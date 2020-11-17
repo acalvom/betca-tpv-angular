@@ -2,12 +2,12 @@
   "name": "betca-tpv-angular",
   "version": "3.0.0-SNAPSHOT",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "postinstall": "ng build --prod",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "~14.15.0",
+    "npm": "~6.14.18"
   },
   "private": true,
   "dependencies": {

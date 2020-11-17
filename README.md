@@ -32,7 +32,7 @@ Permite la creación e impresión del recibo ticket o factura de venta —con lo
 actualiza los cambios en el nivel de existencias de mercancías (STOCK) en la base de datos...
 
 
-## Anexos I. Preparación del entorno
+## Anexo I. Preparación del entorno
 1. Instalar Node: Instalar Node (versión 14.15.0)
    * Todo estándar.
    * Para ver la versión de npm instalada: `>npm –version` (6.14.8).
@@ -49,9 +49,110 @@ actualiza los cambios en el nivel de existencias de mercancías (STOCK) en la ba
    * `>npm i @angular/flex-layout`
    * Para ver la versión instalada: `>npm list @angular/material` o `>npm list @angular/flex-layout`
    
-## Anexos II. Comandos de Angular CLI
-   * `>ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-   * `>ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-   * `>ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-   * `>ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-   * `>ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Anexo II. Comandos de Angular CLI
+* `>ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+* `>ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+* `>ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* `>ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+* `>ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Anexo III. Preparación del ecosistema
+### Versionado y entorno de trabajo
+En el fichero `tsconfig.json` añadir la siguiente opción:
+```json
+"compilerOptions": {
+    "resolveJsonModule": true,
+}
+```
+En el fichero `package.json` , se establece el nombre y versión del artefacto
+```json
+{
+  "name": "betca-tpv-angular",
+  "version": "2.4.0-SNAPSHOT",
+}
+```
+Dentro de la carpeta `src/environments`, establecer los valores dependiendo del entorno de trabajo:
+> environments.ts
+```typescript
+import {name, version} from '../../package.json';
+export const environment = {
+  production: false,
+  NAME: name,
+  VERSION: version,
+  REST_USER: 'http://localhost:8081/api/v0',
+  REST_CORE: 'http://localhost:8082/api/v0'
+};
+```
+> environments.prod.ts
+```typescript
+import {name, version} from '../../package.json';
+export const environment = {
+  production: true,
+  NAME: name,
+  VERSION: version,
+  REST_USER: 'https://betca-tpv-user.herokuapp.com/api/v0',
+  REST_CORE: 'https://betca-tpv-core.herokuapp.com/api/v0'
+};
+```
+### Integración continua con **Travis-CI**
+Se despliega para ejecución de los test Unitarios y de Integración.
+* En el fichero `.travis.yml`:
+```yaml
+language: node_js
+node_js:
+  - '14'
+addons:
+  chrome: stable
+branches:
+  - develop
+  - /^release-[0-999].[0-999]$/
+  - master
+notifications:
+  email:
+    recipients:
+      - user@gmail.com
+script:
+  - ng test --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
+  - ng e2e --protractor-config=e2e/protractor-travis.conf.js
+
+* Se ha creado el fichero `e2e/protractor-travis.conf.js` con el contenido:
+```js
+const config = require('./protractor.conf').config;
+config.capabilities = {
+  browserName: 'chrome',
+  chromeOptions: {
+    args: ['--headless', '--no-sandbox']
+  }
+};
+exports.config = config;
+```
+### Despliegue en Heroku
+Se realiza un despliegue en **Heroku** .  
+En la cuenta de **Heroku**, en la página `-> Account settings -> API Key`, se ha obtenido la `API KEY`.  
+En la cuenta de **Travis-CI**, dentro del proyecto, en `-> More options -> Settings`, se ha creado una variable de entorno llamada `HEROKU` cuyo contenido es la **API key** de **Heroku**.  
+
+* En el fichero `package.json`, se definen los siguientes valores
+```json
+{
+  "scripts": {
+    "postinstall": "ng build --prod",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "~14.15.0",
+    "npm": "~6.14.18"
+  }  
+}
+```
+  `~: versión mas cercana posible, ^: versión compatible mas alta`
+
+* Se ha añadido al fichero `.travis.yml` el contenido:
+```yaml
+# Deploy https://betca-tpv-angular.herokuapp.com
+deploy:
+  provider: heroku
+  api_key:
+    secure: $HEROKU
+  on:
+    branch: master
+```
