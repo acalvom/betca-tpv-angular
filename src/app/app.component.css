@@ -1,0 +1,10 @@
+.mat-toolbar {
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 700px) {
+  .hide {
+    visibility: hidden;
+    display: none;
+  }
+}

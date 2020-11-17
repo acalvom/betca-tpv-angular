@@ -1,9 +1,5 @@
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <span>Welcome</span>
-</div>
-
-<div class="content" role="main">
-  <span>{{ title }} app is running!</span>
-</div>
 <router-outlet></router-outlet>
+<mat-toolbar color="primary">
+  <mat-card-title>UPM-MIW</mat-card-title>
+  <mat-card-content class="hide">Front-end: {{version}}({{profile}})</mat-card-content>
+</mat-toolbar>

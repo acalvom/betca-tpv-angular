@@ -1,20 +1,39 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {CdkTableModule} from '@angular/cdk/table';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {CoreModule} from './core/core.module';
+import {MaterialModule} from './material.module';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {AppComponents} from './app.components';
+import {AppServices} from './app.services';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
+    MaterialModule,
+    BrowserAnimationsModule,
     BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule
+    CdkTableModule,
+    CoreModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
-  providers: [],
+  declarations: [
+    AppComponent,
+    AppComponents.COMPONENTS,
+    AppComponents.DIALOGS
+  ],
+  entryComponents: [
+    AppComponents.DIALOGS
+  ],
+  providers: [
+    AppServices.SERVICES
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
