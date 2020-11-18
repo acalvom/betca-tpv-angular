@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
 
 import {HttpService} from './http.service';
 import {Role} from './role.model';
@@ -7,8 +8,7 @@ import {Role} from './role.model';
 
 @Injectable()
 export class TokensService {
-  static END_POINT = '/users/token';
-
+  static END_POINT = environment.REST_USER + '/users/token';
 
   constructor(private httpService: HttpService) {
   }
@@ -17,20 +17,20 @@ export class TokensService {
     return this.httpService.login(mobile, password, TokensService.END_POINT);
   }
 
-  logout(): Date {
+  logout(): void {
     return this.httpService.logout();
   }
 
   isAdmin(): boolean {
-    return this.httpService.getToken() ? this.httpService.getToken().roles.includes(Role.ADMIN) : false;
+    return this.httpService.getToken() ? this.httpService.getToken().role.includes(Role.ADMIN) : false;
   }
 
   isManager(): boolean {
-    return this.httpService.getToken() ? this.httpService.getToken().roles.includes(Role.MANAGER) : false;
+    return this.httpService.getToken() ? this.httpService.getToken().role.includes(Role.MANAGER) : false;
   }
 
   isOperator(): boolean {
-    return this.httpService.getToken() ? this.httpService.getToken().roles.includes(Role.OPERATOR) : false;
+    return this.httpService.getToken() ? this.httpService.getToken().role.includes(Role.OPERATOR) : false;
   }
 
   getMobile(): number {

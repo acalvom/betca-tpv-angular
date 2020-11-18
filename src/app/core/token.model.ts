@@ -4,5 +4,5 @@ export interface Token {
   token: string;
   mobile?: number;
   name?: string;
-  roles?: Array<Role>;
+  role?: Role;
 }

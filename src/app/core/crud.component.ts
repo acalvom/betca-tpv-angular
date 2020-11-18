@@ -24,19 +24,19 @@ export class CrudComponent {
     this.dataSource = new MatTableDataSource<any>(data);
   }
 
-  onRead(item) {
+  onRead(item): void {
     this.read.emit(item);
   }
 
-  onCreate() {
+  onCreate(): void {
     this.create.emit();
   }
 
-  onUpdate(item) {
+  onUpdate(item): void {
     this.update.emit(item);
   }
 
-  onDelete(item) {
+  onDelete(item): void {
     this.delete.emit(item);
   }
 

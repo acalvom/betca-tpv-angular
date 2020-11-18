@@ -3,18 +3,16 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {EMPTY, Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
-import {environment} from '../../environments/environment';
 import {Token} from './token.model';
 import {Error} from './error.model';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable()
 export class HttpService {
-  static API_END_POINT = environment.REST_CORE;
-  static UNAUTHORIZED = 401;
   static CONNECTION_REFUSE = 0;
+  static UNAUTHORIZED = 401;
   static NOT_FOUND = 404;
 
   private token: Token;
@@ -22,9 +20,7 @@ export class HttpService {
   private params: HttpParams;
   private responseType: string;
   private successfulNotification = undefined;
-
-  private loginTime: Date;
-  private logoutTime: Date;
+  private errorNotification = undefined;
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar, private router: Router) {
     this.resetOptions();
@@ -36,25 +32,16 @@ export class HttpService {
         this.token = token;
         this.token.mobile = new JwtHelperService().decodeToken(token.token).user;
         this.token.name = new JwtHelperService().decodeToken(token.token).name;
-        this.token.roles = new JwtHelperService().decodeToken(token.token).roles;
-        this.loginTime = new Date();
+        this.token.role = new JwtHelperService().decodeToken(token.token).role;
       }), catchError(error => {
         return this.handleError(error);
       })
     );
   }
 
-  logout(): Date {
+  logout(): void {
     this.token = undefined;
-    this.router.navigate(['']);
-    const nowTime = new Date();
-    if (this.loginTime.getDate() === nowTime.getDate()) {
-      // console.log('same days...');
-      return null;
-    } else {
-      // console.log('differernt days...');
-      return this.loginTime;
-    }
+    this.router.navigate(['']).then();
   }
 
   getToken(): Token {
@@ -66,8 +53,22 @@ export class HttpService {
     return this;
   }
 
+  paramsFrom(dto: any): HttpService {
+    Object.getOwnPropertyNames(dto).forEach(item => {
+      if (dto[item] != null) {
+        this.param(item, dto[item]);
+      }
+    });
+    return this;
+  }
+
   successful(notification = 'Successful'): HttpService {
     this.successfulNotification = notification;
+    return this;
+  }
+
+  error(notification: string): HttpService {
+    this.errorNotification = notification;
     return this;
   }
 
@@ -78,7 +79,7 @@ export class HttpService {
   }
 
   post(endpoint: string, body?: object): Observable<any> {
-    return this.http.post(HttpService.API_END_POINT + endpoint, body, this.createOptions()).pipe(
+    return this.http.post(endpoint, body, this.createOptions()).pipe(
       map(response => this.extractData(response)
       ), catchError(error => {
         return this.handleError(error);
@@ -87,7 +88,7 @@ export class HttpService {
   }
 
   get(endpoint: string): Observable<any> {
-    return this.http.get(HttpService.API_END_POINT + endpoint, this.createOptions()).pipe(
+    return this.http.get(endpoint, this.createOptions()).pipe(
       map(response => this.extractData(response)
       ), catchError(error => {
         return this.handleError(error);
@@ -96,7 +97,7 @@ export class HttpService {
   }
 
   put(endpoint: string, body?: object): Observable<any> {
-    return this.http.put(HttpService.API_END_POINT + endpoint, body, this.createOptions()).pipe(
+    return this.http.put(endpoint, body, this.createOptions()).pipe(
       map(response => this.extractData(response)
       ), catchError(error => {
         return this.handleError(error);
@@ -105,7 +106,7 @@ export class HttpService {
   }
 
   patch(endpoint: string, body?: object): Observable<any> {
-    return this.http.patch(HttpService.API_END_POINT + endpoint, body, this.createOptions()).pipe(
+    return this.http.patch(endpoint, body, this.createOptions()).pipe(
       map(response => this.extractData(response)
       ), catchError(error => {
         return this.handleError(error);
@@ -114,7 +115,7 @@ export class HttpService {
   }
 
   delete(endpoint: string): Observable<any> {
-    return this.http.delete(HttpService.API_END_POINT + endpoint, this.createOptions()).pipe(
+    return this.http.delete(endpoint, this.createOptions()).pipe(
       map(response => this.extractData(response)
       ), catchError(error => {
         return this.handleError(error);
@@ -171,27 +172,36 @@ export class HttpService {
     }
   }
 
+  private showError(notification: string): void {
+    if (this.errorNotification) {
+      this.snackBar.open(this.errorNotification, 'Error', {duration: 5000});
+      this.errorNotification = undefined;
+    } else {
+      this.snackBar.open(notification, 'Error', {duration: 5000});
+    }
+  }
+
   private handleError(response): any {
     let error: Error;
     if (response.status === HttpService.UNAUTHORIZED) {
-      this.snackBar.open('Unauthorized', 'Error', {duration: 5000});
+      this.showError('Unauthorized');
       this.logout();
-      this.router.navigate(['']);
+      this.router.navigate(['']).then();
       return EMPTY;
     } else if (response.status === HttpService.CONNECTION_REFUSE) {
-      this.snackBar.open('Connection Refuse', 'Error', {duration: 5000});
+      this.showError('Connection Refuse');
       return EMPTY;
     } else if (response.status === HttpService.NOT_FOUND) {
       error = {error: 'Not Found', message: '', path: ''};
-      this.snackBar.open(error.error + ': ' + error.message, 'Info', {duration: 2000});
+      this.showError(error.error + ': ' + error.message);
       return throwError(error);
     } else {
       try {
         error = response.error; // with 'text': JSON.parse(response.error);
-        this.snackBar.open(error.error + ' (' + response.status + '): ' + error.message, 'Error', {duration: 10000});
+        this.showError(error.error + ' (' + response.status + '): ' + error.message);
         return throwError(error);
       } catch (e) {
-        this.snackBar.open('Not response', 'Error', {duration: 10000});
+        this.showError('Not response');
         return throwError(response.error);
       }
     }

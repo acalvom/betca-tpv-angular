@@ -1,0 +1,7 @@
+<h1 mat-dialog-content>{{title}}</h1>
+<mat-dialog-content>
+  <p *ngFor="let def of labels"><b>{{def | uppercase}}: </b>{{object[def]}}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-dialog-close mat-raised-button>Close</button>
+</mat-dialog-actions>

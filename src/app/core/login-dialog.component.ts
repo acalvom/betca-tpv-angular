@@ -17,7 +17,7 @@ export class LoginDialogComponent {
     this.homeUrl = data.homeUrl;
   }
 
-  login() {
+  login(): void {
     this.tokensService.login(this.mobile, this.password).subscribe(
       () => this.router.navigate([this.homeUrl])
     );

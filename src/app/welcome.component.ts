@@ -13,7 +13,7 @@ export class WelcomeComponent {
   constructor(private dialog: MatDialog) {
   }
 
-  login() {
+  login(): void {
     this.dialog.open(LoginDialogComponent,
       {
         data: {homeUrl: 'home'}

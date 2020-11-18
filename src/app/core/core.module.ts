@@ -17,6 +17,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
+import {ReadDetailDialogComponent} from './read-detail.dialog.component';
 
 
 @NgModule({
@@ -38,18 +39,21 @@ import {MatInputModule} from '@angular/material/input';
     CancelYesDialogComponent,
     CrudComponent,
     DateComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    ReadDetailDialogComponent,
   ],
   exports: [
     CancelYesDialogComponent,
     CrudComponent,
     DateComponent,
     LoginDialogComponent,
+    ReadDetailDialogComponent,
 
   ],
   entryComponents: [
     CancelYesDialogComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    ReadDetailDialogComponent,
   ],
   providers: [
     HttpService,
