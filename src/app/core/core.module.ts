@@ -18,6 +18,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {ReadDetailDialogComponent} from './read-detail.dialog.component';
+import {SearchComponent} from './search.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -34,6 +37,8 @@ import {ReadDetailDialogComponent} from './read-detail.dialog.component';
     MatTableModule,
     MatButtonModule,
     MatDialogModule,
+    MatAutocompleteModule,
+    MatTooltipModule,
   ],
   declarations: [
     CancelYesDialogComponent,
@@ -41,6 +46,7 @@ import {ReadDetailDialogComponent} from './read-detail.dialog.component';
     DateComponent,
     LoginDialogComponent,
     ReadDetailDialogComponent,
+    SearchComponent,
   ],
   exports: [
     CancelYesDialogComponent,
@@ -48,7 +54,7 @@ import {ReadDetailDialogComponent} from './read-detail.dialog.component';
     DateComponent,
     LoginDialogComponent,
     ReadDetailDialogComponent,
-
+    SearchComponent,
   ],
   entryComponents: [
     CancelYesDialogComponent,

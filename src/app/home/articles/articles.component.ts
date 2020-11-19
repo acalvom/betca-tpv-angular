@@ -33,12 +33,6 @@ export class ArticlesComponent {
     this.barcodes = this.articleService.searchByBarcode(this.barcode);
   }
 
-  public filter(value: string): void {
-    this.barcodes = this.barcodes.pipe(
-      map(barcodes => barcodes.filter(barcode => barcode.toLowerCase().includes(value.toLowerCase())))
-    );
-  }
-
   resetSearch(): void {
     this.articleSearch = {};
   }

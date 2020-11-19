@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>{{title}}</mat-label>
+      <input (ngModelChange)="filter($event)"
+             [ngModel]="key"
+             [matAutocomplete]="auto"
+             matInput
+             type="text"
+      >
+      <button (click)="onRefresh()" mat-button mat-icon-button matSuffix matTooltip="Renew" matTooltipShowDelay="2000">
+        <mat-icon>autorenew</mat-icon>
+      </button>
+      <button (click)="resetKey()" *ngIf="key" mat-button mat-icon-button matSuffix  matTooltip="Reset"
+              matTooltipShowDelay="2000">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of keys | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
