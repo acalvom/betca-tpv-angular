@@ -23,13 +23,13 @@ export class ProviderCreationUpdatingDialogComponent {
     return this.oldProvider === undefined;
   }
 
-  createProvider(): void {
+  create(): void {
     this.providerService.create(this.provider).subscribe(
       () => this.dialog.closeAll()
     );
   }
 
-  updateProvider(): void {
+  update(): void {
     this.providerService.update(this.oldProvider, this.provider).subscribe(
       () => this.dialog.closeAll()
     );

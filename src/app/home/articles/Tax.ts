@@ -1,0 +1,3 @@
+export enum Tax {
+  FREE,  SUPER_REDUCED, REDUCED, GENERAL
+}

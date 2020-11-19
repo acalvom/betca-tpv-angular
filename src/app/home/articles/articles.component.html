@@ -1,0 +1,50 @@
+<mat-card>
+  <mat-card-content>
+    <mat-form-field>
+      <input (ngModelChange)="filter($event)"
+             [(ngModel)]="barcode"
+             [matAutocomplete]="auto"
+             matInput
+             placeholder="Barcode"
+             type="text"
+      >
+      <button (click)="searchByBarcode()" mat-button mat-icon-button matSuffix>
+        <mat-icon>autorenew</mat-icon>
+      </button>
+      <button (click)="barcode=''" *ngIf="barcode" mat-button mat-icon-button matSuffix>
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of barcodes | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input [(ngModel)]="articleSearch.description" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Reference</mat-label>
+      <input [(ngModel)]="articleSearch.reference" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Stock</mat-label>
+      <input [(ngModel)]="articleSearch.stock" matInput>
+    </mat-form-field>
+    <mat-slide-toggle [(ngModel)]="articleSearch.discontinued">Discontinued</mat-slide-toggle>
+    <button (click)="search()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <button (click)="resetSearch()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>
+<app-crud (create)="create()" (read)="read($event)" (update)="update($event)" [columns]="columns"
+          [data]="articles" [deleteAction]="false" [title]="title"></app-crud>
