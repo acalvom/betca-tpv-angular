@@ -6,13 +6,13 @@ import {environment} from '../../../environments/environment';
 import {Article} from './article.model';
 import {ArticleSearch} from './article-search.model';
 import {map} from 'rxjs/operators';
-import {Barcodes} from './barcodes.model';
 
 @Injectable()
 export class ArticleService {
   static END_POINT = environment.REST_CORE + '/articles';
   static SEARCH = '/search';
   static BARCODE = '/barcode';
+  static UNFINISHED = '/unfinished';
 
   constructor(private httpService: HttpService) {
   }
@@ -43,7 +43,12 @@ export class ArticleService {
       .param('barcode', barcode)
       .get(ArticleService.END_POINT + ArticleService.BARCODE)
       .pipe(
-        map((dto: Barcodes) => dto.barcodes)
+        map(dto => dto.barcodes)
       );
+  }
+
+  searchUnfinished(): Observable<Article[]> {
+    return this.httpService
+      .get(ArticleService.END_POINT + ArticleService.UNFINISHED);
   }
 }

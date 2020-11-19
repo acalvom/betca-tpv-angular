@@ -33,7 +33,8 @@ export class HttpService {
         this.token.mobile = new JwtHelperService().decodeToken(token.token).user;
         this.token.name = new JwtHelperService().decodeToken(token.token).name;
         this.token.role = new JwtHelperService().decodeToken(token.token).role;
-      }), catchError(error => {
+      }),
+      catchError(error => {
         return this.handleError(error);
       })
     );
@@ -82,8 +83,8 @@ export class HttpService {
 
   post(endpoint: string, body?: object): Observable<any> {
     return this.http.post(endpoint, body, this.createOptions()).pipe(
-      map(response => this.extractData(response)
-      ), catchError(error => {
+      map(response => this.extractData(response)),
+      catchError(error => {
         return this.handleError(error);
       })
     );
@@ -91,8 +92,8 @@ export class HttpService {
 
   get(endpoint: string): Observable<any> {
     return this.http.get(endpoint, this.createOptions()).pipe(
-      map(response => this.extractData(response)
-      ), catchError(error => {
+      map(response => this.extractData(response)),
+      catchError(error => {
         return this.handleError(error);
       })
     );
@@ -100,8 +101,8 @@ export class HttpService {
 
   put(endpoint: string, body?: object): Observable<any> {
     return this.http.put(endpoint, body, this.createOptions()).pipe(
-      map(response => this.extractData(response)
-      ), catchError(error => {
+      map(response => this.extractData(response)),
+      catchError(error => {
         return this.handleError(error);
       })
     );
@@ -109,8 +110,8 @@ export class HttpService {
 
   patch(endpoint: string, body?: object): Observable<any> {
     return this.http.patch(endpoint, body, this.createOptions()).pipe(
-      map(response => this.extractData(response)
-      ), catchError(error => {
+      map(response => this.extractData(response)),
+      catchError(error => {
         return this.handleError(error);
       })
     );
@@ -118,8 +119,8 @@ export class HttpService {
 
   delete(endpoint: string): Observable<any> {
     return this.http.delete(endpoint, this.createOptions()).pipe(
-      map(response => this.extractData(response)
-      ), catchError(error => {
+      map(response => this.extractData(response)),
+      catchError(error => {
         return this.handleError(error);
       })
     );
@@ -193,10 +194,6 @@ export class HttpService {
     } else if (response.status === HttpService.CONNECTION_REFUSE) {
       this.showError('Connection Refuse');
       return EMPTY;
-    } else if (response.status === HttpService.NOT_FOUND) {
-      error = {error: 'Not Found', message: '', path: ''};
-      this.showError(error.error + ': ' + error.message);
-      return throwError(error);
     } else {
       try {
         error = response.error; // with 'text': JSON.parse(response.error);

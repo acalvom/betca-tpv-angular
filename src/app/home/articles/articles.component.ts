@@ -6,7 +6,6 @@ import {ArticleSearch} from './article-search.model';
 import {ArticleService} from './article.service';
 import {ArticleCreationUpdatingDialogComponent} from './article-creation-updating-dialog.component';
 import {of} from 'rxjs';
-import {map} from 'rxjs/operators';
 
 @Component({
   templateUrl: 'articles.component.html'
@@ -24,35 +23,38 @@ export class ArticlesComponent {
     this.articles = undefined;
   }
 
+  searchByBarcode(): void {
+    this.barcodes = this.articleService.searchByBarcode(this.barcode);
+  }
+
   search(): void {
     this.articleService.search(this.articleSearch)
       .subscribe(data => this.articles = data);
-  }
-
-  searchByBarcode(): void {
-    this.barcodes = this.articleService.searchByBarcode(this.barcode);
   }
 
   resetSearch(): void {
     this.articleSearch = {};
   }
 
+  unfinished(): void {
+    this.articleService.searchUnfinished()
+      .subscribe(data => this.articles = data);
+  }
+
   create(): void {
-    this.dialog.open(ArticleCreationUpdatingDialogComponent)
-      .afterClosed()
-      .subscribe(() => this.articles = undefined);
+    this.dialog.open(ArticleCreationUpdatingDialogComponent);
   }
 
   read(article: Article): void {
     this.articleService.read(article.barcode)
-      .subscribe(fullProvider =>
-        this.dialog.open(ReadDetailDialogComponent, {data: {object: fullProvider, title: 'Provider Details'}})
+      .subscribe(fullArticle =>
+        this.dialog.open(ReadDetailDialogComponent, {data: {object: fullArticle, title: 'Provider Details'}})
       );
   }
 
   update(article: Article): void {
     this.articleService.read(article.barcode)
-      .subscribe(fullProvider => this.dialog.open(ArticleCreationUpdatingDialogComponent, {data: fullProvider})
+      .subscribe(fullArticle => this.dialog.open(ArticleCreationUpdatingDialogComponent, {data: fullArticle})
         .afterClosed()
         .subscribe(() => this.search())
       );

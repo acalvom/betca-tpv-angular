@@ -2,6 +2,9 @@ import {Component, Inject} from '@angular/core';
 import {ArticleService} from './article.service';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {Article} from './article.model';
+import {Tax} from './Tax';
+import {Observable, of} from 'rxjs';
+import {SharedProviderService} from '../shared/shared.provider.service';
 
 @Component({
   templateUrl: 'article-creation-updating-dialog.component.html',
@@ -9,11 +12,14 @@ import {Article} from './article.model';
 })
 
 export class ArticleCreationUpdatingDialogComponent {
+  taxValues = Object.keys(Tax).filter(key => isNaN(Number(key)));
   article: Article;
   title: string;
   oldBarcode: string;
+  companies: Observable<string[]> = of([]);
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: Article, private providerService: ArticleService, private dialog: MatDialog) {
+  constructor(@Inject(MAT_DIALOG_DATA) data: Article, private providerService: ArticleService,
+              private sharedProviderService: SharedProviderService, private dialog: MatDialog) {
     this.title = data ? 'Update Article' : 'Create Article';
     this.article = data ? data : {barcode: undefined, description: undefined, retailPrice: undefined, providerCompany: undefined};
     this.oldBarcode = data ? data.barcode : undefined;
@@ -42,5 +48,9 @@ export class ArticleCreationUpdatingDialogComponent {
 
   check(attr: string): boolean {
     return attr === undefined || null || attr === '';
+  }
+
+  searchByCompany(): void {
+    this.companies = this.sharedProviderService.searchCompanies(this.article.providerCompany);
   }
 }

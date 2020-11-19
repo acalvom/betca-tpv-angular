@@ -4,7 +4,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-search',
-  templateUrl: 'search.component.html'
+  templateUrl: 'search.component.html',
+  styleUrls: ['search.component.css']
 })
 export class SearchComponent {
   @Input() title = 'Articles management';
@@ -14,7 +15,7 @@ export class SearchComponent {
   @Output() keyChange = new EventEmitter<string>();
   @Output() renew = new EventEmitter<any>();
 
-  onRefresh(): void {
+  onRenew(): void {
     this.renew.emit();
   }
 
