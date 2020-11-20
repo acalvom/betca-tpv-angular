@@ -1,9 +1,12 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+import {map} from 'rxjs/operators';
+import {MatDialog} from '@angular/material/dialog';
 
 import {HttpService} from '../core/http.service';
 import {TokensService} from '../core/tokens.service';
-import {MatDialog} from '@angular/material/dialog';
+import {SharedCashierService} from './shared/services/shared.cashier.service';
+import {CashierDialogComponent} from './cashier-opened/cashier-closure/cashier-dialog.component';
 
 @Component({
   templateUrl: 'home.component.html',
@@ -11,13 +14,12 @@ import {MatDialog} from '@angular/material/dialog';
 
 })
 export class HomeComponent {
-  backend: string;
-
-  cashierClosed: boolean;
   username: string;
+  cashierClosed: boolean;
 
   constructor(private router: Router, private dialog: MatDialog, private httpService: HttpService,
-              private tokensService: TokensService) {
+              private tokensService: TokensService, private cashierService: SharedCashierService,
+              private sharedCashierService: SharedCashierService) {
     this.username = tokensService.getName();
     this.cashierClosed = true;
     this.cashier();
@@ -32,6 +34,20 @@ export class HomeComponent {
   }
 
   cashier(): void {
+    this.cashierService.readLast()
+      .pipe(
+        map(cashier => cashier.closed)
+      )
+      .subscribe(
+        closed => {
+          this.cashierClosed = closed;
+          if (closed) {
+            this.router.navigate(['home', 'cashier-closed']).then();
+          } else {
+            this.router.navigate(['home', 'cashier-opened']).then();
+          }
+        }
+      );
   }
 
   deleteDb(): void {
@@ -44,10 +60,19 @@ export class HomeComponent {
     this.tokensService.logout();
   }
 
-  closeCashier(): void {
+  openCashier(): void {
+    this.sharedCashierService
+      .openCashier()
+      .subscribe(() => this.cashier());
   }
 
-  openCashier(): void {
+  closeCashier(): void {
+    this.dialog
+      .open(CashierDialogComponent)
+      .afterClosed()
+      .subscribe(() => this.cashier());
   }
+
+
 
 }

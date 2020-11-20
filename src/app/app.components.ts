@@ -1,20 +1,36 @@
-import {WelcomeComponent} from './welcome.component';
+import {ArticlesComponent} from './home/articles/articles.component';
+import {CashierClosedComponent} from './home/cashier-closed/cashier-closed.component';
 import {HomeComponent} from './home/home.component';
 import {ProvidersComponent} from './home/providers/providers.component';
-import {ProviderCreationUpdatingDialogComponent} from './home/providers/provider-creation-updating-dialog.component';
+import {WelcomeComponent} from './welcome.component';
 import {ArticleCreationUpdatingDialogComponent} from './home/articles/article-creation-updating-dialog.component';
-import {ArticlesComponent} from './home/articles/articles.component';
+import {ProviderCreationUpdatingDialogComponent} from './home/providers/provider-creation-updating-dialog.component';
+import {CashierOpenedComponent} from './home/cashier-opened/cashier-opened.component';
+import {AdvancedArticlesSearchComponent} from './home/cashier-opened/advanced-search/advanced-articles-search.component';
+import {ArticlesFamilyViewComponent} from './home/cashier-opened/articles-family/articles-family-view.component';
+import {CashierDialogComponent} from './home/cashier-opened/cashier-closure/cashier-dialog.component';
+import {ArticleQuickCreationDialogComponent} from './home/cashier-opened/shopping-cart/article-quick-creation-dialog.component';
+import {CheckOutDialogComponent} from './home/cashier-opened/shopping-cart/check-out-dialog.component';
+import {ShoppingCartComponent} from './home/cashier-opened/shopping-cart/shopping-cart.component';
 
 export class AppComponents {
   static COMPONENTS = [
+    AdvancedArticlesSearchComponent,
     ArticlesComponent,
+    ArticlesFamilyViewComponent,
+    CashierClosedComponent,
+    CashierOpenedComponent,
     HomeComponent,
+    ProvidersComponent,
+    ShoppingCartComponent,
     WelcomeComponent,
-    ProvidersComponent
   ];
 
   static DIALOGS = [
+    ArticleCreationUpdatingDialogComponent,
+    ArticleQuickCreationDialogComponent,
+    CashierDialogComponent,
+    CheckOutDialogComponent,
     ProviderCreationUpdatingDialogComponent,
-    ArticleCreationUpdatingDialogComponent
   ];
 }

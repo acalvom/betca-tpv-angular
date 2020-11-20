@@ -1,10 +1,11 @@
 import {Component, Inject} from '@angular/core';
-import {ArticleService} from './article.service';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
-import {Article} from './article.model';
-import {Tax} from './Tax';
 import {Observable, of} from 'rxjs';
-import {SharedProviderService} from '../shared/shared.provider.service';
+
+import {Article} from '../shared/services/models/article.model';
+import {Tax} from '../shared/services/models/Tax';
+import {SharedProviderService} from '../shared/services/shared.provider.service';
+import {ArticleService} from './article.service';
 
 @Component({
   templateUrl: 'article-creation-updating-dialog.component.html',

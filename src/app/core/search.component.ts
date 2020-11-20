@@ -1,6 +1,6 @@
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {of} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-search',

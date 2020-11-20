@@ -21,7 +21,7 @@
 <mat-menu #menu="matMenu" xPosition="before">
   <button (click)="cashier()" mat-menu-item>
     <mat-icon>home</mat-icon>
-    <span>Cashier</span>
+    <span>Home</span>
   </button>
   <button *ngIf="isAdmin()" [matMenuTriggerFor]="settings" mat-menu-item>
     <mat-icon>settings</mat-icon>
@@ -29,7 +29,7 @@
   </button>
   <button [matMenuTriggerFor]="cashiers" mat-menu-item>
     <mat-icon>account_balance</mat-icon>
-    <span>Cashier closures</span>
+    <span>Cashier</span>
   </button>
   <button [matMenuTriggerFor]="receipts" mat-menu-item>
     <mat-icon>receipt</mat-icon>

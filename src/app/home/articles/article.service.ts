@@ -2,11 +2,9 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
 import {HttpService} from '../../core/http.service';
-import {environment} from '../../../environments/environment';
-import {Article} from './article.model';
+import {Article} from '../shared/services/models/article.model';
 import {ArticleSearch} from './article-search.model';
-import {map} from 'rxjs/operators';
-import {SharedArticleService} from '../shared/shared.article.service';
+import {SharedArticleService} from '../shared/services/shared.article.service';
 
 @Injectable()
 export class ArticleService {

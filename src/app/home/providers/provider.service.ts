@@ -2,10 +2,9 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
 import {HttpService} from '../../core/http.service';
+import {SharedProviderService} from '../shared/services/shared.provider.service';
 import {Provider} from './provider.model';
 import {ProviderSearch} from './provider-search.model';
-import {environment} from '../../../environments/environment';
-import {SharedProviderService} from '../shared/shared.provider.service';
 
 @Injectable()
 export class ProviderService {

@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
+
 import {ReadDetailDialogComponent} from '../../core/read-detail.dialog.component';
-import {Article} from './article.model';
-import {ArticleSearch} from './article-search.model';
+import {Article} from '../shared/services/models/article.model';
 import {ArticleService} from './article.service';
 import {ArticleCreationUpdatingDialogComponent} from './article-creation-updating-dialog.component';
+import {ArticleSearch} from './article-search.model';
 
 @Component({
   templateUrl: 'articles.component.html'
