@@ -6,19 +6,19 @@ import {environment} from '../../../environments/environment';
 import {map} from 'rxjs/operators';
 
 @Injectable()
-export class SharedProviderService {
-  static END_POINT = environment.REST_CORE + '/providers';
-  static COMPANY = '/company';
+export class SharedArticleService {
+  static END_POINT = environment.REST_CORE + '/articles';
+  static BARCODE = '/barcode';
 
   constructor(private httpService: HttpService) {
   }
 
-  searchCompanies(company: string): Observable<string[]> {
+  searchBarcode(barcode: string): Observable<string[]> {
     return this.httpService
-      .param('company', company)
-      .get(SharedProviderService.END_POINT + SharedProviderService.COMPANY)
+      .param('barcode', barcode)
+      .get(SharedArticleService.END_POINT + SharedArticleService.BARCODE)
       .pipe(
-        map(response => response.companies)
+        map(response => response.barcodes)
       );
   }
 

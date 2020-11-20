@@ -1,5 +1,6 @@
 <mat-card>
   <mat-card-content>
+    <mat-label><strong>Filters: </strong></mat-label>
     <mat-form-field>
       <mat-label>Barcode</mat-label>
       <input [(ngModel)]="articleSearch.barcode" matInput>
@@ -14,7 +15,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Stock</mat-label>
-      <input [(ngModel)]="articleSearch.stock" matInput>
+      <input [(ngModel)]="articleSearch.stock" matInput type="number">
       <mat-hint align="start">Less than</mat-hint>
     </mat-form-field>
     <mat-slide-toggle [(ngModel)]="articleSearch.discontinued">Discontinued</mat-slide-toggle>
@@ -33,5 +34,5 @@
     </mat-form-field>
   </mat-card-content>
 </mat-card>
-<app-crud (create)="create()" (read)="read($event)" (update)="update($event)" [columns]="columns"
+<app-crud (create)="create()" (read)="read($event)" (update)="update($event)"
           [data]="articles" [deleteAction]="false" [title]="title"></app-crud>

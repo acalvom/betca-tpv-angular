@@ -11,9 +11,7 @@ import {ProviderCreationUpdatingDialogComponent} from './provider-creation-updat
 })
 export class ProvidersComponent {
   providerSearch: ProviderSearch;
-
   title = 'Providers management';
-  columns = ['company', 'phone', 'note'];
   providers: Provider[];
 
   constructor(private dialog: MatDialog, private providerService: ProviderService) {

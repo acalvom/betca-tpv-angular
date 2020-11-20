@@ -21,7 +21,10 @@ export class ArticleCreationUpdatingDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) data: Article, private providerService: ArticleService,
               private sharedProviderService: SharedProviderService, private dialog: MatDialog) {
     this.title = data ? 'Update Article' : 'Create Article';
-    this.article = data ? data : {barcode: undefined, description: undefined, retailPrice: undefined, providerCompany: undefined};
+    this.article = data ? data : {
+      barcode: undefined, description: undefined, retailPrice: undefined, providerCompany: undefined,
+      discontinued: false, tax: Tax.GENERAL, stock: 10
+    };
     this.oldBarcode = data ? data.barcode : undefined;
   }
 

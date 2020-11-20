@@ -6,12 +6,11 @@ import {environment} from '../../../environments/environment';
 import {Article} from './article.model';
 import {ArticleSearch} from './article-search.model';
 import {map} from 'rxjs/operators';
+import {SharedArticleService} from '../shared/shared.article.service';
 
 @Injectable()
 export class ArticleService {
-  static END_POINT = environment.REST_CORE + '/articles';
   static SEARCH = '/search';
-  static BARCODE = '/barcode';
   static UNFINISHED = '/unfinished';
 
   constructor(private httpService: HttpService) {
@@ -19,36 +18,28 @@ export class ArticleService {
 
   create(article: Article): Observable<Article> {
     return this.httpService
-      .post(ArticleService.END_POINT, article);
+      .post(SharedArticleService.END_POINT, article);
   }
 
   read(barcode: string): Observable<Article> {
     return this.httpService
-      .get(ArticleService.END_POINT + '/' + barcode);
+      .get(SharedArticleService.END_POINT + '/' + barcode);
   }
 
   update(oldBarcode: string, article: Article): Observable<Article> {
     return this.httpService
-      .put(ArticleService.END_POINT + '/' + oldBarcode, article);
+      .successful()
+      .put(SharedArticleService.END_POINT + '/' + oldBarcode, article);
   }
 
   search(articleSearch: ArticleSearch): Observable<Article[]> {
     return this.httpService
       .paramsFrom(articleSearch)
-      .get(ArticleService.END_POINT + ArticleService.SEARCH);
-  }
-
-  searchByBarcode(barcode: string): Observable<string[]> {
-    return this.httpService
-      .param('barcode', barcode)
-      .get(ArticleService.END_POINT + ArticleService.BARCODE)
-      .pipe(
-        map(dto => dto.barcodes)
-      );
+      .get(SharedArticleService.END_POINT + ArticleService.SEARCH);
   }
 
   searchUnfinished(): Observable<Article[]> {
     return this.httpService
-      .get(ArticleService.END_POINT + ArticleService.UNFINISHED);
+      .get(SharedArticleService.END_POINT + ArticleService.UNFINISHED);
   }
 }

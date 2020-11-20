@@ -2,7 +2,7 @@
 <mat-dialog-content>
   <mat-form-field class="full-width">
     <mat-label>Company</mat-label>
-    <input [(ngModel)]="provider.company" cdkFocusInitial id="company" matInput required type="text"/>
+    <input [(ngModel)]="provider.company" id="company" matInput required type="text"/>
   </mat-form-field>
   <mat-form-field class="full-width">
     <mat-label>NIF</mat-label>
@@ -28,7 +28,7 @@
   <mat-slide-toggle [(ngModel)]="provider.active">Active</mat-slide-toggle>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-dialog-close mat-raised-button>Close</button>
+  <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
   <button (click)="create()" *ngIf="isCreate()" [disabled]=invalid() color="primary" mat-raised-button>Create
   </button>
   <button (click)="update()" *ngIf="!isCreate()" [disabled]=invalid() color="primary" mat-raised-button>Update

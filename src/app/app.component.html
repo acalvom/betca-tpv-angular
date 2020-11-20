@@ -1,5 +1,10 @@
 <router-outlet></router-outlet>
 <mat-toolbar color="primary">
   <mat-card-title>UPM-MIW</mat-card-title>
-  <mat-card-content class="hide">Front-end: {{version}}({{profile}})</mat-card-content>
+  <mat-card-content class="hide">
+    <span>Back-ends: {{backEndUser}} & {{backEndCore}}</span>
+  </mat-card-content>
+  <mat-card-content class="hide">
+    <span>Front-end: {{version}}({{profile}})</span>
+  </mat-card-content>
 </mat-toolbar>

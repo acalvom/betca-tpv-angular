@@ -21,6 +21,7 @@ import {ReadDetailDialogComponent} from './read-detail.dialog.component';
 import {SearchComponent} from './search.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {UppercaseWords} from './UppercaseWordsPipe';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     LoginDialogComponent,
     ReadDetailDialogComponent,
     SearchComponent,
+    UppercaseWords
   ],
   exports: [
     CancelYesDialogComponent,
@@ -55,6 +57,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     LoginDialogComponent,
     ReadDetailDialogComponent,
     SearchComponent,
+    UppercaseWords
   ],
   entryComponents: [
     CancelYesDialogComponent,

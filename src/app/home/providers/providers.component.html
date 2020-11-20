@@ -1,5 +1,6 @@
 <mat-card>
   <mat-card-content>
+    <mat-label><strong>Filters: </strong></mat-label>
     <mat-form-field>
       <mat-label>Company</mat-label>
       <input [(ngModel)]="providerSearch.company" matInput>
@@ -20,5 +21,5 @@
     </button>
   </mat-card-content>
 </mat-card>
-<app-crud (create)="create()" (read)="read($event)" (update)="update($event)" [columns]="columns"
+<app-crud (create)="create()" (read)="read($event)" (update)="update($event)"
           [data]="providers" [deleteAction]="false" [title]="title"></app-crud>

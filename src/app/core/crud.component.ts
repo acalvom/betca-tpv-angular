@@ -8,7 +8,6 @@ import {MatTableDataSource} from '@angular/material/table';
 export class CrudComponent {
 
   @Input() title = 'Management';
-  @Input() columns: Array<string>;
   @Input() createAction = true;
   @Input() readAction = true;
   @Input() updateAction = true;
@@ -18,10 +17,22 @@ export class CrudComponent {
   @Output() update = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
   dataSource: MatTableDataSource<any>;
+  columns: Array<string>;
+  columnsHeader: Array<string>;
 
   @Input()
   set data(data: any[]) {
+    const columnsSet: Set<string> = new Set();
     this.dataSource = new MatTableDataSource<any>(data);
+    if (data) {
+      data.forEach(obj => Object.getOwnPropertyNames(obj)
+        .forEach(column => columnsSet.add(column)));
+      this.columns = Array.from(columnsSet);
+    } else {
+      this.columns = [];
+    }
+    columnsSet.add('actions');
+    this.columnsHeader = Array.from(columnsSet);
   }
 
   onRead(item): void {
