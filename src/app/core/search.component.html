@@ -4,7 +4,6 @@
          [matAutocomplete]="auto"
          [ngModel]="key"
          matInput
-         required
          type="text"
   >
   <button (click)="onRenew()" mat-icon-button matSuffix matTooltip="Renew" matTooltipShowDelay="2000">
@@ -14,7 +13,7 @@
     <mat-icon>close</mat-icon>
   </button>
   <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let option of keys | async" [value]="option">
+    <mat-option *ngFor="let option of keys | async" [value]="option"  (click)="onClick()">
       {{option}}
     </mat-option>
   </mat-autocomplete>

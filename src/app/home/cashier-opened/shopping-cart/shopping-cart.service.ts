@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, concat, EMPTY, iif, merge, Observable, Subject} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
+import {BehaviorSubject, EMPTY, iif, merge, Observable, Subject} from 'rxjs';
+import {catchError, flatMap, map, mergeMap} from 'rxjs/operators';
 
 import {HttpService} from '../../../core/http.service';
 import {SharedArticleService} from '../../shared/services/shared.article.service';
@@ -10,11 +10,13 @@ import {TicketCreation} from './ticket-creation.model';
 
 import {ArticleQuickCreationDialogComponent} from './article-quick-creation-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {environment} from '../../../../environments/environment';
+import {ShoppingState} from './shopping-state.model';
 
 @Injectable()
 export class ShoppingCartService {
-
-  static TICKETS = '/tickets';
+  static END_POINT = environment.REST_CORE + '/tickets';
+  static RECEIPT = '/receipt';
 
   static ARTICLE_VARIOUS = '1';
   static SHOPPING_CART_NUM = 4;
@@ -64,7 +66,7 @@ export class ShoppingCartService {
   getTotalCommitted(): number {
     let total = 0;
     for (const shopping of this.shoppingCart) {
-      if (shopping.committed) {
+      if (shopping.state) {
         total += shopping.total;
       }
     }
@@ -73,7 +75,7 @@ export class ShoppingCartService {
 
   unCommitArticlesExist(): boolean {
     for (const shopping of this.shoppingCart) {
-      if (!shopping.committed && shopping.amount > 0) {
+      if (!shopping.state && shopping.amount > 0) {
         return true;
       }
     }
@@ -126,15 +128,18 @@ export class ShoppingCartService {
     this.synchronizeAll();
   }
 
-  checkOut(ticketCreation: TicketCreation, voucher: number, requestedInvoice: boolean, requestedGiftTicket): Observable<any> {
-    ticketCreation.shoppingCart = this.shoppingCart;
-    const ticket = this.httpService.pdf().post(ShoppingCartService.TICKETS, ticketCreation).pipe(
-      map(() => this.reset())
+  createTicket(ticketCreation: TicketCreation, voucher: number, requestedInvoice: boolean, requestedGiftTicket): Observable<any> {
+    ticketCreation.shoppingList = this.shoppingCart;
+    return this.httpService.post(ShoppingCartService.END_POINT, ticketCreation).pipe(
+      mergeMap(ticket => {
+        this.reset();
+        let receipts = this.httpService.pdf().get(ShoppingCartService.END_POINT + '/' + ticket.id + ShoppingCartService.RECEIPT);
+        receipts = iif(() => voucher > 0, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create voucher
+        receipts = iif(() => requestedInvoice, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create invoice
+        receipts = iif(() => requestedGiftTicket, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create gift ticket
+        return receipts;
+      })
     );
-    let receipts = iif(() => voucher > 0, EMPTY); // TODO change EMPTY to create voucher
-    receipts = iif(() => requestedInvoice, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create invoice
-    receipts = iif(() => requestedGiftTicket, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create gift ticket
-    return concat(ticket, receipts);
   }
 
   isEmpty(): boolean {
@@ -144,7 +149,7 @@ export class ShoppingCartService {
   private addArticle(article: Article, price?: number): void {
     const shopping = new Shopping(article.barcode, article.description, article.retailPrice);
     if (article.stock < 1) {
-      shopping.committed = false;
+      shopping.state = ShoppingState.NOT_COMMITTED;
     }
     this.shoppingCart.push(shopping);
     this.lastArticle = article;

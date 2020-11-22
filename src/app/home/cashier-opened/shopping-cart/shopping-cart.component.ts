@@ -1,11 +1,13 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Observable, of, Subscription} from 'rxjs';
 
 import {ShoppingCartService} from './shopping-cart.service';
 import {Shopping} from './shopping.model';
 import {CheckOutDialogComponent} from './check-out-dialog.component';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
+import {SharedArticleService} from '../../shared/services/shared.article.service';
+import {ShoppingState} from './shopping-state.model';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -13,20 +15,36 @@ import {MatDialog} from '@angular/material/dialog';
   templateUrl: 'shopping-cart.component.html'
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
-
+  barcode: string;
+  barcodes: Observable<number[]> = of([]);
   displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'actions'];
   dataSource: MatTableDataSource<Shopping>;
 
   private subscriptionDataSource: Subscription;
   @ViewChild('code', {static: true}) private elementRef: ElementRef;
 
-  constructor(private dialog: MatDialog, private shoppingCartService: ShoppingCartService) {
+  constructor(private dialog: MatDialog, private shoppingCartService: ShoppingCartService,
+              private sharedArticleService: SharedArticleService) {
     this.subscriptionDataSource = this.shoppingCartService.shoppingCartObservable().subscribe(
       data => {
         this.dataSource = new MatTableDataSource<Shopping>(data);
       }
     );
 
+  }
+
+  add(codeValue: string): void {
+    this.shoppingCartService.add(codeValue).subscribe();
+  }
+
+  searchByBarcode(): void {
+    this.barcodes = this.sharedArticleService.searchBarcode(this.barcode);
+  }
+
+  addBarcode(): void {
+    this.shoppingCartService
+      .add(String(this.barcode))
+      .subscribe(() => this.barcode = undefined);
   }
 
   ngOnInit(): void {
@@ -42,7 +60,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   }
 
   priceLabel(shopping: Shopping): any {
-    if (this.isArticleVarious(shopping.code)) {
+    if (this.isArticleVarious(shopping.barcode)) {
       return Math.round(shopping.total / shopping.amount * 100) / 100;
     } else {
       return shopping.retailPrice;
@@ -62,14 +80,14 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     shopping.amount--;
     if (shopping.amount === 0) {
       shopping.amount--;
-      shopping.committed = true;
+      shopping.state = ShoppingState.COMMITTED;
     }
     shopping.updateTotal();
     this.shoppingCartService.synchronizeCartTotal();
   }
 
   discountLabel(shopping: Shopping): string {
-    return this.isArticleVarious(shopping.code) ? '' : '' + shopping.discount;
+    return this.isArticleVarious(shopping.barcode) ? '' : '' + shopping.discount;
   }
 
   isArticleVarious(code: string): any {
@@ -77,7 +95,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   }
 
   updateDiscount(shopping: Shopping, event: any): void {
-    if (!this.isArticleVarious(shopping.code)) {
+    if (!this.isArticleVarious(shopping.barcode)) {
       shopping.discount = Number(event.target.value);
       if (shopping.discount < 0) {
         shopping.discount = 0;
@@ -105,18 +123,21 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   exchange(): void {
     this.shoppingCartService.exchange();
   }
-
+  checkboxState(state: ShoppingState): boolean{
+    return state === ShoppingState.COMMITTED;
+  }
   changeCommitted(shopping: Shopping): void {
-    shopping.committed = !shopping.committed;
+    if (shopping.state === ShoppingState.COMMITTED) {
+      shopping.state = ShoppingState.NOT_COMMITTED;
+    } else {
+      shopping.state = ShoppingState.COMMITTED;
+    }
   }
 
   delete(shopping: Shopping): void {
     this.shoppingCartService.delete(shopping);
   }
 
-  add(codeValue: string): void {
-    this.shoppingCartService.add(codeValue).subscribe();
-  }
 
   stockLabel(): string {
     return (this.shoppingCartService.getLastArticle()) ? 'Stock of ' + this.shoppingCartService.getLastArticle().description : 'Stock';

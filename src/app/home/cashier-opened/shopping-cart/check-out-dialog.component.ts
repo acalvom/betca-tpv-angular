@@ -17,11 +17,23 @@ export class CheckOutDialogComponent {
 
   constructor(private dialog: MatDialog, private shoppingCartService: ShoppingCartService) {
     this.totalPurchase = this.shoppingCartService.getTotalShoppingCart();
-    this.ticketCreation = {cash: 0, card: 0, voucher: 0, shoppingCart: null, note: ''};
+    this.ticketCreation = {cash: 0, card: 0, voucher: 0, shoppingList: null, note: ''};
   }
 
-  static format(value: number): number {
+  format(value: number): number {
     return value ? value : 0; // empty string,NaN,false,undefined,null,0 is: false
+  }
+
+  searchUser(mobile: string): void {
+    this.ticketCreation.user = {mobile: Number(mobile)};
+  }
+
+  managed(): boolean {
+    return !!this.ticketCreation.user;
+  }
+
+  resetMobile(): void {
+    this.ticketCreation.user = undefined;
   }
 
   uncommitted(): any {
@@ -33,14 +45,14 @@ export class CheckOutDialogComponent {
   }
 
   warning(): boolean {
-    return (!this.ticketCreation.userMobile) && this.shoppingCartService.unCommitArticlesExist();
+    return !this.managed() && this.shoppingCartService.unCommitArticlesExist();
   }
 
   returnedAmount(): number {
     return Math.round(
-      (CheckOutDialogComponent.format(this.ticketCreation.cash)
-        + CheckOutDialogComponent.format(this.ticketCreation.card)
-        + CheckOutDialogComponent.format(this.ticketCreation.voucher)
+      (this.format(this.ticketCreation.cash)
+        + this.format(this.ticketCreation.card)
+        + this.format(this.ticketCreation.voucher)
         - this.totalPurchase) * 100
     ) / 100;
   }
@@ -63,7 +75,7 @@ export class CheckOutDialogComponent {
   }
 
   fillCash(): void {
-    this.ticketCreation.cash = CheckOutDialogComponent.format(this.ticketCreation.cash);
+    this.ticketCreation.cash = this.format(this.ticketCreation.cash);
     if (this.returnedAmount() < 0 && this.ticketCreation.cash === 0) {
       this.ticketCreation.cash = -this.returnedAmount();
     } else if (this.ticketCreation.cash < 20) {
@@ -87,13 +99,13 @@ export class CheckOutDialogComponent {
     return Math.round(value * 100) / 100;
   }
 
-  checkOut(): any {
+  pay(): any {
     const returned = this.returnedAmount();
     const cash = this.ticketCreation.cash;
     let voucher = 0;
-    this.ticketCreation.cash = CheckOutDialogComponent.format(this.ticketCreation.cash);
-    this.ticketCreation.card = CheckOutDialogComponent.format(this.ticketCreation.card);
-    this.ticketCreation.voucher = CheckOutDialogComponent.format(this.ticketCreation.voucher);
+    this.ticketCreation.cash = this.format(this.ticketCreation.cash);
+    this.ticketCreation.card = this.format(this.ticketCreation.card);
+    this.ticketCreation.voucher = this.format(this.ticketCreation.voucher);
     if (returned > 0) {
       this.ticketCreation.cash -= returned;
     }
@@ -101,7 +113,6 @@ export class CheckOutDialogComponent {
       voucher = -this.ticketCreation.cash;
       this.ticketCreation.cash = 0;
     }
-
     if (this.ticketCreation.card > 0) {
       this.ticketCreation.note += ' Pay with card: ' + this.round(this.ticketCreation.card) + '.';
     }
@@ -111,12 +122,16 @@ export class CheckOutDialogComponent {
     if (this.ticketCreation.cash > 0) {
       this.ticketCreation.note += ' Pay with cash: ' + this.round(cash) + '.';
     }
+    if (!this.ticketCreation.note) {
+      this.ticketCreation.note += ' No Pay.';
+    }
     if (returned > 0) {
       this.ticketCreation.note += ' Return: ' + this.round(returned) + '.';
     }
-    this.shoppingCartService.checkOut(this.ticketCreation, voucher, this.requestedInvoice, this.requestedGiftTicket).subscribe(
+    this.shoppingCartService.createTicket(this.ticketCreation, voucher, this.requestedInvoice, this.requestedGiftTicket).subscribe(
       () => {
-      }, () => this.dialog.closeAll()
+      },
+      () => this.dialog.closeAll()
       , () => this.dialog.closeAll()
     );
   }

@@ -1,4 +1,48 @@
 <mat-card>
+  <mat-card-content>
+    <div class="container">
+      <form>
+        <mat-form-field>
+          <input #code cdkFocusInitial matInput placeholder="Barcode" type="text">
+          <mat-hint align="start">{{stockLabel()}}</mat-hint>
+          <mat-hint align="end">{{stockValue()}}</mat-hint>
+        </mat-form-field>
+        <button (click)="add(code.value); code.value=''" [disabled]="code.value === ''" mat-icon-button
+                type="submit" color="primary">
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      </form>
+      <app-search (renew)="searchByBarcode()" [(key)]="barcode" [keys]="barcodes"
+                  class="full-width" title="Barcode" (enter)="addBarcode()">
+      </app-search>
+      <mat-form-field>
+        <input matInput placeholder="Articles Tree" type="text" readonly>
+      </mat-form-field>
+      <button color="primary" disabled="disabled" mat-icon-button>
+        <mat-icon>category</mat-icon>
+      </button>
+      <form>
+        <mat-form-field>
+          <input #mobile matInput placeholder="User Discount" type="text">
+        </mat-form-field>
+        <button (click)="addDiscount(mobile.value)" [disabled]="mobile.value === ''" color="primary" mat-icon-button
+                type="submit">
+          <mat-icon>money_off</mat-icon>
+        </button>
+      </form>
+      <form>
+        <mat-form-field>
+          <input #offer matInput placeholder="Offers" type="text">
+        </mat-form-field>
+        <button (click)="addOffer(offer.value)" [disabled]="offer.value === ''" color="primary" mat-icon-button
+                type="submit">
+          <mat-icon>local_atm</mat-icon>
+        </button>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-card>
   <mat-card-title>
     <mat-icon color="primary">shopping_cart</mat-icon>
     Shopping Cart {{totalShoppingCart() | currency:'EUR':'symbol'}}
@@ -55,7 +99,7 @@
           </button>
         </mat-header-cell>
         <mat-cell *matCellDef="let item" fxFlex="15%">
-          <mat-checkbox (change)="changeCommitted(item)" [checked]="item.committed"
+          <mat-checkbox (change)="changeCommitted(item)" [checked]="checkboxState(item.state)"
                         [disabled]="item.amount<0"></mat-checkbox>
           <button (click)="delete(item)" mat-button mat-icon-button matSuffix>
             <mat-icon color="warn">close</mat-icon>
@@ -66,50 +110,16 @@
       <mat-row *matRowDef="let item; columns: displayedColumns;"></mat-row>
     </mat-table>
   </mat-card-content>
-</mat-card>
-
-<mat-card>
   <mat-card-content>
-    <div class="container">
-      <form>
-        <mat-form-field>
-          <input #code cdkFocusInitial matInput placeholder="Product Code" type="text">
-        </mat-form-field>
-        <button (click)="add(code.value); code.value=''" [disabled]="code.value === ''" color="primary" mat-mini-fab
-                type="submit">
-          <mat-icon>search</mat-icon>
-        </button>
-      </form>
-      <mat-form-field>
-        <input [placeholder]="stockLabel()" [value]="stockValue()" matInput readonly type="number">
-      </mat-form-field>
-      <form>
-        <mat-form-field>
-          <input #mobile matInput placeholder="Mobile to discount" type="text">
-        </mat-form-field>
-        <button (click)="addDiscount(mobile.value)" [disabled]="mobile.value === ''" color="primary" mat-mini-fab
-                type="submit">
-          <mat-icon>money_off</mat-icon>
-        </button>
-      </form>
-      <form>
-        <mat-form-field>
-          <input #offer matInput placeholder="Offers" type="text">
-        </mat-form-field>
-        <button (click)="addOffer(offer.value)" [disabled]="offer.value === ''" color="primary" mat-mini-fab
-                type="submit">
-          <mat-icon>local_atm</mat-icon>
-        </button>
-      </form>
-    </div>
     <button (click)="checkOut()" [disabled]="isEmpty()" color="accent" mat-raised-button>
-      <mat-icon mat-icon-button>credit_card</mat-icon>
+      <mat-icon>credit_card</mat-icon>
       Checkout
       <mat-icon>euro_symbol</mat-icon>
     </button>
-    <button (click)="createBudget()" color="primary" disabled="true" mat-raised-button>
+    <button (click)="createBudget()" color="primary" disabled="disabled" mat-raised-button>
       <mat-icon>description</mat-icon>
       Budget
     </button>
   </mat-card-content>
 </mat-card>
+

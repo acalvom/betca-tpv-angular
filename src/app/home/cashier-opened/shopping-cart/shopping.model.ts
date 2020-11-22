@@ -1,14 +1,16 @@
+import {ShoppingState} from './shopping-state.model';
+
 export class Shopping {
   amount: number;
   discount: number;
   total: number;
-  committed: boolean;
+  state: ShoppingState;
 
-  constructor(public code: string, public description: string, public retailPrice: number) {
+  constructor(public barcode: string, public description: string, public retailPrice: number) {
     this.amount = 1;
     this.discount = 0;
     this.total = this.retailPrice * this.amount * (1 - this.discount / 100);
-    this.committed = true;
+    this.state = ShoppingState.COMMITTED;
   }
 
   static round(value: number): number {
@@ -24,7 +26,7 @@ export class Shopping {
   }
 
   toString(): string {
-    return 'code:' + this.code + ', delivered:' + this.committed;
+    return 'code:' + this.barcode + ', delivered:' + this.state;
   }
 
 

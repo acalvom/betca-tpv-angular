@@ -25,7 +25,7 @@ export class SharedArticleService {
       .post(SharedArticleService.END_POINT, article);
   }
 
-  searchBarcode(barcode: string): Observable<string[]> {
+  searchBarcode(barcode: string): Observable<number[]> {
     return this.httpService
       .param('barcode', barcode)
       .get(SharedArticleService.END_POINT + SharedArticleService.BARCODE)

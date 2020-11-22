@@ -14,6 +14,7 @@ export class SearchComponent {
 
   @Output() keyChange = new EventEmitter<string>();
   @Output() renew = new EventEmitter<any>();
+  @Output() enter = new EventEmitter<string>();
 
   onRenew(): void {
     this.renew.emit();
@@ -22,6 +23,10 @@ export class SearchComponent {
   resetKey(): void {
     this.key = '';
     this.keyChange.emit(this.key);
+  }
+
+  onClick(): void{
+    this.enter.emit();
   }
 
   public filter(value: string): void {

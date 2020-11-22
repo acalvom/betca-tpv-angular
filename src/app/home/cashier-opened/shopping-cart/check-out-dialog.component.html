@@ -6,21 +6,15 @@
         <mat-icon color="warn">report_problem</mat-icon> Uncommit articles & phone not registered</span>
   <!-- <app-user-quick-crud (found)="updateUser($event)"></app-user-quick-crud> -->
   <mat-form-field>
-    <input matInput placeholder="Mobile" type="number"/>
-    <button mat-button mat-icon-button matSuffix>
+    <input #mobile matInput placeholder="Mobile" type="number" [disabled]="managed()"/>
+    <button mat-button mat-icon-button matSuffix *ngIf="!managed()" (click)="searchUser(mobile.value)">
       <mat-icon color="warn">search</mat-icon>
     </button>
-    <button mat-button mat-icon-button matSuffix>
+    <button mat-button mat-icon-button matSuffix *ngIf="managed()">
       <mat-icon color="warn">mode_edit</mat-icon>
     </button>
-    <button mat-button mat-icon-button matSuffix>
+    <button mat-button mat-icon-button matSuffix *ngIf="managed()" (click)="resetMobile()">
       <mat-icon color="warn">close</mat-icon>
-    </button>
-  </mat-form-field>
-  <mat-form-field>
-    <input [(ngModel)]="ticketCreation.card" matInput placeholder="Card" type="number"/>
-    <button (click)="fillCard()" aria-label="Card" mat-button mat-icon-button matSuffix>
-      <mat-icon color="warn">credit_card</mat-icon>
     </button>
   </mat-form-field>
   <mat-form-field>
@@ -30,13 +24,19 @@
     </button>
   </mat-form-field>
   <mat-form-field>
+    <input [(ngModel)]="ticketCreation.card" matInput placeholder="Card" type="number"/>
+    <button (click)="fillCard()" aria-label="Card" mat-button mat-icon-button matSuffix>
+      <mat-icon color="warn">credit_card</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field>
     <input [(ngModel)]="ticketCreation.voucher" [disabled]="true" matInput placeholder="Voucher" type="number"/>
     <button (click)="consumeVoucher()" aria-label="Voucher" mat-button mat-icon-button matSuffix>
       <mat-icon color="warn">local_offer</mat-icon>
     </button>
   </mat-form-field>
   <mat-checkbox [(ngModel)]="requestedInvoice" [disabled]="invalidInvoice()">
-    <span> Create Invoice ({{ticketCreation.userMobile}})</span>
+    <span> Create Invoice</span>
   </mat-checkbox>
   <mat-checkbox [(ngModel)]="requestedGiftTicket" [disabled]="true">
     <span>Create Gift Ticket</span>
@@ -47,7 +47,7 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button cdkFocusInitial mat-dialog-close mat-raised-button>Cancel</button>
-  <button (click)="checkOut()" [disabled]="invalidCheckOut()" color="accent" mat-raised-button>Pay
+  <button (click)="pay()" [disabled]="invalidCheckOut()" color="accent" mat-raised-button>Pay
     <span *ngIf="invalidCheckOut()" class="mat-suffix">( => {{totalCommitted()}})</span>
   </button>
 </mat-dialog-actions>
