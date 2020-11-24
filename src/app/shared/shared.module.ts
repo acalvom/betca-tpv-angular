@@ -10,7 +10,8 @@ import {CancelYesDialogComponent} from './dialogs/cancel-yes-dialog.component';
 import {CrudComponent} from './components/crud.component';
 import {SearchComponent} from './components/search.component';
 import {MaterialModule} from './material.module';
-import { FooterComponent } from './components/footer.component';
+import {FooterComponent } from './components/footer.component';
+import {EndPoints} from './end-points';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { FooterComponent } from './components/footer.component';
     MaterialModule,
   ],
   declarations: [
+
     CancelYesDialogComponent,
     CrudComponent,
     DateComponent,

@@ -2,24 +2,24 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
 import {HttpService} from '@core/http.service';
-import {SharedCashierService} from '../../shared/services/shared.cashier.service';
 import {CashierState} from './cashier-state.model';
 import {CashierClosure} from './cashier-closure.model';
+import {EndPoints} from '@shared/end-points';
 
 
 @Injectable()
 export class CashierClosureService {
-  static STATE = '/state';
+  private static STATE = '/state';
 
   constructor(private httpService: HttpService) {
   }
 
   close(cashierClosure: CashierClosure): Observable<void> {
-    return this.httpService.patch(SharedCashierService.CASHIER_LAST, cashierClosure);
+    return this.httpService.patch(EndPoints.CASHIERS_LAST, cashierClosure);
   }
 
   readState(): Observable<CashierState> {
-    return this.httpService.get(SharedCashierService.CASHIER_LAST + CashierClosureService.STATE);
+    return this.httpService.get(EndPoints.CASHIERS_LAST + CashierClosureService.STATE);
   }
 
 }

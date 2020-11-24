@@ -1,24 +1,22 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
-import {environment} from '@env';
 import {HttpService} from '@core/http.service';
 import {CashierLast} from './models/cashier-last.model';
+import {EndPoints} from '@shared/end-points';
 
 @Injectable()
 export class SharedCashierService {
-  static END_POINT = environment.REST_CORE + '/cashier';
-  static CASHIER_LAST =  SharedCashierService.END_POINT + '/last';
 
   constructor(private httpService: HttpService) {
   }
 
   openCashier(): Observable<any> {
-    return this.httpService.post(SharedCashierService.END_POINT);
+    return this.httpService.post(EndPoints.CASHIERS);
   }
 
   readLast(): Observable<CashierLast> {
-    return this.httpService.get(SharedCashierService.CASHIER_LAST);
+    return this.httpService.get(EndPoints.CASHIERS_LAST);
   }
 
 }
