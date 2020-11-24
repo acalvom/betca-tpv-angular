@@ -11,9 +11,7 @@ import {CrudComponent} from './components/crud.component';
 import {SearchComponent} from './components/search.component';
 import {MaterialModule} from './material.module';
 import {FooterComponent } from './components/footer.component';
-import {EndPoints} from './end-points';
-
-
+import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
 @NgModule({
   imports: [
     FormsModule,
@@ -21,7 +19,7 @@ import {EndPoints} from './end-points';
     MaterialModule,
   ],
   declarations: [
-
+    LoginDialogComponent,
     CancelYesDialogComponent,
     CrudComponent,
     DateComponent,
@@ -35,6 +33,7 @@ import {EndPoints} from './end-points';
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
+    LoginDialogComponent,
     CancelYesDialogComponent,
     CrudComponent,
     DateComponent,
@@ -44,6 +43,7 @@ import {EndPoints} from './end-points';
     FooterComponent
   ],
   entryComponents: [
+    LoginDialogComponent,
     CancelYesDialogComponent,
     ReadDetailDialogComponent,
   ]

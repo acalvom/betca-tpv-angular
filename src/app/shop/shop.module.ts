@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {SharedModule} from '../shared/shared.module';
+import {SharedModule} from '@shared/shared.module';
 import {CoreModule} from '@core/core.module';
 import {AppRoutingModule} from '../app-routing.module';
 import {CashierClosureService} from './cashier-opened/cashier-closure/cashier-closure.service';

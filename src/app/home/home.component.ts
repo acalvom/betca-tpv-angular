@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 
-import {LoginDialogComponent} from '@core/login-dialog.component';
+import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
 
 @Component({
   templateUrl: 'home.component.html',
