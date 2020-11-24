@@ -3,7 +3,12 @@
   "compileOnSave": false,
   "compilerOptions": {
     "resolveJsonModule": true,
-    "baseUrl": "./",
+    "baseUrl": "src",
+    "paths": {
+      "@env": ["environments/environment"],
+      "@sharedHome/*": ["app/home/shared/*"],
+      "@core/*": ["app/core/*"]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,

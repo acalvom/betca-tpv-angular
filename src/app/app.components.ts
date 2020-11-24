@@ -10,6 +10,8 @@ import {CashierDialogComponent} from './home/cashier-opened/cashier-closure/cash
 import {ArticleQuickCreationDialogComponent} from './home/cashier-opened/shopping-cart/article-quick-creation-dialog.component';
 import {CheckOutDialogComponent} from './home/cashier-opened/shopping-cart/check-out-dialog.component';
 import {ShoppingCartComponent} from './home/cashier-opened/shopping-cart/shopping-cart.component';
+import {SearchByCompanyComponent} from './home/shared/search-by-company.component';
+import {SearchByBarcodeComponent} from './home/shared/search-by-barcode.component';
 
 export class AppComponents {
   static COMPONENTS = [
@@ -18,6 +20,8 @@ export class AppComponents {
     CashierOpenedComponent,
     HomeComponent,
     ProvidersComponent,
+    SearchByBarcodeComponent,
+    SearchByCompanyComponent,
     ShoppingCartComponent,
     WelcomeComponent,
   ];

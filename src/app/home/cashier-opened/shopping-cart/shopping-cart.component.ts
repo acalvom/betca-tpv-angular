@@ -6,7 +6,6 @@ import {Shopping} from './shopping.model';
 import {CheckOutDialogComponent} from './check-out-dialog.component';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
-import {SharedArticleService} from '../../shared/services/shared.article.service';
 import {ShoppingState} from './shopping-state.model';
 
 @Component({
@@ -23,8 +22,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   private subscriptionDataSource: Subscription;
   @ViewChild('code', {static: true}) private elementRef: ElementRef;
 
-  constructor(private dialog: MatDialog, private shoppingCartService: ShoppingCartService,
-              private sharedArticleService: SharedArticleService) {
+  constructor(private dialog: MatDialog, private shoppingCartService: ShoppingCartService) {
     this.subscriptionDataSource = this.shoppingCartService.shoppingCartObservable().subscribe(
       data => {
         this.dataSource = new MatTableDataSource<Shopping>(data);
@@ -37,13 +35,9 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     this.shoppingCartService.add(codeValue).subscribe();
   }
 
-  searchByBarcode(): void {
-    this.barcodes = this.sharedArticleService.searchBarcode(this.barcode);
-  }
-
   addBarcode(): void {
     this.shoppingCartService
-      .add(String(this.barcode))
+      .add(this.barcode)
       .subscribe(() => this.barcode = undefined);
   }
 

@@ -4,7 +4,6 @@ import {Observable, of} from 'rxjs';
 
 import {Article} from '../shared/services/models/article.model';
 import {Tax} from '../shared/services/models/Tax';
-import {SharedProviderService} from '../shared/services/shared.provider.service';
 import {ArticleService} from './article.service';
 
 @Component({
@@ -19,8 +18,7 @@ export class ArticleCreationUpdatingDialogComponent {
   oldBarcode: string;
   companies: Observable<string[]> = of([]);
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: Article, private providerService: ArticleService,
-              private sharedProviderService: SharedProviderService, private dialog: MatDialog) {
+  constructor(@Inject(MAT_DIALOG_DATA) data: Article, private articleService: ArticleService, private dialog: MatDialog) {
     this.title = data ? 'Update Article' : 'Create Article';
     this.article = data ? data : {
       barcode: undefined, description: undefined, retailPrice: undefined, providerCompany: undefined,
@@ -34,13 +32,13 @@ export class ArticleCreationUpdatingDialogComponent {
   }
 
   create(): void {
-    this.providerService.create(this.article).subscribe(
+    this.articleService.create(this.article).subscribe(
       () => this.dialog.closeAll()
     );
   }
 
   update(): void {
-    this.providerService.update(this.oldBarcode, this.article).subscribe(
+    this.articleService.update(this.oldBarcode, this.article).subscribe(
       () => this.dialog.closeAll()
     );
   }
@@ -54,7 +52,4 @@ export class ArticleCreationUpdatingDialogComponent {
     return attr === undefined || null || attr === '';
   }
 
-  searchByCompany(): void {
-    this.companies = this.sharedProviderService.searchCompanies(this.article.providerCompany);
-  }
 }

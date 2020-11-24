@@ -12,9 +12,7 @@
           <mat-icon>add_circle</mat-icon>
         </button>
       </form>
-      <app-search (renew)="searchByBarcode()" [(key)]="barcode" [keys]="barcodes"
-                  class="full-width" title="Barcode" (enter)="addBarcode()">
-      </app-search>
+      <app-search-by-barcode  [(barcode)]="barcode" (barcodeChange)="addBarcode()"></app-search-by-barcode>
       <mat-form-field>
         <input matInput placeholder="Articles Tree" type="text" readonly>
       </mat-form-field>

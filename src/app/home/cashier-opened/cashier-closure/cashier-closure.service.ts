@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
-import {HttpService} from '../../../core/http.service';
+import {HttpService} from '@core/http.service';
 import {SharedCashierService} from '../../shared/services/shared.cashier.service';
 import {CashierState} from './cashier-state.model';
 import {CashierClosure} from './cashier-closure.model';

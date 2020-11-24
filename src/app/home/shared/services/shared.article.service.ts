@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
-import {HttpService} from '../../../core/http.service';
-import {environment} from '../../../../environments/environment';
+import {HttpService} from '@core/http.service';
+import {environment} from '@env';
 import {map} from 'rxjs/operators';
 
 import {Article} from './models/article.model';

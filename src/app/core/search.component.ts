@@ -8,13 +8,14 @@ import {map} from 'rxjs/operators';
   styleUrls: ['search.component.css']
 })
 export class SearchComponent {
-  @Input() title = 'Articles management';
+  @Input() title = 'Search';
   @Input() key: string;
   @Input() keys = of([]);
+  @Input() obligatory = false;
 
   @Output() keyChange = new EventEmitter<string>();
   @Output() renew = new EventEmitter<any>();
-  @Output() enter = new EventEmitter<string>();
+  @Output() selected = new EventEmitter<string>();
 
   onRenew(): void {
     this.renew.emit();
@@ -26,7 +27,7 @@ export class SearchComponent {
   }
 
   onClick(): void{
-    this.enter.emit();
+    this.selected.emit();
   }
 
   public filter(value: string): void {

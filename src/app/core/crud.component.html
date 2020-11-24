@@ -17,7 +17,7 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let item">
           <button (click)="onRead(item)" *ngIf="readAction==true" mat-button mat-icon-button matSuffix>
-            <mat-icon color="warn">visibility</mat-icon>
+            <mat-icon>visibility</mat-icon>
           </button>
           <button (click)="onUpdate(item)" *ngIf="updateAction==true" mat-button mat-icon-button matSuffix>
             <mat-icon color="warn">mode_edit</mat-icon>

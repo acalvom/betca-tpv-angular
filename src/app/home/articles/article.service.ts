@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
-import {HttpService} from '../../core/http.service';
+import {HttpService} from '@core/http.service';
 import {Article} from '../shared/services/models/article.model';
 import {ArticleSearch} from './article-search.model';
 import {SharedArticleService} from '../shared/services/shared.article.service';

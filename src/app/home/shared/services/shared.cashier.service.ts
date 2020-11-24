@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
-import {environment} from '../../../../environments/environment';
-import {HttpService} from '../../../core/http.service';
+import {environment} from '@env';
+import {HttpService} from '@core/http.service';
 import {CashierLast} from './models/cashier-last.model';
 
 @Injectable()

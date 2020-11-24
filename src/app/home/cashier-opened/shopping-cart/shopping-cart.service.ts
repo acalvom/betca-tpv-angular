@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, EMPTY, iif, merge, Observable, Subject} from 'rxjs';
 import {catchError, flatMap, map, mergeMap} from 'rxjs/operators';
 
-import {HttpService} from '../../../core/http.service';
+import {HttpService} from '@core/http.service';
 import {SharedArticleService} from '../../shared/services/shared.article.service';
 import {Article} from '../../shared/services/models/article.model';
 import {Shopping} from './shopping.model';
@@ -10,7 +10,7 @@ import {TicketCreation} from './ticket-creation.model';
 
 import {ArticleQuickCreationDialogComponent} from './article-quick-creation-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {environment} from '../../../../environments/environment';
+import {environment} from '@env';
 import {ShoppingState} from './shopping-state.model';
 
 @Injectable()

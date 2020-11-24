@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
-import {HttpService} from '../../core/http.service';
+import {HttpService} from '@core/http.service';
 import {SharedProviderService} from '../shared/services/shared.provider.service';
 import {Provider} from './provider.model';
 import {ProviderSearch} from './provider-search.model';
