@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 
-import {ReadDetailDialogComponent} from '../../shared/read-detail.dialog.component';
+import {ReadDetailDialogComponent} from '../../shared/dialogs/read-detail.dialog.component';
 import {Provider} from './provider.model';
 import {ProviderService} from './provider.service';
 import {ProviderSearch} from './provider-search.model';

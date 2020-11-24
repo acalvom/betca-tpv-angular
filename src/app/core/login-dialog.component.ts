@@ -6,7 +6,7 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   templateUrl: 'login-dialog.component.html',
-  styleUrls: ['dialog.component.css']
+  styleUrls: ['../shared/components/dialog.component.css']
 })
 export class LoginDialogComponent {
   mobile: number;

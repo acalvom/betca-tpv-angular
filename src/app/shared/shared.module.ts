@@ -11,15 +11,12 @@ import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTooltipModule} from '@angular/material/tooltip';
 
-
-
-import {UppercaseWords} from './UppercaseWordsPipe';
-import {LoginDialogComponent} from './login-dialog.component';
-import {ReadDetailDialogComponent} from './read-detail.dialog.component';
-import {DateComponent} from './date.component';
-import {CancelYesDialogComponent} from './cancel-yes-dialog.component';
-import {CrudComponent} from './crud.component';
-import {SearchComponent} from './search.component';
+import {UppercaseWords} from './pipes/UppercaseWordsPipe';
+import {ReadDetailDialogComponent} from './dialogs/read-detail.dialog.component';
+import {DateComponent} from './components/date.component';
+import {CancelYesDialogComponent} from './dialogs/cancel-yes-dialog.component';
+import {CrudComponent} from './components/crud.component';
+import {SearchComponent} from './components/search.component';
 
 @NgModule({
   imports: [
@@ -41,7 +38,6 @@ import {SearchComponent} from './search.component';
     CancelYesDialogComponent,
     CrudComponent,
     DateComponent,
-    LoginDialogComponent,
     ReadDetailDialogComponent,
     SearchComponent,
     UppercaseWords
@@ -50,16 +46,14 @@ import {SearchComponent} from './search.component';
     CancelYesDialogComponent,
     CrudComponent,
     DateComponent,
-    LoginDialogComponent,
     ReadDetailDialogComponent,
     SearchComponent,
     UppercaseWords
   ],
   entryComponents: [
     CancelYesDialogComponent,
-    LoginDialogComponent,
     ReadDetailDialogComponent,
   ]
 })
-export class SharedModule {
+export class SharedModule{
 }
