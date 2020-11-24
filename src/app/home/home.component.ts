@@ -4,10 +4,10 @@ import {MatDialog} from '@angular/material/dialog';
 import {LoginDialogComponent} from '@core/login-dialog.component';
 
 @Component({
-  templateUrl: 'welcome.component.html',
-  styleUrls: ['welcome.component.css'],
+  templateUrl: 'home.component.html',
+  styleUrls: ['home.component.css'],
 })
-export class WelcomeComponent {
+export class HomeComponent {
   title = 'TPV';
 
   constructor(private dialog: MatDialog) {
@@ -16,7 +16,7 @@ export class WelcomeComponent {
   login(): void {
     this.dialog.open(LoginDialogComponent,
       {
-        data: {homeUrl: 'home'}
+        data: {homeUrl: 'shop'}
       }
     );
   }

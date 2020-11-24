@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   templateUrl: 'read-detail.dialog.component.html',
-  styleUrls: ['../components/dialog.component.css']
+  styleUrls: ['./dialog.component.css']
 })
 
 export class ReadDetailDialogComponent {

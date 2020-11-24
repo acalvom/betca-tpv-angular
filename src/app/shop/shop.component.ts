@@ -3,17 +3,17 @@ import {Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 
-import {HttpService} from '../core/http.service';
-import {TokensService} from '../core/tokens.service';
+import {HttpService} from '@core/http.service';
+import {TokensService} from '@core/tokens.service';
 import {SharedCashierService} from './shared/services/shared.cashier.service';
 import {CashierDialogComponent} from './cashier-opened/cashier-closure/cashier-dialog.component';
 
 @Component({
-  templateUrl: 'home.component.html',
-  styleUrls: ['home.component.css'],
+  templateUrl: 'shop.component.html',
+  styleUrls: ['shop.component.css'],
 
 })
-export class HomeComponent {
+export class ShopComponent {
   username: string;
   cashierClosed: boolean;
 
@@ -42,9 +42,9 @@ export class HomeComponent {
         closed => {
           this.cashierClosed = closed;
           if (closed) {
-            this.router.navigate(['home', 'cashier-closed']).then();
+            this.router.navigate(['shop', 'cashier-closed']).then();
           } else {
-            this.router.navigate(['home', 'cashier-opened']).then();
+            this.router.navigate(['shop', 'cashier-opened']).then();
           }
         }
       );

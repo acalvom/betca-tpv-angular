@@ -9,16 +9,15 @@ import {AppComponent} from './app.component';
 import {AppComponents} from './app.components';
 import {AppServices} from './app.services';
 import {SharedModule} from './shared/shared.module';
+import {HomeModule} from './home/home.module';
 
 @NgModule({
   imports: [
-    BrowserAnimationsModule,
-    BrowserModule,
     CoreModule,
     SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutingModule
+    HomeModule,
+
+    AppRoutingModule,
   ],
   declarations: [
     AppComponent,

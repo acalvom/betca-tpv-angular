@@ -1,8 +1,7 @@
 import {ArticlesComponent} from './shop/articles/articles.component';
 import {CashierClosedComponent} from './shop/cashier-closed/cashier-closed.component';
-import {HomeComponent} from './shop/home.component';
+import {ShopComponent} from './shop/shop.component';
 import {ProvidersComponent} from './shop/providers/providers.component';
-import {WelcomeComponent} from './home/welcome.component';
 import {ArticleCreationUpdatingDialogComponent} from './shop/articles/article-creation-updating-dialog.component';
 import {ProviderCreationUpdatingDialogComponent} from './shop/providers/provider-creation-updating-dialog.component';
 import {CashierOpenedComponent} from './shop/cashier-opened/cashier-opened.component';
@@ -18,12 +17,11 @@ export class AppComponents {
     ArticlesComponent,
     CashierClosedComponent,
     CashierOpenedComponent,
-    HomeComponent,
+    ShopComponent,
     ProvidersComponent,
     SearchByBarcodeComponent,
     SearchByCompanyComponent,
     ShoppingCartComponent,
-    WelcomeComponent,
   ];
 
   static DIALOGS = [
