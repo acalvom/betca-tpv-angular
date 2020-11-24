@@ -3,12 +3,13 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import {CoreModule} from './core/core.module';
+import {CoreModule} from '@core/core.module';
 import {MaterialModule} from './material.module';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AppComponents} from './app.components';
 import {AppServices} from './app.services';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import {AppServices} from './app.services';
     BrowserAnimationsModule,
     BrowserModule,
     CoreModule,
+    SharedModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule

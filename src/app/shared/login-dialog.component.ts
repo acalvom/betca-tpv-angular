@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {TokensService} from './tokens.service';
+import {TokensService} from '@core/tokens.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({

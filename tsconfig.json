@@ -6,6 +6,7 @@
     "baseUrl": "src",
     "paths": {
       "@env": ["environments/environment"],
+      "@shared": ["app/shared"],
       "@sharedHome/*": ["app/home/shared/*"],
       "@core/*": ["app/core/*"]
     },
