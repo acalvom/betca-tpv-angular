@@ -18,8 +18,7 @@ export class ShopComponent {
   cashierClosed: boolean;
 
   constructor(private router: Router, private dialog: MatDialog, private httpService: HttpService,
-              private tokensService: TokensService, private cashierService: SharedCashierService,
-              private sharedCashierService: SharedCashierService) {
+              private tokensService: TokensService, private sharedCashierService: SharedCashierService) {
     this.username = tokensService.getName();
     this.cashierClosed = true;
     this.cashier();
@@ -34,7 +33,7 @@ export class ShopComponent {
   }
 
   cashier(): void {
-    this.cashierService.readLast()
+    this.sharedCashierService.readLast()
       .pipe(
         map(cashier => cashier.closed)
       )
@@ -72,7 +71,6 @@ export class ShopComponent {
       .afterClosed()
       .subscribe(() => this.cashier());
   }
-
 
 
 }

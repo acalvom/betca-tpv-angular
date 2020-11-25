@@ -18,6 +18,7 @@ export class SearchByCompanyComponent {
   public onSelect(): void {
     this.companyChange.emit(this.company);
   }
+
   searchByCompany(): void {
     this.companies = this.sharedProviderService.searchCompanies(this.company);
   }

@@ -10,13 +10,13 @@ export class SearchByBarcodeComponent {
   barcodes: Observable<number[]> = of([]);
 
   @Input() barcode: string;
-  @Output() barcodeChange = new EventEmitter<string>();
+  @Output() add = new EventEmitter<string>();
 
   constructor(private sharedArticleService: SharedArticleService) {
   }
 
-  public onSelect(): void {
-    this.barcodeChange.emit(this.barcode);
+  public onSelect(value): void {
+    this.add.emit(value);
   }
 
   searchByBarcode(): void {

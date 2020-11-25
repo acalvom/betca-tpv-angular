@@ -11,15 +11,15 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 export class LoginDialogComponent {
   mobile: number;
   password: string;
-  homeUrl: string;
+  shopUrl: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: any, private tokensService: TokensService, private router: Router) {
-    this.homeUrl = data.homeUrl;
+    this.shopUrl = data.shopUrl;
   }
 
   login(): void {
     this.tokensService.login(this.mobile, this.password).subscribe(
-      () => this.router.navigate([this.homeUrl])
+      () => this.router.navigate([this.shopUrl]).then()
     );
   }
 }

@@ -16,7 +16,7 @@ export class HomeComponent {
   login(): void {
     this.dialog.open(LoginDialogComponent,
       {
-        data: {homeUrl: 'shop'}
+        data: {shopUrl: 'shop'}
       }
     );
   }

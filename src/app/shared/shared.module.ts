@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
 
 import {UppercaseWords} from './pipes/UppercaseWordsPipe';
 import {ReadDetailDialogComponent} from './dialogs/read-detail.dialog.component';
@@ -10,12 +11,13 @@ import {CancelYesDialogComponent} from './dialogs/cancel-yes-dialog.component';
 import {CrudComponent} from './components/crud.component';
 import {SearchComponent} from './components/search.component';
 import {MaterialModule} from './material.module';
-import {FooterComponent } from './components/footer.component';
-import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
+import {FooterComponent} from '@shared/components/footer.component';
+
+
 @NgModule({
   imports: [
+    CommonModule,
     FormsModule,
-    BrowserAnimationsModule,
     MaterialModule,
   ],
   declarations: [
@@ -29,9 +31,8 @@ import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
     FooterComponent
   ],
   exports: [
+    CommonModule,
     FormsModule,
-    BrowserModule,
-    BrowserAnimationsModule,
     MaterialModule,
     LoginDialogComponent,
     CancelYesDialogComponent,
@@ -48,5 +49,5 @@ import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
     ReadDetailDialogComponent,
   ]
 })
-export class SharedModule{
+export class SharedModule {
 }

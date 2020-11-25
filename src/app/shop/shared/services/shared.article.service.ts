@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-
-import {HttpService} from '@core/http.service';
 import {map} from 'rxjs/operators';
 
-import {Article} from './models/article.model';
+import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
+import {Article} from './models/article.model';
 
 @Injectable()
 export class SharedArticleService {

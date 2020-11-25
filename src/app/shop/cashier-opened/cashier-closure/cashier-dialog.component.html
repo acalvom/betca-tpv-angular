@@ -18,7 +18,7 @@
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-dialog-close mat-raised-button cdkFocusInitial>Cancel</button>
+  <button cdkFocusInitial mat-dialog-close mat-raised-button>Cancel</button>
   <button (click)="close()" [disabled]="invalid()" color="accent" mat-raised-button>
     <mat-icon>lock_outline</mat-icon>
     Close cashier

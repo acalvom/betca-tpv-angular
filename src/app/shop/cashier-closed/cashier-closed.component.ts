@@ -9,8 +9,8 @@ import {CashierLast} from '../shared/services/models/cashier-last.model';
 export class CashierClosedComponent {
   cashierLast: CashierLast = {closed: undefined, finalCash: undefined};
 
-  constructor(private cashierService: SharedCashierService) {
-    this.cashierService
+  constructor(private sharedCashierService: SharedCashierService) {
+    this.sharedCashierService
       .readLast()
       .subscribe(cashier => this.cashierLast = cashier);
   }

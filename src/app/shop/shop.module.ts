@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+
 import {SharedModule} from '@shared/shared.module';
-import {CoreModule} from '@core/core.module';
-import {AppRoutingModule} from '../app-routing.module';
+
 import {CashierClosureService} from './cashier-opened/cashier-closure/cashier-closure.service';
 import {ProviderService} from './providers/provider.service';
 import {SharedArticleService} from './shared/services/shared.article.service';
@@ -23,6 +22,7 @@ import {CashierDialogComponent} from './cashier-opened/cashier-closure/cashier-d
 import {CheckOutDialogComponent} from './cashier-opened/shopping-cart/check-out-dialog.component';
 import {ProviderCreationUpdatingDialogComponent} from './providers/provider-creation-updating-dialog.component';
 import {ArticleService} from './articles/article.service';
+import {ShopRoutingModule} from './shop-routing.module';
 
 @NgModule({
   declarations: [
@@ -48,10 +48,8 @@ import {ArticleService} from './articles/article.service';
     ProviderCreationUpdatingDialogComponent,
   ],
   imports: [
-    CommonModule,
-    AppRoutingModule,
-    CoreModule,
     SharedModule,
+    ShopRoutingModule,
   ],
   providers: [
     ArticleService,
@@ -63,4 +61,5 @@ import {ArticleService} from './articles/article.service';
     ShoppingCartService,
   ],
 })
-export class ShopModule { }
+export class ShopModule {
+}

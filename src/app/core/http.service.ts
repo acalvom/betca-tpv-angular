@@ -13,7 +13,6 @@ import {Error} from './error.model';
 export class HttpService {
   static CONNECTION_REFUSE = 0;
   static UNAUTHORIZED = 401;
-  static NOT_FOUND = 404;
 
   private token: Token;
   private headers: HttpHeaders;
@@ -142,7 +141,7 @@ export class HttpService {
   }
 
   private createOptions(): any {
-    if (this.token !== undefined) {
+    if (this.token != null) {
       this.header('Authorization', 'Bearer ' + this.token.token);
     }
     const options: any = {

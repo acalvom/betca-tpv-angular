@@ -35,10 +35,10 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     this.shoppingCartService.add(codeValue).subscribe();
   }
 
-  addBarcode(): void {
+  addBarcode(value): void {
     this.shoppingCartService
-      .add(this.barcode)
-      .subscribe(() => this.barcode = undefined);
+      .add(value)
+      .subscribe();
   }
 
   ngOnInit(): void {
@@ -117,9 +117,11 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   exchange(): void {
     this.shoppingCartService.exchange();
   }
-  checkboxState(state: ShoppingState): boolean{
+
+  checkboxState(state: ShoppingState): boolean {
     return state === ShoppingState.COMMITTED;
   }
+
   changeCommitted(shopping: Shopping): void {
     if (shopping.state === ShoppingState.COMMITTED) {
       shopping.state = ShoppingState.NOT_COMMITTED;

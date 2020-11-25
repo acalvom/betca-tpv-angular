@@ -26,8 +26,8 @@ export class SearchComponent {
     this.keyChange.emit(this.key);
   }
 
-  onClick(): void{
-    this.selected.emit();
+  onClick(value): void {
+    this.selected.emit(value);
   }
 
   public filter(value: string): void {

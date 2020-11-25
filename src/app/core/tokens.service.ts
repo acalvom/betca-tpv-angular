@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
-import {environment} from '../../environments/environment';
+import {environment} from '@env';
 import {HttpService} from './http.service';
 import {Role} from './role.model';
 
@@ -40,4 +40,5 @@ export class TokensService {
   getName(): string {
     return this.httpService.getToken() ? this.httpService.getToken().name : '???';
   }
+
 }

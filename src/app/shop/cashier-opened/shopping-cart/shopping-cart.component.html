@@ -7,14 +7,14 @@
           <mat-hint align="start">{{stockLabel()}}</mat-hint>
           <mat-hint align="end">{{stockValue()}}</mat-hint>
         </mat-form-field>
-        <button (click)="add(code.value); code.value=''" [disabled]="code.value === ''" mat-icon-button
-                type="submit" color="primary">
+        <button (click)="add(code.value); code.value=''" [disabled]="code.value === ''" color="primary"
+                mat-icon-button type="submit">
           <mat-icon>add_circle</mat-icon>
         </button>
       </form>
-      <app-search-by-barcode  [(barcode)]="barcode" (barcodeChange)="addBarcode()"></app-search-by-barcode>
+      <app-search-by-barcode (add)="addBarcode($event)" [barcode]="barcode"></app-search-by-barcode>
       <mat-form-field>
-        <input matInput placeholder="Articles Tree" type="text" readonly>
+        <input matInput placeholder="Articles Tree" readonly type="text">
       </mat-form-field>
       <button color="primary" disabled="disabled" mat-icon-button>
         <mat-icon>category</mat-icon>

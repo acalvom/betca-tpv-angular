@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
 import {HttpService} from '@core/http.service';
-import {CashierLast} from './models/cashier-last.model';
 import {EndPoints} from '@shared/end-points';
+import {CashierLast} from './models/cashier-last.model';
 
 @Injectable()
 export class SharedCashierService {
