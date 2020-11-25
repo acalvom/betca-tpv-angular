@@ -1,12 +1,57 @@
 <mat-toolbar color="primary">
+  <div>
+    <mat-form-field appearance="fill" hideRequiredMarker="true" floatLabel="false">
+      <mat-label><small>Description</small></mat-label>
+      <input #code matInput placeholder="" required>
+    </mat-form-field>
+    <button (click)="search(code.value)" mat-icon-button>
+      <mat-icon>pageview</mat-icon>
+    </button>
+  </div>
   <img alt="miw" src="../../assets/img/miw.png"/>
-  <mat-card-title>{{title}}</mat-card-title>
-  <button (click)="login()" mat-button>
-    <mat-icon>person_outline</mat-icon>
-    <span>Login</span>
+  <div>
+    <button (click)="login()" mat-button *ngIf="!isLogged()">
+      <mat-icon>person_outline</mat-icon>
+      <span>Login</span>
+    </button>
+    <button (click)="logout()" mat-button *ngIf="isLogged()">
+      <span>{{username}}</span>
+      <mat-icon>person_outline</mat-icon>
+      <span>Logout</span>
+    </button>
+    <button *ngIf="isLogged()" mat-button [matMenuTriggerFor]="profile">
+      <mat-icon>account_box</mat-icon>
+      <span>Profile</span>
+    </button>
+    <button (click)="cart()" mat-button>
+      <mat-icon matBadge="3" matBadgeOverlap="false" matBadgeSize="medium" matBadgeColor="accent">shopping_cart</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+<mat-menu #profile="matMenu" xPosition="before">
+  <button mat-menu-item>
+    <mat-icon>settings</mat-icon>
+    <span>Settings</span>
   </button>
+  <button mat-menu-item>
+    <mat-icon>grade</mat-icon>
+    <span>Reviews</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>shopping_basket</mat-icon>
+    <span>Online Orders</span>
+  </button>
+</mat-menu>
+<mat-toolbar class="center">
+  <button mat-button [matMenuTriggerFor]="adviser">Adviser</button>
+  <mat-menu #adviser="matMenu">
+    <button mat-menu-item>Sale</button>
+    <button mat-menu-item>Popular</button>
+    <button mat-menu-item>New</button>
+  </mat-menu>
+  <button mat-button>Top 5</button>
 </mat-toolbar>
 <mat-grid-list cols="1" rowHeight="4:1">
-  <mat-grid-tile><br>Welcome to {{title}}</mat-grid-tile>
+  <mat-grid-tile>Welcome to {{title}}</mat-grid-tile>
 </mat-grid-list>
 

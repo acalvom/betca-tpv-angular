@@ -7,14 +7,14 @@ import {Role} from './role.model';
 
 
 @Injectable()
-export class TokensService {
+export class AuthService {
   static END_POINT = environment.REST_USER + '/users/token';
 
   constructor(private httpService: HttpService) {
   }
 
   login(mobile: number, password: string): Observable<any> {
-    return this.httpService.login(mobile, password, TokensService.END_POINT);
+    return this.httpService.login(mobile, password, AuthService.END_POINT);
   }
 
   logout(): void {
@@ -39,6 +39,10 @@ export class TokensService {
 
   getName(): string {
     return this.httpService.getToken() ? this.httpService.getToken().name : '???';
+  }
+
+  isLogged(): boolean {
+    return this.httpService.getToken() != null;
   }
 
 }

@@ -12,6 +12,7 @@ import {CrudComponent} from './components/crud.component';
 import {SearchComponent} from './components/search.component';
 import {MaterialModule} from './material.module';
 import {FooterComponent} from '@shared/components/footer.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import {FooterComponent} from '@shared/components/footer.component';
     CommonModule,
     FormsModule,
     MaterialModule,
+    FlexLayoutModule,
   ],
   declarations: [
     LoginDialogComponent,

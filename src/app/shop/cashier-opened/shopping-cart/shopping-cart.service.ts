@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, EMPTY, iif, merge, Observable, Subject} from 'rxjs';
-import {catchError, map, mergeMap} from 'rxjs/operators';
+import {catchError, concatMap, map, mergeMap} from 'rxjs/operators';
 
 import {HttpService} from '@core/http.service';
 import {SharedArticleService} from '../../shared/services/shared.article.service';
@@ -128,15 +128,19 @@ export class ShoppingCartService {
     this.synchronizeAll();
   }
 
-  createTicket(ticketCreation: TicketCreation, voucher: number, requestedInvoice: boolean, requestedGiftTicket): Observable<any> {
+  createTicketAndPrintReceipts(ticketCreation: TicketCreation, voucher: number,
+                               requestedInvoice: boolean,
+                               requestedGiftTicket: boolean,
+                               requestDataProtectionAct: boolean): Observable<any> {
     ticketCreation.shoppingList = this.shoppingCart;
     return this.httpService.post(ShoppingCartService.END_POINT, ticketCreation).pipe(
-      mergeMap(ticket => {
+      concatMap(ticket => {
         this.reset();
         let receipts = this.httpService.pdf().get(ShoppingCartService.END_POINT + '/' + ticket.id + ShoppingCartService.RECEIPT);
         receipts = iif(() => voucher > 0, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create voucher
         receipts = iif(() => requestedInvoice, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create invoice
         receipts = iif(() => requestedGiftTicket, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create gift ticket
+        receipts = iif(() => requestDataProtectionAct, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create gift ticket
         return receipts;
       })
     );

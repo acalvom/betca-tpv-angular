@@ -9,11 +9,11 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['shopping-cart.component.css']
 })
 export class CheckOutDialogComponent {
-
+  ticketCreation: TicketCreation;
   totalPurchase: number;
   requestedInvoice = false;
   requestedGiftTicket = false;
-  ticketCreation: TicketCreation;
+  requestedDataProtectionAct = false;
 
   constructor(private dialog: MatDialog, private shoppingCartService: ShoppingCartService) {
     this.totalPurchase = this.shoppingCartService.getTotalShoppingCart();
@@ -25,7 +25,9 @@ export class CheckOutDialogComponent {
   }
 
   searchUser(mobile: string): void {
-    this.ticketCreation.user = {mobile: Number(mobile)};
+    if (mobile) {
+      this.ticketCreation.user = {mobile: Number(mobile)};
+    }
   }
 
   managed(): boolean {
@@ -128,12 +130,9 @@ export class CheckOutDialogComponent {
     if (returned > 0) {
       this.ticketCreation.note += ' Return: ' + this.round(returned) + '.';
     }
-    this.shoppingCartService.createTicket(this.ticketCreation, voucher, this.requestedInvoice, this.requestedGiftTicket).subscribe(
-      () => {
-      },
-      () => this.dialog.closeAll()
-      , () => this.dialog.closeAll()
-    );
+    this.shoppingCartService.createTicketAndPrintReceipts(this.ticketCreation, voucher,
+      this.requestedInvoice, this.requestedGiftTicket, this.requestedDataProtectionAct)
+      .subscribe(() => this.dialog.closeAll());
   }
 
   invalidInvoice(): boolean {

@@ -41,6 +41,9 @@
   <mat-checkbox [(ngModel)]="requestedGiftTicket" [disabled]="true">
     <span>Create Gift Ticket</span>
   </mat-checkbox>
+  <mat-checkbox [(ngModel)]="requestedDataProtectionAct" [disabled]="true">
+    <span>Data Protection Act</span>
+  </mat-checkbox>
   <div *ngIf="!invalidCheckOut()&&returnedCash()>0" class="mat-raised-button mat-primary"> Cash Return:
     {{returnedCash() | currency:'EUR':'symbol'}}
   </div>

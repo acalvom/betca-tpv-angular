@@ -4,6 +4,10 @@
     position: fixed;*/
 }
 
+.center {
+  justify-content: center;
+}
+
 .mat-grid-tile {
   font-size: xx-large;
 }

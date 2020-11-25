@@ -1,10 +1,4 @@
-.mat-toolbar {
+.mat-grid-list {
   justify-content: space-between;
 }
 
-@media screen and (max-width: 700px) {
-  .hide {
-    visibility: hidden;
-    display: none;
-  }
-}

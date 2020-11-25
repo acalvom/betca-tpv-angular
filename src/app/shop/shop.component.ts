@@ -4,7 +4,7 @@ import {map} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 
 import {HttpService} from '@core/http.service';
-import {TokensService} from '@core/tokens.service';
+import {AuthService} from '@core/auth.service';
 import {SharedCashierService} from './shared/services/shared.cashier.service';
 import {CashierDialogComponent} from './cashier-opened/cashier-closure/cashier-dialog.component';
 
@@ -18,7 +18,7 @@ export class ShopComponent {
   cashierClosed: boolean;
 
   constructor(private router: Router, private dialog: MatDialog, private httpService: HttpService,
-              private tokensService: TokensService, private sharedCashierService: SharedCashierService) {
+              private tokensService: AuthService, private sharedCashierService: SharedCashierService) {
     this.username = tokensService.getName();
     this.cashierClosed = true;
     this.cashier();
