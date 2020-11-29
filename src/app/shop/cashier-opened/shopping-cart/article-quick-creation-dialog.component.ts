@@ -19,8 +19,8 @@ export class ArticleQuickCreationDialogComponent {
   }
 
   create(): void {
-    this.articleService.create(this.article).subscribe(
-      newArticle => this.dialogRef.close(newArticle)
-    );
+    this.articleService
+      .create(this.article)
+      .subscribe(newArticle => this.dialogRef.close(newArticle));
   }
 }

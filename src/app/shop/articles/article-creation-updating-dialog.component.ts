@@ -32,15 +32,15 @@ export class ArticleCreationUpdatingDialogComponent {
   }
 
   create(): void {
-    this.articleService.create(this.article).subscribe(
-      () => this.dialog.closeAll()
-    );
+    this.articleService
+      .create(this.article)
+      .subscribe(() => this.dialog.closeAll());
   }
 
   update(): void {
-    this.articleService.update(this.oldBarcode, this.article).subscribe(
-      () => this.dialog.closeAll()
-    );
+    this.articleService
+      .update(this.oldBarcode, this.article)
+      .subscribe(() => this.dialog.closeAll());
   }
 
   invalid(): boolean {

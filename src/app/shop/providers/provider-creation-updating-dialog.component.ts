@@ -25,15 +25,15 @@ export class ProviderCreationUpdatingDialogComponent {
   }
 
   create(): void {
-    this.providerService.create(this.provider).subscribe(
-      () => this.dialog.closeAll()
-    );
+    this.providerService
+      .create(this.provider)
+      .subscribe(() => this.dialog.closeAll());
   }
 
   update(): void {
-    this.providerService.update(this.oldProvider, this.provider).subscribe(
-      () => this.dialog.closeAll()
-    );
+    this.providerService
+      .update(this.oldProvider, this.provider)
+      .subscribe(() => this.dialog.closeAll());
   }
 
 

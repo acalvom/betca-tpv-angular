@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 
-import {ReadDetailDialogComponent} from '../../shared/dialogs/read-detail.dialog.component';
+import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 import {Article} from '../shared/services/models/article.model';
 import {ArticleService} from './article.service';
 import {ArticleCreationUpdatingDialogComponent} from './article-creation-updating-dialog.component';

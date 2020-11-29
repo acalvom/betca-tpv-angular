@@ -11,40 +11,28 @@ import {AuthService} from '@core/auth.service';
 export class HomeComponent {
   title = 'TPV';
   username = undefined;
-  tags = ['Sale', 'Popular', 'New'];
 
-  constructor(private dialog: MatDialog, private tokensService: AuthService) {
+  constructor(private dialog: MatDialog, private authService: AuthService) {
   }
 
   login(): void {
     this.dialog.open(LoginDialogComponent)
       .afterClosed()
-      .subscribe(() => this.username = this.tokensService.getName());
-  }
-
-  addTag(tag): void {
+      .subscribe(() => this.username = this.authService.getName());
   }
 
   logout(): void {
-    this.tokensService.logout();
+    this.authService.logout();
   }
 
   cart(): void {
   }
 
-  isLogged(): boolean {
-    return this.tokensService.isAuthenticated();
-  }
-
-  isAdmin(): boolean {
-    return this.tokensService.isAdmin();
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 
   search(value): void {
-  }
-
-  remove(tag): void {
-
   }
 
 }

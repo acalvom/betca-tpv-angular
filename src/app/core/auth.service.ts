@@ -22,10 +22,11 @@ export class AuthService {
   login(mobile: number, password: string): Observable<User> {
     return this.httpService.authBasic(mobile, password).post(AuthService.END_POINT).pipe(
       map(jsonToken => {
+        const jwtHelper = new JwtHelperService();
         this.user = jsonToken;
-        this.user.mobile = new JwtHelperService().decodeToken(jsonToken.token).user;
-        this.user.name = new JwtHelperService().decodeToken(jsonToken.token).name;
-        this.user.role = new JwtHelperService().decodeToken(jsonToken.token).role;
+        this.user.mobile = jwtHelper.decodeToken(jsonToken.token).user;
+        this.user.name = jwtHelper.decodeToken(jsonToken.token).name;
+        this.user.role = jwtHelper.decodeToken(jsonToken.token).role;
         return this.user;
       })
     );

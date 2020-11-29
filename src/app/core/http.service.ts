@@ -32,11 +32,8 @@ export class HttpService {
   }
 
   paramsFrom(dto: any): HttpService {
-    Object.getOwnPropertyNames(dto).forEach(item => {
-      if (dto[item] != null) {
-        this.param(item, dto[item]);
-      }
-    });
+    Object.getOwnPropertyNames(dto)
+      .forEach(item => this.param(item, dto[item]));
     return this;
   }
 
@@ -57,48 +54,47 @@ export class HttpService {
   }
 
   post(endpoint: string, body?: object): Observable<any> {
-    return this.http.post(endpoint, body, this.createOptions()).pipe(
-      map(response => this.extractData(response)),
-      catchError(error => {
-        return this.handleError(error);
-      })
-    );
+    return this.http
+      .post(endpoint, body, this.createOptions())
+      .pipe(
+        map(response => this.extractData(response)),
+        catchError(error => this.handleError(error))
+      );
   }
 
   get(endpoint: string): Observable<any> {
-    return this.http.get(endpoint, this.createOptions()).pipe(
-      map(response => this.extractData(response)),
-      catchError(error => {
-        return this.handleError(error);
-      })
-    );
+    return this.http
+      .get(endpoint, this.createOptions())
+      .pipe(
+        map(response => this.extractData(response)),
+        catchError(error => this.handleError(error))
+      );
   }
 
   put(endpoint: string, body?: object): Observable<any> {
-    return this.http.put(endpoint, body, this.createOptions()).pipe(
-      map(response => this.extractData(response)),
-      catchError(error => {
-        return this.handleError(error);
-      })
-    );
+    return this.http
+      .put(endpoint, body, this.createOptions())
+      .pipe(
+        map(response => this.extractData(response)),
+        catchError(error => this.handleError(error))
+      );
   }
 
   patch(endpoint: string, body?: object): Observable<any> {
-    return this.http.patch(endpoint, body, this.createOptions()).pipe(
-      map(response => this.extractData(response)),
-      catchError(error => {
-        return this.handleError(error);
-      })
-    );
+    return this.http
+      .patch(endpoint, body, this.createOptions())
+      .pipe(
+        map(response => this.extractData(response)),
+        catchError(error => this.handleError(error))
+      );
   }
 
   delete(endpoint: string): Observable<any> {
-    return this.http.delete(endpoint, this.createOptions()).pipe(
-      map(response => this.extractData(response)),
-      catchError(error => {
-        return this.handleError(error);
-      })
-    );
+    return this.http
+      .delete(endpoint, this.createOptions())
+      .pipe(
+        map(response => this.extractData(response)),
+        catchError(error => this.handleError(error)));
   }
 
   authBasic(mobile: number, password: string): HttpService {

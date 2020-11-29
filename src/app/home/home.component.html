@@ -10,16 +10,16 @@
   </div>
   <img alt="miw" src="../../assets/imges/miw.png"/>
   <div>
-    <button (click)="login()" *ngIf="!isLogged()" mat-button>
+    <button (click)="login()" *ngIf="!isAuthenticated()" mat-button>
       <mat-icon>person_outline</mat-icon>
       <span>Login</span>
     </button>
-    <button (click)="logout()" *ngIf="isLogged()" mat-button>
+    <button (click)="logout()" *ngIf="isAuthenticated()" mat-button>
       <span>{{username}}</span>
       <mat-icon>person_outline</mat-icon>
       <span>Logout</span>
     </button>
-    <button *ngIf="isLogged()" [matMenuTriggerFor]="profile" mat-button>
+    <button *ngIf="isAuthenticated()" [matMenuTriggerFor]="profile" mat-button>
       <mat-icon>account_box</mat-icon>
       <span>Profile</span>
     </button>

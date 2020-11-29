@@ -21,7 +21,8 @@ export class ProvidersComponent {
   }
 
   search(): void {
-    this.providerService.search(this.providerSearch)
+    this.providerService
+      .search(this.providerSearch)
       .subscribe(data => this.providers = data);
   }
 
@@ -30,20 +31,23 @@ export class ProvidersComponent {
   }
 
   create(): void {
-    this.dialog.open(ProviderCreationUpdatingDialogComponent)
+    this.dialog
+      .open(ProviderCreationUpdatingDialogComponent)
       .afterClosed()
       .subscribe(() => this.search());
   }
 
   read(provider: Provider): void {
-    this.providerService.read(provider.company)
+    this.providerService
+      .read(provider.company)
       .subscribe(fullProvider =>
         this.dialog.open(ReadDetailDialogComponent, {data: {object: fullProvider, title: 'Provider Details'}})
       );
   }
 
   update(provider: Provider): void {
-    this.providerService.read(provider.company)
+    this.providerService
+      .read(provider.company)
       .subscribe(fullProvider => this.dialog.open(ProviderCreationUpdatingDialogComponent, {data: fullProvider})
         .afterClosed()
         .subscribe(() => this.search())
