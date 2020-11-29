@@ -5,7 +5,9 @@ import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
 import {CashierLast} from './models/cashier-last.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class SharedCashierService {
 
   constructor(private httpService: HttpService) {

@@ -6,7 +6,9 @@ import {Provider} from './provider.model';
 import {ProviderSearch} from './provider-search.model';
 import {EndPoints} from '@shared/end-points';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ProviderService {
   private static SEARCH = '/search';
 

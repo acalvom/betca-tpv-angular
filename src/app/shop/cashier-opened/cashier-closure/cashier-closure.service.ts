@@ -7,7 +7,9 @@ import {CashierClosure} from './cashier-closure.model';
 import {EndPoints} from '@shared/end-points';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class CashierClosureService {
   private static STATE = '/state';
 

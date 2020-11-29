@@ -6,7 +6,9 @@ import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
 import {Article} from './models/article.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class SharedArticleService {
   private static BARCODE = '/barcode';
 

@@ -6,7 +6,9 @@ import {Article} from '../shared/services/models/article.model';
 import {ArticleSearch} from './article-search.model';
 import {EndPoints} from '@shared/end-points';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ArticleService {
   static SEARCH = '/search';
   static UNFINISHED = '/unfinished';

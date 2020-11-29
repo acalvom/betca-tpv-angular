@@ -5,7 +5,9 @@ import {map} from 'rxjs/operators';
 import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class SharedProviderService {
   private static COMPANY = '/company';
 

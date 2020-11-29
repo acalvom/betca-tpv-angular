@@ -9,7 +9,9 @@ import {User} from '@core/user.model';
 import {HttpService} from '@core/http.service';
 import {Role} from '@core/role.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
   static END_POINT = environment.REST_USER + '/users/token';
   private user: User;

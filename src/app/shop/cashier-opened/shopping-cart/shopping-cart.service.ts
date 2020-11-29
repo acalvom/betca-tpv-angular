@@ -13,7 +13,9 @@ import {MatDialog} from '@angular/material/dialog';
 import {environment} from '@env';
 import {ShoppingState} from './shopping-state.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ShoppingCartService {
   static END_POINT = environment.REST_CORE + '/tickets';
   static RECEIPT = '/receipt';

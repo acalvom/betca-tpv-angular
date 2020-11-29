@@ -7,7 +7,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {Error} from '@core/error.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class HttpService {
   static CONNECTION_REFUSE = 0;
   static UNAUTHORIZED = 401;
