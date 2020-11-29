@@ -23,7 +23,7 @@ import {CheckOutDialogComponent} from './cashier-opened/shopping-cart/check-out-
 import {ProviderCreationUpdatingDialogComponent} from './providers/provider-creation-updating-dialog.component';
 import {ArticleService} from './articles/article.service';
 import {ShopRoutingModule} from './shop-routing.module';
-import { TicketsComponent } from './cashier-opened/tickets/tickets.component';
+import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
 
 @NgModule({
   declarations: [

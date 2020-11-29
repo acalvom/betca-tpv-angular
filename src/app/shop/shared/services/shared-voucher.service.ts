@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {EMPTY, Observable, of} from 'rxjs';
+import {EMPTY, Observable} from 'rxjs';
 
 @Injectable()
 export class SharedVoucherService {

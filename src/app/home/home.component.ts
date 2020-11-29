@@ -17,14 +17,14 @@ export class HomeComponent {
   }
 
   login(): void {
-    this.dialog.open(LoginDialogComponent, {data: {shopUrl: 'shop'}})
+    this.dialog.open(LoginDialogComponent)
       .afterClosed()
       .subscribe(() => this.username = this.tokensService.getName());
   }
 
-  addTag(tag){
-
+  addTag(tag): void {
   }
+
   logout(): void {
     this.tokensService.logout();
   }
@@ -33,7 +33,7 @@ export class HomeComponent {
   }
 
   isLogged(): boolean {
-    return this.tokensService.isLogged();
+    return this.tokensService.isAuthenticated();
   }
 
   isAdmin(): boolean {

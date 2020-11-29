@@ -14,7 +14,6 @@ export class FooterComponent {
   backEndCore: string;
 
 
-
   constructor() {
     this.version = environment.VERSION;
     this.profile = environment.production ? 'Prod' : 'Dev';

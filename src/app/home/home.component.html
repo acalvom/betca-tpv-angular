@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <div>
-    <mat-form-field appearance="fill" hideRequiredMarker="true" floatLabel="false">
+    <mat-form-field appearance="fill" floatLabel="false" hideRequiredMarker="true">
       <mat-label><small>Description</small></mat-label>
       <input #code matInput placeholder="" required>
     </mat-form-field>
@@ -10,21 +10,22 @@
   </div>
   <img alt="miw" src="../../assets/img/miw.png"/>
   <div>
-    <button (click)="login()" mat-button *ngIf="!isLogged()">
+    <button (click)="login()" *ngIf="!isLogged()" mat-button>
       <mat-icon>person_outline</mat-icon>
       <span>Login</span>
     </button>
-    <button (click)="logout()" mat-button *ngIf="isLogged()">
+    <button (click)="logout()" *ngIf="isLogged()" mat-button>
       <span>{{username}}</span>
       <mat-icon>person_outline</mat-icon>
       <span>Logout</span>
     </button>
-    <button *ngIf="isLogged()" mat-button [matMenuTriggerFor]="profile">
+    <button *ngIf="isLogged()" [matMenuTriggerFor]="profile" mat-button>
       <mat-icon>account_box</mat-icon>
       <span>Profile</span>
     </button>
     <button (click)="cart()" mat-button>
-      <mat-icon matBadge="3" matBadgeOverlap="false" matBadgeSize="medium" matBadgeColor="accent">shopping_cart</mat-icon>
+      <mat-icon matBadge="3" matBadgeColor="accent" matBadgeOverlap="false" matBadgeSize="medium">shopping_cart
+      </mat-icon>
     </button>
   </div>
 </mat-toolbar>
@@ -43,7 +44,7 @@
   </button>
 </mat-menu>
 <mat-toolbar class="center">
-  <button mat-button [matMenuTriggerFor]="adviser">Adviser</button>
+  <button [matMenuTriggerFor]="adviser" mat-button>Adviser</button>
   <mat-menu #adviser="matMenu">
     <button mat-menu-item>Sale</button>
     <button mat-menu-item>Popular</button>

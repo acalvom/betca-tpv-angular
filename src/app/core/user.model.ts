@@ -1,6 +1,6 @@
 import {Role} from './role.model';
 
-export interface Token {
+export interface User {
   token: string;
   mobile?: number;
   name?: string;

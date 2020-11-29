@@ -4,9 +4,6 @@ import {EMPTY, Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {JwtHelperService} from '@auth0/angular-jwt';
-
-import {Token} from './token.model';
 import {Error} from './error.model';
 
 @Injectable()
@@ -14,7 +11,7 @@ export class HttpService {
   static CONNECTION_REFUSE = 0;
   static UNAUTHORIZED = 401;
 
-  private token: Token;
+  private token: string;
   private headers: HttpHeaders;
   private params: HttpParams;
   private responseType: string;
@@ -25,27 +22,8 @@ export class HttpService {
     this.resetOptions();
   }
 
-  login(mobile: number, password: string, endPoint: string): Observable<any> {
-    return this.authBasic(mobile, password).post(endPoint).pipe(
-      map(token => {
-        this.token = token;
-        this.token.mobile = new JwtHelperService().decodeToken(token.token).user;
-        this.token.name = new JwtHelperService().decodeToken(token.token).name;
-        this.token.role = new JwtHelperService().decodeToken(token.token).role;
-      }),
-      catchError(error => {
-        return this.handleError(error);
-      })
-    );
-  }
-
-  logout(): void {
-    this.token = undefined;
-    this.router.navigate(['']).then();
-  }
-
-  getToken(): Token {
-    return this.token;
+  setToken(token: string): void {
+    this.token = token;
   }
 
   param(key: string, value: string): HttpService {
@@ -125,13 +103,13 @@ export class HttpService {
     );
   }
 
+  authBasic(mobile: number, password: string): HttpService {
+    return this.header('Authorization', 'Basic ' + btoa(mobile + ':' + password));
+  }
+
   private header(key: string, value: string): HttpService {
     this.headers = this.headers.append(key, value); // This class is immutable
     return this;
-  }
-
-  private authBasic(mobile: number, password: string): HttpService {
-    return this.header('Authorization', 'Basic ' + btoa(mobile + ':' + password));
   }
 
   private resetOptions(): void {
@@ -142,7 +120,7 @@ export class HttpService {
 
   private createOptions(): any {
     if (this.token != null) {
-      this.header('Authorization', 'Bearer ' + this.token.token);
+      this.header('Authorization', 'Bearer ' + this.token);
     }
     const options: any = {
       headers: this.headers,
@@ -187,7 +165,7 @@ export class HttpService {
     let error: Error;
     if (response.status === HttpService.UNAUTHORIZED) {
       this.showError('Unauthorized');
-      this.logout();
+      this.token = undefined;
       this.router.navigate(['']).then();
       return EMPTY;
     } else if (response.status === HttpService.CONNECTION_REFUSE) {

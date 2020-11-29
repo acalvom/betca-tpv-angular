@@ -47,7 +47,7 @@
     <mat-icon>people</mat-icon>
     <span>Users</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="vat" >
+  <button [matMenuTriggerFor]="vat" mat-menu-item>
     <mat-icon>local_atm</mat-icon>
     <span>VAT Management</span>
   </button>
@@ -138,15 +138,15 @@
   </button>
 </mat-menu>
 <mat-menu #stock="matMenu">
-  <button mat-menu-item disabled="disabled" routerLink="/home/stock-alarm">
+  <button disabled="disabled" mat-menu-item routerLink="/home/stock-alarm">
     <mat-icon>alarm</mat-icon>
     <span>Stock Alarm</span>
   </button>
-  <button mat-menu-item disabled="disabled" routerLink="/home/stock-management">
+  <button disabled="disabled" mat-menu-item routerLink="/home/stock-management">
     <mat-icon>equalizer</mat-icon>
     <span>Stock Management</span>
   </button>
-  <button mat-menu-item disabled="disabled" routerLink="/home/stock-management">
+  <button disabled="disabled" mat-menu-item routerLink="/home/stock-management">
     <mat-icon>assessment</mat-icon>
     <span>Stock Audit</span>
   </button>
@@ -178,11 +178,11 @@
   </button>
 </mat-menu>
 <mat-menu #vat="matMenu">
-  <button mat-menu-item disabled="disabled" routerLink="/home/stock-management">
+  <button disabled="disabled" mat-menu-item routerLink="/home/stock-management">
     <mat-icon>money</mat-icon>
     <span>Quarter VAT</span>
   </button>
-  <button mat-menu-item disabled="disabled" routerLink="/home/stock-management">
+  <button disabled="disabled" mat-menu-item routerLink="/home/stock-management">
     <mat-icon>local_shipping</mat-icon>
     <span>Provider Invoice</span>
   </button>

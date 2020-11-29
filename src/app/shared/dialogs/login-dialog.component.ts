@@ -1,8 +1,8 @@
-import {Component, Inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {AuthService} from '@core/auth.service';
-import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   templateUrl: 'login-dialog.component.html',
@@ -11,17 +11,15 @@ import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 export class LoginDialogComponent {
   mobile: number;
   password: string;
-  shopUrl: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: any, private tokensService: AuthService, private router: Router, private dialog: MatDialog) {
-    this.shopUrl = data.shopUrl;
+  constructor(private tokensService: AuthService, private router: Router, private dialog: MatDialog) {
   }
 
   login(): void {
     this.tokensService.login(this.mobile, this.password).subscribe(
       () => {
-        if (this.tokensService.isAdmin() || this.tokensService.isManager() || this.tokensService.isOperator()) {
-          this.router.navigate([this.shopUrl]).then().finally(() => this.dialog.closeAll());
+        if (this.tokensService.isStaff()) {
+          this.router.navigate(['shop']).then().finally(() => this.dialog.closeAll());
         } else {
           this.dialog.closeAll();
         }
