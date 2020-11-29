@@ -28,8 +28,8 @@ export class ShopComponent {
     return this.tokensService.isAdmin();
   }
 
-  isManager(): boolean {
-    return this.tokensService.isManager();
+  untilManager(): boolean {
+    return this.tokensService.untilManager();
   }
 
   cashier(): void {

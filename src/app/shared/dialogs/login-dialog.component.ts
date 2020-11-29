@@ -12,13 +12,13 @@ export class LoginDialogComponent {
   mobile: number;
   password: string;
 
-  constructor(private tokensService: AuthService, private router: Router, private dialog: MatDialog) {
+  constructor(private auth: AuthService, private router: Router, private dialog: MatDialog) {
   }
 
   login(): void {
-    this.tokensService.login(this.mobile, this.password).subscribe(
+    this.auth.login(this.mobile, this.password).subscribe(
       () => {
-        if (this.tokensService.isStaff()) {
+        if (this.auth.untilOperator()) {
           this.router.navigate(['shop']).then().finally(() => this.dialog.closeAll());
         } else {
           this.dialog.closeAll();

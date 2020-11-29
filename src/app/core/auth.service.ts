@@ -1,16 +1,13 @@
 import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
 import {environment} from '@env';
-import {User} from './user.model';
-import {HttpService} from './http.service';
-import {Role} from './role.model';
-
-
-import {Router} from '@angular/router';
-import {map} from 'rxjs/operators';
-
+import {User} from '@core/user.model';
+import {HttpService} from '@core/http.service';
+import {Role} from '@core/role.model';
 
 @Injectable()
 export class AuthService {
@@ -27,7 +24,6 @@ export class AuthService {
         this.user.mobile = new JwtHelperService().decodeToken(jsonToken.token).user;
         this.user.name = new JwtHelperService().decodeToken(jsonToken.token).name;
         this.user.role = new JwtHelperService().decodeToken(jsonToken.token).role;
-        this.httpService.setToken(jsonToken.token);
         return this.user;
       })
     );
@@ -35,7 +31,6 @@ export class AuthService {
 
   logout(): void {
     this.user = undefined;
-    this.httpService.setToken(undefined);
     this.router.navigate(['']).then();
   }
 
@@ -43,24 +38,24 @@ export class AuthService {
     return this.user != null && !(new JwtHelperService().isTokenExpired(this.user.token));
   }
 
+  hasRoles(roles: Role[]): boolean {
+    return this.isAuthenticated() && roles.includes(this.user.role);
+  }
+
   isAdmin(): boolean {
-    return this.user ? this.user.role.includes(Role.ADMIN) : false;
+    return this.hasRoles([Role.ADMIN]);
   }
 
-  isManager(): boolean {
-    return this.user ? this.user.role.includes(Role.MANAGER) : false;
+  untilManager(): boolean {
+    return this.hasRoles([Role.ADMIN, Role.MANAGER]);
   }
 
-  isOperator(): boolean {
-    return this.user ? this.user.role.includes(Role.OPERATOR) : false;
-  }
-
-  isStaff(): boolean {
-    return this.isAdmin() || this.isManager() || this.isOperator();
+  untilOperator(): boolean {
+    return this.hasRoles([Role.ADMIN, Role.MANAGER, Role.ADMIN]);
   }
 
   isCustomer(): boolean {
-    return this.user ? this.user.role.includes(Role.CUSTOMER) : false;
+    return this.hasRoles([Role.CUSTOMER]);
   }
 
   getMobile(): number {
@@ -71,5 +66,8 @@ export class AuthService {
     return this.user ? this.user.name : '???';
   }
 
+  getToken(): string {
+    return this.user ? this.user.token : undefined;
+  }
 
 }

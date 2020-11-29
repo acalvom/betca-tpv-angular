@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <span>TPV </span>
-  <img alt="miw" src="../../assets/img/miw.png"/>
+  <img alt="miw" src="../../assets/imges/miw.png"/>
   <!--<span class="toolbar-spacer"></span>-->
   <span>
     <app-date></app-date>
@@ -124,7 +124,7 @@
     <mat-icon>local_shipping</mat-icon>
     <span>Providers</span>
   </button>
-  <button *ngIf="isAdmin()||isManager()" disabled="disabled" mat-menu-item routerLink="">
+  <button *ngIf="untilManager()" disabled="disabled" mat-menu-item routerLink="">
     <mat-icon>storage</mat-icon>
     <span>Orders</span>
   </button>

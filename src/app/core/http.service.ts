@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {EMPTY, Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Error} from './error.model';
+
+import {Error} from '@core/error.model';
 
 @Injectable()
 export class HttpService {
   static CONNECTION_REFUSE = 0;
   static UNAUTHORIZED = 401;
 
-  private token: string;
   private headers: HttpHeaders;
   private params: HttpParams;
   private responseType: string;
@@ -20,10 +20,6 @@ export class HttpService {
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar, private router: Router) {
     this.resetOptions();
-  }
-
-  setToken(token: string): void {
-    this.token = token;
   }
 
   param(key: string, value: string): HttpService {
@@ -107,7 +103,7 @@ export class HttpService {
     return this.header('Authorization', 'Basic ' + btoa(mobile + ':' + password));
   }
 
-  private header(key: string, value: string): HttpService {
+  header(key: string, value: string): HttpService {
     this.headers = this.headers.append(key, value); // This class is immutable
     return this;
   }
@@ -119,9 +115,6 @@ export class HttpService {
   }
 
   private createOptions(): any {
-    if (this.token != null) {
-      this.header('Authorization', 'Bearer ' + this.token);
-    }
     const options: any = {
       headers: this.headers,
       params: this.params,
@@ -165,7 +158,6 @@ export class HttpService {
     let error: Error;
     if (response.status === HttpService.UNAUTHORIZED) {
       this.showError('Unauthorized');
-      this.token = undefined;
       this.router.navigate(['']).then();
       return EMPTY;
     } else if (response.status === HttpService.CONNECTION_REFUSE) {

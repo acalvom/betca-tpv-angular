@@ -1,9 +1,12 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {HttpClientModule} from '@angular/common/http';
-import {HttpService} from './http.service';
-import {AuthService} from './auth.service';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+import {HttpService} from '@core/http.service';
+import {AuthService} from '@core/auth.service';
+import {RoleGuardService} from '@core/role-guard.service';
+import {TokenInterceptor} from '@core/token.interceptor';
 
 @NgModule({
   imports: [
@@ -14,7 +17,13 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
   declarations: [],
   providers: [
     HttpService,
-    AuthService
+    AuthService,
+    RoleGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
 })
 export class CoreModule {

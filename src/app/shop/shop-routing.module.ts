@@ -6,10 +6,15 @@ import {CashierOpenedComponent} from './cashier-opened/cashier-opened.component'
 import {ProvidersComponent} from './providers/providers.component';
 import {ShopComponent} from './shop.component';
 import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
+import {RoleGuardService} from '@core/role-guard.service';
+import {Role} from '@core/role.model';
 
 const routes: Routes = [
   {
-    path: '', component: ShopComponent, // 'shop' to forRoot
+    path: '', // 'shop' to forRoot
+    component: ShopComponent,
+    canActivate: [RoleGuardService],
+    data: {roles: [Role.ADMIN, Role.MANAGER, Role.OPERATOR]},
     children: [ // or path: shop/articles
       {path: 'articles', component: ArticlesComponent},
       {path: 'cashier-closed', component: CashierClosedComponent},
