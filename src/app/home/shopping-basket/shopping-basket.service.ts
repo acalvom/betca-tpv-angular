@@ -11,5 +11,6 @@ export class ShoppingBasketService {
   }
 
   addArticle(article: Article): void {
+    console.log('Article added to shopping basket: ' + article.description);
   }
 }

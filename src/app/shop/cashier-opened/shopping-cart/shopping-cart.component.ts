@@ -31,18 +31,14 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   }
 
-  add(codeValue: string): void {
-    this.shoppingCartService.add(codeValue).subscribe();
-  }
-
-  addBarcode(value): void {
-    this.shoppingCartService
-      .add(value)
-      .subscribe();
-  }
-
   ngOnInit(): void {
     this.elementRef.nativeElement.focus();
+  }
+
+  addBarcode(barcode): void {
+    this.shoppingCartService
+      .add(barcode)
+      .subscribe();
   }
 
   totalShoppingCart(): number {
@@ -62,22 +58,11 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   }
 
   incrementAmount(shopping: Shopping): void {
-    shopping.amount++;
-    if (shopping.amount === 0) {
-      shopping.amount++;
-    }
-    shopping.updateTotal();
-    this.shoppingCartService.synchronizeCartTotal();
+    this.shoppingCartService.incrementShoppingAmount(shopping);
   }
 
   decreaseAmount(shopping: Shopping): any {
-    shopping.amount--;
-    if (shopping.amount === 0) {
-      shopping.amount--;
-      shopping.state = ShoppingState.COMMITTED;
-    }
-    shopping.updateTotal();
-    this.shoppingCartService.synchronizeCartTotal();
+    this.shoppingCartService.decreaseShoppingAmount(shopping);
   }
 
   discountLabel(shopping: Shopping): string {
@@ -85,33 +70,19 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   }
 
   isArticleVarious(code: string): any {
-    return ShoppingCartService.isArticleVarious(code);
+    return this.shoppingCartService.isArticleVarious(code);
   }
 
   updateDiscount(shopping: Shopping, event: any): void {
-    if (!this.isArticleVarious(shopping.barcode)) {
-      shopping.discount = Number(event.target.value);
-      if (shopping.discount < 0) {
-        shopping.discount = 0;
-      }
-      if (shopping.discount > 100) {
-        shopping.discount = 100;
-      }
-      shopping.updateTotal();
-      this.shoppingCartService.synchronizeCartTotal();
-    }
+    this.shoppingCartService.updateShoppingDiscount(shopping, Number(event.target.value));
   }
 
   updateTotal(shopping: Shopping, event: any): void {
-    shopping.total = Number(event.target.value);
-    if (shopping.total > (shopping.retailPrice * shopping.amount)) {
-      shopping.total = shopping.retailPrice * shopping.amount;
-    }
-    if (shopping.total < 0) {
-      shopping.total = 0;
-    }
-    shopping.updateDiscount();
-    this.shoppingCartService.synchronizeCartTotal();
+    this.shoppingCartService.updateShoppingTotal(shopping, Number(event));
+  }
+
+  delete(shopping: Shopping): void {
+    this.shoppingCartService.delete(shopping);
   }
 
   exchange(): void {
@@ -123,17 +94,8 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   }
 
   changeCommitted(shopping: Shopping): void {
-    if (shopping.state === ShoppingState.COMMITTED) {
-      shopping.state = ShoppingState.NOT_COMMITTED;
-    } else {
-      shopping.state = ShoppingState.COMMITTED;
-    }
+    this.shoppingCartService.changeShoppingCommitted(shopping);
   }
-
-  delete(shopping: Shopping): void {
-    this.shoppingCartService.delete(shopping);
-  }
-
 
   stockLabel(): string {
     return (this.shoppingCartService.getLastArticle()) ? 'Stock of ' + this.shoppingCartService.getLastArticle().description : 'Stock';

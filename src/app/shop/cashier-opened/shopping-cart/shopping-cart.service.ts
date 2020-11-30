@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {BehaviorSubject, EMPTY, iif, merge, Observable, Subject} from 'rxjs';
-import {catchError, concatMap, map, mergeMap} from 'rxjs/operators';
+import {catchError, map, mergeMap} from 'rxjs/operators';
 
 import {HttpService} from '@core/http.service';
 import {SharedArticleService} from '../../shared/services/shared.article.service';
@@ -36,8 +36,8 @@ export class ShoppingCartService {
     this.shoppingCart = this.shoppingCartList[this.indexShoppingCart];
   }
 
-  static isArticleVarious(code: string): boolean {
-    return code === ShoppingCartService.ARTICLE_VARIOUS;
+  isArticleVarious(barcode: string): boolean {
+    return barcode === ShoppingCartService.ARTICLE_VARIOUS;
   }
 
   shoppingCartObservable(): Observable<Shopping[]> {
@@ -74,7 +74,7 @@ export class ShoppingCartService {
     return Math.round(total * 100) / 100;
   }
 
-  unCommitArticlesExist(): boolean {
+  existUnCommitArticles(): boolean {
     for (const shopping of this.shoppingCart) {
       if (!shopping.state && shopping.amount > 0) {
         return true;
@@ -91,20 +91,73 @@ export class ShoppingCartService {
     this.synchronizeAll();
   }
 
-  add(codeValue: string): Observable<any> {
-    let price: number = Number(codeValue.replace(',', '.'));
-    if (!Number.isNaN(price) && codeValue.length <= 5) {
-      codeValue = ShoppingCartService.ARTICLE_VARIOUS;
+  incrementShoppingAmount(shopping: Shopping): void {
+    shopping.amount++;
+    if (shopping.amount === 0) {
+      shopping.amount++;
+    }
+    shopping.updateTotal();
+    this.synchronizeCartTotal();
+  }
+
+  decreaseShoppingAmount(shopping: Shopping): any {
+    shopping.amount--;
+    if (shopping.amount === 0) {
+      shopping.amount--;
+      shopping.state = ShoppingState.COMMITTED;
+    }
+    shopping.updateTotal();
+    this.synchronizeCartTotal();
+  }
+
+  updateShoppingDiscount(shopping: Shopping, discount: number): void {
+    if (!this.isArticleVarious(shopping.barcode)) {
+      shopping.discount = discount;
+      if (shopping.discount < 0) {
+        shopping.discount = 0;
+      }
+      if (shopping.discount > 100) {
+        shopping.discount = 100;
+      }
+      shopping.updateTotal();
+      this.synchronizeCartTotal();
+    }
+  }
+
+  updateShoppingTotal(shopping: Shopping, total: number): void {
+    shopping.total = total;
+    if (shopping.total > (shopping.retailPrice * shopping.amount)) {
+      shopping.total = shopping.retailPrice * shopping.amount;
+    }
+    if (shopping.total < 0) {
+      shopping.total = 0;
+    }
+    shopping.updateDiscount();
+    this.synchronizeCartTotal();
+  }
+
+  changeShoppingCommitted(shopping: Shopping): void {
+    if (shopping.state === ShoppingState.COMMITTED) {
+      shopping.state = ShoppingState.NOT_COMMITTED;
+    } else {
+      shopping.state = ShoppingState.COMMITTED;
+    }
+  }
+
+  add(newBarcode: string): Observable<any> {
+    let price: number = Number(newBarcode.replace(',', '.'));
+    if (!Number.isNaN(price) && newBarcode.length <= 5) {
+      newBarcode = ShoppingCartService.ARTICLE_VARIOUS;
     } else {
       price = undefined;
     }
     return this.articleService
-      .read(codeValue)
+      .read(newBarcode)
       .pipe(
         map(article => this.addArticle(article, price)),
         catchError(() => {
           this.dialog
-            .open(ArticleQuickCreationDialogComponent, {data: {barcode: codeValue}})
+            .open(ArticleQuickCreationDialogComponent, {data: {barcode: newBarcode}})
             .afterClosed()
             .subscribe(newArticle => {
                 if (newArticle) {
@@ -129,17 +182,19 @@ export class ShoppingCartService {
                                requestedGiftTicket: boolean,
                                requestDataProtectionAct: boolean): Observable<any> {
     ticketCreation.shoppingList = this.shoppingCart;
-    return this.httpService.post(EndPoints.TICKETS, ticketCreation).pipe(
-      mergeMap(ticket => {
-        this.reset();
-        let receipts = this.httpService.pdf().get(EndPoints.TICKETS + '/' + ticket.id + ShoppingCartService.RECEIPT);
-        receipts = iif(() => voucher > 0, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create voucher
-        receipts = iif(() => requestedInvoice, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create invoice
-        receipts = iif(() => requestedGiftTicket, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create gift ticket
-        receipts = iif(() => requestDataProtectionAct, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create gift ticket
-        return receipts;
-      })
-    );
+    return this.httpService
+      .post(EndPoints.TICKETS, ticketCreation)
+      .pipe(
+        mergeMap(ticket => {
+          this.reset();
+          let receipts = this.httpService.pdf().get(EndPoints.TICKETS + '/' + ticket.id + ShoppingCartService.RECEIPT);
+          receipts = iif(() => voucher > 0, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create voucher
+          receipts = iif(() => requestedInvoice, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create invoice
+          receipts = iif(() => requestedGiftTicket, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create gift ticket
+          receipts = iif(() => requestDataProtectionAct, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create gift ticket
+          return receipts;
+        })
+      );
   }
 
   isEmpty(): boolean {

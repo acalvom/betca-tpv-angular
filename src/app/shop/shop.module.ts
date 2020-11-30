@@ -24,6 +24,7 @@ import {ProviderCreationUpdatingDialogComponent} from './providers/provider-crea
 import {ArticleService} from './articles/article.service';
 import {ShopRoutingModule} from './shop-routing.module';
 import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
+import {FlexModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
   imports: [
     SharedModule,
     ShopRoutingModule,
+    FlexModule,
   ],
   providers: [
     ArticleService,

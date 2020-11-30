@@ -1,19 +1,16 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-
-import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
-
-import {UppercaseWords} from './pipes/UppercaseWordsPipe';
-import {ReadDetailDialogComponent} from './dialogs/read-detail.dialog.component';
-import {DateComponent} from './components/date.component';
-import {CancelYesDialogComponent} from './dialogs/cancel-yes-dialog.component';
-import {CrudComponent} from './components/crud.component';
-import {SearchComponent} from './components/search.component';
-import {MaterialModule} from './material.module';
-import {FooterComponent} from '@shared/components/footer.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
-
+import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
+import {FooterComponent} from '@shared/components/footer.component';
+import {MaterialModule} from '@shared/material.module';
+import {UppercaseWords} from '@shared/pipes/UppercaseWordsPipe';
+import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
+import {DateComponent} from '@shared/components/date.component';
+import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
+import {CrudComponent} from '@shared/components/crud.component';
+import {SearchComponent} from '@shared/components/search.component';
 
 @NgModule({
   imports: [

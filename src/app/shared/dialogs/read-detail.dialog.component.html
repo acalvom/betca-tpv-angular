@@ -1,6 +1,8 @@
 <h1 mat-dialog-content>{{title}}</h1>
 <mat-dialog-content>
-  <mat-label *ngFor="let def of labels"><strong>{{def | uppercaseWords}}: </strong>{{object[def]}}</mat-label>
+  <ng-container *ngIf="(object | async) as data">
+    <mat-label *ngFor="let def of labels(data)"><strong>{{def | uppercaseWords}}: </strong>{{data[def]}}</mat-label>
+  </ng-container>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-dialog-close mat-raised-button>Close</button>

@@ -1,5 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {Observable} from 'rxjs';
 
 @Component({
   templateUrl: 'read-detail.dialog.component.html',
@@ -8,12 +9,14 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 export class ReadDetailDialogComponent {
   title: string;
-  labels: string[];
-  object: any;
+  object: Observable<any>;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: any) {
     this.title = data.title;
     this.object = data.object;
-    this.labels = Object.getOwnPropertyNames(this.object);
+  }
+
+  labels(object): string[] {
+    return Object.getOwnPropertyNames(object);
   }
 }

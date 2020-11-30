@@ -39,7 +39,7 @@ export class CheckOutDialogComponent {
   }
 
   uncommitted(): any {
-    return this.shoppingCartService.unCommitArticlesExist();
+    return this.shoppingCartService.existUnCommitArticles();
   }
 
   totalCommitted(): any {
@@ -47,7 +47,7 @@ export class CheckOutDialogComponent {
   }
 
   warning(): boolean {
-    return !this.managedMobile() && this.shoppingCartService.unCommitArticlesExist();
+    return !this.managedMobile() && this.shoppingCartService.existUnCommitArticles();
   }
 
   returnedAmount(): number {

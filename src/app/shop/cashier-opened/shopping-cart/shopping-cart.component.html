@@ -7,7 +7,7 @@
           <mat-hint align="start">{{stockLabel()}}</mat-hint>
           <mat-hint align="end">{{stockValue()}}</mat-hint>
         </mat-form-field>
-        <button (click)="add(code.value); code.value=''" [disabled]="code.value === ''" color="primary"
+        <button (click)="addBarcode(code.value); code.value=''" [disabled]="code.value === ''" color="primary"
                 mat-icon-button type="submit">
           <mat-icon>add_circle</mat-icon>
         </button>

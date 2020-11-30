@@ -40,10 +40,12 @@ export class ArticlesComponent {
   }
 
   read(article: Article): void {
-    this.articleService.read(article.barcode)
-      .subscribe(fullArticle =>
-        this.dialog.open(ReadDetailDialogComponent, {data: {object: fullArticle, title: 'Provider Details'}})
-      );
+    this.dialog.open(ReadDetailDialogComponent, {
+      data: {
+        object: this.articleService.read(article.barcode),
+        title: 'Provider Details'
+      }
+    });
   }
 
   update(article: Article): void {
