@@ -7,7 +7,6 @@ import {environment} from '@env';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
-  panelOpenState = false;
   version: string;
   profile: string;
   backEndUser: string;

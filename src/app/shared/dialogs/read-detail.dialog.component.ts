@@ -12,8 +12,8 @@ export class ReadDetailDialogComponent {
   object: any;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: any) {
-    this.object = data.object;
     this.title = data.title;
+    this.object = data.object;
     this.labels = Object.getOwnPropertyNames(this.object);
   }
 }

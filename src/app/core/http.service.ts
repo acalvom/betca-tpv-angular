@@ -102,7 +102,9 @@ export class HttpService {
   }
 
   header(key: string, value: string): HttpService {
-    this.headers = this.headers.append(key, value); // This class is immutable
+    if (value != null) {
+      this.headers = this.headers.append(key, value); // This class is immutable
+    }
     return this;
   }
 

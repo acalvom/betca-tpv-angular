@@ -32,8 +32,11 @@ export class SearchComponent {
 
   public filter(value: string): void {
     this.keyChange.emit(value);
-    this.keys = this.keys.pipe(
-      map(keys => keys.filter(key => key.toLowerCase().includes(value.toLowerCase())))
-    );
+    this.keys = this.keys
+      .pipe(
+        map(keys => keys
+          .filter(key => key.toLowerCase().includes(value.toLowerCase()))
+        )
+      );
   }
 }
