@@ -30,7 +30,7 @@ export class CheckOutDialogComponent {
     }
   }
 
-  managed(): boolean {
+  managedMobile(): boolean {
     return !!this.ticketCreation.user;
   }
 
@@ -47,7 +47,7 @@ export class CheckOutDialogComponent {
   }
 
   warning(): boolean {
-    return !this.managed() && this.shoppingCartService.unCommitArticlesExist();
+    return !this.managedMobile() && this.shoppingCartService.unCommitArticlesExist();
   }
 
   returnedAmount(): number {

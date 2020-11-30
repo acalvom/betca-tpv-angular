@@ -4,6 +4,7 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CashierClosureService} from './cashier-closure.service';
 import {CashierState} from './cashier-state.model';
 import {CashierClosure} from './cashier-closure.model';
+import {Observable} from 'rxjs';
 
 @Component({
   templateUrl: 'cashier-dialog.component.html',
@@ -11,13 +12,11 @@ import {CashierClosure} from './cashier-closure.model';
 })
 export class CashierDialogComponent {
   cashierFinal: CashierClosure = {finalCash: null, finalCard: null, comment: undefined};
-  cashierState: CashierState = {totalSales: null, totalCard: null, totalCash: null, totalVoucher: null};
+  cashierState: Observable<CashierState>;
 
   constructor(private dialog: MatDialog, private dialogRef: MatDialogRef<CashierDialogComponent>,
               private cashierService: CashierClosureService) {
-    this.cashierService
-      .readState()
-      .subscribe(state => this.cashierState = state);
+    this.cashierState = this.cashierService.readState();
   }
 
   close(): void {

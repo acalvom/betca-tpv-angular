@@ -1,23 +1,22 @@
 import {Injectable} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 import {BehaviorSubject, EMPTY, iif, merge, Observable, Subject} from 'rxjs';
-import {catchError, concatMap, map} from 'rxjs/operators';
+import {catchError, concatMap, map, mergeMap} from 'rxjs/operators';
 
 import {HttpService} from '@core/http.service';
 import {SharedArticleService} from '../../shared/services/shared.article.service';
 import {Article} from '../../shared/services/models/article.model';
 import {Shopping} from './shopping.model';
 import {TicketCreation} from './ticket-creation.model';
-
 import {ArticleQuickCreationDialogComponent} from './article-quick-creation-dialog.component';
-import {MatDialog} from '@angular/material/dialog';
-import {environment} from '@env';
+
 import {ShoppingState} from './shopping-state.model';
+import {EndPoints} from '@shared/end-points';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShoppingCartService {
-  static END_POINT = environment.REST_CORE + '/tickets';
   static RECEIPT = '/receipt';
 
   static ARTICLE_VARIOUS = '1';
@@ -99,28 +98,23 @@ export class ShoppingCartService {
     } else {
       price = undefined;
     }
-    return this.articleService.read(codeValue).pipe(
-      map(
-        (article: Article) => {
-          this.addArticle(article, price);
-        }), catchError(() => {
-        const dialogRef = this.dialog.open(ArticleQuickCreationDialogComponent);
-        dialogRef.componentInstance.article = {
-          barcode: codeValue,
-          description: undefined,
-          retailPrice: undefined,
-          providerCompany: undefined
-        };
-        dialogRef.afterClosed().subscribe(
-          newArticle => {
-            if (newArticle) {
-              this.addArticle(newArticle);
-            }
-          }
-        );
-        return EMPTY;
-      })
-    );
+    return this.articleService
+      .read(codeValue)
+      .pipe(
+        map(article => this.addArticle(article, price)),
+        catchError(() => {
+          this.dialog
+            .open(ArticleQuickCreationDialogComponent, {data: {barcode: codeValue}})
+            .afterClosed()
+            .subscribe(newArticle => {
+                if (newArticle) {
+                  this.addArticle(newArticle);
+                }
+              }
+            );
+          return EMPTY;
+        })
+      );
   }
 
   exchange(): void {
@@ -135,10 +129,10 @@ export class ShoppingCartService {
                                requestedGiftTicket: boolean,
                                requestDataProtectionAct: boolean): Observable<any> {
     ticketCreation.shoppingList = this.shoppingCart;
-    return this.httpService.post(ShoppingCartService.END_POINT, ticketCreation).pipe(
-      concatMap(ticket => {
+    return this.httpService.post(EndPoints.TICKETS, ticketCreation).pipe(
+      mergeMap(ticket => {
         this.reset();
-        let receipts = this.httpService.pdf().get(ShoppingCartService.END_POINT + '/' + ticket.id + ShoppingCartService.RECEIPT);
+        let receipts = this.httpService.pdf().get(EndPoints.TICKETS + '/' + ticket.id + ShoppingCartService.RECEIPT);
         receipts = iif(() => voucher > 0, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create voucher
         receipts = iif(() => requestedInvoice, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create invoice
         receipts = iif(() => requestedGiftTicket, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create gift ticket

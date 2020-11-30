@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {Article} from '../../shared/services/models/article.model';
 import {SharedArticleService} from '../../shared/services/shared.article.service';
-import {MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   templateUrl: 'article-quick-creation-dialog.component.html',
@@ -11,7 +11,9 @@ export class ArticleQuickCreationDialogComponent {
 
   article: Article;
 
-  constructor(private articleService: SharedArticleService, private dialogRef: MatDialogRef<ArticleQuickCreationDialogComponent>) {
+  constructor(@Inject(MAT_DIALOG_DATA) data: any, private articleService: SharedArticleService,
+              private dialogRef: MatDialogRef<ArticleQuickCreationDialogComponent>) {
+    this.article = data;
   }
 
   invalidArticle(): boolean {
