@@ -1,4 +1,4 @@
-name: CD - Heroku
+name: Heroku Deployment
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy on Heroku
+    name: Heroku Deployment
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
