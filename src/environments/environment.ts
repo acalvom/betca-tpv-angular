@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   NAME: name,
   VERSION: version,
-  REST_USER: 'http://localhost:8081/api/v0',
+  REST_USER: 'http://localhost:8081',
   REST_CORE: 'http://localhost:8082'
 };
 
