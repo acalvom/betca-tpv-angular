@@ -16,8 +16,8 @@ import {TokenInterceptor} from '@core/token.interceptor';
   ],
   declarations: [],
   providers: [
-    HttpService,
     AuthService,
+    HttpService,
     RoleGuardService,
     {
       provide: HTTP_INTERCEPTORS,

@@ -58,7 +58,13 @@ actualiza los cambios en el nivel de existencias de mercancías (STOCK) en la ba
 
 ## Anexo III. Preparación del ecosistema
 ### Versionado y entorno de trabajo
-En el fichero `tsconfig.json` añadir la siguiente opción:
+-------------------------------------------
+Explicar {{item}} VS {{item|async}}
+-------------------------------------------
+
+En el fichero `tsconfig.json` añadir la siguientes opciones:
+* `"resolveJsonModule":true`: nos permite importar valores de los ficheros *.json.
+* `"paths":{...}`: nos permite establecer alias para rutas mas utilizadaas, por ejemplo `@core`
 ```json
 "compilerOptions": {
     "resolveJsonModule": true,

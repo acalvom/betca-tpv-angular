@@ -42,6 +42,10 @@
     <mat-icon>shopping_basket</mat-icon>
     <span>Online Orders</span>
   </button>
+  <button mat-menu-item>
+    <mat-icon>money_off</mat-icon>
+    <span>Refund</span>
+  </button>
 </mat-menu>
 <mat-toolbar class="center">
   <button [matMenuTriggerFor]="adviser" mat-button>Adviser</button>
@@ -53,6 +57,6 @@
   <button mat-button>Top 5</button>
 </mat-toolbar>
 <mat-grid-list cols="1" rowHeight="4:1">
-  <mat-grid-tile>Welcome to {{title}}</mat-grid-tile>
+  <mat-grid-tile>Welcome to {{title}} <strong> -> News...</strong></mat-grid-tile>
 </mat-grid-list>
 

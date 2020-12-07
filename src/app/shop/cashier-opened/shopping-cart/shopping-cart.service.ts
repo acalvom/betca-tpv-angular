@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {BehaviorSubject, EMPTY, iif, merge, Observable, Subject} from 'rxjs';
+import {EMPTY, iif, merge, Observable} from 'rxjs';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 
 import {HttpService} from '@core/http.service';
 import {SharedArticleService} from '../../shared/services/shared.article.service';
-import {Article} from '../../shared/services/models/article.model';
 import {Shopping} from './shopping.model';
 import {TicketCreation} from './ticket-creation.model';
 import {ArticleQuickCreationDialogComponent} from './article-quick-creation-dialog.component';
@@ -18,211 +17,72 @@ import {EndPoints} from '@shared/end-points';
 })
 export class ShoppingCartService {
   static RECEIPT = '/receipt';
-
-  static ARTICLE_VARIOUS = '1';
-  static SHOPPING_CART_NUM = 4;
-
-  private indexShoppingCart = 0;
-  private shoppingCart: Array<Shopping>;
-  private totalShoppingCart = 0;
-  private shoppingCartList: Array<Array<Shopping>> = [];
-  private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // refresh auto
-  private lastArticle: Article;
+  static VARIOUS_BARCODE = '1';
+  static VARIOUS_LENGTH = 5;
 
   constructor(private dialog: MatDialog, private articleService: SharedArticleService, private httpService: HttpService) {
-    for (let i = 0; i < ShoppingCartService.SHOPPING_CART_NUM; i++) {
-      this.shoppingCartList.push([]);
-    }
-    this.shoppingCart = this.shoppingCartList[this.indexShoppingCart];
   }
 
-  isArticleVarious(barcode: string): boolean {
-    return barcode === ShoppingCartService.ARTICLE_VARIOUS;
-  }
-
-  shoppingCartObservable(): Observable<Shopping[]> {
-    return this.shoppingCartSubject.asObservable();
-  }
-
-  getIndexShoppingCart(): number {
-    return this.indexShoppingCart + 1;
-  }
-
-  getTotalShoppingCart(): number {
-    return this.totalShoppingCart;
-  }
-
-  getLastArticle(): Article {
-    return this.lastArticle;
-  }
-
-  synchronizeCartTotal(): void {
-    let total = 0;
-    for (const shopping of this.shoppingCart) {
-      total = total + shopping.total;
-    }
-    this.totalShoppingCart = Math.round(total * 100) / 100;
-  }
-
-  getTotalCommitted(): number {
-    let total = 0;
-    for (const shopping of this.shoppingCart) {
-      if (shopping.state) {
-        total += shopping.total;
-      }
-    }
-    return Math.round(total * 100) / 100;
-  }
-
-  existUnCommitArticles(): boolean {
-    for (const shopping of this.shoppingCart) {
-      if (!shopping.state && shopping.amount > 0) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  delete(shopping: Shopping): void {
-    const index = this.shoppingCart.indexOf(shopping);
-    if (index > -1) {
-      this.shoppingCart.splice(index, 1);
-    }
-    this.synchronizeAll();
-  }
-
-  incrementShoppingAmount(shopping: Shopping): void {
-    shopping.amount++;
-    if (shopping.amount === 0) {
-      shopping.amount++;
-    }
-    shopping.updateTotal();
-    this.synchronizeCartTotal();
-  }
-
-  decreaseShoppingAmount(shopping: Shopping): any {
-    shopping.amount--;
-    if (shopping.amount === 0) {
-      shopping.amount--;
-      shopping.state = ShoppingState.COMMITTED;
-    }
-    shopping.updateTotal();
-    this.synchronizeCartTotal();
-  }
-
-  updateShoppingDiscount(shopping: Shopping, discount: number): void {
-    if (!this.isArticleVarious(shopping.barcode)) {
-      shopping.discount = discount;
-      if (shopping.discount < 0) {
-        shopping.discount = 0;
-      }
-      if (shopping.discount > 100) {
-        shopping.discount = 100;
-      }
-      shopping.updateTotal();
-      this.synchronizeCartTotal();
-    }
-  }
-
-  updateShoppingTotal(shopping: Shopping, total: number): void {
-    shopping.total = total;
-    if (shopping.total > (shopping.retailPrice * shopping.amount)) {
-      shopping.total = shopping.retailPrice * shopping.amount;
-    }
-    if (shopping.total < 0) {
-      shopping.total = 0;
-    }
-    shopping.updateDiscount();
-    this.synchronizeCartTotal();
-  }
-
-  changeShoppingCommitted(shopping: Shopping): void {
-    if (shopping.state === ShoppingState.COMMITTED) {
-      shopping.state = ShoppingState.NOT_COMMITTED;
-    } else {
-      shopping.state = ShoppingState.COMMITTED;
-    }
-  }
-
-  add(newBarcode: string): Observable<any> {
-    let price: number = Number(newBarcode.replace(',', '.'));
-    if (!Number.isNaN(price) && newBarcode.length <= 5) {
-      newBarcode = ShoppingCartService.ARTICLE_VARIOUS;
-    } else {
-      price = undefined;
+  read(newBarcode: string): Observable<Shopping> {
+    const price: number = Number(newBarcode.replace(',', '.'));
+    if (!Number.isNaN(price) && newBarcode.length <= ShoppingCartService.VARIOUS_LENGTH) {
+      newBarcode = ShoppingCartService.VARIOUS_BARCODE;
     }
     return this.articleService
       .read(newBarcode)
       .pipe(
-        map(article => this.addArticle(article, price)),
+        map(article => {
+          if (newBarcode === ShoppingCartService.VARIOUS_BARCODE) {
+            article.retailPrice = price;
+          }
+          return article;
+        }),
         catchError(() => {
-          this.dialog
+          return this.dialog
             .open(ArticleQuickCreationDialogComponent, {data: {barcode: newBarcode}})
-            .afterClosed()
-            .subscribe(newArticle => {
-                if (newArticle) {
-                  this.addArticle(newArticle);
-                }
-              }
-            );
-          return EMPTY;
+            .afterClosed();
         })
+      ).pipe(
+        map(article => {
+            const shopping = new Shopping(article.barcode, article.description, article.retailPrice);
+            if (article.stock < 1) {
+              shopping.state = ShoppingState.NOT_COMMITTED;
+            }
+            return shopping;
+          }
+        )
       );
   }
 
-  exchange(): void {
-    this.shoppingCartList[this.indexShoppingCart++] = this.shoppingCart;
-    this.indexShoppingCart %= ShoppingCartService.SHOPPING_CART_NUM;
-    this.shoppingCart = this.shoppingCartList[this.indexShoppingCart];
-    this.synchronizeAll();
-  }
-
-  createTicketAndPrintReceipts(ticketCreation: TicketCreation, voucher: number,
-                               requestedInvoice: boolean,
-                               requestedGiftTicket: boolean,
+  createTicketAndPrintReceipts(ticketCreation: TicketCreation, voucher: number, requestedInvoice: boolean, requestedGiftTicket: boolean,
                                requestDataProtectionAct: boolean): Observable<any> {
-    ticketCreation.shoppingList = this.shoppingCart;
     return this.httpService
       .post(EndPoints.TICKETS, ticketCreation)
       .pipe(
         mergeMap(ticket => {
-          this.reset();
           let receipts = this.httpService.pdf().get(EndPoints.TICKETS + '/' + ticket.id + ShoppingCartService.RECEIPT);
-          receipts = iif(() => voucher > 0, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create voucher
-          receipts = iif(() => requestedInvoice, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create invoice
-          receipts = iif(() => requestedGiftTicket, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create gift ticket
-          receipts = iif(() => requestDataProtectionAct, merge(receipts, EMPTY), receipts); // TODO change EMPTY to create gift ticket
+          receipts = iif(() => voucher > 0, merge(receipts, this.createVoucherAndPrint(voucher)), receipts);
+          receipts = iif(() => requestedInvoice, merge(receipts, this.createInvoiceAndPrint(ticket)), receipts);
+          receipts = iif(() => requestedGiftTicket, merge(receipts, this.createGiftTicketAndPrint(ticket)), receipts);
+          receipts = iif(() => requestDataProtectionAct, merge(receipts, this.createDataProtectionActAndPrint(ticket.user)), receipts);
           return receipts;
         })
       );
   }
 
-  isEmpty(): boolean {
-    return (!this.shoppingCart || this.shoppingCart.length === 0);
+  createVoucherAndPrint(voucher): Observable<any> {
+    return EMPTY; // TODO change EMPTY
   }
 
-  private addArticle(article: Article, price?: number): void {
-    const shopping = new Shopping(article.barcode, article.description, article.retailPrice);
-    if (article.stock < 1) {
-      shopping.state = ShoppingState.NOT_COMMITTED;
-    }
-    this.shoppingCart.push(shopping);
-    this.lastArticle = article;
-    if (price) {
-      shopping.total = price;
-      shopping.updateDiscount();
-    }
-    this.synchronizeAll();
+  createInvoiceAndPrint(ticket): Observable<any> {
+    return EMPTY; // TODO change EMPTY
   }
 
-  private reset(): void {
-    this.shoppingCart = [];
-    this.synchronizeAll();
+  createGiftTicketAndPrint(ticket): Observable<any> {
+    return EMPTY; // TODO change EMPTY
   }
 
-  private synchronizeAll(): void {
-    this.shoppingCartSubject.next(this.shoppingCart);
-    this.synchronizeCartTotal();
+  createDataProtectionActAndPrint(user): Observable<any> {
+    return EMPTY; // TODO change EMPTY
   }
-
 }

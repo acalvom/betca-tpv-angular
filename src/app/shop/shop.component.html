@@ -23,10 +23,6 @@
     <mat-icon>business</mat-icon>
     <span>Shop</span>
   </button>
-  <button *ngIf="isAdmin()" [matMenuTriggerFor]="settings" mat-menu-item>
-    <mat-icon>settings</mat-icon>
-    <span>Admin</span>
-  </button>
   <button [matMenuTriggerFor]="cashiers" mat-menu-item>
     <mat-icon>account_balance</mat-icon>
     <span>Cashier</span>
@@ -53,16 +49,6 @@
   </button>
 </mat-menu>
 <!--   Menus  -->
-<mat-menu #settings="matMenu">
-  <button (click)="deleteDb()" mat-menu-item>
-    <mat-icon>delete_sweep</mat-icon>
-    <span>Delete Database</span>
-  </button>
-  <button (click)="seedDb()" mat-menu-item>
-    <mat-icon>unarchive</mat-icon>
-    <span>Seed Database</span>
-  </button>
-</mat-menu>
 <mat-menu #cashiers="matMenu">
   <button (click)="closeCashier()" *ngIf="!cashierClosed" mat-menu-item>
     <mat-icon>lock_outline</mat-icon>

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 
-import {ReadDetailDialogComponent} from '../../shared/dialogs/read-detail.dialog.component';
+import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 import {Provider} from './provider.model';
 import {ProviderService} from './provider.service';
 import {ProviderSearch} from './provider-search.model';
@@ -38,11 +38,12 @@ export class ProvidersComponent {
   }
 
   read(provider: Provider): void {
-    this.providerService
-      .read(provider.company)
-      .subscribe(fullProvider =>
-        this.dialog.open(ReadDetailDialogComponent, {data: {object: fullProvider, title: 'Provider Details'}})
-      );
+    this.dialog.open(ReadDetailDialogComponent, {
+      data: {
+        title: 'Provider Details',
+        object: this.providerService.read(provider.company)
+      }
+    });
   }
 
   update(provider: Provider): void {

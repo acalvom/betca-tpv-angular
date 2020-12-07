@@ -4,114 +4,153 @@ import {Observable, of, Subscription} from 'rxjs';
 import {ShoppingCartService} from './shopping-cart.service';
 import {Shopping} from './shopping.model';
 import {CheckOutDialogComponent} from './check-out-dialog.component';
-import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {ShoppingState} from './shopping-state.model';
+import {NumberDialogComponent} from '@shared/dialogs/number-dialog.component';
 
 @Component({
   selector: 'app-shopping-cart',
   styleUrls: ['shopping-cart.component.css'],
   templateUrl: 'shopping-cart.component.html'
 })
-export class ShoppingCartComponent implements OnInit, OnDestroy {
+export class ShoppingCartComponent implements OnInit {
+  static SHOPPING_CART_NUM = 4;
+
   barcode: string;
   barcodes: Observable<number[]> = of([]);
-  displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'actions'];
-  dataSource: MatTableDataSource<Shopping>;
 
-  private subscriptionDataSource: Subscription;
+  displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'actions'];
+  shoppingCart: Shopping[] = [];
+  indexShoppingCart = 0;
+  totalShoppingCart = 0;
+  private shoppingCartList: Array<Array<Shopping>> = [];
   @ViewChild('code', {static: true}) private elementRef: ElementRef;
 
   constructor(private dialog: MatDialog, private shoppingCartService: ShoppingCartService) {
-    this.subscriptionDataSource = this.shoppingCartService.shoppingCartObservable().subscribe(
-      data => {
-        this.dataSource = new MatTableDataSource<Shopping>(data);
-      }
-    );
-
+    for (let i = 0; i < ShoppingCartComponent.SHOPPING_CART_NUM; i++) {
+      this.shoppingCartList.push([]);
+    }
+    this.shoppingCart = [];
   }
 
   ngOnInit(): void {
     this.elementRef.nativeElement.focus();
+    this.shoppingCart = [];
+    this.synchronizeShoppingCart();
+  }
+
+  synchronizeShoppingCart(): void {
+    this.shoppingCart = [...this.shoppingCart];
+    let total = 0;
+    for (const shopping of this.shoppingCart) {
+      total = total + shopping.total;
+    }
+    this.totalShoppingCart = Math.round(total * 100) / 100;
   }
 
   addBarcode(barcode): void {
     this.shoppingCartService
-      .add(barcode)
-      .subscribe();
-  }
-
-  totalShoppingCart(): number {
-    return this.shoppingCartService.getTotalShoppingCart();
-  }
-
-  indexShoppingCart(): number {
-    return this.shoppingCartService.getIndexShoppingCart() === 0 ? undefined : this.shoppingCartService.getIndexShoppingCart();
-  }
-
-  priceLabel(shopping: Shopping): any {
-    if (this.isArticleVarious(shopping.barcode)) {
-      return Math.round(shopping.total / shopping.amount * 100) / 100;
-    } else {
-      return shopping.retailPrice;
-    }
+      .read(barcode)
+      .subscribe(newShopping => {
+        this.shoppingCart.push(newShopping);
+        this.synchronizeShoppingCart();
+      });
   }
 
   incrementAmount(shopping: Shopping): void {
-    this.shoppingCartService.incrementShoppingAmount(shopping);
+    shopping.amount++;
+    if (shopping.amount === 0) {
+      shopping.amount++;
+    }
+    shopping.updateTotal();
+    this.synchronizeShoppingCart();
   }
 
   decreaseAmount(shopping: Shopping): any {
-    this.shoppingCartService.decreaseShoppingAmount(shopping);
+    shopping.amount--;
+    if (shopping.amount === 0) {
+      shopping.amount--;
+      shopping.state = ShoppingState.COMMITTED;
+    }
+    shopping.updateTotal();
+    this.synchronizeShoppingCart();
   }
 
-  discountLabel(shopping: Shopping): string {
-    return this.isArticleVarious(shopping.barcode) ? '' : '' + shopping.discount;
+  updateDiscount(shopping: Shopping): void {
+    this.dialog.open(NumberDialogComponent, {data: shopping.discount})
+      .afterClosed()
+      .subscribe(result => {
+        if (result) {
+          shopping.discount = result;
+          if (shopping.discount < 0) {
+            shopping.discount = 0;
+          }
+          if (shopping.discount > 100) {
+            shopping.discount = 100;
+          }
+          shopping.updateTotal();
+          this.synchronizeShoppingCart();
+        }
+      });
   }
 
-  isArticleVarious(code: string): any {
-    return this.shoppingCartService.isArticleVarious(code);
-  }
-
-  updateDiscount(shopping: Shopping, event: any): void {
-    this.shoppingCartService.updateShoppingDiscount(shopping, Number(event.target.value));
-  }
-
-  updateTotal(shopping: Shopping, event: any): void {
-    this.shoppingCartService.updateShoppingTotal(shopping, Number(event));
+  updateTotal(shopping: Shopping): void {
+    this.dialog.open(NumberDialogComponent, {data: shopping.total})
+      .afterClosed()
+      .subscribe(result => {
+        if (result) {
+          shopping.total = result;
+          if (shopping.total > (shopping.retailPrice * shopping.amount)) {
+            shopping.total = shopping.retailPrice * shopping.amount;
+          }
+          if (shopping.total < 0) {
+            shopping.total = 0;
+          }
+          shopping.updateDiscount();
+          this.synchronizeShoppingCart();
+        }
+      });
   }
 
   delete(shopping: Shopping): void {
-    this.shoppingCartService.delete(shopping);
+    const index = this.shoppingCart.indexOf(shopping);
+    if (index > -1) {
+      this.shoppingCart.splice(index, 1);
+    }
+    this.synchronizeShoppingCart();
   }
 
-  exchange(): void {
-    this.shoppingCartService.exchange();
-  }
 
   checkboxState(state: ShoppingState): boolean {
     return state === ShoppingState.COMMITTED;
   }
 
   changeCommitted(shopping: Shopping): void {
-    this.shoppingCartService.changeShoppingCommitted(shopping);
-  }
-
-  stockLabel(): string {
-    return (this.shoppingCartService.getLastArticle()) ? 'Stock of ' + this.shoppingCartService.getLastArticle().description : 'Stock';
-  }
-
-  stockValue(): number {
-    return (this.shoppingCartService.getLastArticle()) ? this.shoppingCartService.getLastArticle().stock : null;
+    if (shopping.state === ShoppingState.COMMITTED) {
+      shopping.state = ShoppingState.NOT_COMMITTED;
+    } else {
+      shopping.state = ShoppingState.COMMITTED;
+    }
   }
 
   isEmpty(): boolean {
-    return this.shoppingCartService.isEmpty();
+    return (!this.shoppingCart || this.shoppingCart.length === 0);
+  }
+
+  exchangeShoppingCart(): void {
+    this.shoppingCartList[this.indexShoppingCart++] = this.shoppingCart;
+    this.indexShoppingCart %= ShoppingCartComponent.SHOPPING_CART_NUM;
+    this.shoppingCart = this.shoppingCartList[this.indexShoppingCart];
+    this.synchronizeShoppingCart();
   }
 
   checkOut(): void {
-    this.dialog.open(CheckOutDialogComponent).afterClosed().subscribe(
-      () => this.ngOnInit()
+    this.dialog.open(CheckOutDialogComponent, {data: this.shoppingCart}).afterClosed().subscribe(
+      result => {
+        if (result) {
+          this.ngOnInit();
+        }
+      }
     );
   }
 
@@ -125,10 +164,6 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   addOffer(offer): void {
     // TODO add offer
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptionDataSource.unsubscribe();
   }
 
 }

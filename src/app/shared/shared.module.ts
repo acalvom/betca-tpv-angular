@@ -11,6 +11,7 @@ import {DateComponent} from '@shared/components/date.component';
 import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
 import {CrudComponent} from '@shared/components/crud.component';
 import {SearchComponent} from '@shared/components/search.component';
+import {NumberDialogComponent} from '@shared/dialogs/number-dialog.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import {SearchComponent} from '@shared/components/search.component';
     CrudComponent,
     DateComponent,
     ReadDetailDialogComponent,
+    NumberDialogComponent,
     SearchComponent,
     UppercaseWords,
     FooterComponent
@@ -38,6 +40,7 @@ import {SearchComponent} from '@shared/components/search.component';
     CrudComponent,
     DateComponent,
     ReadDetailDialogComponent,
+    NumberDialogComponent,
     SearchComponent,
     UppercaseWords,
     FooterComponent
@@ -45,6 +48,7 @@ import {SearchComponent} from '@shared/components/search.component';
   entryComponents: [
     LoginDialogComponent,
     CancelYesDialogComponent,
+    NumberDialogComponent,
     ReadDetailDialogComponent,
   ]
 })

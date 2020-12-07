@@ -13,21 +13,16 @@ export class Shopping {
     this.state = ShoppingState.COMMITTED;
   }
 
-  static round(value: number): number {
+  static round2decimal(value: number): number {
     return Math.round(value * 100) / 100;
   }
 
   updateTotal(): void {
-    this.total = Shopping.round(this.retailPrice * this.amount * (1 - this.discount / 100));
+    this.total = Shopping.round2decimal(this.retailPrice * this.amount * (1 - this.discount / 100));
   }
 
   updateDiscount(): void {
-    this.discount = Shopping.round(100 * (1 - (this.total / (this.amount * this.retailPrice))));
+    this.discount = Shopping.round2decimal(100 * (1 - (this.total / (this.amount * this.retailPrice))));
   }
-
-  toString(): string {
-    return 'code:' + this.barcode + ', delivered:' + this.state;
-  }
-
 
 }

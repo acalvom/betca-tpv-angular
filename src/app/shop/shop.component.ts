@@ -24,10 +24,6 @@ export class ShopComponent {
     this.cashier();
   }
 
-  isAdmin(): boolean {
-    return this.tokensService.isAdmin();
-  }
-
   untilManager(): boolean {
     return this.tokensService.untilManager();
   }
@@ -47,12 +43,6 @@ export class ShopComponent {
           }
         }
       );
-  }
-
-  deleteDb(): void {
-  }
-
-  seedDb(): void {
   }
 
   logout(): void {

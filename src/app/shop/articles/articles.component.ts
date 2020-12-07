@@ -42,8 +42,8 @@ export class ArticlesComponent {
   read(article: Article): void {
     this.dialog.open(ReadDetailDialogComponent, {
       data: {
-        object: this.articleService.read(article.barcode),
-        title: 'Provider Details'
+        title: 'Article Details',
+        object: this.articleService.read(article.barcode)
       }
     });
   }

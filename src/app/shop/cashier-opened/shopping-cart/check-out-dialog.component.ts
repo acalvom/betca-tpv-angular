@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 
 import {TicketCreation} from './ticket-creation.model';
 import {ShoppingCartService} from './shopping-cart.service';
-import {MatDialog} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   templateUrl: 'check-out-dialog.component.html',
@@ -15,9 +15,18 @@ export class CheckOutDialogComponent {
   requestedGiftTicket = false;
   requestedDataProtectionAct = false;
 
-  constructor(private dialog: MatDialog, private shoppingCartService: ShoppingCartService) {
-    this.totalPurchase = this.shoppingCartService.getTotalShoppingCart();
-    this.ticketCreation = {cash: 0, card: 0, voucher: 0, shoppingList: null, note: ''};
+  constructor(@Inject(MAT_DIALOG_DATA) data, private dialogRef: MatDialogRef<CheckOutDialogComponent>,
+              private shoppingCartService: ShoppingCartService) {
+    this.ticketCreation = {cash: 0, card: 0, voucher: 0, shoppingList: data, note: ''};
+    this.total();
+  }
+
+  total(): void {
+    this.totalPurchase = 0;
+    for (const shopping of this.ticketCreation.shoppingList) {
+      this.totalPurchase = this.totalPurchase + shopping.total;
+    }
+    this.totalPurchase = Math.round(this.totalPurchase * 100) / 100;
   }
 
   format(value: number): number {
@@ -26,6 +35,7 @@ export class CheckOutDialogComponent {
 
   searchUser(mobile: string): void {
     if (mobile) {
+      // TODO falta buscar el user en BD, si no existe, debe sacar un dialogo para crearlo
       this.ticketCreation.user = {mobile: Number(mobile)};
     }
   }
@@ -38,16 +48,27 @@ export class CheckOutDialogComponent {
     this.ticketCreation.user = undefined;
   }
 
-  uncommitted(): any {
-    return this.shoppingCartService.existUnCommitArticles();
+  unCommitted(): boolean {
+    for (const shopping of this.ticketCreation.shoppingList) {
+      if (!shopping.state && shopping.amount > 0) {
+        return true;
+      }
+    }
+    return false;
   }
 
-  totalCommitted(): any {
-    return this.shoppingCartService.getTotalCommitted();
+  totalCommitted(): number {
+    let total = 0;
+    for (const shopping of this.ticketCreation.shoppingList) {
+      if (shopping.state) {
+        total += shopping.total;
+      }
+    }
+    return Math.round(total * 100) / 100;
   }
 
   warning(): boolean {
-    return !this.managedMobile() && this.shoppingCartService.existUnCommitArticles();
+    return !this.managedMobile() && this.unCommitted();
   }
 
   returnedAmount(): number {
@@ -94,7 +115,7 @@ export class CheckOutDialogComponent {
   }
 
   invalidCheckOut(): boolean {
-    return (this.totalPurchase + this.returnedAmount() - this.shoppingCartService.getTotalCommitted() < -0.01); // rounding errors
+    return (this.totalPurchase + this.returnedAmount() - this.totalCommitted() < -0.01); // rounding errors
   }
 
   round(value): any {
@@ -132,7 +153,7 @@ export class CheckOutDialogComponent {
     }
     this.shoppingCartService.createTicketAndPrintReceipts(this.ticketCreation, voucher,
       this.requestedInvoice, this.requestedGiftTicket, this.requestedDataProtectionAct)
-      .subscribe(() => this.dialog.closeAll());
+      .subscribe(() => this.dialogRef.close(true));
   }
 
   invalidInvoice(): boolean {
