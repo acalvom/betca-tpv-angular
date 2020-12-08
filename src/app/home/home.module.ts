@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {SharedModule} from '@shared/shared.module';
 import {HomeComponent} from './home.component';
@@ -12,8 +11,7 @@ import {ShoppingBasketService} from './shopping-basket/shopping-basket.service';
   ],
   imports: [
     SharedModule,
-    HomeRoutingModule,
-    FlexLayoutModule
+    HomeRoutingModule
   ],
   providers: [
     ShoppingBasketService,

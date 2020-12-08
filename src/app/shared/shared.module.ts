@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
 import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
 import {FooterComponent} from '@shared/components/footer.component';
 import {MaterialModule} from '@shared/material.module';
@@ -19,6 +19,7 @@ import {NumberDialogComponent} from '@shared/dialogs/number-dialog.component';
     FormsModule,
     MaterialModule,
     FlexLayoutModule,
+    FlexModule
   ],
   declarations: [
     LoginDialogComponent,
@@ -35,6 +36,8 @@ import {NumberDialogComponent} from '@shared/dialogs/number-dialog.component';
     CommonModule,
     FormsModule,
     MaterialModule,
+    FlexLayoutModule,
+    FlexModule,
     LoginDialogComponent,
     CancelYesDialogComponent,
     CrudComponent,
