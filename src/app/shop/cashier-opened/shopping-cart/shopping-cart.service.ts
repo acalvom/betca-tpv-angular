@@ -70,23 +70,23 @@ export class ShoppingCartService {
       );
   }
 
-  printTicket(ticketId: string): Observable<any>{
+  printTicket(ticketId: string): Observable<void>{
     return this.httpService.pdf().get(EndPoints.TICKETS + '/' + ticketId + ShoppingCartService.RECEIPT);
   }
 
-  createVoucherAndPrint(voucher: number): Observable<any> {
+  createVoucherAndPrint(voucher: number): Observable<void> {
     return EMPTY; // TODO change EMPTY
   }
 
-  createInvoiceAndPrint(ticketId: string): Observable<any> {
+  createInvoiceAndPrint(ticketId: string): Observable<void> {
     return EMPTY; // TODO change EMPTY
   }
 
-  createGiftTicketAndPrint(ticketId: string): Observable<any> {
+  createGiftTicketAndPrint(ticketId: string): Observable<void> {
     return EMPTY; // TODO change EMPTY
   }
 
-  createDataProtectionActAndPrint(ticket): Observable<any> {
+  createDataProtectionActAndPrint(ticket): Observable<void> {
     return EMPTY; // TODO change EMPTY
   }
 }

@@ -30,13 +30,7 @@ export class SearchComponent {
     this.selected.emit(value);
   }
 
-  public filter(value: string): void {
+  public onChange(value: string): void {
     this.keyChange.emit(value);
-    this.keys = this.keys
-      .pipe(
-        map(keys => keys
-          .filter(key => key.toLowerCase().includes(value.toLowerCase()))
-        )
-      );
   }
 }

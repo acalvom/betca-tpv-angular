@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 import {Provider} from './provider.model';
@@ -14,7 +14,7 @@ import {ProviderCreationUpdatingDialogComponent} from './provider-creation-updat
 export class ProvidersComponent {
   providerSearch: ProviderSearch;
   title = 'Providers management';
-  providers: Observable<Provider[]>;
+  providers = of([]);
 
   constructor(private dialog: MatDialog, private providerService: ProviderService) {
     this.resetSearch();

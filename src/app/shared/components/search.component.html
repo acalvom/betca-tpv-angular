@@ -1,6 +1,6 @@
 <mat-form-field class="full-width">
   <mat-label>{{title}}</mat-label>
-  <input (ngModelChange)="filter($event)"
+  <input (ngModelChange)="onChange($event)"
          [matAutocomplete]="auto"
          [ngModel]="key"
          [required]="obligatory"

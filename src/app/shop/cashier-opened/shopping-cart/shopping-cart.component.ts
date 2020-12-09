@@ -55,6 +55,7 @@ export class ShoppingCartComponent implements OnInit {
         this.shoppingCart.push(newShopping);
         this.synchronizeShoppingCart();
       });
+    this.elementRef.nativeElement.focus();
   }
 
   incrementAmount(shopping: Shopping): void {

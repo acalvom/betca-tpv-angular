@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 import {Article} from '../shared/services/models/article.model';
@@ -15,7 +15,7 @@ export class ArticlesComponent {
   barcode: string;
   articleSearch: ArticleSearch;
   title = 'Articles management';
-  articles: Observable<Article[]>;
+  articles = of([]);
 
   constructor(private dialog: MatDialog, private articleService: ArticleService) {
     this.resetSearch();

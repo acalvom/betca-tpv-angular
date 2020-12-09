@@ -13,7 +13,7 @@ export class SharedCashierService {
   constructor(private httpService: HttpService) {
   }
 
-  openCashier(): Observable<any> {
+  openCashier(): Observable<void> {
     return this.httpService.post(EndPoints.CASHIERS);
   }
 
