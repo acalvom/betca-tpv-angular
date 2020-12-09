@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
+import {Observable} from 'rxjs';
 
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 import {Provider} from './provider.model';
@@ -13,17 +14,14 @@ import {ProviderCreationUpdatingDialogComponent} from './provider-creation-updat
 export class ProvidersComponent {
   providerSearch: ProviderSearch;
   title = 'Providers management';
-  providers: Provider[];
+  providers: Observable<Provider[]>;
 
   constructor(private dialog: MatDialog, private providerService: ProviderService) {
     this.resetSearch();
-    this.providers = undefined;
   }
 
   search(): void {
-    this.providerService
-      .search(this.providerSearch)
-      .subscribe(data => this.providers = data);
+    this.providers = this.providerService.search(this.providerSearch);
   }
 
   resetSearch(): void {

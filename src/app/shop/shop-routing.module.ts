@@ -15,7 +15,7 @@ const routes: Routes = [
     component: ShopComponent,
     canActivate: [RoleGuardService],
     data: {roles: [Role.ADMIN, Role.MANAGER, Role.OPERATOR]},
-    children: [ // or path: shop/articles
+    children: [ // or path: 'shop/articles'
       {path: 'articles', component: ArticlesComponent},
       {path: 'cashier-closed', component: CashierClosedComponent},
       {path: 'cashier-opened', component: CashierOpenedComponent},
@@ -26,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)], // forRoot to eager load
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class ShopRoutingModule {

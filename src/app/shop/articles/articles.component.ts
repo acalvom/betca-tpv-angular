@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
+import {Observable} from 'rxjs';
 
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 import {Article} from '../shared/services/models/article.model';
@@ -14,16 +15,14 @@ export class ArticlesComponent {
   barcode: string;
   articleSearch: ArticleSearch;
   title = 'Articles management';
-  articles: Article[];
+  articles: Observable<Article[]>;
 
   constructor(private dialog: MatDialog, private articleService: ArticleService) {
     this.resetSearch();
-    this.articles = undefined;
   }
 
   search(): void {
-    this.articleService.search(this.articleSearch)
-      .subscribe(data => this.articles = data);
+    this.articles = this.articleService.search(this.articleSearch);
   }
 
   resetSearch(): void {
@@ -31,8 +30,7 @@ export class ArticlesComponent {
   }
 
   unfinished(): void {
-    this.articleService.searchUnfinished()
-      .subscribe(data => this.articles = data);
+    this.articles = this.articleService.searchUnfinished();
   }
 
   create(): void {

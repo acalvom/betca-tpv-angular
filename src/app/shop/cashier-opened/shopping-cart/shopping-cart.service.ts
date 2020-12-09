@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {EMPTY, iif, merge, Observable} from 'rxjs';
-import {catchError, map, mergeMap} from 'rxjs/operators';
+import {catchError, concatMap, map, mergeMap, switchMap} from 'rxjs/operators';
 
 import {HttpService} from '@core/http.service';
 import {SharedArticleService} from '../../shared/services/shared.article.service';
@@ -55,34 +55,38 @@ export class ShoppingCartService {
   }
 
   createTicketAndPrintReceipts(ticketCreation: TicketCreation, voucher: number, requestedInvoice: boolean, requestedGiftTicket: boolean,
-                               requestDataProtectionAct: boolean): Observable<any> {
+                               requestDataProtectionAct: boolean): Observable<void> {
     return this.httpService
       .post(EndPoints.TICKETS, ticketCreation)
       .pipe(
-        mergeMap(ticket => {
-          let receipts = this.httpService.pdf().get(EndPoints.TICKETS + '/' + ticket.id + ShoppingCartService.RECEIPT);
-          receipts = iif(() => voucher > 0, merge(receipts, this.createVoucherAndPrint(voucher)), receipts);
-          receipts = iif(() => requestedInvoice, merge(receipts, this.createInvoiceAndPrint(ticket)), receipts);
-          receipts = iif(() => requestedGiftTicket, merge(receipts, this.createGiftTicketAndPrint(ticket)), receipts);
-          receipts = iif(() => requestDataProtectionAct, merge(receipts, this.createDataProtectionActAndPrint(ticket.user)), receipts);
-          return receipts;
-        })
+        concatMap(ticket => {
+            let receipts = this.printTicket(ticket.id);
+            receipts = iif(() => voucher > 0, merge(receipts, this.createVoucherAndPrint(voucher)), receipts);
+            receipts = iif(() => requestedInvoice, merge(receipts, this.createInvoiceAndPrint(ticket.id)), receipts);
+            receipts = iif(() => requestedGiftTicket, merge(receipts, this.createGiftTicketAndPrint(ticket.id)), receipts);
+            receipts = iif(() => requestDataProtectionAct, merge(receipts, this.createDataProtectionActAndPrint(ticket)), receipts);
+            return receipts;
+          })// ,switchMap(() => EMPTY)
       );
   }
 
-  createVoucherAndPrint(voucher): Observable<any> {
+  printTicket(ticketId: string): Observable<any>{
+    return this.httpService.pdf().get(EndPoints.TICKETS + '/' + ticketId + ShoppingCartService.RECEIPT);
+  }
+
+  createVoucherAndPrint(voucher: number): Observable<any> {
     return EMPTY; // TODO change EMPTY
   }
 
-  createInvoiceAndPrint(ticket): Observable<any> {
+  createInvoiceAndPrint(ticketId: string): Observable<any> {
     return EMPTY; // TODO change EMPTY
   }
 
-  createGiftTicketAndPrint(ticket): Observable<any> {
+  createGiftTicketAndPrint(ticketId: string): Observable<any> {
     return EMPTY; // TODO change EMPTY
   }
 
-  createDataProtectionActAndPrint(user): Observable<any> {
+  createDataProtectionActAndPrint(ticket): Observable<any> {
     return EMPTY; // TODO change EMPTY
   }
 }

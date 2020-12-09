@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-crud',
@@ -21,18 +22,21 @@ export class CrudComponent {
   columnsHeader: Array<string>;
 
   @Input()
-  set data(data: any[]) {
-    const columnsSet: Set<string> = new Set();
-    this.dataSource = new MatTableDataSource<any>(data);
-    if (data) {
-      data.forEach(obj => Object.getOwnPropertyNames(obj)
-        .forEach(column => columnsSet.add(column)));
-      this.columns = Array.from(columnsSet);
-    } else {
-      this.columns = [];
-    }
-    columnsSet.add('actions');
-    this.columnsHeader = Array.from(columnsSet);
+  set data(data: Observable<any[]>) {
+    data.subscribe(dataValue => {
+      const columnsSet: Set<string> = new Set();
+      this.dataSource = new MatTableDataSource<any>(dataValue);
+      if (dataValue) {
+        dataValue.forEach(obj => Object.getOwnPropertyNames(obj)
+          .forEach(column => columnsSet.add(column))
+        );
+        this.columns = Array.from(columnsSet);
+      } else {
+        this.columns = [];
+      }
+      columnsSet.add('actions');
+      this.columnsHeader = Array.from(columnsSet);
+    });
   }
 
   onRead(item): void {
