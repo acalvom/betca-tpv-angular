@@ -1,5 +1,5 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Observable, of, Subscription} from 'rxjs';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Observable, of} from 'rxjs';
 
 import {ShoppingCartService} from './shopping-cart.service';
 import {Shopping} from './shopping.model';

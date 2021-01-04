@@ -9,6 +9,9 @@
     </button>
   </div>
   <img alt="miw" src="../../assets/images/miw.png"/>
+  <button mat-button routerLink="/home/adviser">
+    <span>TPV</span>
+  </button>
   <div>
     <button (click)="login()" *ngIf="!isAuthenticated()" mat-button>
       <mat-icon>person_outline</mat-icon>
@@ -44,7 +47,11 @@
   </button>
   <button mat-menu-item>
     <mat-icon>money_off</mat-icon>
-    <span>Refund</span>
+    <span>Refunds</span>
+  </button>
+  <button mat-menu-item routerLink="/home/complaints">
+    <mat-icon>sentiment_very_dissatisfied</mat-icon>
+    <span>Complaints</span>
   </button>
 </mat-menu>
 <mat-toolbar class="center">
@@ -56,9 +63,8 @@
   </mat-menu>
   <button mat-button>Top 5</button>
 </mat-toolbar>
-<mat-grid-list cols="1" rowHeight="4:1">
-  <mat-grid-tile>Welcome to {{title}} <strong> -> News...</strong></mat-grid-tile>
-</mat-grid-list>
+
+<router-outlet></router-outlet>
 
 <app-footer></app-footer>
 

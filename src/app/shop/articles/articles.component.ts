@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {Observable, of} from 'rxjs';
+import {of} from 'rxjs';
 
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 import {Article} from '../shared/services/models/article.model';

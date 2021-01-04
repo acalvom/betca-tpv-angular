@@ -27,19 +27,19 @@ import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
 
 @NgModule({
   declarations: [
+    ArticleCreationUpdatingDialogComponent,
+    ArticleQuickCreationDialogComponent,
     ArticlesComponent,
     CashierClosedComponent,
+    CashierDialogComponent,
     CashierOpenedComponent,
-    ShopComponent,
+    CheckOutDialogComponent,
+    ProviderCreationUpdatingDialogComponent,
     ProvidersComponent,
     SearchByBarcodeComponent,
     SearchByCompanyComponent,
+    ShopComponent,
     ShoppingCartComponent,
-    ArticleCreationUpdatingDialogComponent,
-    ArticleQuickCreationDialogComponent,
-    CashierDialogComponent,
-    CheckOutDialogComponent,
-    ProviderCreationUpdatingDialogComponent,
     TicketsComponent,
   ],
   entryComponents: [

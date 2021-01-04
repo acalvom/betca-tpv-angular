@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-crud',

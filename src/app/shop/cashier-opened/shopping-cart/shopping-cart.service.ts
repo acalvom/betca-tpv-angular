@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {EMPTY, iif, merge, Observable} from 'rxjs';
-import {catchError, concatMap, map, mergeMap, switchMap} from 'rxjs/operators';
+import {catchError, concatMap, map} from 'rxjs/operators';
 
 import {HttpService} from '@core/http.service';
 import {SharedArticleService} from '../../shared/services/shared.article.service';
@@ -60,17 +60,17 @@ export class ShoppingCartService {
       .post(EndPoints.TICKETS, ticketCreation)
       .pipe(
         concatMap(ticket => {
-            let receipts = this.printTicket(ticket.id);
-            receipts = iif(() => voucher > 0, merge(receipts, this.createVoucherAndPrint(voucher)), receipts);
-            receipts = iif(() => requestedInvoice, merge(receipts, this.createInvoiceAndPrint(ticket.id)), receipts);
-            receipts = iif(() => requestedGiftTicket, merge(receipts, this.createGiftTicketAndPrint(ticket.id)), receipts);
-            receipts = iif(() => requestDataProtectionAct, merge(receipts, this.createDataProtectionActAndPrint(ticket)), receipts);
-            return receipts;
-          })// ,switchMap(() => EMPTY)
+          let receipts = this.printTicket(ticket.id);
+          receipts = iif(() => voucher > 0, merge(receipts, this.createVoucherAndPrint(voucher)), receipts);
+          receipts = iif(() => requestedInvoice, merge(receipts, this.createInvoiceAndPrint(ticket.id)), receipts);
+          receipts = iif(() => requestedGiftTicket, merge(receipts, this.createGiftTicketAndPrint(ticket.id)), receipts);
+          receipts = iif(() => requestDataProtectionAct, merge(receipts, this.createDataProtectionActAndPrint(ticket)), receipts);
+          return receipts;
+        })// ,switchMap(() => EMPTY)
       );
   }
 
-  printTicket(ticketId: string): Observable<void>{
+  printTicket(ticketId: string): Observable<void> {
     return this.httpService.pdf().get(EndPoints.TICKETS + '/' + ticketId + ShoppingCartService.RECEIPT);
   }
 
