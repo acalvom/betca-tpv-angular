@@ -1,13 +1,14 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+
+import {Role} from '@core/role.model';
+import {RoleGuardService} from '@core/role-guard.service';
 import {ArticlesComponent} from './articles/articles.component';
 import {CashierClosedComponent} from './cashier-closed/cashier-closed.component';
 import {CashierOpenedComponent} from './cashier-opened/cashier-opened.component';
 import {ProvidersComponent} from './providers/providers.component';
 import {ShopComponent} from './shop.component';
 import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
-import {RoleGuardService} from '@core/role-guard.service';
-import {Role} from '@core/role.model';
 
 const routes: Routes = [
   {

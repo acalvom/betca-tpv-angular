@@ -3,8 +3,8 @@ import {CommonModule} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 
-import {HttpService} from '@core/http.service';
 import {AuthService} from '@core/auth.service';
+import {HttpService} from '@core/http.service';
 import {RoleGuardService} from '@core/role-guard.service';
 import {TokenInterceptor} from '@core/token.interceptor';
 
@@ -14,7 +14,6 @@ import {TokenInterceptor} from '@core/token.interceptor';
     HttpClientModule,
     MatSnackBarModule,
   ],
-  declarations: [],
   providers: [
     AuthService,
     HttpService,

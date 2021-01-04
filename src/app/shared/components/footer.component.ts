@@ -11,6 +11,7 @@ export class FooterComponent {
   profile: string;
   backEndUser: string;
   backEndCore: string;
+  backEndCustomerSupport: string;
 
 
   constructor() {
@@ -18,6 +19,7 @@ export class FooterComponent {
     this.profile = environment.production ? 'Prod' : 'Dev';
     this.backEndUser = environment.REST_USER;
     this.backEndCore = environment.REST_CORE;
+    this.backEndCustomerSupport = environment.REST_CUSTOMER_SUPPORT;
   }
 
 }
