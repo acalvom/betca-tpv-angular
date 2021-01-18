@@ -14,8 +14,7 @@ export class ComplaintCreationDialogComponent {
   complaint: Complaint;
 
   constructor(private complaintService: ComplaintService, private dialog: MatDialog, private authService: AuthService) {
-    this.complaint = {mobile: undefined, barcode: undefined, description: undefined};
-    this.complaint.mobile = authService.getMobile();
+    this.complaint = {barcode: undefined, description: undefined};
   }
 
   create(): void {

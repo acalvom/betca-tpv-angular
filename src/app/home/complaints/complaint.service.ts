@@ -15,8 +15,6 @@ export class ComplaintService {
   }
 
   create(complaint: Complaint): Observable<Complaint> {
-    console.log('url: ' + EndPoints.COMPLAINTS);
-    console.log('complaint: ' + complaint.mobile + ',' + complaint.barcode + ',' + complaint.description);
     return this.httpService
       .post(EndPoints.COMPLAINTS, complaint);
   }
@@ -29,6 +27,11 @@ export class ComplaintService {
   read(id: string): Observable<Complaint> {
     return this.httpService
       .get(EndPoints.COMPLAINTS + '/' + id);
+  }
+
+  delete(id: string): Observable<void>{
+    return this.httpService
+      .delete(EndPoints.COMPLAINTS + '/' + id );
   }
 
 }

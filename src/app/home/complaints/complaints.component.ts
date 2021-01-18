@@ -36,4 +36,10 @@ export class ComplaintsComponent {
       }
     });
   }
+
+  delete(complaint: Complaint): void {
+    this.complaintService
+      .delete(complaint.id)
+      .subscribe(() => this.searchAll());
+  }
 }
