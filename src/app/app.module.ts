@@ -12,8 +12,8 @@ import {AppComponent} from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     CoreModule,
-    // HomeModule,  eager load
-    // ShopModule,  eager load
+    // HomeModule // eager load
+    // ShopModule // eager load
   ],
   declarations: [
     AppComponent,
