@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {of} from 'rxjs';
+import {TicketService} from './ticket.service';
+import {Ticket} from './ticket.model';
 
 @Component({
   selector: 'app-ticket',
@@ -12,19 +14,19 @@ export class TicketsComponent{
   key: string;
   tickets = of([]);
 
-  constructor() {
+  constructor(private ticketService: TicketService) {
+    this.resetSearch();
   }
 
   search(): void {
-
+    this.tickets = this.ticketService.search(this.key);
   }
 
   resetSearch(): void {
-    this.key = '';
-    this.tickets = null;
+    this.key = null;
   }
 
-  update($event: any): void {
+  update(ticket: Ticket): void {
 
   }
 }
