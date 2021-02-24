@@ -42,4 +42,10 @@ export class OffersComponent {
         .subscribe(() => this.search())
       );
   }
+
+  print(offer: Offer): void {
+    this.offerService
+      .printOffer(offer.reference)
+      .subscribe(() => this.dialog.closeAll());
+  }
 }

@@ -40,7 +40,6 @@ export class OfferService {
 
   search(offerSearch: OfferSearch): Observable<Offer[]> {
     return of(this.offers);
-
     /*return this.httpService
       .paramsFrom(offerSearch)
       .get(EndPoints.OFFERS + OfferService.SEARCH);*/
@@ -73,4 +72,13 @@ export class OfferService {
       .successful()
       .put(EndPoints.OFFERS + '/' + oldOffer, offer);*/
   }
+
+  printOffer(reference: string): Observable<void> {
+    return of(console.log('Implementado'));
+    /*return this.httpService
+      .pdf()
+      .get(EndPoints.OFFERS + '/' + reference);*/
+  }
 }
+
+
