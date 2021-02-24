@@ -21,6 +21,7 @@
     </button>
   </mat-card-content>
 </mat-card>
-<app-crud [data]="offers" [createAction]="false" [readAction]="false" [updateAction]="false" [deleteAction]="false"
+<app-crud (create)="create()" [data]="offers"
+          [readAction]="false" [updateAction]="false" [deleteAction]="false"
           [title]="title">
 </app-crud>

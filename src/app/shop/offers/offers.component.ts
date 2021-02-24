@@ -3,6 +3,8 @@ import {of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {OfferSearch} from './offer-search.model';
 import {OfferService} from './offer.service';
+import {Offer} from './offer.model';
+import {OfferCreationUpdatingDialogComponent} from './offer-creation-updating-dialog.component';
 
 @Component({
   templateUrl: './offers.component.html',
@@ -23,5 +25,21 @@ export class OffersComponent {
 
   resetSearch(): void {
     this.offerSearch = {};
+  }
+
+  create(): void {
+    this.dialog
+      .open(OfferCreationUpdatingDialogComponent)
+      .afterClosed()
+      .subscribe(() => this.search());
+  }
+
+  update(offer: Offer): void {
+    this.offerService
+      .read(offer.reference)
+      .subscribe(fullOffer => this.dialog.open(OfferCreationUpdatingDialogComponent, {data: fullOffer})
+        .afterClosed()
+        .subscribe(() => this.search())
+      );
   }
 }
