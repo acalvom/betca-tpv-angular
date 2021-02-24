@@ -79,6 +79,19 @@ export class OfferService {
       .pdf()
       .get(EndPoints.OFFERS + '/' + reference);*/
   }
+
+  deleteOffer(reference: string): Observable<void> {
+    const offerToDelete = this.offers.find(off => off.reference === reference);
+    const index = this.offers.indexOf(offerToDelete);
+    if (index > -1) {
+      this.offers.splice(index, 1);
+    }
+    this.search(new OfferSearch());
+    return of(console.log('Offer ' + reference + 'deleted successfully'));
+    /*return this.httpService
+      .successful()
+      .delete(EndPoints.OFFERS + '/' + reference);*/
+  }
 }
 
 

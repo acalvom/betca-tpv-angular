@@ -21,7 +21,6 @@
     </button>
   </mat-card-content>
 </mat-card>
-<app-crud (create)="create()" (update)="update($event)" (read)="print($event)" [data]="offers"
-          [deleteAction]="false"
-          [title]="title">
+<app-crud (create)="create()" (update)="update($event)" (read)="print($event)" (delete)="delete($event)"
+          [data]="offers" [title]="title">
 </app-crud>

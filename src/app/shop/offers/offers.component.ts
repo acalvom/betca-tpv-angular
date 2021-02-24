@@ -48,4 +48,10 @@ export class OffersComponent {
       .printOffer(offer.reference)
       .subscribe(() => this.dialog.closeAll());
   }
+
+  delete(offer: Offer): void {
+    this.offerService
+      .deleteOffer(offer.reference)
+      .subscribe(() => this.search());
+  }
 }
