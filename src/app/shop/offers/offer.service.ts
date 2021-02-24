@@ -66,7 +66,12 @@ export class OfferService {
   }
 
   update(oldOfferReference: string, offer: Offer): Observable<Offer> {
-    this.offers.push(offer); // No es lo más óptimo pero es para visualizar el cambio
+    const offerToUpdate = this.offers.find(off => off.reference === oldOfferReference);
+    const index = this.offers.indexOf(offerToUpdate);
+    if (index > -1) {
+      this.offers.splice(index, 1, offer);
+    }
+    this.search(new OfferSearch());
     return of(offer);
     /*return this.httpService
       .successful()
