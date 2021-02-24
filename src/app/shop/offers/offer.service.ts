@@ -54,14 +54,23 @@ export class OfferService {
   }
 
   read(reference: string): Observable<Offer> {
-    return of({reference, description: '...', expiryDate: new Date('2019-03-16'), discount: 50});
+    return of({
+      reference,
+      description: this.offers.find(off => off.reference === reference).description,
+      creationDate: this.offers.find(off => off.reference === reference).creationDate,
+      expiryDate: this.offers.find(off => off.reference === reference).expiryDate,
+      discount: this.offers.find(off => off.reference === reference).discount,
+      articles: this.offers.find(off => off.reference === reference).articles
+    });
     /*return this.httpService
       .get(EndPoints.OFFERS + '/' + reference);*/
   }
 
-  update(oldOffer: string, offer: Offer): Observable<Offer> {
-    return this.httpService
+  update(oldOfferReference: string, offer: Offer): Observable<Offer> {
+    this.offers.push(offer); // No es lo más óptimo pero es para visualizar el cambio
+    return of(offer);
+    /*return this.httpService
       .successful()
-      .put(EndPoints.OFFERS + '/' + oldOffer, offer);
+      .put(EndPoints.OFFERS + '/' + oldOffer, offer);*/
   }
 }
