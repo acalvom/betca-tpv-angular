@@ -22,14 +22,23 @@ export class OfferService {
     [{
       reference: '123abc',
       description: 'offer1',
-      expiryDate: new Date('2019-03-16'),
+      creationDate: new Date('2019-03-16'),
+      expiryDate: new Date('2020-03-16'),
       discount: 10,
       articles: this.articles
     },
-      {reference: '234bcd', description: 'offer2', expiryDate: new Date('2019-08-08'), discount: 20, articles: []},
+      {
+        reference: '234bcd',
+        description: 'offer2',
+        creationDate: new Date('2019-03-16'),
+        expiryDate: new Date('2020-08-08'),
+        discount: 20,
+        articles: []
+      },
       {
         reference: '345cde',
         description: 'offer3',
+        creationDate: new Date('2019-03-16'),
         expiryDate: new Date('2021-08-13'),
         discount: 30,
         articles: this.articles.slice(0, 1)
