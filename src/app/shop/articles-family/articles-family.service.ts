@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import {ArticlesNode} from "./articles-node";
+import {Injectable} from '@angular/core';
+import {ArticlesNode} from './articles-node';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticlesFamilyService {
-    ARTICLES_DATA: ArticlesNode[] = [{
+  ARTICLES_DATA: ArticlesNode[] = [{
     id: '1',
     name: 'ArticleFamily-Root',
     children: [{
@@ -21,6 +21,7 @@ export class ArticlesFamilyService {
         name: 'ArticleFamily-Sub2',
       }]
   }];
+
   constructor() {
   }
 
@@ -28,15 +29,15 @@ export class ArticlesFamilyService {
     return this.ARTICLES_DATA;
   }
 
-  create(){
+  create(): any {
 
   }
 
-  edit(){
+  edit(): any {
 
   }
 
-  delete(nodeId: number){
+  delete(): any {
 
   }
 }
