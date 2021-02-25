@@ -8,6 +8,7 @@ import {CashierClosedComponent} from './cashier-closed/cashier-closed.component'
 import {CashierOpenedComponent} from './cashier-opened/cashier-opened.component';
 import {ProvidersComponent} from './providers/providers.component';
 import {ShopComponent} from './shop.component';
+import {StockAlarmsComponent} from './stock-alarms/stock-alarms.component';
 import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
 import {ArticlesFamilyComponent} from "./articles-family/articles-family/articles-family.component";
 
@@ -22,6 +23,7 @@ const routes: Routes = [
       {path: 'cashier-closed', component: CashierClosedComponent},
       {path: 'cashier-opened', component: CashierOpenedComponent},
       {path: 'providers', component: ProvidersComponent},
+      {path: 'stock-alarms', component: StockAlarmsComponent},
       {path: 'tickets', component: TicketsComponent},
       {path: 'articles-family', component: ArticlesFamilyComponent}
     ]
