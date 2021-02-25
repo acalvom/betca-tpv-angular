@@ -24,6 +24,7 @@ import {ProviderCreationUpdatingDialogComponent} from './providers/provider-crea
 import {ArticleService} from './articles/article.service';
 import {ShopRoutingModule} from './shop-routing.module';
 import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
+import { ArticlesFamilyComponent } from './articles-family/articles-family/articles-family.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
     ShopComponent,
     ShoppingCartComponent,
     TicketsComponent,
+    ArticlesFamilyComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
