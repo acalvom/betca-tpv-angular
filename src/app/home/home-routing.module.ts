@@ -6,6 +6,7 @@ import {RoleGuardService} from '@core/role-guard.service';
 import {AdviserComponent} from './adviser/adviser.component';
 import {ComplaintsComponent} from './complaints/complaints.component';
 import {HomeComponent} from './home.component';
+import {ReviewsComponent} from './reviews/reviews.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {path: 'adviser', component: AdviserComponent}, // public
-      {path: 'complaints', component: ComplaintsComponent, canActivate: [RoleGuardService], data: {roles: [Role.CUSTOMER]}}
+      {path: 'complaints', component: ComplaintsComponent, canActivate: [RoleGuardService], data: {roles: [Role.CUSTOMER]}},
+      {path: 'reviews', component: ReviewsComponent, canActivate: [RoleGuardService], data: {roles: [Role.CUSTOMER]}}
     ]
   }
 ];

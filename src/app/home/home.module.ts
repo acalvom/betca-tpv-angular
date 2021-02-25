@@ -7,6 +7,7 @@ import {ShoppingBasketService} from './shopping-basket/shopping-basket.service';
 import {ComplaintCreationDialogComponent} from './complaints/complaint-creation-dialog.component';
 import {ComplaintsComponent} from './complaints/complaints.component';
 import {AdviserComponent} from './adviser/adviser.component';
+import { ReviewsComponent } from './reviews/reviews.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import {AdviserComponent} from './adviser/adviser.component';
     ComplaintsComponent,
     ComplaintCreationDialogComponent,
     HomeComponent,
+    ReviewsComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,
