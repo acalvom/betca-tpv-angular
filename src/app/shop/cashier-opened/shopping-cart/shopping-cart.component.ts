@@ -7,6 +7,7 @@ import {CheckOutDialogComponent} from './check-out-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {ShoppingState} from './shopping-state.model';
 import {NumberDialogComponent} from '@shared/dialogs/number-dialog.component';
+import {ArticleFamilyViewComponent} from "./article-family-view/article-family-view.component";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -167,4 +168,11 @@ export class ShoppingCartComponent implements OnInit {
     // TODO add offer
   }
 
+  openArticleFamily() {
+    this.dialog
+      .open(ArticleFamilyViewComponent,{
+      minWidth: '600px',
+      minHeight: '300px'}
+    );
+  }
 }

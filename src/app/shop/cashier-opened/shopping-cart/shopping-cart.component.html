@@ -12,7 +12,7 @@
       </form>
       <app-search-by-barcode (add)="addBarcode($event)"></app-search-by-barcode>
       <button color="primary" disabled="disabled" mat-icon-button>
-        <mat-icon>category</mat-icon>
+        <mat-icon class="icon" (click)="openArticleFamily()">category</mat-icon>
       </button>
       <form>
         <mat-form-field>

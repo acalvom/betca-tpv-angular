@@ -7,9 +7,51 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticleFamilyViewComponent implements OnInit {
 
-  constructor() { }
+  cardData: {
+    title: string;
+    price: number;
+    type: string;
+  }[] = [];
 
-  ngOnInit(): void {
+  constructor() {
   }
 
+  ngOnInit(): void {
+    this.cardData = [
+      {
+        title: "Zarzuela",
+        price: 20,
+        type: "composite"
+      },
+      {
+        title: "Varios",
+        price: 20,
+        type: "composite"
+      }
+    ];
+  }
+
+  updateArray(): void {
+    this.cardData = [
+      {
+        title: "Zz Falda",
+        price: 20,
+        type: "size"
+      },
+      {
+        title: "Zz Polo",
+        price: 27.8,
+        type: "size"
+      },
+      {
+        title: "Descrip a3",
+        price: 10.12,
+        type: "leaf"
+      }
+    ];
+  }
+
+  openSizes(): void {
+
+  }
 }
