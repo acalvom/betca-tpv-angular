@@ -26,10 +26,15 @@ import {ShopRoutingModule} from './shop-routing.module';
 import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
 import {OffersComponent} from './offers/offers.component';
 import {OfferCreationUpdatingDialogComponent} from './offers/offer-creation-updating-dialog.component';
+import {ArticlesFamilyComponent} from './articles-family/articles-family/articles-family.component';
+import {ArticleFamilyViewComponent} from './cashier-opened/shopping-cart/article-family-view/article-family-view.component';
+import { StockAlarmsComponent } from './stock-alarms/stock-alarms.component';
 
 @NgModule({
   declarations: [
     ArticleCreationUpdatingDialogComponent,
+    ArticlesFamilyComponent,
+    ArticleFamilyViewComponent,
     ArticleQuickCreationDialogComponent,
     ArticlesComponent,
     CashierClosedComponent,
@@ -45,6 +50,7 @@ import {OfferCreationUpdatingDialogComponent} from './offers/offer-creation-upda
     TicketsComponent,
     OffersComponent,
     OfferCreationUpdatingDialogComponent,
+    StockAlarmsComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,

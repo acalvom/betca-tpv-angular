@@ -8,8 +8,10 @@ import {CashierClosedComponent} from './cashier-closed/cashier-closed.component'
 import {CashierOpenedComponent} from './cashier-opened/cashier-opened.component';
 import {ProvidersComponent} from './providers/providers.component';
 import {ShopComponent} from './shop.component';
+import {StockAlarmsComponent} from './stock-alarms/stock-alarms.component';
 import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
 import {OffersComponent} from './offers/offers.component';
+import {ArticlesFamilyComponent} from "./articles-family/articles-family/articles-family.component";
 
 const routes: Routes = [
   {
@@ -23,7 +25,9 @@ const routes: Routes = [
       {path: 'cashier-opened', component: CashierOpenedComponent},
       {path: 'offers', component: OffersComponent},
       {path: 'providers', component: ProvidersComponent},
+      {path: 'stock-alarms', component: StockAlarmsComponent},
       {path: 'tickets', component: TicketsComponent},
+      {path: 'articles-family', component: ArticlesFamilyComponent}
     ]
   }
 ];

@@ -83,6 +83,7 @@ export class ShoppingCartService {
   }
 
   createGiftTicketAndPrint(ticketId: string): Observable<void> {
+    console.log("Crear ticket regalo");
     return EMPTY; // TODO change EMPTY
   }
 
