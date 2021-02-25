@@ -24,11 +24,14 @@ import {ProviderCreationUpdatingDialogComponent} from './providers/provider-crea
 import {ArticleService} from './articles/article.service';
 import {ShopRoutingModule} from './shop-routing.module';
 import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
-import { ArticlesFamilyComponent } from './articles-family/articles-family/articles-family.component';
+import {ArticlesFamilyComponent} from './articles-family/articles-family/articles-family.component';
+import {ArticleFamilyViewComponent} from './cashier-opened/shopping-cart/article-family-view/article-family-view.component';
 
 @NgModule({
   declarations: [
     ArticleCreationUpdatingDialogComponent,
+    ArticlesFamilyComponent,
+    ArticleFamilyViewComponent,
     ArticleQuickCreationDialogComponent,
     ArticlesComponent,
     CashierClosedComponent,
@@ -42,7 +45,6 @@ import { ArticlesFamilyComponent } from './articles-family/articles-family/artic
     ShopComponent,
     ShoppingCartComponent,
     TicketsComponent,
-    ArticlesFamilyComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
