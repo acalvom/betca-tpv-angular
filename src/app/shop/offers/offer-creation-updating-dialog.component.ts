@@ -1,9 +1,10 @@
-import {Component, Inject} from '@angular/core';
+import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {Offer} from './offer.model';
 import {OfferService} from './offer.service';
 import {SharedArticleService} from '../shared/services/shared.article.service';
 import {Article} from '../shared/services/models/article.model';
+
 
 @Component({
   templateUrl: './offer-creation-updating-dialog.component.html',
@@ -17,6 +18,12 @@ export class OfferCreationUpdatingDialogComponent {
   oldOffer: string;
   articles: Article[] = [];
 
+  selectable = true;
+  removable = true;
+  barcodes: string[] = [];
+
+  @ViewChild('barcodeInput') barcodeInput: ElementRef<HTMLInputElement>;
+
   constructor(@Inject(MAT_DIALOG_DATA) data: Offer, private offerService: OfferService,
               private sharedArticleService: SharedArticleService, private dialog: MatDialog) {
     this.title = data ? 'Update Offer' : 'Create Offer';
@@ -25,6 +32,17 @@ export class OfferCreationUpdatingDialogComponent {
       expiryDate: undefined, discount: undefined, articles: this.articles
     };
     this.oldOffer = data ? data.reference : undefined;
+  }
+
+  removeBarcode(barcode: string): void {
+    const index = this.barcodes.indexOf(barcode);
+    if (index >= 0) {
+      this.barcodes.splice(index, 1);
+      this.articles.splice(index, 1);
+      this.offer.articles.splice(index, 1);
+    }
+    // console.log('delete articles ' + this.offer.articles);
+    // console.log('delete barcodes ' + this.barcodes);
   }
 
   isCreate(): boolean {
@@ -36,7 +54,9 @@ export class OfferCreationUpdatingDialogComponent {
       .read(barcode)
       .subscribe(article => {
         this.articles.push(article);
-        console.log('article ' + this.articles);
+        this.barcodes.push(article.barcode);
+        console.log('add barcodes ' + this.barcodes);
+        this.offer.articles.push(article);
       });
   }
 

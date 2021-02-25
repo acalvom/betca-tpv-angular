@@ -24,6 +24,19 @@
     <mat-hint align="start">%</mat-hint>
   </mat-form-field>
   <app-search-by-barcode (add)="addBarcode($event)" class="full-width"></app-search-by-barcode>
+  <mat-form-field class="example-chip-list">
+    <mat-label>Selected Articles</mat-label>
+    <mat-chip-list>
+      <mat-chip
+        *ngFor="let barcode of barcodes"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="removeBarcode(barcode)">
+        {{barcode}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
