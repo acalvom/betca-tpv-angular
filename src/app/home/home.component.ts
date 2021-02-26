@@ -35,4 +35,7 @@ export class HomeComponent {
   search(value): void {
   }
 
+  register(): void {
+
+  }
 }
