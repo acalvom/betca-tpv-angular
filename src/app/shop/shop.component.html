@@ -158,9 +158,13 @@
     <mat-icon>message</mat-icon>
     <span>Messengers</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="">
+  <button (click)="creditLine()" mat-menu-item>
     <mat-icon>card_membership</mat-icon>
-    <span>Credit</span>
+    <span>Add credit-line</span>
+  </button>
+  <button *ngIf="!cashierClosed" (click)="creditLinePay()" mat-menu-item>
+    <mat-icon>card_membership</mat-icon>
+    <span>Pay pending tickets (credit-line)</span>
   </button>
 </mat-menu>
 <mat-menu #vat="matMenu">

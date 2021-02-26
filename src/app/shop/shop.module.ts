@@ -15,6 +15,7 @@ import {ShopComponent} from './shop.component';
 import {ProvidersComponent} from './providers/providers.component';
 import {SearchByBarcodeComponent} from './shared/search-by-barcode.component';
 import {SearchByCompanyComponent} from './shared/search-by-company.component';
+import {AddCreditLineDialogComponent} from './shared/dialogs/add-credit-line-dialog.component';
 import {ShoppingCartComponent} from './cashier-opened/shopping-cart/shopping-cart.component';
 import {ArticleCreationUpdatingDialogComponent} from './articles/article-creation-updating-dialog.component';
 import {ArticleQuickCreationDialogComponent} from './cashier-opened/shopping-cart/article-quick-creation-dialog.component';
@@ -28,11 +29,16 @@ import {OffersComponent} from './offers/offers.component';
 import {OfferCreationUpdatingDialogComponent} from './offers/offer-creation-updating-dialog.component';
 import {ArticlesFamilyComponent} from './articles-family/articles-family/articles-family.component';
 import {ArticleFamilyViewComponent} from './cashier-opened/shopping-cart/article-family-view/article-family-view.component';
-import { StockAlarmsComponent } from './stock-alarms/stock-alarms.component';
-import { UsersComponent } from './users/users.component';
+import {StockAlarmsComponent} from './stock-alarms/stock-alarms.component';
+import {UsersComponent} from './users/users.component';
+import {SharedOfferService} from './shared/services/shared.offer.service';
+import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
+import {UserCreationUpdatingDialogComponent} from './users/user-creation-updating-dialog.component';
+
 
 @NgModule({
   declarations: [
+    AddCreditLineDialogComponent,
     ArticleCreationUpdatingDialogComponent,
     ArticlesFamilyComponent,
     ArticleFamilyViewComponent,
@@ -42,6 +48,7 @@ import { UsersComponent } from './users/users.component';
     CashierDialogComponent,
     CashierOpenedComponent,
     CheckOutDialogComponent,
+    CreditLinePayDialogComponent,
     ProviderCreationUpdatingDialogComponent,
     ProvidersComponent,
     SearchByBarcodeComponent,
@@ -53,6 +60,7 @@ import { UsersComponent } from './users/users.component';
     OfferCreationUpdatingDialogComponent,
     StockAlarmsComponent,
     UsersComponent,
+    UserCreationUpdatingDialogComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
@@ -60,6 +68,7 @@ import { UsersComponent } from './users/users.component';
     CashierDialogComponent,
     CheckOutDialogComponent,
     ProviderCreationUpdatingDialogComponent,
+    UserCreationUpdatingDialogComponent,
   ],
   imports: [
     SharedModule,
@@ -71,6 +80,7 @@ import { UsersComponent } from './users/users.component';
     ProviderService,
     SharedArticleService,
     SharedCashierService,
+    SharedOfferService,
     SharedProviderService,
     ShoppingCartService,
   ],

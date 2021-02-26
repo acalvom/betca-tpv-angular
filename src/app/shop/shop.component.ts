@@ -7,6 +7,8 @@ import {HttpService} from '@core/http.service';
 import {AuthService} from '@core/auth.service';
 import {SharedCashierService} from './shared/services/shared.cashier.service';
 import {CashierDialogComponent} from './cashier-opened/cashier-closure/cashier-dialog.component';
+import {AddCreditLineDialogComponent} from './shared/dialogs/add-credit-line-dialog.component';
+import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
 
 @Component({
   templateUrl: 'shop.component.html',
@@ -62,5 +64,14 @@ export class ShopComponent {
       .subscribe(() => this.cashier());
   }
 
+  creditLine(): void {
+    this.dialog.open(AddCreditLineDialogComponent)
+      .afterClosed();
+  }
+
+  creditLinePay(): void {
+    this.dialog.open(CreditLinePayDialogComponent)
+      .afterClosed();
+  }
 
 }
