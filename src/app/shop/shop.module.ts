@@ -28,8 +28,9 @@ import {OffersComponent} from './offers/offers.component';
 import {OfferCreationUpdatingDialogComponent} from './offers/offer-creation-updating-dialog.component';
 import {ArticlesFamilyComponent} from './articles-family/articles-family/articles-family.component';
 import {ArticleFamilyViewComponent} from './cashier-opened/shopping-cart/article-family-view/article-family-view.component';
-import { StockAlarmsComponent } from './stock-alarms/stock-alarms.component';
-import { UsersComponent } from './users/users.component';
+import {StockAlarmsComponent} from './stock-alarms/stock-alarms.component';
+import {UsersComponent} from './users/users.component';
+import {SharedOfferService} from './shared/services/shared.offer.service';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { UsersComponent } from './users/users.component';
     ProviderService,
     SharedArticleService,
     SharedCashierService,
+    SharedOfferService,
     SharedProviderService,
     ShoppingCartService,
   ],
