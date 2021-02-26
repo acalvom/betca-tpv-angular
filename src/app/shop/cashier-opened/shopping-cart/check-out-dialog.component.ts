@@ -3,6 +3,7 @@ import {Component, Inject} from '@angular/core';
 import {TicketCreation} from './ticket-creation.model';
 import {ShoppingCartService} from './shopping-cart.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {ShoppingState} from './shopping-state.model';
 
 @Component({
   templateUrl: 'check-out-dialog.component.html',
@@ -159,7 +160,7 @@ export class CheckOutDialogComponent {
       this.ticketCreation.note += ' Return: ' + this.round(returned) + '.';
     }
     this.shoppingCartService.createTicketAndPrintReceipts(this.ticketCreation, voucher,
-      this.requestedInvoice, this.requestedGiftTicket, this.requestedDataProtectionAct)
+      this.requestedInvoice, this.requestedGiftTicket, this.requestedDataProtectionAct, this.checkedCreditLine)
       .subscribe(() => this.dialogRef.close(true));
   }
 
@@ -175,6 +176,9 @@ export class CheckOutDialogComponent {
       this.checkedCreditLine = true;
       this.ticketCreation.cash = 0;
       this.ticketCreation.card = 0;
+      this.ticketCreation.shoppingList.forEach((value) => {
+        value.state = ShoppingState.COMMITTED;
+      });
     }
   }
 
