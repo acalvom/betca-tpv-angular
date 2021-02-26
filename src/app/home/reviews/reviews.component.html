@@ -1,1 +1,12 @@
-<p>reviews works!</p>
+<mat-card *ngFor="let review of reviews">
+  <mat-card-header>
+    <mat-card-title>Barcode: {{review.articleBarcode}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <textarea>{{review.opinion}}</textarea>
+  </mat-card-content>
+  <mat-card-actions>
+    <!-- Put here stars-score-bar component -->
+    <button mat-stroked-button (click)="saveReview(review)">Save</button>
+  </mat-card-actions>
+</mat-card>

@@ -165,14 +165,27 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   addOffer(offer): void {
-    // TODO add offer
+    this.shoppingCartService
+      .readOffer(offer)
+      .subscribe(newOffer => {
+        this.shoppingCart.forEach(element => {
+          const search = newOffer.articles.find(art => art.barcode === element.barcode);
+          if (search !== undefined) {
+            console.log(element.barcode + ' matches with ' + search.barcode);
+          } else {
+            console.log('article  ' + element.barcode + ' is not in the offer');
+          }
+        });
+        // console.log('reference: ' + newOffer.reference + ' - discount: ' + newOffer.discount + ' - article: ' + art.barcode);
+      });
   }
 
   openArticleFamily() {
     this.dialog
-      .open(ArticleFamilyViewComponent,{
-      minWidth: '600px',
-      minHeight: '300px'}
-    );
+      .open(ArticleFamilyViewComponent, {
+          minWidth: '600px',
+          minHeight: '300px'
+        }
+      );
   }
 }

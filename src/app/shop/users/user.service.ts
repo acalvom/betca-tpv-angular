@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from '@core/http.service';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {EndPoints} from '@shared/end-points';
 import {UserSearch} from './user-search-model';
 import {User} from '../shared/services/models/user.models';
@@ -16,13 +16,23 @@ export class UserService {
   }
 
   search(userSearch: UserSearch): Observable<User[]> {
-    return this.httpService
+    return of([
+      {mobile: 649111014},
+      {mobile: 666788875},
+      {mobile: 666788567},
+    ]);
+    /*return this.httpService
       .paramsFrom(userSearch)
-      .get(EndPoints.USERS + UserService.SEARCH);
+      .get(EndPoints.USERS + UserService.SEARCH);*/
   }
 
   searchUnfinished(): Observable<User[]> {
-    return this.httpService
-      .get(EndPoints.USERS + UserService.UNFINISHED);
+    return of([
+      {mobile: 649111014},
+      {mobile: 666788875},
+      {mobile: 666788567},
+    ]);
+    /*return this.httpService
+      .get(EndPoints.USERS + UserService.UNFINISHED);*/
   }
 }
