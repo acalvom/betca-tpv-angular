@@ -34,6 +34,7 @@ import {UsersComponent} from './users/users.component';
 import {SharedOfferService} from './shared/services/shared.offer.service';
 import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
 import {UserCreationUpdatingDialogComponent} from './users/user-creation-updating-dialog.component';
+import { TicketEditingDialogComponent } from './cashier-opened/tickets/ticket-editing-dialog.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import {UserCreationUpdatingDialogComponent} from './users/user-creation-updatin
     StockAlarmsComponent,
     UsersComponent,
     UserCreationUpdatingDialogComponent,
+    TicketEditingDialogComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,

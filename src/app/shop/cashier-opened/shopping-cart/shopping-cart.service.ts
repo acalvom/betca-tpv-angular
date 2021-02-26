@@ -5,7 +5,7 @@ import {catchError, concatMap, map} from 'rxjs/operators';
 
 import {HttpService} from '@core/http.service';
 import {SharedArticleService} from '../../shared/services/shared.article.service';
-import {Shopping} from './shopping.model';
+import {Shopping} from '../../shared/services/models/shopping.model';
 import {TicketCreation} from './ticket-creation.model';
 import {ArticleQuickCreationDialogComponent} from './article-quick-creation-dialog.component';
 
@@ -87,7 +87,7 @@ export class ShoppingCartService {
   }
 
   createGiftTicketAndPrint(ticketId: string): Observable<void> {
-    console.log("Crear ticket regalo");
+    console.log('Crear ticket regalo');
     return EMPTY; // TODO change EMPTY
   }
 
