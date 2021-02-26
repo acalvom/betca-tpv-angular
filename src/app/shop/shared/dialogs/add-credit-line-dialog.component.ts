@@ -1,5 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {User} from '../services/models/user.models';
 
 @Component({
   templateUrl: 'add-credit-line-dialog.component.html'
@@ -7,7 +8,7 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 export class AddCreditLineDialogComponent {
 
-  user = undefined;
+  user: User;
 
   constructor(@Inject(MAT_DIALOG_DATA) data) {
 
