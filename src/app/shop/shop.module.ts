@@ -15,6 +15,7 @@ import {ShopComponent} from './shop.component';
 import {ProvidersComponent} from './providers/providers.component';
 import {SearchByBarcodeComponent} from './shared/search-by-barcode.component';
 import {SearchByCompanyComponent} from './shared/search-by-company.component';
+import {AddCreditLineDialogComponent} from './shared/add-credit-line-dialog.component';
 import {ShoppingCartComponent} from './cashier-opened/shopping-cart/shopping-cart.component';
 import {ArticleCreationUpdatingDialogComponent} from './articles/article-creation-updating-dialog.component';
 import {ArticleQuickCreationDialogComponent} from './cashier-opened/shopping-cart/article-quick-creation-dialog.component';
@@ -33,6 +34,7 @@ import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
+    AddCreditLineDialogComponent,
     ArticleCreationUpdatingDialogComponent,
     ArticlesFamilyComponent,
     ArticleFamilyViewComponent,
