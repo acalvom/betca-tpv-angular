@@ -29,6 +29,7 @@ import {OfferCreationUpdatingDialogComponent} from './offers/offer-creation-upda
 import {ArticlesFamilyComponent} from './articles-family/articles-family/articles-family.component';
 import {ArticleFamilyViewComponent} from './cashier-opened/shopping-cart/article-family-view/article-family-view.component';
 import { StockAlarmsComponent } from './stock-alarms/stock-alarms.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { StockAlarmsComponent } from './stock-alarms/stock-alarms.component';
     OffersComponent,
     OfferCreationUpdatingDialogComponent,
     StockAlarmsComponent,
+    UsersComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
