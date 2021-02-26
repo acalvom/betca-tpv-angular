@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {Ticket} from './ticket.model';
+import {Ticket} from '../../shared/services/models/ticket.model';
 
 @Injectable({
   providedIn: 'root'

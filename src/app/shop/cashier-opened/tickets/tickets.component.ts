@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {of} from 'rxjs';
 import {TicketService} from './ticket.service';
-import {Ticket} from './ticket.model';
+import {Ticket} from '../../shared/services/models/ticket.model';
 
 @Component({
   selector: 'app-ticket',
