@@ -46,7 +46,7 @@ export class SharedOfferService {
     }];
   offers: Offer[] =
     [{
-      reference: '123abc',
+      reference: '123',
       description: 'offer1',
       creationDate: new Date('2019-03-16'),
       expiryDate: new Date('2020-03-16'),
@@ -54,7 +54,7 @@ export class SharedOfferService {
       articles: this.articles
     },
       {
-        reference: '234bcd',
+        reference: '234',
         description: 'offer2',
         creationDate: new Date('2019-03-16'),
         expiryDate: new Date('2020-08-08'),
@@ -62,7 +62,7 @@ export class SharedOfferService {
         articles: []
       },
       {
-        reference: '345cde',
+        reference: '345',
         description: 'offer3',
         creationDate: new Date('2019-03-16'),
         expiryDate: new Date('2021-08-13'),
@@ -74,6 +74,7 @@ export class SharedOfferService {
   }
 
   read(reference: string): Observable<Offer> {
+    console.log('leida la oferta: ' + reference);
     return of({
       reference,
       description: this.offers.find(off => off.reference === reference).description,

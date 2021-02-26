@@ -166,13 +166,20 @@ export class ShoppingCartComponent implements OnInit {
 
   addOffer(offer): void {
     // TODO add offer
+    console.log('leida la oferta: ' + offer);
+    this.shoppingCartService
+      .readOffer(offer)
+      .subscribe(newOffer => {
+        console.log('reference: ' + newOffer.reference + ' - discount: ' + newOffer.discount);
+      });
   }
 
   openArticleFamily() {
     this.dialog
-      .open(ArticleFamilyViewComponent,{
-      minWidth: '600px',
-      minHeight: '300px'}
-    );
+      .open(ArticleFamilyViewComponent, {
+          minWidth: '600px',
+          minHeight: '300px'
+        }
+      );
   }
 }

@@ -11,6 +11,8 @@ import {ArticleQuickCreationDialogComponent} from './article-quick-creation-dial
 
 import {ShoppingState} from './shopping-state.model';
 import {EndPoints} from '@shared/end-points';
+import {Offer} from '../../shared/services/models/offer.model';
+import {SharedOfferService} from '../../shared/services/shared.offer.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +22,8 @@ export class ShoppingCartService {
   static VARIOUS_BARCODE = '1';
   static VARIOUS_LENGTH = 5;
 
-  constructor(private dialog: MatDialog, private articleService: SharedArticleService, private httpService: HttpService) {
+  constructor(private dialog: MatDialog, private articleService: SharedArticleService,
+              private offerService: SharedOfferService, private httpService: HttpService) {
   }
 
   read(newBarcode: string): Observable<Shopping> {
@@ -89,5 +92,11 @@ export class ShoppingCartService {
 
   createDataProtectionActAndPrint(ticket): Observable<void> {
     return EMPTY; // TODO change EMPTY
+  }
+
+  readOffer(offerReference: string): Observable<Offer> {
+    console.log('leida la oferta: ' + offerReference);
+    return this.offerService
+      .read(offerReference);
   }
 }
