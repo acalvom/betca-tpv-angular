@@ -31,6 +31,7 @@ import {ArticlesFamilyComponent} from './articles-family/articles-family/article
 import {ArticleFamilyViewComponent} from './cashier-opened/shopping-cart/article-family-view/article-family-view.component';
 import { StockAlarmsComponent } from './stock-alarms/stock-alarms.component';
 import { UsersComponent } from './users/users.component';
+import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { UsersComponent } from './users/users.component';
     CashierDialogComponent,
     CashierOpenedComponent,
     CheckOutDialogComponent,
+    CreditLinePayDialogComponent,
     ProviderCreationUpdatingDialogComponent,
     ProvidersComponent,
     SearchByBarcodeComponent,
