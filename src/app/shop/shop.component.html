@@ -162,7 +162,7 @@
     <mat-icon>card_membership</mat-icon>
     <span>Add credit-line</span>
   </button>
-  <button (click)="creditLinePay()" mat-menu-item>
+  <button *ngIf="!cashierClosed" (click)="creditLinePay()" mat-menu-item>
     <mat-icon>card_membership</mat-icon>
     <span>Pay pending tickets (credit-line)</span>
   </button>
