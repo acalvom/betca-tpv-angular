@@ -8,6 +8,7 @@ import {ComplaintCreationDialogComponent} from './complaints/complaint-creation-
 import {ComplaintsComponent} from './complaints/complaints.component';
 import {AdviserComponent} from './adviser/adviser.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { TicketTrackingComponent } from './ticket-tracking/ticket-tracking.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ReviewsComponent } from './reviews/reviews.component';
     ComplaintCreationDialogComponent,
     HomeComponent,
     ReviewsComponent,
+    TicketTrackingComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,
