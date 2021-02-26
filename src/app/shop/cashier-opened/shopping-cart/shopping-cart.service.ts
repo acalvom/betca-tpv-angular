@@ -58,7 +58,7 @@ export class ShoppingCartService {
   }
 
   createTicketAndPrintReceipts(ticketCreation: TicketCreation, voucher: number, requestedInvoice: boolean, requestedGiftTicket: boolean,
-                               requestDataProtectionAct: boolean): Observable<void> {
+                               requestDataProtectionAct: boolean, checkedCreditLine: boolean): Observable<void> {
     return this.httpService
       .post(EndPoints.TICKETS, ticketCreation)
       .pipe(
@@ -68,6 +68,7 @@ export class ShoppingCartService {
           receipts = iif(() => requestedInvoice, merge(receipts, this.createInvoiceAndPrint(ticket.id)), receipts);
           receipts = iif(() => requestedGiftTicket, merge(receipts, this.createGiftTicketAndPrint(ticket.id)), receipts);
           receipts = iif(() => requestDataProtectionAct, merge(receipts, this.createDataProtectionActAndPrint(ticket)), receipts);
+          receipts = iif(() => checkedCreditLine, merge(receipts, this.createCreditSaleAndPrint(ticket)), receipts);
           return receipts;
         })// ,switchMap(() => EMPTY)
       );
@@ -92,6 +93,10 @@ export class ShoppingCartService {
 
   createDataProtectionActAndPrint(ticket): Observable<void> {
     return EMPTY; // TODO change EMPTY
+  }
+
+  createCreditSaleAndPrint(ticket): Observable<void> {
+    return EMPTY; // TODO change EMPTY (Hacer llamada para crear la credit sale y guardarla en base de datos)
   }
 
   readOffer(offerReference: string): Observable<Offer> {

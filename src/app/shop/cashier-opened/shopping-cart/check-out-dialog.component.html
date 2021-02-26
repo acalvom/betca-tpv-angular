@@ -18,13 +18,13 @@
     </button>
   </mat-form-field>
   <mat-form-field>
-    <input [(ngModel)]="ticketCreation.cash" cdkFocusInitial matInput placeholder="Cash" type="number"/>
+    <input [(ngModel)]="ticketCreation.cash" [disabled]="checkedCreditLine" cdkFocusInitial matInput placeholder="Cash" type="number"/>
     <button (click)="fillCash()" mat-button mat-icon-button matSuffix>
       <mat-icon color="warn">euro_symbol</mat-icon>
     </button>
   </mat-form-field>
   <mat-form-field>
-    <input [(ngModel)]="ticketCreation.card" matInput placeholder="Card" type="number"/>
+    <input [(ngModel)]="ticketCreation.card" [disabled]="checkedCreditLine" matInput placeholder="Card" type="number"/>
     <button (click)="fillCard()" aria-label="Card" mat-button mat-icon-button matSuffix>
       <mat-icon color="warn">credit_card</mat-icon>
     </button>
@@ -35,7 +35,7 @@
       <mat-icon color="warn">local_offer</mat-icon>
     </button>
   </mat-form-field>
-  <mat-checkbox [disabled]="true">
+  <mat-checkbox (change)="useCreditLine()" [disabled]="!credit">
     <span> Use credit-line</span>
   </mat-checkbox>
   <mat-checkbox [(ngModel)]="requestedInvoice" [disabled]="invalidInvoice()">
