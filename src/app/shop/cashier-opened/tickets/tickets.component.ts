@@ -1,16 +1,32 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
+import {of} from 'rxjs';
+import {TicketService} from './ticket.service';
+import {Ticket} from './ticket.model';
 
 @Component({
   selector: 'app-ticket',
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.css']
 })
-export class TicketsComponent implements OnInit {
+export class TicketsComponent{
 
-  constructor() {
+  title = 'Tickets Management';
+  key: string;
+  tickets = of([]);
+
+  constructor(private ticketService: TicketService) {
+    this.resetSearch();
   }
 
-  ngOnInit(): void {
+  search(): void {
+    this.tickets = this.ticketService.search(this.key);
   }
 
+  resetSearch(): void {
+    this.key = null;
+  }
+
+  update(ticket: Ticket): void {
+
+  }
 }
