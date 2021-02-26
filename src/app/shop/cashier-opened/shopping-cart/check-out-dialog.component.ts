@@ -14,6 +14,8 @@ export class CheckOutDialogComponent {
   requestedInvoice = false;
   requestedGiftTicket = false;
   requestedDataProtectionAct = false;
+  credit = false;
+  checkedCreditLine = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) data, private dialogRef: MatDialogRef<CheckOutDialogComponent>,
               private shoppingCartService: ShoppingCartService) {
@@ -37,6 +39,8 @@ export class CheckOutDialogComponent {
     if (mobile) {
       // TODO falta buscar el user en BD, si no existe, debe sacar un dialogo para crearlo
       this.ticketCreation.user = {mobile: Number(mobile)};
+      // TODO me falta comprobar si tiene credit-line el usuario
+      this.credit = true;
     }
   }
 
@@ -115,7 +119,10 @@ export class CheckOutDialogComponent {
   }
 
   invalidCheckOut(): boolean {
-    return (this.totalPurchase + this.returnedAmount() - this.totalCommitted() < -0.01); // rounding errors
+    if (!this.checkedCreditLine){
+      return (this.totalPurchase + this.returnedAmount() - this.totalCommitted() < -0.01); // rounding errors
+    }
+    return false;
   }
 
   round(value): any {
@@ -159,6 +166,16 @@ export class CheckOutDialogComponent {
   invalidInvoice(): boolean {
     // TODO pendiente de calcular. Hace falta tener al usuario totalmente completado
     return true;
+  }
+
+  useCreditLine(): void{
+    if (this.checkedCreditLine) {
+      this.checkedCreditLine = false;
+    } else {
+      this.checkedCreditLine = true;
+      this.ticketCreation.cash = 0;
+      this.ticketCreation.card = 0;
+    }
   }
 
 }
