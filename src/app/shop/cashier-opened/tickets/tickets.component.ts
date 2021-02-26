@@ -30,6 +30,8 @@ export class TicketsComponent{
 
   update(ticket: Ticket): void {
     this.ticketService.read(ticket.id)
-      .subscribe( shoppingList => this.dialog.open(TicketEditingDialogComponent, {data: shoppingList}));
+      .subscribe( shoppingList => this.dialog.open(TicketEditingDialogComponent, {data: shoppingList,
+        width: '80%',
+    }));
   }
 }
