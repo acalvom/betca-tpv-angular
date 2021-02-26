@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<mat-dialog-content>
+  <mat-form-field class="full-width">
+    <mat-label>Reference</mat-label>
+    <label for="reference"></label><input [(ngModel)]="offer.reference" id="reference" matInput required type="text"/>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Description</mat-label>
+    <label>
+      <input [(ngModel)]="offer.description" matInput required type="text"/>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Expiry Date</mat-label>
+    <label>
+      <input [(ngModel)]="offer.expiryDate" matInput required type="date">
+    </label>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Discount</mat-label>
+    <label>
+      <input [(ngModel)]="offer.discount" matInput required type="number">
+    </label>
+    <mat-hint align="start">%</mat-hint>
+  </mat-form-field>
+  <app-search-by-barcode (add)="addBarcode($event)" class="full-width"></app-search-by-barcode>
+  <mat-form-field class="example-chip-list">
+    <mat-label>Selected Articles</mat-label>
+    <mat-chip-list>
+      <mat-chip
+        *ngFor="let barcode of barcodes"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="removeBarcode(barcode)">
+        {{barcode}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
+  <button (click)="create()" *ngIf="isCreate()" [disabled]=invalid() color="primary" mat-raised-button>Create
+  </button>
+  <button (click)="update()" *ngIf="!isCreate()" [disabled]=invalid() color="primary" mat-raised-button>Update
+  </button>
+</mat-dialog-actions>

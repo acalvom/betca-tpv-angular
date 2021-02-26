@@ -1,0 +1,27 @@
+mat-toolbar {
+  justify-content: space-between;
+}
+
+.content {
+  padding: 16px;
+}
+
+.content > mat-card {
+  margin-bottom: 16px;
+}
+
+.composite {
+  background-color: #3F51B5;
+  min-height: 8em;
+}
+
+.leaf{
+  min-height: 8em;
+}
+
+.centered{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
