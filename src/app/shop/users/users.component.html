@@ -20,4 +20,4 @@
     </mat-form-field>
   </mat-card-content>
 </mat-card>
-<app-crud [data]="users" [createAction]="false" [deleteAction]="false" [title]="title"></app-crud>
+<app-crud (update)="update($event)" [data]="users" [readAction]="false" [createAction]="false" [deleteAction]="false" [title]="title"></app-crud>
