@@ -165,12 +165,18 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   addOffer(offer): void {
-    // TODO add offer
-    console.log('leida la oferta: ' + offer);
     this.shoppingCartService
       .readOffer(offer)
       .subscribe(newOffer => {
-        console.log('reference: ' + newOffer.reference + ' - discount: ' + newOffer.discount);
+        this.shoppingCart.forEach(element => {
+          const search = newOffer.articles.find(art => art.barcode === element.barcode);
+          if (search !== undefined) {
+            console.log(element.barcode + ' matches with ' + search.barcode);
+          } else {
+            console.log('article  ' + element.barcode + ' is not in the offer');
+          }
+        });
+        // console.log('reference: ' + newOffer.reference + ' - discount: ' + newOffer.discount + ' - article: ' + art.barcode);
       });
   }
 

@@ -74,7 +74,6 @@ export class SharedOfferService {
   }
 
   read(reference: string): Observable<Offer> {
-    console.log('leida la oferta: ' + reference);
     return of({
       reference,
       description: this.offers.find(off => off.reference === reference).description,

@@ -95,7 +95,6 @@ export class ShoppingCartService {
   }
 
   readOffer(offerReference: string): Observable<Offer> {
-    console.log('leida la oferta: ' + offerReference);
     return this.offerService
       .read(offerReference);
   }
