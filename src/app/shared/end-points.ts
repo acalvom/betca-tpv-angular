@@ -2,6 +2,7 @@ import {environment} from '@env';
 
 export class EndPoints {
   static OFFERS = environment.REST_CORE + '/offers';
+  static OFFERS_HOME = environment.REST_CUSTOMER_SUPPORT + '/offers';
   static PROVIDERS = environment.REST_CORE + '/providers';
   static ARTICLES = environment.REST_CORE + '/articles';
   static CASHIERS = environment.REST_CORE + '/cashiers';

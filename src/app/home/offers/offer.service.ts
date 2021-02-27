@@ -57,7 +57,7 @@ export class OfferService {
   searchAll(): Observable<Offer[]> {
     return of(this.offers);
     /*return this.httpService
-      .get(EndPoints.OFFERS + OfferService.SEARCH);*/
+      .get(EndPoints.OFFERS_HOME + OfferService.SEARCH);*/
   }
 
   read(reference: string): Observable<Offer> {
@@ -69,7 +69,7 @@ export class OfferService {
       articles: this.offers.find(off => off.reference === reference).articles
     });
     /*return this.httpService
-      .get(EndPoints.OFFERS + '/' + reference);*/
+      .get(EndPoints.OFFERS_HOME + '/' + reference);*/
   }
 
 }
