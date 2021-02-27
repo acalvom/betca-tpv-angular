@@ -1,6 +1,6 @@
 import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
-import {Offer} from './offer.model';
+import {Offer} from '../shared/services/models/offer.model';
 import {OfferService} from './offer.service';
 import {SharedArticleService} from '../shared/services/shared.article.service';
 import {Article} from '../shared/services/models/article.model';

@@ -3,7 +3,7 @@ import {HttpService} from '@core/http.service';
 import {Observable, of} from 'rxjs';
 import {EndPoints} from '@shared/end-points';
 import {OfferSearch} from './offer-search.model';
-import {Offer} from './offer.model';
+import {Offer} from '../shared/services/models/offer.model';
 import {Article} from '../shared/services/models/article.model';
 
 
