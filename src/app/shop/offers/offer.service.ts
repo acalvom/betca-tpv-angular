@@ -3,8 +3,9 @@ import {HttpService} from '@core/http.service';
 import {Observable, of} from 'rxjs';
 import {EndPoints} from '@shared/end-points';
 import {OfferSearch} from './offer-search.model';
-import {Offer} from './offer.model';
+import {Offer} from '../shared/services/models/offer.model';
 import {Article} from '../shared/services/models/article.model';
+import {Tax} from '../shared/services/models/Tax';
 
 
 @Injectable({
@@ -14,12 +15,40 @@ import {Article} from '../shared/services/models/article.model';
 export class OfferService {
   private static SEARCH = '/search';
 
-  articles: Article[] = [{barcode: '123', description: '...', retailPrice: 10, providerCompany: 'pro1'},
-    {barcode: '234', description: '...', retailPrice: 20, providerCompany: 'pro2'},
-    {barcode: '345', description: '...', retailPrice: 30, providerCompany: 'pro3'}];
-
-  offers: Offer[] =
-    [{
+  articles: Article[] = [
+    {
+      barcode: '8400000000017',
+      description: 'Zarzuela - Falda T2',
+      retailPrice: 20,
+      reference: 'zz-falda-T2',
+      stock: 10,
+      discontinued: false,
+      registrationDate: new Date('2021-02-26 10:36:30'),
+      providerCompany: 'pro1'
+    },
+    {
+      barcode: '8400000000024',
+      description: 'Zarzuela - Falda T4',
+      retailPrice: 27.8,
+      reference: 'zz-falda-T4',
+      stock: 5,
+      discontinued: false,
+      registrationDate: new Date('2021-02-26 10:36:30'),
+      providerCompany: 'pro1'
+    },
+    {
+      barcode: '8400000000031',
+      description: 'descrip-a3',
+      retailPrice: 10.12,
+      reference: 'ref-a3',
+      stock: 8,
+      tax: Tax.FREE,
+      discontinued: false,
+      registrationDate: new Date('2021-02-26 10:36:30'),
+      providerCompany: 'pro1'
+    }];
+  offers: Offer[] = [
+    {
       reference: '123abc',
       description: 'offer1',
       creationDate: new Date('2019-03-16'),
@@ -27,22 +56,22 @@ export class OfferService {
       discount: 10,
       articles: this.articles
     },
-      {
-        reference: '234bcd',
-        description: 'offer2',
-        creationDate: new Date('2019-03-16'),
-        expiryDate: new Date('2020-08-08'),
-        discount: 20,
-        articles: []
-      },
-      {
-        reference: '345cde',
-        description: 'offer3',
-        creationDate: new Date('2019-03-16'),
-        expiryDate: new Date('2021-08-13'),
-        discount: 30,
-        articles: this.articles.slice(0, 1)
-      }];
+    {
+      reference: '234bcd',
+      description: 'offer2',
+      creationDate: new Date('2019-03-16'),
+      expiryDate: new Date('2020-08-08'),
+      discount: 20,
+      articles: []
+    },
+    {
+      reference: '345cde',
+      description: 'offer3',
+      creationDate: new Date('2019-03-16'),
+      expiryDate: new Date('2021-08-13'),
+      discount: 30,
+      articles: this.articles.slice(0, 1)
+    }];
 
   constructor(private httpService: HttpService) {
   }
