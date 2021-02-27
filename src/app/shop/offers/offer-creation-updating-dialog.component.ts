@@ -41,8 +41,6 @@ export class OfferCreationUpdatingDialogComponent {
       this.articles.splice(index, 1);
       this.offer.articles.splice(index, 1);
     }
-    // console.log('delete articles ' + this.offer.articles);
-    // console.log('delete barcodes ' + this.barcodes);
   }
 
   isCreate(): boolean {
@@ -55,7 +53,6 @@ export class OfferCreationUpdatingDialogComponent {
       .subscribe(article => {
         this.articles.push(article);
         this.barcodes.push(article.barcode);
-        console.log('add barcodes ' + this.barcodes);
         this.offer.articles.push(article);
       });
   }
