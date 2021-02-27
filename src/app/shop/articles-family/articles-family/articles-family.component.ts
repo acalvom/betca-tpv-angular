@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
-import {SharedArticlesFamilyService} from '../../shared/services/shared.articles-family.service';
-import {ArticleFamilyModel} from '../../shared/services/models/article-family.model';
+
 import {MatDialog} from '@angular/material/dialog';
 import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
-import {Article} from "../../shared/services/models/article.model";
+import {ArticleFamilyModel} from '../../shared/services/models/article-family.model';
+import {SharedArticlesFamilyService} from '../../shared/services/shared.articles-family.service';
 
 
 /**
@@ -18,33 +18,46 @@ import {Article} from "../../shared/services/models/article.model";
   templateUrl: './articles-family.component.html',
   styleUrls: ['./articles-family.component.css']
 })
-export class ArticlesFamilyComponent {
+export class ArticlesFamilyComponent implements OnInit {
   TREE_DATA: ArticleFamilyModel[];
-  //treeControl = new NestedTreeControl<ArticleFamilyModel|Article>(node => node.children);
+  treeControl = new NestedTreeControl<ArticleFamilyModel>(node => node.children);
   dataSource = new MatTreeNestedDataSource<ArticleFamilyModel>();
 
-  constructor(private articleFamilyService: SharedArticlesFamilyService, public dialog: MatDialog) {
-    this.getData();
-    this.dataSource.data = this.TREE_DATA;
+  constructor(private sharedArticlesFamilyService: SharedArticlesFamilyService, public dialog: MatDialog) {
+  }
+
+  ngOnInit(): void {
+    this.read();
   }
 
   hasChild = (_: number, node: ArticleFamilyModel) => !!node.children && node.children.length > 0;
 
-  getData(): any {
-    //this.TREE_DATA = this.articleFamilyService.getData();
+  read(): void {
+    this.sharedArticlesFamilyService.readWithoutArticles().subscribe(
+      data => {
+        this.TREE_DATA = data;
+        this.dataSource.data = this.TREE_DATA;
+      }
+    );
   }
 
-  editNode(): any {
+  createFamilyArticle(node: ArticleFamilyModel): any {
+    // this.dialog.open()
   }
 
-  deleteNode(node: any): any {
-    console.log(node);
+  editFamilyArticle(node: ArticleFamilyModel): any {
+  }
+
+  deleteFamilyArticle(node: ArticleFamilyModel): any {
     this.dialog.open(CancelYesDialogComponent).afterClosed().subscribe(
       result => {
         if (result) {
-          this.articleFamilyService.delete();
+          this.sharedArticlesFamilyService.deleteFamilyArticle(node).subscribe(
+            () => this.read()
+          );
         }
       }
     );
   }
 }
+
