@@ -1,1 +1,11 @@
-<p>offers works!</p>
+<mat-card>
+  <mat-card-content>
+    <button (click)="searchAll()" mat-icon-button>
+      <span>Search All Offers</span>
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>
+<app-crud (read)="read($event)" [data]="offers" [title]="title"
+          [updateAction]="false" [createAction]="false" [deleteAction]="false">
+</app-crud>
