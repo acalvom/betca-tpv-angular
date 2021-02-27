@@ -13,6 +13,7 @@ import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
 import {OffersComponent} from './offers/offers.component';
 import {ArticlesFamilyComponent} from './articles-family/articles-family/articles-family.component';
 import {UsersComponent} from './users/users.component';
+import {CashierClosureComponent} from './cashier-opened/cashier-closure/cashier-closure.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
     children: [ // or path: 'shop/articles'
       {path: 'articles', component: ArticlesComponent},
       {path: 'cashier-closed', component: CashierClosedComponent},
+      {path: 'cashier-closure', component: CashierClosureComponent},
       {path: 'cashier-opened', component: CashierOpenedComponent},
       {path: 'offers', component: OffersComponent},
       {path: 'providers', component: ProvidersComponent},

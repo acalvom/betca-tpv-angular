@@ -34,6 +34,8 @@ import {UsersComponent} from './users/users.component';
 import {SharedOfferService} from './shared/services/shared.offer.service';
 import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
 import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
+import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashier-closure.component';
+import { CashierUpdatingDialogComponent } from './cashier-opened/cashier-closure/cashier-updating-dialog.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cas
     StockAlarmsComponent,
     UsersComponent,
     CashMovementDialogComponent,
+    CashierClosureComponent,
+    CashierUpdatingDialogComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
