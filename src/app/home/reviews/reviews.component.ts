@@ -14,9 +14,7 @@ export class ReviewsComponent {
   searchAll(): Observable<Review[]> {
     return this.reviewsService.searchAll();
   }
-  saveReview(review: Review): void {
-    // Modificating mocks instead of calling API.
-    // Create or update?
-    // this.reviewsService.create(review);
+  update(review: Review): void {
+    this.reviewsService.update(review);
   }
 }
