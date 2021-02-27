@@ -20,18 +20,21 @@ export class ReviewService {
     };
     this.reviews = [
       {
-        user,
-        articleBarcode: '#00000001',
-        score: 2.5,
-        opinion: 'Is ok but not that much'
-      }
+        user, articleBarcode: '#00000001', score: 2.5, opinion: 'Is ok but not that much'
+      },
+      {
+        user, articleBarcode: '#00000002', score: 5, opinion: 'Best product'
+      },
+      {
+        user, articleBarcode: '#00000003', score: 0, opinion: 'Really bad'
+      },
     ];
   }
   create(review: Review): Observable<Review> {
     this.reviews.push(review);
     return of(review);
   }
-  findAll(): Observable<Review[]> {
+  searchAll(): Observable<Review[]> {
     return of(this.reviews);
   }
 }
