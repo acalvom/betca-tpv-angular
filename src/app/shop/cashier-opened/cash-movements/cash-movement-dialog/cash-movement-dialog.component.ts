@@ -23,16 +23,18 @@ export class CashMovementDialogComponent implements OnInit {
   }
 
   cashIn(): void {
-    this.cashFinal.movementtype = true;
+    /*this.cashFinal.movementtype = true;
     this.cashMovementDialogService
       .setMovement(this.cashFinal)
-      .subscribe(() => this.dialogRef.close());
+      .subscribe(() => this.dialogRef.close());*/
+    this.dialogRef.close();
   }
 
   cashOut(): void {
-    this.cashFinal.movementtype = false;
+/*    this.cashFinal.movementtype = false;
     this.cashMovementDialogService
       .setMovement(this.cashFinal)
-      .subscribe(() => this.dialogRef.close());
+      .subscribe(() => this.dialogRef.close());*/
+    this.dialogRef.close();
   }
 }
