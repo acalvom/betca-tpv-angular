@@ -34,21 +34,21 @@ export class OfferService {
       description: 'offer1',
       expiryDate: new Date('2020-03-16'),
       discount: 10,
-      articles: this.articles
+      articleBarcodes: this.articles.map(art => art.barcode)
     },
     {
       reference: '234bcd',
       description: 'offer2',
       expiryDate: new Date('2020-08-08'),
       discount: 20,
-      articles: []
+      articleBarcodes: []
     },
     {
       reference: '345cde',
       description: 'offer3',
       expiryDate: new Date('2021-08-13'),
       discount: 30,
-      articles: this.articles.slice(0, 1)
+      articleBarcodes: this.articles.slice(0, 1).map(art => art.barcode)
     }];
 
   constructor(private httpService: HttpService) {
@@ -66,7 +66,7 @@ export class OfferService {
       description: this.offers.find(off => off.reference === reference).description,
       expiryDate: this.offers.find(off => off.reference === reference).expiryDate,
       discount: this.offers.find(off => off.reference === reference).discount,
-      articles: this.offers.find(off => off.reference === reference).articles
+      articleBarcodes: this.offers.find(off => off.reference === reference).articleBarcodes
     });
     /*return this.httpService
       .get(EndPoints.OFFERS_HOME + '/' + reference);*/
