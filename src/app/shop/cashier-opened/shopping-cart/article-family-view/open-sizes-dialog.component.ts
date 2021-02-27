@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
-  templateUrl: 'cancel-yes-dialog.component.html',
-  styleUrls: ['./dialog.component.css']
+  templateUrl: 'open-sizes-dialog.component.html'
 })
 export class OpenSizesDialogComponent {
 }

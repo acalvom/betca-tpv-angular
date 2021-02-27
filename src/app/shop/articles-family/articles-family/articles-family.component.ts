@@ -5,6 +5,7 @@ import {SharedArticlesFamilyService} from '../../shared/services/shared.articles
 import {ArticleFamilyModel} from '../../shared/services/models/article-family.model';
 import {MatDialog} from '@angular/material/dialog';
 import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
+import {Article} from "../../shared/services/models/article.model";
 
 
 /**
@@ -19,7 +20,7 @@ import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.compon
 })
 export class ArticlesFamilyComponent {
   TREE_DATA: ArticleFamilyModel[];
-  treeControl = new NestedTreeControl<ArticleFamilyModel>(node => node.children);
+  //treeControl = new NestedTreeControl<ArticleFamilyModel|Article>(node => node.children);
   dataSource = new MatTreeNestedDataSource<ArticleFamilyModel>();
 
   constructor(private articleFamilyService: SharedArticlesFamilyService, public dialog: MatDialog) {
@@ -30,7 +31,7 @@ export class ArticlesFamilyComponent {
   hasChild = (_: number, node: ArticleFamilyModel) => !!node.children && node.children.length > 0;
 
   getData(): any {
-    this.TREE_DATA = this.articleFamilyService.getData();
+    //this.TREE_DATA = this.articleFamilyService.getData();
   }
 
   editNode(): any {
