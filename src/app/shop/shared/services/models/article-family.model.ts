@@ -1,5 +1,9 @@
+import {Article} from "./article.model";
+
+
 export interface ArticleFamilyModel {
-  id: string;
-  name: string;
-  children?: ArticleFamilyModel[];
+  reference: string;
+  description: string;
+  type: string;
+  children?: (ArticleFamilyModel | Article)[];
 }

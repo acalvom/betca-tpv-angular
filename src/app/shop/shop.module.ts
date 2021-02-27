@@ -35,6 +35,7 @@ import {SharedOfferService} from './shared/services/shared.offer.service';
 import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
 import {UserCreationUpdatingDialogComponent} from './users/user-creation-updating-dialog.component';
 import { TicketEditingDialogComponent } from './cashier-opened/tickets/ticket-editing-dialog.component';
+import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-family-view/open-sizes-dialog.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { TicketEditingDialogComponent } from './cashier-opened/tickets/ticket-ed
     TicketsComponent,
     OffersComponent,
     OfferCreationUpdatingDialogComponent,
+    OpenSizesDialogComponent,
     StockAlarmsComponent,
     UsersComponent,
     UserCreationUpdatingDialogComponent,
