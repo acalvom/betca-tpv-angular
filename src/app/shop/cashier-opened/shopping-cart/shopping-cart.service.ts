@@ -5,7 +5,7 @@ import {catchError, concatMap, map} from 'rxjs/operators';
 
 import {HttpService} from '@core/http.service';
 import {SharedArticleService} from '../../shared/services/shared.article.service';
-import {Shopping} from './shopping.model';
+import {Shopping} from '../../shared/services/models/shopping.model';
 import {TicketCreation} from './ticket-creation.model';
 import {ArticleQuickCreationDialogComponent} from './article-quick-creation-dialog.component';
 
@@ -58,7 +58,7 @@ export class ShoppingCartService {
   }
 
   createTicketAndPrintReceipts(ticketCreation: TicketCreation, voucher: number, requestedInvoice: boolean, requestedGiftTicket: boolean,
-                               requestDataProtectionAct: boolean): Observable<void> {
+                               requestDataProtectionAct: boolean, checkedCreditLine: boolean): Observable<void> {
     return this.httpService
       .post(EndPoints.TICKETS, ticketCreation)
       .pipe(
@@ -68,6 +68,7 @@ export class ShoppingCartService {
           receipts = iif(() => requestedInvoice, merge(receipts, this.createInvoiceAndPrint(ticket.id)), receipts);
           receipts = iif(() => requestedGiftTicket, merge(receipts, this.createGiftTicketAndPrint(ticket.id)), receipts);
           receipts = iif(() => requestDataProtectionAct, merge(receipts, this.createDataProtectionActAndPrint(ticket)), receipts);
+          receipts = iif(() => checkedCreditLine, merge(receipts, this.createCreditSaleAndPrint(ticket)), receipts);
           return receipts;
         })// ,switchMap(() => EMPTY)
       );
@@ -86,12 +87,16 @@ export class ShoppingCartService {
   }
 
   createGiftTicketAndPrint(ticketId: string): Observable<void> {
-    console.log("Crear ticket regalo");
+    console.log('Crear ticket regalo');
     return EMPTY; // TODO change EMPTY
   }
 
   createDataProtectionActAndPrint(ticket): Observable<void> {
     return EMPTY; // TODO change EMPTY
+  }
+
+  createCreditSaleAndPrint(ticket): Observable<void> {
+    return EMPTY; // TODO change EMPTY (Hacer llamada para crear la credit sale y guardarla en base de datos)
   }
 
   readOffer(offerReference: string): Observable<Offer> {
