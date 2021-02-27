@@ -1,6 +1,6 @@
 import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
-import {Offer} from './offer.model';
+import {Offer} from '../shared/services/models/offer.model';
 import {OfferService} from './offer.service';
 import {SharedArticleService} from '../shared/services/shared.article.service';
 import {Article} from '../shared/services/models/article.model';
@@ -41,8 +41,6 @@ export class OfferCreationUpdatingDialogComponent {
       this.articles.splice(index, 1);
       this.offer.articles.splice(index, 1);
     }
-    // console.log('delete articles ' + this.offer.articles);
-    // console.log('delete barcodes ' + this.barcodes);
   }
 
   isCreate(): boolean {
@@ -55,7 +53,6 @@ export class OfferCreationUpdatingDialogComponent {
       .subscribe(article => {
         this.articles.push(article);
         this.barcodes.push(article.barcode);
-        console.log('add barcodes ' + this.barcodes);
         this.offer.articles.push(article);
       });
   }
