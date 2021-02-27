@@ -5,7 +5,7 @@ import {ShoppingCartService} from './shopping-cart.service';
 import {Shopping} from '../../shared/services/models/shopping.model';
 import {CheckOutDialogComponent} from './check-out-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {ShoppingState} from './shopping-state.model';
+import {ShoppingState} from '../../shared/services/models/shopping-state.model';
 import {NumberDialogComponent} from '@shared/dialogs/number-dialog.component';
 import {ArticleFamilyViewComponent} from './article-family-view/article-family-view.component';
 

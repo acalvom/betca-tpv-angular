@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Shopping} from '../../shared/services/models/shopping.model';
-import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
-import {NumberDialogComponent} from '@shared/dialogs/number-dialog.component';
-import {ShoppingState} from '../shopping-cart/shopping-state.model';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {ShoppingState} from '../../shared/services/models/shopping-state.model';
+import {TicketEdition} from './ticket-edition.model';
 
 @Component({
   selector: 'app-ticket-editing-dialog',
@@ -14,10 +14,12 @@ export class TicketEditingDialogComponent implements OnInit{
   indexShoppingList: 0;
   displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'actions'];
   shoppingList: Shopping[];
+  ticket: TicketEdition;
   totalShoppingList = 0 ;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: Shopping[], private dialog: MatDialog) {
-    this.shoppingList = data ? data : undefined;
+  constructor(@Inject(MAT_DIALOG_DATA) data: TicketEdition) {
+    this.ticket = data ? data : undefined;
+    this.shoppingList = this.ticket.shoppingList;
   }
 
   ngOnInit(): void {
@@ -43,12 +45,16 @@ export class TicketEditingDialogComponent implements OnInit{
     this.synchronizeShoppingCart();
   }
 
-  changeCommitted(item: any): void {
-
+  changeCommitted(shopping: Shopping): void {
+    if (shopping.state === ShoppingState.COMMITTED) {
+      shopping.state = ShoppingState.NOT_COMMITTED;
+    } else {
+      shopping.state = ShoppingState.COMMITTED;
+    }
   }
 
-  checkboxState(state: any): void {
-
+  checkboxState(state: ShoppingState): boolean {
+    return state === ShoppingState.COMMITTED;
   }
 
   update(): void {

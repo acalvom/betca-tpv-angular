@@ -9,7 +9,7 @@ import {Shopping} from '../../shared/services/models/shopping.model';
 import {TicketCreation} from './ticket-creation.model';
 import {ArticleQuickCreationDialogComponent} from './article-quick-creation-dialog.component';
 
-import {ShoppingState} from './shopping-state.model';
+import {ShoppingState} from '../../shared/services/models/shopping-state.model';
 import {EndPoints} from '@shared/end-points';
 import {Offer} from '../../shared/services/models/offer.model';
 import {SharedOfferService} from '../../shared/services/shared.offer.service';
