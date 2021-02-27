@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {ArticlesNode} from './articles-node';
+import {ArticleFamilyModel} from './models/article-family.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ArticlesFamilyService {
-  ARTICLES_DATA: ArticlesNode[] = [{
+export class SharedArticlesFamilyService {
+  ARTICLES_DATA: ArticleFamilyModel[] = [{
     id: '1',
     name: 'ArticleFamily-Root',
     children: [{
@@ -25,7 +25,7 @@ export class ArticlesFamilyService {
   constructor() {
   }
 
-  getData(): ArticlesNode[] {
+  getData(): ArticleFamilyModel[] {
     return this.ARTICLES_DATA;
   }
 
