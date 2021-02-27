@@ -172,16 +172,12 @@ export class ShoppingCartComponent implements OnInit {
           const search = newOffer.articles.find(art => art.barcode === element.barcode);
           if (search !== undefined) {
             element.discount = newOffer.discount;
-            // console.log('article  ' + element.barcode + ' is in the offer ' + newOffer.reference +
-            //   ' and the discount is: ' + newOffer.discount);
             element.updateTotal();
             this.synchronizeShoppingCart();
           } else {
             element.discount = 0;
-            // console.log('article  ' + element.barcode + ' is not in the offer');
           }
         });
-        // console.log('reference: ' + newOffer.reference + ' - discount: ' + newOffer.discount + ' - article: ' + art.barcode);
       });
   }
 
