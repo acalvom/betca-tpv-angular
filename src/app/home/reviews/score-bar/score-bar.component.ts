@@ -1,32 +1,36 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-score-bar',
-  templateUrl: './score-bar.component.html',
-  styleUrls: ['./score-bar.component.css']
+  templateUrl: './score-bar.component.html'
 })
-export class ScoreBarComponent {
-  @Input() score;
+export class ScoreBarComponent implements OnInit {
+  @Input() score: number;
+  @Output() scoreChange = new EventEmitter<number>();
   private ICON_WIDTH = 20;
+  private NUMBER_ICONS = 5;
   iconNames: string[] = [];
   constructor() {
-    for (let i = 0; i < 5; i++) {
-      this.iconNames[i] = 'star_border';
+  }
+  ngOnInit(): void {
+    this.fillStars();
+  }
+  private fillStars(): void {
+    for (let i = 0; i < this.NUMBER_ICONS; i++) {
+      if (i + 0.5 < this.score) { this.iconNames[i] = 'star'; }
+      if (i + 0.5 === this.score) { this.iconNames[i] = 'star_half'; }
+      if (i + 0.5 > this.score) { this.iconNames[i] = 'star_border'; }
     }
   }
   iconClicked(myEvent: any): void {
     const iconId = myEvent.id;
     const event = myEvent.event;
-    for (let i = 0; i < 5; i++) {
-      if (i < iconId) { this.iconNames[i] = 'star'; }
-      if (i > iconId) { this.iconNames[i] = 'star_border'; }
-    }
     if (Math.sign(event.offsetX - this.ICON_WIDTH / 2) >= 0) {
-      this.iconNames[iconId] = 'star';
-      this.score = iconId + 1;
+      this.score = Number.parseInt(iconId, 10) + 1;
     } else {
-      this.iconNames[iconId] = 'star_half';
-      this.score = iconId + 0.5;
+      this.score = Number.parseInt(iconId, 10) + 0.5;
     }
+    this.scoreChange.emit(this.score);
+    this.fillStars();
   }
 }
