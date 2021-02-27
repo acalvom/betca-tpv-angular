@@ -33,6 +33,7 @@ import {StockAlarmsComponent} from './stock-alarms/stock-alarms.component';
 import {UsersComponent} from './users/users.component';
 import {SharedOfferService} from './shared/services/shared.offer.service';
 import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
+import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dia
     OfferCreationUpdatingDialogComponent,
     StockAlarmsComponent,
     UsersComponent,
+    CashMovementDialogComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,

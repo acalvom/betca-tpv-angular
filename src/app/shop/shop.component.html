@@ -58,7 +58,7 @@
     <mat-icon>lock_open</mat-icon>
     <span>Open Cashier</span>
   </button>
-  <button *ngIf="!cashierClosed" disabled="disabled" mat-menu-item routerLink="">
+  <button (click)="movementCash()" *ngIf="!cashierClosed" mat-menu-item>
     <mat-icon>account_balance_wallet</mat-icon>
     <span>Cash Movement</span>
   </button>

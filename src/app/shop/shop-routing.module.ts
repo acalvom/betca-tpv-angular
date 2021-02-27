@@ -11,7 +11,7 @@ import {ShopComponent} from './shop.component';
 import {StockAlarmsComponent} from './stock-alarms/stock-alarms.component';
 import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
 import {OffersComponent} from './offers/offers.component';
-import {ArticlesFamilyComponent} from "./articles-family/articles-family/articles-family.component";
+import {ArticlesFamilyComponent} from './articles-family/articles-family/articles-family.component';
 import {UsersComponent} from './users/users.component';
 
 const routes: Routes = [

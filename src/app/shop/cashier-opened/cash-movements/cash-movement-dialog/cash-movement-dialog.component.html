@@ -1,0 +1,21 @@
+<h3 mat-dialog-title>Cash Movements (total cash: € {{(cashMovementDialog|async)?.totalCash}})</h3>
+<mat-dialog-content>
+  <mat-form-field>
+    <label>
+      <input [(ngModel)]="cashFinal.totalCash" matInput
+             placeholder="Remove or Add cash (€)"
+             required
+             type="number"/>
+    </label>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="cashOut()" color="accent" mat-raised-button>
+    <mat-icon>account_balance_wallet</mat-icon>
+    Cash Out
+  </button>
+  <button (click)="cashIn()" color="primary" mat-raised-button>
+    <mat-icon>account_balance_wallet</mat-icon>
+    <span>Cash In</span>
+  </button>
+</mat-dialog-actions>
