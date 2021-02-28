@@ -1,4 +1,23 @@
-<div>
-  <h1>{{id}}</h1>
+<mat-card>
+  <mat-card-content>
+    <div class="container">
+      <h1>{{id}}</h1>
 
-</div>
+      <app-product
+        *ngFor="let product of products"
+        [barcode]="product.barcode"
+        [description]="product.description"
+        [state]="product.state"
+      ></app-product>
+
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <ul>
+      <li class="committed">Entregado</li>
+      <li class="not_committed">No entregado</li>
+      <li class="in_stock">En stock</li>
+      <li class="require_provider">Pedido al proveedor</li>
+    </ul>
+  </mat-card-footer>
+</mat-card>
