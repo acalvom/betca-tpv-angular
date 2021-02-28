@@ -11,6 +11,7 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { TicketTrackingComponent } from './ticket-tracking/ticket-tracking.component';
 import { IconButtonComponent } from './reviews/icon-button/icon-button.component';
 import { ScoreBarComponent } from './reviews/score-bar/score-bar.component';
+import { OffersComponent } from './offers/offers.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ScoreBarComponent } from './reviews/score-bar/score-bar.component';
     TicketTrackingComponent,
     IconButtonComponent,
     ScoreBarComponent,
+    OffersComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,
