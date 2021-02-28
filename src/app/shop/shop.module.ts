@@ -36,6 +36,7 @@ import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dia
 import {UserCreationUpdatingDialogComponent} from './users/user-creation-updating-dialog.component';
 import { TicketEditingDialogComponent } from './cashier-opened/tickets/ticket-editing-dialog.component';
 import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-family-view/open-sizes-dialog.component';
+import {ListComponent} from './shared/components/list.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-f
     CashierOpenedComponent,
     CheckOutDialogComponent,
     CreditLinePayDialogComponent,
+    ListComponent,
     ProviderCreationUpdatingDialogComponent,
     ProvidersComponent,
     SearchByBarcodeComponent,
