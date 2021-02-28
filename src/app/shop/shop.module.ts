@@ -39,6 +39,7 @@ import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-f
 import {ListComponent} from './shared/components/list.component';
 import {NewArticleFamilyDialogComponent} from './articles-family/dialogs/new-article-family-dialog/new-article-family-dialog.component';
 import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-article-family-dialog/edit-article-family-dialog.component';
+import { ManageDataProtectionActComponent } from './shared/components/manage-data-protection-act.component';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-a
     UsersComponent,
     UserCreationUpdatingDialogComponent,
     TicketEditingDialogComponent,
+    ManageDataProtectionActComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
