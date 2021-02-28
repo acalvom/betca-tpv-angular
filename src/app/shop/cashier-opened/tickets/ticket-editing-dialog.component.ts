@@ -1,8 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Shopping} from '../../shared/services/models/shopping.model';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {ShoppingState} from '../../shared/services/models/shopping-state.model';
 import {TicketEdition} from './ticket-edition.model';
+import {TicketService} from './ticket.service';
 
 @Component({
   selector: 'app-ticket-editing-dialog',
@@ -17,7 +18,7 @@ export class TicketEditingDialogComponent implements OnInit{
   ticket: TicketEdition;
   totalShoppingList = 0 ;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: TicketEdition) {
+  constructor(@Inject(MAT_DIALOG_DATA) data: TicketEdition, private ticketService: TicketService, private dialog: MatDialog) {
     this.ticket = data ? data : undefined;
     this.shoppingList = this.ticket.shoppingList;
   }
@@ -58,6 +59,7 @@ export class TicketEditingDialogComponent implements OnInit{
   }
 
   update(): void {
-
+    this.ticketService.update(this.ticket.id, this.shoppingList)
+      .subscribe( () => this.dialog.closeAll());
   }
 }
