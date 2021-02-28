@@ -3,6 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 
 import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
 import {AuthService} from '@core/auth.service';
+import {RegisterDialogComponent} from '@shared/dialogs/register-dialog.component';
 
 @Component({
   templateUrl: 'home.component.html',
@@ -21,6 +22,10 @@ export class HomeComponent {
       .subscribe(() => this.username = this.authService.getName());
   }
 
+  register(): void {
+    this.dialog.open(RegisterDialogComponent);
+  }
+
   logout(): void {
     this.authService.logout();
   }
@@ -35,7 +40,4 @@ export class HomeComponent {
   search(value): void {
   }
 
-  register(): void {
-
-  }
 }

@@ -13,11 +13,11 @@ export class UserService {
   static SEARCH = '/search';
   static UNFINISHED = '/unfinished';
   private users: User[] = [
-    {mobile: 1234324, name: 'Hector', role: Role.CUSTOMER, token: ' '},
-    {mobile: 1236453, name: 'Mario', role: Role.ADMIN, token: ' '},
-    {mobile: 1264563, name: 'Pablo', role: Role.MANAGER, token: ' '},
-    {mobile: 1346623, name: 'Rafa', role: Role.CUSTOMER, token: ' '},
-    {mobile: 1256773, name: 'Jaime', role: Role.OPERATOR, token: ' '},
+    {token: ' ', mobile: 1234324, name: 'Hector', role: Role.CUSTOMER},
+    {token: ' ', mobile: 1236453, name: 'Mario', role: Role.ADMIN},
+    {token: ' ', mobile: 1264563, name: 'Pablo', role: Role.MANAGER},
+    {token: ' ', mobile: 1346623, name: 'Rafa', role: Role.CUSTOMER},
+    {token: ' ', mobile: 1256773, name: 'Jaime', role: Role.OPERATOR},
   ];
 
   constructor(private httpService: HttpService) {
