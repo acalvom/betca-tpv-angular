@@ -58,6 +58,8 @@ export class SharedArticlesFamilyService {
     }
   ];
 
+  SIZES: String [] = ['T2','T4','T6'];
+
   constructor() {
   }
 
@@ -72,6 +74,10 @@ export class SharedArticlesFamilyService {
 
   readChildrenTemporal(articleFamilyModel?: ArticleFamilyModel): Observable<(ArticleFamilyModel | Article)[]> {
     return of(this.CHILDRENS_OF_ZZ);
+  }
+
+  readSizes(articleFamily: ArticleFamilyModel) : Observable<String[]> {
+    return of(this.SIZES);
   }
 
   edit(articleFamilyModel: ArticleFamilyModel): Observable<ArticleFamilyModel> {

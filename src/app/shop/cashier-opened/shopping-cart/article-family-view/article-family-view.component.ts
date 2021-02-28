@@ -36,11 +36,11 @@ export class ArticleFamilyViewComponent implements OnInit {
 
   openSizes(articleFamily: ArticleFamilyModel): void {
     let sizes: String[] = [];
-    /*this.articlesFamilyService.readSizes(articleFamily).subscribe(
+    this.articlesFamilyService.readSizes(articleFamily).subscribe(
       result=>{
         sizes = result;
       }
-    )*/
+    )
     this.dialog.open(OpenSizesDialogComponent, {
       data: sizes
     });
