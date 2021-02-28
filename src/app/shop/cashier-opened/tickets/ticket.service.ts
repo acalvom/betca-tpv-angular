@@ -9,21 +9,25 @@ import {TicketEdition} from './ticket-edition.model';
 })
 export class TicketService {
 
+  ticket1: Ticket = {id: '1', reference: '123', mobile: 654987125};
+  ticket2: Ticket = {id: '2', reference: '789', mobile: 698875321};
+  shopping1: Shopping = new Shopping('12345', 'description1', 5);
+  shopping2: Shopping = new Shopping('54321', 'description2', 10);
+
   constructor() { }
 
   search(key: string): Observable<Ticket[]> {
     return of(
-      [
-        {id: '1', reference: '111', mobile: 123456789},
-        {id: '2', reference: '222', mobile: 987654321}
-      ]
+      [this.ticket1, this.ticket2]
     );
   }
 
   read(id: string): Observable<TicketEdition> {
-    const shopping1: Shopping = new Shopping('12345', 'description1', 5);
-    const shopping2: Shopping = new Shopping('54321', 'description2', 10);
-    const ticket: TicketEdition = {id, shoppingList: [shopping1, shopping2]};
-    return of(ticket);
+    const ticketEdition: TicketEdition = {id, shoppingList: [this.shopping1, this.shopping2]};
+    return of(ticketEdition);
+  }
+
+  update(id: string, shoppingList: Shopping[]): Observable<TicketEdition> {
+    return of({id, shoppingList});
   }
 }
