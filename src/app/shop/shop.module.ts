@@ -37,6 +37,8 @@ import {UserCreationUpdatingDialogComponent} from './users/user-creation-updatin
 import { TicketEditingDialogComponent } from './cashier-opened/tickets/ticket-editing-dialog.component';
 import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-family-view/open-sizes-dialog.component';
 import {ListComponent} from './shared/components/list.component';
+import {NewArticleFamilyDialogComponent} from './articles-family/dialogs/new-article-family-dialog/new-article-family-dialog.component';
+import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-article-family-dialog/edit-article-family-dialog.component';
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import {ListComponent} from './shared/components/list.component';
     CashierOpenedComponent,
     CheckOutDialogComponent,
     CreditLinePayDialogComponent,
+    EditArticleFamilyDialogComponent,
     ListComponent,
+    NewArticleFamilyDialogComponent,
     ProviderCreationUpdatingDialogComponent,
     ProvidersComponent,
     SearchByBarcodeComponent,
