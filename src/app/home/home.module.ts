@@ -12,6 +12,7 @@ import { TicketTrackingComponent } from './ticket-tracking/ticket-tracking.compo
 import { IconButtonComponent } from './reviews/icon-button/icon-button.component';
 import { ScoreBarComponent } from './reviews/score-bar/score-bar.component';
 import { OffersComponent } from './offers/offers.component';
+import { ProductComponent } from './ticket-tracking/product/product.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { OffersComponent } from './offers/offers.component';
     IconButtonComponent,
     ScoreBarComponent,
     OffersComponent,
+    ProductComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,

@@ -1,0 +1,24 @@
+<h3 mat-dialog-title>Register</h3>
+<mat-dialog-content>
+  <mat-form-field>
+    <input [(ngModel)]="mobile" matInput placeholder="Mobile" type="text" required/>
+    <button (click)="mobile=undefined" *ngIf="mobile" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
+            matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field>
+    <input [(ngModel)]="name" matInput placeholder="Name" type="text" required/>
+    <button (click)="name=undefined" *ngIf="name" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
+            matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field>
+    <input [(ngModel)]="password" matInput placeholder="Password" type="password" required/>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button (click)="register()" mat-button>Register</button>
+</mat-dialog-actions>

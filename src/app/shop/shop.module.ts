@@ -36,6 +36,10 @@ import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dia
 import {UserCreationUpdatingDialogComponent} from './users/user-creation-updating-dialog.component';
 import { TicketEditingDialogComponent } from './cashier-opened/tickets/ticket-editing-dialog.component';
 import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-family-view/open-sizes-dialog.component';
+import {ListComponent} from './shared/components/list.component';
+import {NewArticleFamilyDialogComponent} from './articles-family/dialogs/new-article-family-dialog/new-article-family-dialog.component';
+import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-article-family-dialog/edit-article-family-dialog.component';
+import { ManageDataProtectionActComponent } from './shared/components/manage-data-protection-act.component';
 
 
 @NgModule({
@@ -51,6 +55,9 @@ import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-f
     CashierOpenedComponent,
     CheckOutDialogComponent,
     CreditLinePayDialogComponent,
+    EditArticleFamilyDialogComponent,
+    ListComponent,
+    NewArticleFamilyDialogComponent,
     ProviderCreationUpdatingDialogComponent,
     ProvidersComponent,
     SearchByBarcodeComponent,
@@ -65,6 +72,7 @@ import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-f
     UsersComponent,
     UserCreationUpdatingDialogComponent,
     TicketEditingDialogComponent,
+    ManageDataProtectionActComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
