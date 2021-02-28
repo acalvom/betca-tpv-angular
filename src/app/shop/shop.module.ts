@@ -36,14 +36,6 @@ import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dia
 import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
 import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashier-closure.component';
 import { CashierUpdatingDialogComponent } from './cashier-opened/cashier-closure/cashier-updating-dialog.component';
-import {UserCreationUpdatingDialogComponent} from './users/user-creation-updating-dialog.component';
-import { TicketEditingDialogComponent } from './cashier-opened/tickets/ticket-editing-dialog.component';
-import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-family-view/open-sizes-dialog.component';
-import {ListComponent} from './shared/components/list.component';
-import {NewArticleFamilyDialogComponent} from './articles-family/dialogs/new-article-family-dialog/new-article-family-dialog.component';
-import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-article-family-dialog/edit-article-family-dialog.component';
-import { ManageDataProtectionActComponent } from './shared/components/manage-data-protection-act.component';
-
 
 @NgModule({
   declarations: [
@@ -58,9 +50,6 @@ import { ManageDataProtectionActComponent } from './shared/components/manage-dat
     CashierOpenedComponent,
     CheckOutDialogComponent,
     CreditLinePayDialogComponent,
-    EditArticleFamilyDialogComponent,
-    ListComponent,
-    NewArticleFamilyDialogComponent,
     ProviderCreationUpdatingDialogComponent,
     ProvidersComponent,
     SearchByBarcodeComponent,
@@ -70,15 +59,11 @@ import { ManageDataProtectionActComponent } from './shared/components/manage-dat
     TicketsComponent,
     OffersComponent,
     OfferCreationUpdatingDialogComponent,
-    OpenSizesDialogComponent,
     StockAlarmsComponent,
     UsersComponent,
     CashMovementDialogComponent,
     CashierClosureComponent,
     CashierUpdatingDialogComponent,
-    UserCreationUpdatingDialogComponent,
-    TicketEditingDialogComponent,
-    ManageDataProtectionActComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
@@ -86,7 +71,6 @@ import { ManageDataProtectionActComponent } from './shared/components/manage-dat
     CashierDialogComponent,
     CheckOutDialogComponent,
     ProviderCreationUpdatingDialogComponent,
-    UserCreationUpdatingDialogComponent,
   ],
   imports: [
     SharedModule,
