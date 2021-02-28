@@ -9,6 +9,7 @@ import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.compon
 import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
 import {NumberDialogComponent} from '@shared/dialogs/number-dialog.component';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
+import {RegisterDialogComponent} from '@shared/dialogs/register-dialog.component';
 
 import {UppercaseWords} from '@shared/pipes/UppercaseWordsPipe';
 
@@ -35,6 +36,7 @@ import {SearchComponent} from '@shared/components/search.component';
     ReadDetailDialogComponent,
     SearchComponent,
     UppercaseWords,
+    RegisterDialogComponent,
   ],
   exports: [
     CancelYesDialogComponent,
@@ -51,12 +53,14 @@ import {SearchComponent} from '@shared/components/search.component';
     ReadDetailDialogComponent,
     SearchComponent,
     UppercaseWords,
+    RegisterDialogComponent
   ],
   entryComponents: [
     CancelYesDialogComponent,
     LoginDialogComponent,
     NumberDialogComponent,
     ReadDetailDialogComponent,
+    RegisterDialogComponent,
   ]
 })
 export class SharedModule {
