@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {SharedArticlesFamilyService} from "../../../shared/services/shared.articles-family.service";
 import {ArticleFamilyModel} from "../../../shared/services/models/article-family.model";
 import {Article} from "../../../shared/services/models/article.model";
+import {MatDialog} from "@angular/material/dialog";
+import {OpenSizesDialogComponent} from "./open-sizes-dialog.component";
 
 @Component({
   selector: 'app-article-family-view',
@@ -12,7 +14,7 @@ export class ArticleFamilyViewComponent implements OnInit {
 
   cardData: (ArticleFamilyModel | Article)[];
 
-  constructor(private articlesFamilyService: SharedArticlesFamilyService) {
+  constructor(private articlesFamilyService: SharedArticlesFamilyService, private dialog: MatDialog) {
     this.cardData = [];
   }
 
@@ -33,6 +35,14 @@ export class ArticleFamilyViewComponent implements OnInit {
   }
 
   openSizes(articleFamily: ArticleFamilyModel): void {
-
+    let sizes: String[] = [];
+    this.articlesFamilyService.readSizes(articleFamily).subscribe(
+      result=>{
+        sizes = result;
+      }
+    )
+    this.dialog.open(OpenSizesDialogComponent, {
+      data: sizes
+    });
   }
 }
