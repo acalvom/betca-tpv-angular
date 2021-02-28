@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-
 import {HttpService} from '@core/http.service';
 import {CashierState} from './cashier-state.model';
 import {CashierClosure} from './cashier-closure.model';
 import {EndPoints} from '@shared/end-points';
 import {Cashier} from '../../shared/services/models/cashier.model';
+import {Observable, of} from 'rxjs';
 
 
 @Injectable({
@@ -43,7 +42,42 @@ export class CashierClosureService {
   }
 
   search(cashierClosure: CashierClosure): Observable<Cashier[]> {
-    return this.httpService
+    /*return this.httpService
       .paramsFrom(cashierClosure)
-      .get(EndPoints.CASHIERS + CashierClosureService.SEARCH);  }
+      .get(EndPoints.CASHIERS + CashierClosureService.SEARCH);*/
+
+    const cashier: Cashier[] = ([
+      {
+        initialCash : 1,
+        cashSales : 1,
+        cardSales : 1,
+        usedVouchers : 1,
+        deposit : 1,
+        withdrawal : 1,
+        comment : 'hola',
+        lostCard : 1,
+        lostCash : 1,
+        finalCash : 1,
+        finalCard : 1,
+        openingDate : null,
+        closureDate : null
+      },
+      {
+        initialCash : 1,
+        cashSales : 1,
+        cardSales : 1,
+        usedVouchers : 1,
+        deposit : 1,
+        withdrawal : 1,
+        comment : 'hola',
+        lostCard : 1,
+        lostCash : 1,
+        finalCash : 1,
+        finalCard : 1,
+        openingDate : null,
+        closureDate : null
+      }
+    ]);
+    return of(cashier);
+  }
 }
