@@ -1,12 +1,14 @@
-<mat-card *ngFor="let review of reviews">
-  <mat-card-header>
-    <mat-card-title>Barcode: {{review.articleBarcode}}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <textarea>{{review.opinion}}</textarea>
-  </mat-card-content>
-  <mat-card-actions>
-    <!-- Put here stars-score-bar component -->
-    <button mat-stroked-button (click)="saveReview(review)">Save</button>
-  </mat-card-actions>
-</mat-card>
+<main class="flex-container">
+  <mat-card *ngFor="let review of searchAll() | async" class="card-container">
+    <mat-card-header>
+      <mat-card-title>Barcode: {{review.articleBarcode}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <textarea matInput placeholder="Ex. It makes me feel..." [(ngModel)]=review.opinion></textarea>
+    </mat-card-content>
+    <mat-card-actions>
+      <app-score-bar [(score)]=review.score></app-score-bar>
+      <button mat-stroked-button (click)="update(review)">Save</button>
+    </mat-card-actions>
+  </mat-card>
+</main>

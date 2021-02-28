@@ -1,4 +1,4 @@
-import {Shopping} from './shopping.model';
+import {Shopping} from '../../shared/services/models/shopping.model';
 import {User} from '../../shared/services/models/user.models';
 
 export interface TicketCreation {

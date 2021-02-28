@@ -3,7 +3,7 @@ import {of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {OfferSearch} from './offer-search.model';
 import {OfferService} from './offer.service';
-import {Offer} from './offer.model';
+import {Offer} from '../shared/services/models/offer.model';
 import {OfferCreationUpdatingDialogComponent} from './offer-creation-updating-dialog.component';
 
 @Component({

@@ -9,6 +9,9 @@ import {ComplaintsComponent} from './complaints/complaints.component';
 import {AdviserComponent} from './adviser/adviser.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { TicketTrackingComponent } from './ticket-tracking/ticket-tracking.component';
+import { IconButtonComponent } from './reviews/icon-button/icon-button.component';
+import { ScoreBarComponent } from './reviews/score-bar/score-bar.component';
+import { OffersComponent } from './offers/offers.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { TicketTrackingComponent } from './ticket-tracking/ticket-tracking.compo
     HomeComponent,
     ReviewsComponent,
     TicketTrackingComponent,
+    IconButtonComponent,
+    ScoreBarComponent,
+    OffersComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,

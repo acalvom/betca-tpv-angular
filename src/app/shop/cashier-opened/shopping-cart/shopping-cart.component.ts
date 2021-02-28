@@ -2,12 +2,12 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Observable, of} from 'rxjs';
 
 import {ShoppingCartService} from './shopping-cart.service';
-import {Shopping} from './shopping.model';
+import {Shopping} from '../../shared/services/models/shopping.model';
 import {CheckOutDialogComponent} from './check-out-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {ShoppingState} from './shopping-state.model';
+import {ShoppingState} from '../../shared/services/models/shopping-state.model';
 import {NumberDialogComponent} from '@shared/dialogs/number-dialog.component';
-import {ArticleFamilyViewComponent} from "./article-family-view/article-family-view.component";
+import {ArticleFamilyViewComponent} from './article-family-view/article-family-view.component';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -171,16 +171,17 @@ export class ShoppingCartComponent implements OnInit {
         this.shoppingCart.forEach(element => {
           const search = newOffer.articles.find(art => art.barcode === element.barcode);
           if (search !== undefined) {
-            console.log(element.barcode + ' matches with ' + search.barcode);
+            element.discount = newOffer.discount;
+            element.updateTotal();
+            this.synchronizeShoppingCart();
           } else {
-            console.log('article  ' + element.barcode + ' is not in the offer');
+            element.discount = 0;
           }
         });
-        // console.log('reference: ' + newOffer.reference + ' - discount: ' + newOffer.discount + ' - article: ' + art.barcode);
       });
   }
 
-  openArticleFamily() {
+  openArticleFamily(): void {
     this.dialog
       .open(ArticleFamilyViewComponent, {
           minWidth: '600px',

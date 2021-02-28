@@ -1,0 +1,52 @@
+<mat-card>
+  <mat-card-title>
+    <mat-icon color="primary">shopping_cart</mat-icon>
+    Shopping List {{totalShoppingList| currency:'EUR':'symbol'}}
+  </mat-card-title>
+  <mat-card-content>
+    <mat-table [dataSource]="shoppingList" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef fxFlex="5%">{{this.indexShoppingList + 1}} #</mat-header-cell>
+        <mat-cell *matCellDef="let i = index" fxFlex="5%"> {{i + 1}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef fxFlex="28%"> Description</mat-header-cell>
+        <mat-cell *matCellDef="let item" [matTooltip]="item.barcode" fxFlex="28%"> {{item.description}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="retailPrice">
+        <mat-header-cell *matHeaderCellDef fxFlex="11%"> Retail Price</mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="11%">{{item.retailPrice}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef fxFlex="20%"> Amount</mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="20%">
+          <button (click)="decreaseAmount(item)" color="accent" mat-icon-button>
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
+          {{item.amount}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="discount">
+        <mat-header-cell *matHeaderCellDef fxFlex="12%"> %</mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="12%">{{item.discount}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="total">
+        <mat-header-cell *matHeaderCellDef fxFlex="12%"> Total</mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="12%">{{item.total}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef fxFlex="12%"> State</mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="12%">
+          <mat-checkbox (change)="changeCommitted(item)" [checked]="checkboxState(item.state)"
+                        [disabled]="item.amount<0"></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card-content>
+  <mat-card-content>
+    <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
+    <button (click)="update()" color="primary" mat-raised-button>Update</button>
+  </mat-card-content>
+</mat-card>
