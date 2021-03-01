@@ -1,1 +1,16 @@
-<p>data-protection-act-dialog works!</p>
+<mat-card>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>Mobile</mat-label>
+      <input [(ngModel)]="rgpdUser.mobile" matInput>
+    </mat-form-field>
+    <button (click)="search()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <button (click)="resetSearch()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-content>
+  <app-manage-data-protection-act [rgpdUser]="rgpdUser"></app-manage-data-protection-act>
+  <button mat-raised-button color="primary">Submit</button>
+</mat-card>

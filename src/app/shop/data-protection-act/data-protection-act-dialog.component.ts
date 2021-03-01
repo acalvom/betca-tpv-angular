@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import {RgpdUser} from '../shared/services/models/rgpd-user.model';
+import {RgpdType} from '../shared/services/models/RgpdType';
 
 @Component({
   selector: 'app-data-protection-act-dialog',
   templateUrl: './data-protection-act-dialog.component.html',
-  styleUrls: ['./data-protection-act-dialog.component.css']
+  styleUrls: ['../../shared/dialogs/dialog.component.css']
 })
-export class DataProtectionActDialogComponent implements OnInit {
+export class DataProtectionActDialogComponent {
 
-  constructor() { }
+  rgpdUser: RgpdUser;
 
-  ngOnInit(): void {
+  constructor() {
+    this.resetSearch();
+  }
+
+  search(): void {
+    this.rgpdUser.rgpdType = RgpdType.ADVANCED;
+  }
+
+  resetSearch(): void {
+    this.rgpdUser = {};
   }
 
 }
