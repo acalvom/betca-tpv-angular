@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {RgpdType} from '../services/models/RgpdType';
+import {RgpdUser} from '../services/models/rgpd-user.model';
 
 @Component({
   selector: 'app-manage-data-protection-act',
@@ -7,19 +8,17 @@ import {RgpdType} from '../services/models/RgpdType';
 })
 export class ManageDataProtectionActComponent {
 
+  @Input() rgpdUser: RgpdUser = {};
+
   rgpdTypes = RgpdType;
   selectedRgpdType: RgpdType;
-  userRgpdType = RgpdType.BASIC;
   file: File;
 
-  constructor() { }
-
-  isUserRgpdType(): boolean {
-    return this.userRgpdType === this.selectedRgpdType;
+  constructor() {
   }
 
-  uploadFile($event: Event): void {
-    // TODO Upload file
+  isUserRgpdType(): boolean {
+    return this.rgpdUser.rgpdType === this.selectedRgpdType;
   }
 
 }
