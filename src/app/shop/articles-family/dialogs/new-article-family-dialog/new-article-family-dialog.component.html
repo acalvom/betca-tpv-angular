@@ -1,1 +1,21 @@
-<p>new-article-family-dialog works!</p>
+<h3 mat-dialog-title>New Family Article</h3>
+<mat-dialog-content>
+  <mat-form-field>
+    <input [(ngModel)]="reference" matInput placeholder="Reference" type="text"/>
+  </mat-form-field>
+  <mat-form-field>
+    <input [(ngModel)]="description" matInput placeholder="Description" type="text"/>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Favorite food</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let type of types" [value]="type">
+        {{type}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button (click)="createArticlesFamily()" mat-button>Submit</button>
+</mat-dialog-actions>
