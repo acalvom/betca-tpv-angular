@@ -17,6 +17,7 @@ import {CrudComponent} from '@shared/components/crud.component';
 import {DateComponent} from '@shared/components/date.component';
 import {FooterComponent} from '@shared/components/footer.component';
 import {SearchComponent} from '@shared/components/search.component';
+import {LoginComponent} from "@shared/components/login/login.component";
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import {SearchComponent} from '@shared/components/search.component';
     SearchComponent,
     UppercaseWords,
     RegisterDialogComponent,
+    LoginComponent
   ],
   exports: [
     CancelYesDialogComponent,
