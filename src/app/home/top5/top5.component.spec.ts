@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StockAlarmsComponent } from './stock-alarms.component';
+import { Top5Component } from './top5.component';
 
-describe('StockAlarmsComponent', () => {
-  let component: StockAlarmsComponent;
-  let fixture: ComponentFixture<StockAlarmsComponent>;
+describe('Top5Component', () => {
+  let component: Top5Component;
+  let fixture: ComponentFixture<Top5Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StockAlarmsComponent ]
+      declarations: [ Top5Component ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StockAlarmsComponent);
+    fixture = TestBed.createComponent(Top5Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

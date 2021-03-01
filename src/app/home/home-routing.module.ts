@@ -8,6 +8,7 @@ import {ComplaintsComponent} from './complaints/complaints.component';
 import {HomeComponent} from './home.component';
 import {ReviewsComponent} from './reviews/reviews.component';
 import {TicketTrackingComponent} from './ticket-tracking/ticket-tracking.component';
+import {Top5Component} from './top5/top5.component';
 import {OffersComponent} from './offers/offers.component';
 import {ShoppingBasketComponent} from './shopping-basket/shopping-basket.component';
 
@@ -20,6 +21,7 @@ const routes: Routes = [
       {path: 'offers', component: OffersComponent},
       {path: 'complaints', component: ComplaintsComponent, canActivate: [RoleGuardService], data: {roles: [Role.CUSTOMER]}},
       {path: 'ticket-tracking/:id', component: TicketTrackingComponent},
+      {path: 'top5', component: Top5Component},
       {path: 'reviews', component: ReviewsComponent, canActivate: [RoleGuardService], data: {roles: [Role.CUSTOMER]}},
       {path: 'shopping-basket', component: ShoppingBasketComponent}
     ]
