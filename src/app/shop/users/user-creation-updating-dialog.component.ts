@@ -16,11 +16,10 @@ export class UserCreationUpdatingDialogComponent {
   title: string;
   oldRole: Role;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: User, private userService: UserService, private dialog: MatDialog) {
+  constructor(@Inject(MAT_DIALOG_DATA) data: User, private userService: UserService,
+              private dialog: MatDialog) {
     this.title = data ? 'Update User' : 'Create User';
-    this.user = data ? data : {
-      mobile: undefined, name: undefined, token: undefined
-    };
+    this.user = data;
     this.oldRole = data ? data.role : undefined;
   }
 
@@ -35,7 +34,7 @@ export class UserCreationUpdatingDialogComponent {
   }
 
   invalid(): boolean {
-    return this.check(this.user.token) || this.check(this.user.name) || this.check(this.user.role)
+    return this.check(this.user.name) || this.check(this.user.role)
       || (this.user.mobile === undefined || null);
   }
 

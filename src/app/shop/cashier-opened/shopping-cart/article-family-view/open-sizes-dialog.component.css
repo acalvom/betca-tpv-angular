@@ -1,0 +1,9 @@
+.buttons{
+  padding: 1em;
+}
+
+.cancelButton{
+  padding: 1em;
+  margin-top: 1em;
+  text-align: right;
+}

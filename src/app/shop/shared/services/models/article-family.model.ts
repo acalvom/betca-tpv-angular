@@ -1,5 +1,6 @@
 export interface ArticleFamilyModel {
-  id: string;
-  name: string;
+  reference: string;
+  description: string;
+  type: string;
   children?: ArticleFamilyModel[];
 }

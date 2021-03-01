@@ -1,5 +1,15 @@
 <mat-grid-list cols="1" rowHeight="4:1">
-  <mat-grid-tile>Welcome to TPV <strong> -> News...</strong></mat-grid-tile>
+
+  <carousel [cellsToShow]="2" [cellWidth]="150" [margin]="30" [height]="180" [width]="800"
+            [arrowsOutside]="true" [autoplay]="false" [autoplayInterval]="500" id="wrap">
+    <div class="carousel-cell" *ngFor="let article of newArticle; let i = index;" id="wrap1">
+      <strong>Article number {{i+1}} <br></strong>
+      <strong>Barcode: </strong> {{article.barcode}} <br>
+      <strong>Description: </strong> {{article.description}} <br>
+      <strong>Retail price: </strong> {{article.retailPrice}}
+    </div>
+  </carousel>
+
 </mat-grid-list>
 
 

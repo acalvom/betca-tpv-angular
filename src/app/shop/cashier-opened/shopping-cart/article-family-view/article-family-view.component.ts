@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {SharedArticlesFamilyService} from "../../../shared/services/shared.articles-family.service";
+import {ArticleFamilyModel} from "../../../shared/services/models/article-family.model";
+import {Article} from "../../../shared/services/models/article.model";
+import {MatDialog} from "@angular/material/dialog";
+import {OpenSizesDialogComponent} from "./open-sizes-dialog.component";
 
 @Component({
   selector: 'app-article-family-view',
@@ -7,51 +12,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticleFamilyViewComponent implements OnInit {
 
-  cardData: {
-    title: string;
-    price: number;
-    type: string;
-  }[] = [];
+  cardData: (ArticleFamilyModel | Article)[];
 
-  constructor() {
+  constructor(private articlesFamilyService: SharedArticlesFamilyService, private dialog: MatDialog) {
+    this.cardData = [];
   }
 
   ngOnInit(): void {
-    this.cardData = [
-      {
-        title: "Zarzuela",
-        price: 20,
-        type: "composite"
-      },
-      {
-        title: "Varios",
-        price: 20,
-        type: "composite"
+    this.articlesFamilyService.readChildren().subscribe(
+      result=>{
+        this.cardData = result;
       }
-    ];
+    )
   }
 
-  updateArray(): void {
-    this.cardData = [
-      {
-        title: "Zz Falda",
-        price: 20,
-        type: "size"
-      },
-      {
-        title: "Zz Polo",
-        price: 27.8,
-        type: "size"
-      },
-      {
-        title: "Descrip a3",
-        price: 10.12,
-        type: "leaf"
+  updateArray(articleFamily: ArticleFamilyModel): void {
+    this.articlesFamilyService.readChildrenTemporal(articleFamily).subscribe(
+      result=> {
+        this.cardData = result;
       }
-    ];
+    );
   }
 
-  openSizes(): void {
-
+  openSizes(articleFamily: ArticleFamilyModel): void {
+    let sizes: String[] = [];
+    this.articlesFamilyService.readSizes(articleFamily).subscribe(
+      result=>{
+        sizes = result;
+      }
+    )
+    this.dialog.open(OpenSizesDialogComponent, {
+      data: sizes
+    });
   }
 }

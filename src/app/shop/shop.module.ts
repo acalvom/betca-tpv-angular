@@ -35,6 +35,13 @@ import {SharedOfferService} from './shared/services/shared.offer.service';
 import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
 import {UserCreationUpdatingDialogComponent} from './users/user-creation-updating-dialog.component';
 import { TicketEditingDialogComponent } from './cashier-opened/tickets/ticket-editing-dialog.component';
+import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-family-view/open-sizes-dialog.component';
+import {ListComponent} from './shared/components/list.component';
+import {NewArticleFamilyDialogComponent} from './articles-family/dialogs/new-article-family-dialog/new-article-family-dialog.component';
+import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-article-family-dialog/edit-article-family-dialog.component';
+import { ManageDataProtectionActComponent } from './shared/components/manage-data-protection-act.component';
+import { StockAlarmsCreationUpdatingDialogComponent } from './stock-alarms/stock-alarms-creation-updating-dialog.component';
+import { DataProtectionActDialogComponent } from './data-protection-act/data-protection-act-dialog.component';
 
 
 @NgModule({
@@ -50,6 +57,9 @@ import { TicketEditingDialogComponent } from './cashier-opened/tickets/ticket-ed
     CashierOpenedComponent,
     CheckOutDialogComponent,
     CreditLinePayDialogComponent,
+    EditArticleFamilyDialogComponent,
+    ListComponent,
+    NewArticleFamilyDialogComponent,
     ProviderCreationUpdatingDialogComponent,
     ProvidersComponent,
     SearchByBarcodeComponent,
@@ -59,10 +69,15 @@ import { TicketEditingDialogComponent } from './cashier-opened/tickets/ticket-ed
     TicketsComponent,
     OffersComponent,
     OfferCreationUpdatingDialogComponent,
+    OpenSizesDialogComponent,
     StockAlarmsComponent,
     UsersComponent,
     UserCreationUpdatingDialogComponent,
     TicketEditingDialogComponent,
+    ManageDataProtectionActComponent,
+    StockAlarmsCreationUpdatingDialogComponent,
+    DataProtectionActDialogComponent,
+
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
