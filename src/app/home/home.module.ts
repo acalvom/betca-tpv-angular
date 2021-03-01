@@ -1,3 +1,4 @@
+
 import {NgModule} from '@angular/core';
 
 import {SharedModule} from '@shared/shared.module';
@@ -13,7 +14,8 @@ import { IconButtonComponent } from './reviews/icon-button/icon-button.component
 import { ScoreBarComponent } from './reviews/score-bar/score-bar.component';
 import { OffersComponent } from './offers/offers.component';
 import { ProductComponent } from './ticket-tracking/product/product.component';
-import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { IvyCarouselModule } from "angular-responsive-carousel";
+import {ShoppingBasketComponent} from './shopping-basket/shopping-basket.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
     ScoreBarComponent,
     OffersComponent,
     ProductComponent,
+    ShoppingBasketComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,
