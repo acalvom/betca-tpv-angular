@@ -13,6 +13,7 @@ import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
 import {OffersComponent} from './offers/offers.component';
 import {ArticlesFamilyComponent} from "./articles-family/articles-family/articles-family.component";
 import {UsersComponent} from './users/users.component';
+import {StockAuditComponent} from './stock-audit/stock-audit.component';
 import {ProviderInvoicesComponent} from './provider-invoices/provider-invoices.component';
 
 const routes: Routes = [
@@ -31,7 +32,9 @@ const routes: Routes = [
       {path: 'tickets', component: TicketsComponent},
       {path: 'articles-family', component: ArticlesFamilyComponent},
       {path: 'users', component: UsersComponent},
-      {path: 'provider-invoices', component: ProviderInvoicesComponent}
+      {path: 'provider-invoices', component: ProviderInvoicesComponent},
+      {path: 'users', component: UsersComponent},
+      {path: 'stock-audit', component: StockAuditComponent}
     ]
   }
 ];
