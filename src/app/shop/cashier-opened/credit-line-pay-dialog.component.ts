@@ -3,7 +3,8 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {User} from '../shared/services/models/user.models';
 import {Observable, of} from 'rxjs';
 import {SharedCreditLineService} from '../shared/services/shared.credit-line.service';
-import {Ticket} from '../shared/services/models/ticket.model';
+import {TicketCreditLine} from '../shared/services/models/ticket-credit-line.model';
+import {MatTableDataSource} from '@angular/material/table';
 
 
 @Component({
@@ -16,8 +17,9 @@ export class CreditLinePayDialogComponent {
   user: User;
   cash = false;
   card = false;
+  total = 0;
 
-  unpaidTickets: Observable<Ticket[]> = of([]);
+  unpaidTickets: Observable<TicketCreditLine[]> = of([]);
 
   @Input() userPhone: string;
   @Output() add = new EventEmitter<string>();
@@ -51,7 +53,9 @@ export class CreditLinePayDialogComponent {
       this.user = {mobile: Number(this.userPhone)};
       if (this.user){
         this.unpaidTickets = this.sharedCreditLineService.searchUnpaidTickets(this.user.mobile.toString());
-        console.log(this.unpaidTickets);
+        this.unpaidTickets.subscribe(dataValue => {
+          dataValue.forEach(dataValues => this.total += dataValues.total.valueOf());
+        });
       }
   }
 
