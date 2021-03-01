@@ -34,7 +34,7 @@ export class UserCreationUpdatingDialogComponent {
   }
 
   invalid(): boolean {
-    return this.check(this.user.token) || this.check(this.user.name) || this.check(this.user.role)
+    return this.check(this.user.name) || this.check(this.user.role)
       || (this.user.mobile === undefined || null);
   }
 
