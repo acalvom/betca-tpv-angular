@@ -43,6 +43,7 @@ import { ManageDataProtectionActComponent } from './shared/components/manage-dat
 import { StockAlarmsCreationUpdatingDialogComponent } from './stock-alarms/stock-alarms-creation-updating-dialog.component';
 import { DataProtectionActDialogComponent } from './data-protection-act/data-protection-act-dialog.component';
 import { StockAuditComponent } from './stock-audit/stock-audit.component';
+import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { StockAuditComponent } from './stock-audit/stock-audit.component';
     StockAlarmsCreationUpdatingDialogComponent,
     DataProtectionActDialogComponent,
     StockAuditComponent,
+    ProviderInvoicesComponent,
 
   ],
   entryComponents: [
