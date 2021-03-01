@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 
 import {HttpService} from '@core/http.service';
-import {Ticket} from './models/ticket.model';
+import {TicketCreditLine} from './models/ticket-credit-line.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,17 +23,17 @@ export class SharedCreditLineService {
       .post(EndPoints.ARTICLES, article);
   }*/
 
-  searchUnpaidTickets(userPhone: string): Observable<Ticket[]> {
+  searchUnpaidTickets(userPhone: string): Observable<TicketCreditLine[]> {
     /*return this.httpService
       .param('userPhone', userPhone)
       .get(EndPoints.CREDIT_LINE + SharedCreditLineService.USER_PHONE)
       .pipe(
         map(response => response.creditSales)
       );*/
-    return of([ // TODO ver exactamente que datos mostrar aqui
-      {id: '1', reference: 'sashdkh3423', mobile: 345443454534},
-      {id: '2', reference: '2sashdkh342', mobile: 345443454534},
-      {id: '3', reference: '3sashdkh342', mobile: 345443454534},
+    return of([
+      {reference: '4354345df', total: 25, creationDate: '2018-02-27 12:26:30'},
+      {reference: '7354345df', total: 40, creationDate: '2018-03-09 10:20:35'},
+      {reference: '6354345df', total: 68, creationDate: '2018-03-12 12:09:12'},
     ]);
   }
 
