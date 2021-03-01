@@ -51,6 +51,7 @@ export class CheckOutDialogComponent {
 
   resetMobile(): void {
     this.ticketCreation.user = undefined;
+    this.credit = false;
   }
 
   unCommitted(): boolean {

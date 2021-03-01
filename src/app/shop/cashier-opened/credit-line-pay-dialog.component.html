@@ -1,5 +1,5 @@
 <h3 mat-dialog-title>Pay pending tickets</h3>
-<mat-dialog-content style="width: 40vw;">
+<mat-dialog-content>
   <app-search (renew)="searchUnpaidTicketsByUserPhone()" (selected)="onSelect($event)" [key]="userPhone"
               title="User's phone">
   </app-search>
@@ -7,7 +7,7 @@
   <div *ngIf="user" style="font-size: x-small; margin-left: 30vw;">
     <mat-checkbox (change)="payByCash()" [checked]="cash" style="margin-right: 2vw; margin-top: 2vw;">Cash</mat-checkbox>
     <mat-checkbox (change)="payByCard()" [checked]="card">Card</mat-checkbox>
-    <p style="margin-top: 1vw;">TOTAL: ____€</p>
+    <p style="margin-top: 1vw;">TOTAL: {{total}}€</p>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions style="margin-top: -1vw;">
