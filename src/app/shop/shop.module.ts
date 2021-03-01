@@ -40,6 +40,7 @@ import {ListComponent} from './shared/components/list.component';
 import {NewArticleFamilyDialogComponent} from './articles-family/dialogs/new-article-family-dialog/new-article-family-dialog.component';
 import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-article-family-dialog/edit-article-family-dialog.component';
 import { ManageDataProtectionActComponent } from './shared/components/manage-data-protection-act.component';
+import { StockAlarmsCreationUpdatingDialogComponent } from './stock-alarms/stock-alarms-creation-updating-dialog.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { ManageDataProtectionActComponent } from './shared/components/manage-dat
     UserCreationUpdatingDialogComponent,
     TicketEditingDialogComponent,
     ManageDataProtectionActComponent,
+    StockAlarmsCreationUpdatingDialogComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
