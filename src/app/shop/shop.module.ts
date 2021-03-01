@@ -42,6 +42,7 @@ import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-a
 import { ManageDataProtectionActComponent } from './shared/components/manage-data-protection-act.component';
 import { StockAlarmsCreationUpdatingDialogComponent } from './stock-alarms/stock-alarms-creation-updating-dialog.component';
 import { DataProtectionActDialogComponent } from './data-protection-act/data-protection-act-dialog.component';
+import { StockAuditComponent } from './stock-audit/stock-audit.component';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { DataProtectionActDialogComponent } from './data-protection-act/data-pro
     ManageDataProtectionActComponent,
     StockAlarmsCreationUpdatingDialogComponent,
     DataProtectionActDialogComponent,
+    StockAuditComponent,
 
   ],
   entryComponents: [
