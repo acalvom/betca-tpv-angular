@@ -2,10 +2,16 @@ import {Component} from '@angular/core';
 
 
 @Component({
-  selector: 'app-search',
-  templateUrl: 'search.component.html',
-  styleUrls: ['search.component.css']
+  selector: 'app-settings',
+  templateUrl: 'profile-settings.component.html',
+  styleUrls: ['profile-settings.component.css']
 })
 export class ProfileSettingsComponent {
+
+  mobile: number;
+  editable: boolean;
+
+  constructor() {
+  }
 
 }

@@ -10,6 +10,7 @@ import {ReviewsComponent} from './reviews/reviews.component';
 import {TicketTrackingComponent} from './ticket-tracking/ticket-tracking.component';
 import {OffersComponent} from './offers/offers.component';
 import {ShoppingBasketComponent} from './shopping-basket/shopping-basket.component';
+import {ProfileSettingsComponent} from '@shared/components/profile-settings/profile-settings.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
       {path: 'complaints', component: ComplaintsComponent, canActivate: [RoleGuardService], data: {roles: [Role.CUSTOMER]}},
       {path: 'ticket-tracking/:id', component: TicketTrackingComponent},
       {path: 'reviews', component: ReviewsComponent, canActivate: [RoleGuardService], data: {roles: [Role.CUSTOMER]}},
-      {path: 'shopping-basket', component: ShoppingBasketComponent}
+      {path: 'shopping-basket', component: ShoppingBasketComponent},
+      {path: 'settings', component: ProfileSettingsComponent}
     ]
   }
 ];
