@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import {Observable, of, Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
@@ -15,6 +15,7 @@ import {Role} from '@core/role.model';
 export class AuthService {
   static END_POINT = environment.REST_USER + '/users/token';
   private user: User;
+  private onLogin$ = new Subject<User>();
 
   constructor(private httpService: HttpService, private router: Router) {
   }
@@ -29,9 +30,14 @@ export class AuthService {
           this.user.mobile = jwtHelper.decodeToken(jsonToken.token).user;  // secret key is not necessary
           this.user.name = jwtHelper.decodeToken(jsonToken.token).name;
           this.user.role = jwtHelper.decodeToken(jsonToken.token).role;
+          this.onLogin$.next(this.user);
           return this.user;
         })
       );
+  }
+
+  onLogin(): Observable<User> {
+    return this.onLogin$.asObservable();
   }
 
   logout(): void {

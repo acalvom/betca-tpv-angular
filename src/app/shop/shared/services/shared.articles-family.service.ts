@@ -7,7 +7,13 @@ import {Article} from './models/article.model';
   providedIn: 'root'
 })
 export class SharedArticlesFamilyService {
-  ARTICLES_DATA: ArticleFamilyModel[] = [
+  ARTICLES_DATA: ArticleFamilyModel[] = [{
+    reference: '1',
+    description: 'Zarzuela',
+    type: 'composite',
+    children:[]
+  }
+
     /*{
     id: '1',
     name: 'ArticleFamily-Root',
@@ -80,7 +86,14 @@ export class SharedArticlesFamilyService {
     return of(this.SIZES);
   }
 
-  edit(articleFamilyModel: ArticleFamilyModel): Observable<ArticleFamilyModel> {
+  createArticleFamily(articleFamilyModel: ArticleFamilyModel): Observable<ArticleFamilyModel> {
+    // HACER DIALOGO EDIT
+    console.log("SERVICIO:");
+    console.log(articleFamilyModel);
+    return of(articleFamilyModel);
+  }
+
+  editArticleFamily(articleFamilyModel: ArticleFamilyModel): Observable<ArticleFamilyModel> {
     // HACER DIALOGO EDIT
     return of(articleFamilyModel);
 

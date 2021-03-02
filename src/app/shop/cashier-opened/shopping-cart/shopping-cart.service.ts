@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {EMPTY, iif, merge, Observable} from 'rxjs';
+import {EMPTY, iif, merge, Observable, of} from 'rxjs';
 import {catchError, concatMap, map} from 'rxjs/operators';
 
 import {HttpService} from '@core/http.service';
@@ -13,6 +13,7 @@ import {ShoppingState} from '../../shared/services/models/shopping-state.model';
 import {EndPoints} from '@shared/end-points';
 import {Offer} from '../../shared/services/models/offer.model';
 import {SharedOfferService} from '../../shared/services/shared.offer.service';
+import {BudgetCreation} from './budget-creation.model';
 
 @Injectable({
   providedIn: 'root',
@@ -102,5 +103,9 @@ export class ShoppingCartService {
   readOffer(offerReference: string): Observable<Offer> {
     return this.offerService
       .read(offerReference);
+  }
+
+  createBudget(budgetCreation: BudgetCreation): Observable<void> {
+    return of(console.log('Success'));
   }
 }
