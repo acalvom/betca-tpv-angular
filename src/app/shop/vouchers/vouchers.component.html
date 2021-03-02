@@ -1,1 +1,5 @@
-
+<app-crud (create)="create()" (read)="read($event)"
+          [updateAction]="false"
+          [deleteAction]="false"
+          [data]="vouchers"
+          [title]="title"></app-crud>
