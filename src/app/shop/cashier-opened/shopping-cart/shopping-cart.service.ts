@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {EMPTY, iif, merge, Observable} from 'rxjs';
+import {EMPTY, iif, merge, Observable, of} from 'rxjs';
 import {catchError, concatMap, map} from 'rxjs/operators';
 
 import {HttpService} from '@core/http.service';
@@ -87,8 +87,13 @@ export class ShoppingCartService {
   }
 
   createGiftTicketAndPrint(ticketId: string): Observable<void> {
-    console.log('Crear ticket regalo');
-    return EMPTY; // TODO change EMPTY
+    const giftTicket = { id: 'Ma35Mhdgd2454656', message: 'Gift ticket', ticketId}; // ticket provisional
+    return of(giftTicket)
+      .pipe(
+        source => {
+          return this.printTicket(ticketId);
+        }
+      );
   }
 
   createDataProtectionActAndPrint(ticket): Observable<void> {
