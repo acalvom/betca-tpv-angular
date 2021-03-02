@@ -18,6 +18,8 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import {ShoppingBasketComponent} from './shopping-basket/shopping-basket.component';
 import { Top5Component } from './top5/top5.component';
 import { StockManagementComponent } from './stock-management/stock-management.component';
+import { NewsComponent } from './adviser/news/news.component';
+import { PopularComponent } from './adviser/popular/popular.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { StockManagementComponent } from './stock-management/stock-management.co
     ShoppingBasketComponent,
     Top5Component,
     StockManagementComponent,
+    NewsComponent,
+    PopularComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,

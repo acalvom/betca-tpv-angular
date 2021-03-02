@@ -4,6 +4,7 @@
 }
 
 #backup_password {
+  cursor: pointer;
   font-size: smaller;
   color: dodgerblue;
   text-decoration: none;
@@ -32,4 +33,14 @@
 
 #backup_password::before {
   transform-origin: center;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
 }

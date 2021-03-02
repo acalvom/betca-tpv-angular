@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 
 import {AuthService} from '@core/auth.service';
 import {MatDialog} from '@angular/material/dialog';
+import {RecoverPasswordDialogComponent} from '@shared/dialogs/recoverPassword-dialog.component';
 
 @Component({
   templateUrl: 'login-dialog.component.html',
@@ -25,5 +26,10 @@ export class LoginDialogComponent {
         }
       }
     );
+  }
+
+  recoverPassword(): void {
+    this.dialog.closeAll();
+    this.dialog.open(RecoverPasswordDialogComponent);
   }
 }

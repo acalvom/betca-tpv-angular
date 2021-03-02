@@ -15,15 +15,26 @@ export class StockManagementComponent implements OnInit {
 
   stockArticle: ArticleSearch;
   articles = of([]);
+  articlesByDate =  of([]);
   title = 'Stock management';
+  start: any;
+  end: any;
+  articleFuture: any;
+
   constructor(private dialog: MatDialog, private stockService: StockService) {
     this.stockArticle = {};
   }
 
   ngOnInit(): void {
   }
-  searchStock(): void {
+  searchByStock(): void {
     this.articles = this.stockService.searchStock(this.stockArticle.stock);
+  }
+  searchByDate(): void {
+    //
+    const firstDate = new Date(this.start);
+    const secondDate = new Date(this.start);
+    this.articlesByDate = this.stockService.searchByDate(firstDate, secondDate);
   }
   read(article: Article): void {
     this.dialog.open(ReadDetailDialogComponent, {
