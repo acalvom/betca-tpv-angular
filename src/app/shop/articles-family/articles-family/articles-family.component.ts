@@ -8,6 +8,7 @@ import {ArticleFamilyModel} from '../../shared/services/models/article-family.mo
 import {SharedArticlesFamilyService} from '../../shared/services/shared.articles-family.service';
 import {NewArticleFamilyDialogComponent} from "../dialogs/new-article-family-dialog/new-article-family-dialog.component";
 import {EditArticleFamilyDialogComponent} from "../dialogs/edit-article-family-dialog/edit-article-family-dialog.component";
+import {AddArticleDialogComponent} from "../dialogs/add-article-dialog/add-article-dialog.component";
 
 
 /**
@@ -71,6 +72,14 @@ export class ArticlesFamilyComponent implements OnInit {
         }
       }
     );
+  }
+
+  addArticle(node:ArticleFamilyModel) {
+    this.dialog.open(AddArticleDialogComponent,{
+      data: node
+    }).afterClosed().subscribe(result=>{
+      console.log(result);
+    })
   }
 }
 

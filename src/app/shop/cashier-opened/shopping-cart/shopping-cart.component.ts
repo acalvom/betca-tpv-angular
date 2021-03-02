@@ -188,11 +188,13 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   openArticleFamily(): void {
-    this.dialog
-      .open(ArticleFamilyViewComponent, {
+    this.dialog.open(ArticleFamilyViewComponent, {
           minWidth: '600px',
           minHeight: '300px'
-        }
-      );
+        }).afterClosed().subscribe(result => {
+          if (result !== true && result !== undefined) {
+            this.addBarcode(result.barcode);
+          }
+      });
   }
 }
