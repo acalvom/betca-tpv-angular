@@ -11,9 +11,9 @@ import {ArticleQuickCreationDialogComponent} from './article-quick-creation-dial
 
 import {ShoppingState} from '../../shared/services/models/shopping-state.model';
 import {EndPoints} from '@shared/end-points';
-import {Offer} from '../../shared/services/models/offer.model';
 import {SharedOfferService} from '../../shared/services/shared.offer.service';
 import {BudgetCreation} from './budget-creation.model';
+import {OfferShoppingCart} from './offer-shopping-cart.model';
 
 @Injectable({
   providedIn: 'root',
@@ -105,7 +105,7 @@ export class ShoppingCartService {
     return EMPTY; // TODO change EMPTY (Hacer llamada para crear la credit sale y guardarla en base de datos)
   }
 
-  readOffer(offerReference: string): Observable<Offer> {
+  readOffer(offerReference: string): Observable<OfferShoppingCart> {
     return this.offerService
       .read(offerReference);
   }

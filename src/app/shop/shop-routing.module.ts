@@ -16,6 +16,7 @@ import {UsersComponent} from './users/users.component';
 import {ProfileSettingsComponent} from '@shared/components/profile-settings/profile-settings.component';
 import {StockAuditComponent} from './stock-audit/stock-audit.component';
 import {ProviderInvoicesComponent} from './provider-invoices/provider-invoices.component';
+import {CustomerDiscountComponent} from './customer-discount/customer-discount.component';
 
 const routes: Routes = [
   {
@@ -37,7 +38,8 @@ const routes: Routes = [
       {path: 'users', component: UsersComponent},
       {path: 'stock-audit', component: StockAuditComponent},
       {path: 'users', component: UsersComponent},
-      {path: 'profile', component: ProfileSettingsComponent}
+      {path: 'profile', component: ProfileSettingsComponent},
+      {path: 'customer-discount', component: CustomerDiscountComponent}
     ]
   }
 ];
