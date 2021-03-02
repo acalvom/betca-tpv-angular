@@ -88,8 +88,13 @@ export class ShoppingCartService {
   }
 
   createGiftTicketAndPrint(ticketId: string): Observable<void> {
-    console.log('Crear ticket regalo');
-    return EMPTY; // TODO change EMPTY
+    const giftTicket = { id: 'Ma35Mhdgd2454656', message: 'Gift ticket', ticketId}; // ticket provisional
+    return of(giftTicket)
+      .pipe(
+        source => {
+          return this.printTicket(ticketId);
+        }
+      );
   }
 
   createDataProtectionActAndPrint(ticket): Observable<void> {
