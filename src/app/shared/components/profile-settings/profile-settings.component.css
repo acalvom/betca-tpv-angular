@@ -1,0 +1,17 @@
+.mat-card {
+  text-align: -webkit-left;
+}
+
+mat-card {
+  max-width: 80%;
+  margin: 2em auto;
+  text-align: left;
+}
+mat-card-title{
+  margin-bottom: 20px;
+}
+
+.full-width {
+  width: 80%;
+}
+
