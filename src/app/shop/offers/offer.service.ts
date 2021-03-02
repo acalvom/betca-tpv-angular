@@ -3,9 +3,8 @@ import {HttpService} from '@core/http.service';
 import {Observable, of} from 'rxjs';
 import {EndPoints} from '@shared/end-points';
 import {OfferSearch} from './offer-search.model';
-import {Offer} from '../shared/services/models/offer.model';
-import {Article} from '../shared/services/models/article.model';
-import {Tax} from '../shared/services/models/Tax';
+import {OfferCreateUpdate} from './offer-creation-updating.model';
+import {OfferMenu} from './offer-menu.model';
 
 
 @Injectable({
@@ -15,102 +14,86 @@ import {Tax} from '../shared/services/models/Tax';
 export class OfferService {
   private static SEARCH = '/search';
 
-  articles: Article[] = [
-    {
-      barcode: '8400000000017',
-      description: 'Zarzuela - Falda T2',
-      retailPrice: 20,
-      reference: 'zz-falda-T2',
-      stock: 10,
-      discontinued: false,
-      registrationDate: new Date('2021-02-26 10:36:30'),
-      providerCompany: 'pro1'
-    },
-    {
-      barcode: '8400000000024',
-      description: 'Zarzuela - Falda T4',
-      retailPrice: 27.8,
-      reference: 'zz-falda-T4',
-      stock: 5,
-      discontinued: false,
-      registrationDate: new Date('2021-02-26 10:36:30'),
-      providerCompany: 'pro1'
-    },
-    {
-      barcode: '8400000000031',
-      description: 'descrip-a3',
-      retailPrice: 10.12,
-      reference: 'ref-a3',
-      stock: 8,
-      tax: Tax.FREE,
-      discontinued: false,
-      registrationDate: new Date('2021-02-26 10:36:30'),
-      providerCompany: 'pro1'
-    }];
-  offers: Offer[] = [
+  articleBarcodes: string[] = ['8400000000017', '8400000000024', '8400000000031'];
+  newOffers: OfferCreateUpdate[] = [
     {
       reference: '123abc',
       description: 'offer1',
-      creationDate: new Date('2019-03-16'),
       expiryDate: new Date('2020-03-16'),
       discount: 10,
-      articles: this.articles
+      articleBarcodes: this.articleBarcodes
     },
     {
       reference: '234bcd',
       description: 'offer2',
-      creationDate: new Date('2019-03-16'),
       expiryDate: new Date('2020-08-08'),
       discount: 20,
-      articles: []
+      articleBarcodes: []
     },
     {
       reference: '345cde',
       description: 'offer3',
-      creationDate: new Date('2019-03-16'),
       expiryDate: new Date('2021-08-13'),
       discount: 30,
-      articles: this.articles.slice(0, 1)
+      articleBarcodes: this.articleBarcodes.slice(0, 1)
+    }];
+  offers: OfferMenu[] = [
+    {
+      reference: '123abc',
+      description: 'offer1',
+      expiryDate: new Date('2020-03-16'),
+      discount: 10,
+    },
+    {
+      reference: '234bcd',
+      description: 'offer2',
+      expiryDate: new Date('2020-08-08'),
+      discount: 20,
+    },
+    {
+      reference: '345cde',
+      description: 'offer3',
+      expiryDate: new Date('2021-08-13'),
+      discount: 30,
     }];
 
   constructor(private httpService: HttpService) {
   }
 
-  search(offerSearch: OfferSearch): Observable<Offer[]> {
+  search(offerSearch: OfferSearch): Observable<OfferMenu[]> {
     return of(this.offers);
     /*return this.httpService
       .paramsFrom(offerSearch)
       .get(EndPoints.OFFERS + OfferService.SEARCH);*/
   }
 
-  create(offer: Offer): Observable<Offer> {
-    this.offers.push(offer);
-    return of(offer);
+  create(newOffer: OfferCreateUpdate): Observable<OfferMenu> {
+    this.newOffers.push(newOffer);
+    return of(newOffer);
     /*return this.httpService
       .post(EndPoints.OFFERS, offer);*/
   }
 
-  read(reference: string): Observable<Offer> {
+  read(reference: string): Observable<OfferCreateUpdate> {
     return of({
       reference,
-      description: this.offers.find(off => off.reference === reference).description,
-      creationDate: this.offers.find(off => off.reference === reference).creationDate,
-      expiryDate: this.offers.find(off => off.reference === reference).expiryDate,
-      discount: this.offers.find(off => off.reference === reference).discount,
-      articles: this.offers.find(off => off.reference === reference).articles
+      description: this.newOffers.find(off => off.reference === reference).description,
+      expiryDate: this.newOffers.find(off => off.reference === reference).expiryDate,
+      discount: this.newOffers.find(off => off.reference === reference).discount,
+      articleBarcodes: this.newOffers.find(off => off.reference === reference).articleBarcodes
     });
     /*return this.httpService
       .get(EndPoints.OFFERS + '/' + reference);*/
   }
 
-  update(oldOfferReference: string, offer: Offer): Observable<Offer> {
-    const offerToUpdate = this.offers.find(off => off.reference === oldOfferReference);
-    const index = this.offers.indexOf(offerToUpdate);
+  update(oldOfferReference: string, newOffer: OfferCreateUpdate): Observable<OfferMenu> {
+    const offerToUpdate = this.newOffers.find(off => off.reference === oldOfferReference);
+    const index = this.newOffers.indexOf(offerToUpdate);
     if (index > -1) {
-      this.offers.splice(index, 1, offer);
+      this.newOffers.splice(index, 1, newOffer);
     }
     this.search(new OfferSearch());
-    return of(offer);
+    return of(newOffer);
     /*return this.httpService
       .successful()
       .put(EndPoints.OFFERS + '/' + oldOffer, offer);*/

@@ -1,9 +1,8 @@
 import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
-import {Offer} from '../shared/services/models/offer.model';
 import {OfferService} from './offer.service';
 import {SharedArticleService} from '../shared/services/shared.article.service';
-import {Article} from '../shared/services/models/article.model';
+import {OfferCreateUpdate} from './offer-creation-updating.model';
 
 
 @Component({
@@ -13,23 +12,20 @@ import {Article} from '../shared/services/models/article.model';
 
 export class OfferCreationUpdatingDialogComponent {
 
-  offer: Offer;
+  newOffer: OfferCreateUpdate;
   title: string;
   oldOffer: string;
-  articles: Article[] = [];
-
   selectable = true;
   removable = true;
-  barcodes: string[] = [];
 
   @ViewChild('barcodeInput') barcodeInput: ElementRef<HTMLInputElement>;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: Offer, private offerService: OfferService,
+  constructor(@Inject(MAT_DIALOG_DATA) data: OfferCreateUpdate, private offerService: OfferService,
               private sharedArticleService: SharedArticleService, private dialog: MatDialog) {
     this.title = data ? 'Update Offer' : 'Create Offer';
-    this.offer = data ? data : {
-      reference: Math.random().toString(36).substring(7), description: undefined, creationDate: new Date(Date.now()),
-      expiryDate: undefined, discount: undefined, articles: this.articles
+    this.newOffer = data ? data : {
+      reference: Math.random().toString(36).substring(7), description: undefined,
+      expiryDate: undefined, discount: undefined, articleBarcodes: []
     };
     this.oldOffer = data ? data.reference : undefined;
   }
@@ -37,11 +33,9 @@ export class OfferCreationUpdatingDialogComponent {
   // TODO: change Math.random().toString(36).substring(7) to undefined when back-end is ready
 
   removeBarcode(barcode: string): void {
-    const index = this.barcodes.indexOf(barcode);
+    const index = this.newOffer.articleBarcodes.indexOf(barcode);
     if (index >= 0) {
-      this.barcodes.splice(index, 1);
-      this.articles.splice(index, 1);
-      this.offer.articles.splice(index, 1);
+      this.newOffer.articleBarcodes.splice(index, 1);
     }
   }
 
@@ -53,27 +47,27 @@ export class OfferCreationUpdatingDialogComponent {
     this.sharedArticleService
       .read(barcode)
       .subscribe(article => {
-        this.articles.push(article);
-        this.barcodes.push(article.barcode);
-        this.offer.articles.push(article);
+        this.newOffer.articleBarcodes.push(article.barcode);
+        // console.log('barcodes ' + this.newOffer.articleBarcodes);
       });
   }
 
   create(): void {
     this.offerService
-      .create(this.offer)
+      .create(this.newOffer)
       .subscribe(() => this.dialog.closeAll());
   }
 
   update(): void {
     this.offerService
-      .update(this.oldOffer, this.offer)
+      .update(this.oldOffer, this.newOffer)
       .subscribe(() => this.dialog.closeAll());
   }
 
   invalid(): boolean {
-    return this.check(this.offer.description)
-      || this.check(this.offer.expiryDate.toString()) || this.check(this.offer.discount.toString());
+    return this.check(this.newOffer.description)
+      || this.check(this.newOffer.expiryDate.toString())
+      || this.check(this.newOffer.discount.toString());
   }
 
   check(attr: string): boolean {
