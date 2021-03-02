@@ -8,6 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ShoppingState} from '../../shared/services/models/shopping-state.model';
 import {NumberDialogComponent} from '@shared/dialogs/number-dialog.component';
 import {ArticleFamilyViewComponent} from './article-family-view/article-family-view.component';
+import {BudgetDialogComponent} from './budget-dialog.component';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -157,7 +158,12 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   createBudget(): void {
-    // TODO create budget
+    this.dialog.open(BudgetDialogComponent).afterClosed().subscribe(
+      () => {
+        this.dialog.closeAll();
+      }
+      , () => this.dialog.closeAll()
+    );
   }
 
   addDiscount(mobile): void {

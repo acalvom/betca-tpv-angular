@@ -44,6 +44,7 @@ import { StockAlarmsCreationUpdatingDialogComponent } from './stock-alarms/stock
 import { DataProtectionActDialogComponent } from './data-protection-act/data-protection-act-dialog.component';
 import { StockAuditComponent } from './stock-audit/stock-audit.component';
 import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices.component';
+import {BudgetDialogComponent} from './cashier-opened/shopping-cart/budget-dialog.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices
     ArticleFamilyViewComponent,
     ArticleQuickCreationDialogComponent,
     ArticlesComponent,
+    BudgetDialogComponent,
     CashierClosedComponent,
     CashierDialogComponent,
     CashierOpenedComponent,
