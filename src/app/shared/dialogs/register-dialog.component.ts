@@ -15,9 +15,15 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class RegisterDialogComponent {
   mobile: number;
+  firstName = '';
+  familyName: string;
+  email: string;
+  dni: string;
+  address: string;
   password: string;
-  role: Role = Role.CUSTOMER;
-  name = '';
+  role: Role;
+  registrationDate: Date;
+  active: boolean;
   /*  private MESSAGE: string = 'Usuario ' + this.name + ' registrado correctamente.';
     user: User = {
       mobile: this.mobile,
@@ -34,7 +40,7 @@ export class RegisterDialogComponent {
     of(console.log(''))
       .subscribe(() => {
         this.dialog.closeAll();
-        this.openSnackBar('Usuario ' + this.name + ' registrado correctamente.', '');
+        this.openSnackBar('Usuario ' + this.firstName + ' registrado correctamente.', '');
       });
     /*this.httpService.post(EndPoints.USERS, this.user)
       .subscribe(() => {

@@ -40,16 +40,24 @@ import {ListComponent} from './shared/components/list.component';
 import {NewArticleFamilyDialogComponent} from './articles-family/dialogs/new-article-family-dialog/new-article-family-dialog.component';
 import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-article-family-dialog/edit-article-family-dialog.component';
 import { ManageDataProtectionActComponent } from './shared/components/manage-data-protection-act.component';
+import { StockAlarmsCreationUpdatingDialogComponent } from './stock-alarms/stock-alarms-creation-updating-dialog.component';
+import { DataProtectionActDialogComponent } from './data-protection-act/data-protection-act-dialog.component';
+import { StockAuditComponent } from './stock-audit/stock-audit.component';
+import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices.component';
+import {BudgetDialogComponent} from './cashier-opened/shopping-cart/budget-dialog.component';
+import { AddArticleDialogComponent } from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
 
 
 @NgModule({
   declarations: [
+    AddArticleDialogComponent,
     AddCreditLineDialogComponent,
     ArticleCreationUpdatingDialogComponent,
     ArticlesFamilyComponent,
     ArticleFamilyViewComponent,
     ArticleQuickCreationDialogComponent,
     ArticlesComponent,
+    BudgetDialogComponent,
     CashierClosedComponent,
     CashierDialogComponent,
     CashierOpenedComponent,
@@ -73,6 +81,11 @@ import { ManageDataProtectionActComponent } from './shared/components/manage-dat
     UserCreationUpdatingDialogComponent,
     TicketEditingDialogComponent,
     ManageDataProtectionActComponent,
+    StockAlarmsCreationUpdatingDialogComponent,
+    DataProtectionActDialogComponent,
+    StockAuditComponent,
+    ProviderInvoicesComponent,
+
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,

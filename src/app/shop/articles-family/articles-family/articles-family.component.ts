@@ -6,6 +6,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
 import {ArticleFamilyModel} from '../../shared/services/models/article-family.model';
 import {SharedArticlesFamilyService} from '../../shared/services/shared.articles-family.service';
+import {NewArticleFamilyDialogComponent} from "../dialogs/new-article-family-dialog/new-article-family-dialog.component";
+import {EditArticleFamilyDialogComponent} from "../dialogs/edit-article-family-dialog/edit-article-family-dialog.component";
 
 
 /**
@@ -41,11 +43,22 @@ export class ArticlesFamilyComponent implements OnInit {
     );
   }
 
-  createFamilyArticle(node: ArticleFamilyModel): any {
-    // this.dialog.open()
+  createFamilyArticle(node : ArticleFamilyModel): any {
+    this.dialog.open(NewArticleFamilyDialogComponent).afterClosed().subscribe(
+      result => {
+        console.log("DENTRO DEL SUBSCRIBE")
+        console.log(result)
+      }
+    );
   }
 
   editFamilyArticle(node: ArticleFamilyModel): any {
+    this.dialog.open(EditArticleFamilyDialogComponent,{
+      data: node
+    }).afterClosed().subscribe(result=>{
+      console.log(result);
+    })
+
   }
 
   deleteFamilyArticle(node: ArticleFamilyModel): any {

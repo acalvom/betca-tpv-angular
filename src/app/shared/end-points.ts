@@ -10,4 +10,6 @@ export class EndPoints {
   static TICKETS = environment.REST_CORE + '/tickets';
   static COMPLAINTS = environment.REST_CUSTOMER_SUPPORT + '/complaints';
   static USERS = environment.REST_USER + '/users';
+  static STOCKS = environment.REST_CORE + '/stocks';
+  static BUDGETS = environment.REST_CORE + '/budgets';
 }
