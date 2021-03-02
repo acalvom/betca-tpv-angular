@@ -4,6 +4,8 @@ import {TicketCreation} from './ticket-creation.model';
 import {ShoppingCartService} from './shopping-cart.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ShoppingState} from '../../shared/services/models/shopping-state.model';
+import {UserService} from '../../users/user.service';
+import {UserSearch} from '../../users/user-search-model';
 
 @Component({
   templateUrl: 'check-out-dialog.component.html',
@@ -17,9 +19,10 @@ export class CheckOutDialogComponent {
   requestedDataProtectionAct = false;
   credit = false;
   checkedCreditLine = false;
+  userSearch: UserSearch;
 
   constructor(@Inject(MAT_DIALOG_DATA) data, private dialogRef: MatDialogRef<CheckOutDialogComponent>,
-              private shoppingCartService: ShoppingCartService) {
+              private shoppingCartService: ShoppingCartService, private userService: UserService) {
     this.ticketCreation = {cash: 0, card: 0, voucher: 0, shoppingList: data, note: ''};
     this.total();
   }
@@ -37,8 +40,17 @@ export class CheckOutDialogComponent {
   }
 
   searchUser(mobile: string): void {
+
+    this.userSearch = {
+      mobile: Number(mobile)
+    };
+
     if (mobile) {
       // TODO falta buscar el user en BD, si no existe, debe sacar un dialogo para crearlo
+      if (this.userService.search(this.userSearch) === undefined) {
+
+      }
+
       this.ticketCreation.user = {mobile: Number(mobile)};
       // TODO me falta comprobar si tiene credit-line el usuario
       this.credit = true;
@@ -122,7 +134,7 @@ export class CheckOutDialogComponent {
   }
 
   invalidCheckOut(): boolean {
-    if (!this.checkedCreditLine){
+    if (!this.checkedCreditLine) {
       return (this.totalPurchase + this.returnedAmount() - this.totalCommitted() < -0.01); // rounding errors
     }
     return false;
@@ -171,7 +183,7 @@ export class CheckOutDialogComponent {
     return true;
   }
 
-  useCreditLine(): void{
+  useCreditLine(): void {
     if (this.checkedCreditLine) {
       this.checkedCreditLine = false;
     } else {
