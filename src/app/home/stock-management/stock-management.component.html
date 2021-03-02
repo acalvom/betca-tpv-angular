@@ -1,1 +1,19 @@
-<p>stock-management works!</p>
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Search by stock: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>Stock</mat-label>
+      <input [(ngModel)]="stockArticle.stock" matInput type="number">
+      <mat-hint align="start">Less than</mat-hint>
+    </mat-form-field>
+
+    <button (click)="searchStock()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>
+
+<app-crud (read)="read($event)"
+          [data]="articles" [deleteAction]="false" [createAction]="false" [updateAction]="false" [title]="title"></app-crud>
+
+
