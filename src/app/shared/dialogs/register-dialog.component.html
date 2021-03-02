@@ -8,8 +8,36 @@
     </button>
   </mat-form-field>
   <mat-form-field>
-    <input [(ngModel)]="name" matInput placeholder="Name" type="text" required/>
-    <button (click)="name=undefined" *ngIf="name" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
+    <input [(ngModel)]="firstName" matInput placeholder="First name" type="text" required/>
+    <button (click)="firstName=undefined" *ngIf="firstName" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
+            matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field>
+    <input [(ngModel)]="familyName" matInput placeholder="Family name" type="text" required/>
+    <button (click)="familyName=undefined" *ngIf="familyName" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
+            matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field>
+    <input [(ngModel)]="email" matInput placeholder="Email" type="email" required/>
+    <button (click)="email=undefined" *ngIf="email" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
+            matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field>
+    <input [(ngModel)]="dni" matInput placeholder="DNI" type="text" required/>
+    <button (click)="dni=undefined" *ngIf="dni" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
+            matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field>
+    <input [(ngModel)]="address" matInput placeholder="Address" type="text" required/>
+    <button (click)="address=undefined" *ngIf="address" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
             matSuffix>
       <mat-icon>close</mat-icon>
     </button>
