@@ -174,27 +174,30 @@ export class ShoppingCartComponent implements OnInit {
     this.shoppingCartService
       .readOffer(offer)
       .subscribe(newOffer => {
-        this.shoppingCart.forEach(element => {
-          const search = newOffer.articles.find(art => art.barcode === element.barcode);
-          if (search !== undefined) {
-            element.discount = newOffer.discount;
+        this.shoppingCart
+          .forEach(element => {
+            const barcodeSearch = newOffer.articleBarcodes
+              .find(barcode => barcode === element.barcode);
+            const expireDateSearch = newOffer.expiryDate.getTime();
+            if (barcodeSearch !== undefined && (expireDateSearch > Date.now())) {
+              element.discount = newOffer.discount;
+            } else {
+              element.discount = 0;
+            }
             element.updateTotal();
-            this.synchronizeShoppingCart();
-          } else {
-            element.discount = 0;
-          }
-        });
+          });
+        this.synchronizeShoppingCart();
       });
   }
 
   openArticleFamily(): void {
     this.dialog.open(ArticleFamilyViewComponent, {
-          minWidth: '600px',
-          minHeight: '300px'
-        }).afterClosed().subscribe(result => {
-          if (result !== true && result !== undefined) {
-            this.addBarcode(result.barcode);
-          }
-      });
+      minWidth: '600px',
+      minHeight: '300px'
+    }).afterClosed().subscribe(result => {
+      if (result !== true && result !== undefined) {
+        this.addBarcode(result.barcode);
+      }
+    });
   }
 }

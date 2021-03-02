@@ -29,6 +29,12 @@ export class SharedOfferService {
       expiryDate: new Date('2022-08-13'),
       discount: 30,
       articleBarcodes: this.articleBarcodes.slice(0, 1)
+    },
+    {
+      reference: '456',
+      expiryDate: new Date('2020-08-13'),
+      discount: 40,
+      articleBarcodes: this.articleBarcodes.slice(1, 3)
     }];
 
   constructor(private httpService: HttpService) {
