@@ -10,18 +10,16 @@ import {SharedArticlesFamilyService} from "../../../shared/services/shared.artic
   styleUrls: ['./new-article-family-dialog.component.css']
 })
 
-export class NewArticleFamilyDialogComponent implements OnInit {
+export class NewArticleFamilyDialogComponent {
 
   reference: string;
   description: string;
   types: string[]
   selectedType: string
 
-  constructor(private sharedArticlesFamilyService: SharedArticlesFamilyService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ArticleFamilyModel, private sharedArticlesFamilyService: SharedArticlesFamilyService) {
     this.types = ["ARTICLES","SIZE"];
-  }
-
-  ngOnInit(): void {
+    this.selectedType = this.types[0];
   }
 
   createArticlesFamily(): Observable<ArticleFamilyModel> {
@@ -32,5 +30,9 @@ export class NewArticleFamilyDialogComponent implements OnInit {
     }
 
     return this.sharedArticlesFamilyService.createArticleFamily(articlesFamilyModel);
+  }
+
+  changeSelection(value: any) {
+    this.selectedType = value;
   }
 }

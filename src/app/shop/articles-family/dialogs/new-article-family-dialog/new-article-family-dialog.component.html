@@ -7,9 +7,9 @@
     <input [(ngModel)]="description" matInput placeholder="Description" type="text"/>
   </mat-form-field>
   <mat-form-field appearance="fill">
-    <mat-label>Favorite food</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let type of types" [value]="type">
+    <mat-label>Type</mat-label>
+    <mat-select [value]="types[0]"  (selectionChange)="changeSelection($event.value)">
+      <mat-option *ngFor="let type of types" [value]="type" >
         {{type}}
       </mat-option>
     </mat-select>

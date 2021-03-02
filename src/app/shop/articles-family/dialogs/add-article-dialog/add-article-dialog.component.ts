@@ -4,38 +4,37 @@ import {ArticleFamilyModel} from "../../../shared/services/models/article-family
 import {SharedArticlesFamilyService} from "../../../shared/services/shared.articles-family.service";
 
 @Component({
-  selector: 'app-edit-article-family-dialog',
-  templateUrl: './edit-article-family-dialog.component.html',
-  styleUrls: ['./edit-article-family-dialog.component.css']
+  selector: 'app-add-article-dialog',
+  templateUrl: './add-article-dialog.component.html',
+  styleUrls: ['./add-article-dialog.component.css']
 })
-export class EditArticleFamilyDialogComponent implements OnInit {
+export class AddArticleDialogComponent {
 
   reference: string;
   description: string;
   types: string[]
-  selectedType: string;
+  typeSelected: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ArticleFamilyModel, private articlesFamilyService : SharedArticlesFamilyService) {
     this.reference = data.reference;
     this.description = data.description;
-    this.selectedType = data.type;
+    this.typeSelected = data.type;
+
     this.types = ["ARTICLES","SIZE"];
   }
 
-  ngOnInit(): void {
-
-  }
-
-  updateArticlesFamily() {
+  addArticleToFamily() {
     const articlesFamilyModel : ArticleFamilyModel = {
       reference : this.reference,
       description : this.description,
-      type : this.selectedType,
+      type : this.typeSelected,
     }
 
     return this.articlesFamilyService.editArticleFamily(articlesFamilyModel);
   }
-  changeSelection(value: any) {
-    this.selectedType = value;
+
+  addBarcode(barcode){
+    console.log(barcode);
   }
 }
+
