@@ -17,6 +17,7 @@ import { ProductComponent } from './ticket-tracking/product/product.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import {ShoppingBasketComponent} from './shopping-basket/shopping-basket.component';
 import { Top5Component } from './top5/top5.component';
+import { StockManagementComponent } from './stock-management/stock-management.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { Top5Component } from './top5/top5.component';
     ProductComponent,
     ShoppingBasketComponent,
     Top5Component,
+    StockManagementComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,
