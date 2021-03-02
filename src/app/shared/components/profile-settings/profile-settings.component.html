@@ -4,44 +4,75 @@
       Profile Settings
     </mat-card-title>
     <mat-card-content>
-      <form [formGroup]="settingsFormGroup" (ngSubmit)="update()">
-        <p>
-          <mat-form-field class="full-width">
-            <mat-label>Name</mat-label>
-            <input  formControlName="nameControl" matInput placeholder="Name" type="text"/>
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="full-width">
-            <mat-label>Mobile</mat-label>
-            <input  formControlName="mobileControl" matInput placeholder="Mobile" type="text"/>
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="full-width">
-            <mat-label>Password</mat-label>
-            <input  formControlName="passwordControl" matInput placeholder="Password" type="text"/>
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="full-width">
-            <mat-label>Role</mat-label>
-            <input formControlName="roleControl" matInput [readonly]="!editable" placeholder="Role" type="text"/>
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="full-width">
-            <mat-label>Creation date</mat-label>
-            <input formControlName="creationDateControl" matInput [readonly]="!editable" placeholder="Creation date" type="text"/>
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-checkbox class="full-width" [disabled]="true">Disable account</mat-checkbox>
-        </p>
+      <form [formGroup]="settingsFormGroup">
+        <table>
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <mat-label>Mobile</mat-label>
+                <input formControlName="mobileControl" matInput placeholder="Mobile" type="tel"/>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <mat-label>First Name</mat-label>
+                <input formControlName="firstNameControl" matInput placeholder="First Name" type="text"/>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="full-width">
+                <mat-label>Family Name</mat-label>
+                <input formControlName="familyNameControl" matInput placeholder="Family Name" type="text"/>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input formControlName="passwordControl" matInput placeholder="Password" type="password"/>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="full-width">
+                <mat-label>DNI</mat-label>
+                <input formControlName="dniControl" matInput  placeholder="DNI" type="text"/>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <mat-label>Email</mat-label>
+                <input formControlName="emailControl" matInput placeholder="Email" type="email"/>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="full-width">
+                <mat-label>Role</mat-label>
+                <input formControlName="roleControl" matInput [readonly]="!editable" placeholder="Role" type="text"/>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <mat-form-field class="full-width">
+              <mat-label>Registration date</mat-label>
+              <input formControlName="registrationDateControl" matInput [readonly]="!editable" placeholder="Registration date"
+                     type="date"/>
+            </mat-form-field>
+          </tr>
+          <tr>
+            <td>
+              <mat-checkbox class="full-width" [disabled]="true">Disable account</mat-checkbox>
+            </td>
+          </tr>
+        </table>
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button type="submit" mat-raised-button color="primary">Update</button>
+      <button (click)="update()" type="button" mat-raised-button color="primary">Update</button>
     </mat-card-actions>
   </mat-card>
 </main>

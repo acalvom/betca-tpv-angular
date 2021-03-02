@@ -4,6 +4,9 @@ import {AuthService} from '@core/auth.service';
 import {User} from '@core/user.model';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {UserService} from '../../../shop/users/user.service';
+import {of} from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {PROFILE_FORM} from '@shared/form.constant';
 
 
 @Component({
@@ -19,41 +22,38 @@ export class ProfileSettingsComponent implements OnInit {
 
   public settingsFormGroup: FormGroup;
 
-  constructor(private router: Router, private authService: AuthService, private fb: FormBuilder, private userService: UserService) {
+  constructor(private router: Router, private snackBar: MatSnackBar,
+              private authService: AuthService, private fb: FormBuilder, private userService: UserService) {
 
   }
 
 
   ngOnInit(): void {
 
-    this.settingsFormGroup = this.fb.group({
-      nameControl: [''],
-      mobileControl: [''],
-      passwordControl: [''],
-      roleControl: [''],
-      creationDateControl: ['']
-    });
-
-    this.user = {
-      mobile: this.authService.getMobile(),
-      name: this.authService.getName(),
-      token: this.authService.getToken(),
-      role: this.authService.getRole()
-    };
+    this.settingsFormGroup = this.fb.group(PROFILE_FORM.CONF);
 
     if (this.authService.isAuthenticated()) {
       this.settingsFormGroup.patchValue({
-        nameControl: this.user.name,
-        mobileControl: this.user.mobile,
+        firstNameControl: this.authService.getName(),
+        mobileControl: this.authService.getMobile(),
         passwordControl: this.authService.getPassword(),
-        roleControl: this.user.role,
+        roleControl: this.authService.getRole(),
       });
     }
   }
 
   update(): void {
-    console.log('updating');
+    console.log('update');
+    of(console.log(''))
+      .subscribe(() => {
+        this.openSnackBar('Usuario actualizado correctamente', '');
+      });
   }
 
+  openSnackBar(message: string, action: string): void {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+    });
+  }
 
 }
