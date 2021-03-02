@@ -3,6 +3,7 @@ import {VouchersService} from './vouchers.service';
 import {of} from 'rxjs';
 import {Voucher} from '../shared/services/models/voucher.model';
 import {MatDialog} from '@angular/material/dialog';
+import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 
 @Component({
   selector: 'app-vouchers',
@@ -27,6 +28,11 @@ export class VouchersComponent {
   }
 
   read(voucher: Voucher): void {
-
+    this.dialog.open(ReadDetailDialogComponent, {
+      data: {
+        title: 'Voucher Details',
+        object: this.vouchersService.read(voucher.reference)
+      }
+    });
   }
 }

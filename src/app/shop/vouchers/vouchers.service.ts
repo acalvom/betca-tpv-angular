@@ -21,4 +21,8 @@ export class VouchersService {
   findAll(): Observable<Voucher[]> {
     return of(this.vouchers);
   }
+
+  read(reference: string): Observable<Voucher> {
+    return of(this.vouchers.filter(v => v.reference === reference)[0]);
+  }
 }
