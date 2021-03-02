@@ -7,7 +7,7 @@
     <input [(ngModel)]="description" matInput placeholder="Description" type="text"/>
   </mat-form-field>
   <mat-form-field appearance="fill">
-    <mat-label>Favorite food</mat-label>
+    <mat-label>Type</mat-label>
     <mat-select>
       <mat-option *ngFor="let type of types" [value]="type">
         {{type}}

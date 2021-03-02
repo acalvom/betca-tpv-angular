@@ -8,10 +8,26 @@ import {Article} from './models/article.model';
 })
 export class SharedArticlesFamilyService {
   ARTICLES_DATA: ArticleFamilyModel[] = [{
-    reference: '1',
-    description: 'Zarzuela',
-    type: 'composite',
-    children:[]
+    reference: 'root',
+    description: 'root',
+    type: 'ARTICLES',
+    children:[{
+      reference: 'Zz',
+      description: 'Zz',
+      type: 'ARTICLES',
+      children:[{
+        reference: 'Zz Falda',
+        description: 'Zz',
+        type: 'ARTICLES'
+      }]
+    },
+      {
+        reference: 'Varios',
+        description: 'Zarzuela',
+        type: 'ARTICLES',
+        children:[]
+      }
+    ]
   }
 
     /*{

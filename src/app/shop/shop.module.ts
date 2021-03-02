@@ -45,10 +45,12 @@ import { DataProtectionActDialogComponent } from './data-protection-act/data-pro
 import { StockAuditComponent } from './stock-audit/stock-audit.component';
 import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices.component';
 import {BudgetDialogComponent} from './cashier-opened/shopping-cart/budget-dialog.component';
+import { AddArticleDialogComponent } from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
 
 
 @NgModule({
   declarations: [
+    AddArticleDialogComponent,
     AddCreditLineDialogComponent,
     ArticleCreationUpdatingDialogComponent,
     ArticlesFamilyComponent,
