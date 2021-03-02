@@ -8,8 +8,8 @@
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Type</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let type of types" [value]="type">
+    <mat-select [value]="this.selectedType"  (selectionChange)="changeSelection($event.value)">
+      <mat-option *ngFor="let type of types" [value]="type" >
         {{type}}
       </mat-option>
     </mat-select>

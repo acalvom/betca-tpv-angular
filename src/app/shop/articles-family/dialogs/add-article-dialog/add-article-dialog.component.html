@@ -1,1 +1,8 @@
-<p>add-article-dialog works!</p>
+<h3 mat-dialog-title>New Family Article</h3>
+<mat-dialog-content>
+      <app-search-by-barcode (add)="addBarcode($event)"></app-search-by-barcode>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button (click)="addArticleToFamily()" mat-button>Submit</button>
+</mat-dialog-actions>

@@ -8,7 +8,8 @@
     </mat-card-content>
     <mat-card-actions>
       <app-score-bar [(score)]=review.score></app-score-bar>
-      <button mat-stroked-button (click)="update(review)">Save</button>
+      <button *ngIf="!(searchIfExists(review) | async)" mat-stroked-button (click)="create(review)">Create</button>
+      <button *ngIf="searchIfExists(review) | async" mat-stroked-button (click)="update(review)">Update</button>
     </mat-card-actions>
   </mat-card>
 </main>
