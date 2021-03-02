@@ -14,8 +14,10 @@ import { IconButtonComponent } from './reviews/icon-button/icon-button.component
 import { ScoreBarComponent } from './reviews/score-bar/score-bar.component';
 import { OffersComponent } from './offers/offers.component';
 import { ProductComponent } from './ticket-tracking/product/product.component';
-import { IvyCarouselModule } from "angular-responsive-carousel";
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 import {ShoppingBasketComponent} from './shopping-basket/shopping-basket.component';
+import { Top5Component } from './top5/top5.component';
+import { StockManagementComponent } from './stock-management/stock-management.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import {ShoppingBasketComponent} from './shopping-basket/shopping-basket.compone
     OffersComponent,
     ProductComponent,
     ShoppingBasketComponent,
+    Top5Component,
+    StockManagementComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,

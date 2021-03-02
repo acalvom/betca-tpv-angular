@@ -28,11 +28,13 @@ export class OfferCreationUpdatingDialogComponent {
               private sharedArticleService: SharedArticleService, private dialog: MatDialog) {
     this.title = data ? 'Update Offer' : 'Create Offer';
     this.offer = data ? data : {
-      reference: undefined, description: undefined, creationDate: new Date(Date.now()),
+      reference: Math.random().toString(36).substring(7), description: undefined, creationDate: new Date(Date.now()),
       expiryDate: undefined, discount: undefined, articles: this.articles
     };
     this.oldOffer = data ? data.reference : undefined;
   }
+
+  // TODO: change Math.random().toString(36).substring(7) to undefined when back-end is ready
 
   removeBarcode(barcode: string): void {
     const index = this.barcodes.indexOf(barcode);
@@ -70,7 +72,7 @@ export class OfferCreationUpdatingDialogComponent {
   }
 
   invalid(): boolean {
-    return this.check(this.offer.reference) || this.check(this.offer.description)
+    return this.check(this.offer.description)
       || this.check(this.offer.expiryDate.toString()) || this.check(this.offer.discount.toString());
   }
 
