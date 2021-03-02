@@ -113,7 +113,7 @@ export class OfferService {
       this.offers.splice(index, 1);
     }
     this.search(new OfferSearch());
-    return of(console.log('Offer ' + reference + 'deleted successfully'));
+    return of(console.log('Offer ' + reference + ' deleted successfully'));
     /*return this.httpService
       .successful()
       .delete(EndPoints.OFFERS + '/' + reference);*/
