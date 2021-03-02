@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
 
 import {MaterialModule} from '@shared/material.module';
@@ -20,13 +20,14 @@ import {SearchComponent} from '@shared/components/search.component';
 import {ProfileSettingsComponent} from '@shared/components/profile-settings/profile-settings.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    MaterialModule,
-    FlexLayoutModule,
-    FlexModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        MaterialModule,
+        FlexLayoutModule,
+        FlexModule,
+        ReactiveFormsModule
+    ],
   declarations: [
     CancelYesDialogComponent,
     CrudComponent,

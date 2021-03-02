@@ -4,60 +4,44 @@
       Profile Settings
     </mat-card-title>
     <mat-card-content>
-      <form>
-        <table>
-          <tr>
-            <td>
-              <mat-form-field class="demo-full-width">
-                <input matInput placeholder="First Name">
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field class="demo-full-width">
-                <input matInput placeholder="Last Name">
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <mat-form-field>
-                <input [(ngModel)]="mobile" matInput placeholder="Mobile" type="text"/>
-              </mat-form-field>
-            </td>
-            <td colspan="2">
-              <mat-form-field class="demo-full-width">
-                <textarea matInput placeholder="Address" matTextareaAutosize matAutosizeMinRows="2"
-                          matAutosizeMaxRows="5"></textarea>
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <mat-form-field class="demo-full-width">
-                <input matInput [matDatepicker]="picker" placeholder="Date of birth">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker touchUi="true" #picker></mat-datepicker>
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <td><br>
-              <mat-form-field>
-                <input matInput [readonly]="!editable" [matDatepicker]="picker" placeholder="Date of creation">
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2" class="content-center">
-              <button mat-raised-button color="accent">Submit</button>
-              <button mat-raised-button color="accent">Clear</button>
-            </td>
-          </tr>
-
-
-        </table>
+      <form [formGroup]="settingsFormGroup" (ngSubmit)="update()">
+        <p>
+          <mat-form-field class="full-width">
+            <mat-label>Name</mat-label>
+            <input  formControlName="nameControl" matInput placeholder="Name" type="text"/>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="full-width">
+            <mat-label>Mobile</mat-label>
+            <input  formControlName="mobileControl" matInput placeholder="Mobile" type="text"/>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="full-width">
+            <mat-label>Password</mat-label>
+            <input  formControlName="passwordControl" matInput placeholder="Password" type="text"/>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="full-width">
+            <mat-label>Role</mat-label>
+            <input formControlName="roleControl" matInput [readonly]="!editable" placeholder="Role" type="text"/>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="full-width">
+            <mat-label>Creation date</mat-label>
+            <input formControlName="creationDateControl" matInput [readonly]="!editable" placeholder="Creation date" type="text"/>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-checkbox class="full-width" [disabled]="true">Disable account</mat-checkbox>
+        </p>
       </form>
-
     </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" mat-raised-button color="primary">Update</button>
+    </mat-card-actions>
   </mat-card>
 </main>
