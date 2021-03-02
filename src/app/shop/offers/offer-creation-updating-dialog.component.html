@@ -1,10 +1,6 @@
 <h2 mat-dialog-title>{{title}}</h2>
 <mat-dialog-content>
   <mat-form-field class="full-width">
-    <mat-label>Reference</mat-label>
-    <label for="reference"></label><input [(ngModel)]="offer.reference" id="reference" matInput required type="text"/>
-  </mat-form-field>
-  <mat-form-field class="full-width">
     <mat-label>Description</mat-label>
     <label>
       <input [(ngModel)]="offer.description" matInput required type="text"/>
@@ -45,3 +41,4 @@
   <button (click)="update()" *ngIf="!isCreate()" [disabled]=invalid() color="primary" mat-raised-button>Update
   </button>
 </mat-dialog-actions>
+

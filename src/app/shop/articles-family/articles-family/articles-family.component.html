@@ -1,16 +1,16 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
-  &lt;!&ndash; This is the tree node template for leaf nodes &ndash;&gt;
+  <!-- This is the tree node template for leaf nodes -->
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
     <li class="mat-tree-node">
-      &lt;!&ndash; use a disabled button to provide padding for tree leaf &ndash;&gt;
+      <!-- use a disabled button to provide padding for tree leaf -->
       <button mat-icon-button disabled></button>
-      {{node.name}}
+      {{node.reference}}
 
       <div class="crudButtons">
-        <button mat-button mat-icon-button matSuffix>
+        <button (click)="createFamilyArticle(node)" mat-button mat-icon-button matSuffix>
           <mat-icon color="warn">add</mat-icon>
         </button>
-        <button mat-button mat-icon-button matSuffix>
+        <button (click)="editFamilyArticle(node)" mat-button mat-icon-button matSuffix>
           <mat-icon color="warn">mode_edit</mat-icon>
         </button>
         <button (click)="deleteFamilyArticle(node)" mat-button mat-icon-button matSuffix>
@@ -20,7 +20,7 @@
     </li>
   </mat-tree-node>
 
-  &lt;!&ndash; This is the tree node template for expandable nodes &ndash;&gt;
+  <!-- This is the tree node template for expandable nodes -->
   <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
     <li>
       <div class="mat-tree-node">
@@ -30,13 +30,13 @@
             {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
           </mat-icon>
         </button>
-        {{node.name}}
+        {{node.reference}}
 
         <div class="crudButtons">
-          <button mat-button mat-icon-button matSuffix>
+          <button (click)="createFamilyArticle(node)" mat-button mat-icon-button matSuffix>
             <mat-icon color="warn">add</mat-icon>
           </button>
-          <button mat-button mat-icon-button matSuffix>
+          <button (click)="editFamilyArticle(node)"  mat-button mat-icon-button matSuffix>
             <mat-icon color="warn">mode_edit</mat-icon>
           </button>
           <button (click)="deleteFamilyArticle(node)" mat-button mat-icon-button matSuffix>

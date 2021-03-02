@@ -1,0 +1,66 @@
+<mat-card>
+
+  <mat-card-title>
+    <mat-icon color="primary">shopping_basket</mat-icon>
+    Shopping Basket
+  </mat-card-title>
+
+  <mat-card-content>
+    <mat-table class="mat-elevation-z8">
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell></mat-header-cell>
+        <mat-cell></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <mat-header-cell>Description</mat-header-cell>
+        <mat-cell></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <mat-header-cell>Quantity</mat-header-cell>
+        <mat-cell>
+          <button color="accent" mat-icon-button>
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
+          <button color="accent" mat-icon-button>
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <mat-header-cell>Price</mat-header-cell>
+        <mat-cell></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-cell>
+          <button mat-button mat-icon-button matSuffix>
+            <mat-icon color="warn">Delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+    </mat-table>
+  </mat-card-content>
+
+  <mat-card-content>
+      Total:
+  </mat-card-content>
+
+  <mat-card-content>
+
+    <button color="primary" mat-raised-button>
+      <mat-icon>person_outline</mat-icon>
+      Sign In
+    </button>&nbsp;
+
+    <button color="accent" mat-raised-button>
+      <mat-icon>credit_card</mat-icon>
+      Pay
+    </button>
+  </mat-card-content>
+
+</mat-card>
