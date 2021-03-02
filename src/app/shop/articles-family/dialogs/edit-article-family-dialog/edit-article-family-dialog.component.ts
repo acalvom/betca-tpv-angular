@@ -13,13 +13,12 @@ export class EditArticleFamilyDialogComponent implements OnInit {
   reference: string;
   description: string;
   types: string[]
-  typeSelected: string;
+  selectedType: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ArticleFamilyModel, private articlesFamilyService : SharedArticlesFamilyService) {
     this.reference = data.reference;
     this.description = data.description;
-    this.typeSelected = data.type;
-
+    this.selectedType = data.type;
     this.types = ["ARTICLES","SIZE"];
   }
 
@@ -31,9 +30,12 @@ export class EditArticleFamilyDialogComponent implements OnInit {
     const articlesFamilyModel : ArticleFamilyModel = {
       reference : this.reference,
       description : this.description,
-      type : this.typeSelected,
+      type : this.selectedType,
     }
 
     return this.articlesFamilyService.editArticleFamily(articlesFamilyModel);
+  }
+  changeSelection(value: any) {
+    this.selectedType = value;
   }
 }
