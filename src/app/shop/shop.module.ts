@@ -47,7 +47,8 @@ import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices
 import {BudgetDialogComponent} from './cashier-opened/shopping-cart/budget-dialog.component';
 import { AddArticleDialogComponent } from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
 import { CustomerDiscountComponent } from './customer-discount/customer-discount.component';
-
+import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
+import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashier-closure.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { CustomerDiscountComponent } from './customer-discount/customer-discount
     StockAuditComponent,
     ProviderInvoicesComponent,
     CustomerDiscountComponent,
-
+    CashMovementDialogComponent,
+    CashierClosureComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
