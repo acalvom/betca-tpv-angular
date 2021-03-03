@@ -1,0 +1,29 @@
+.parent {
+  position: relative;
+  margin: 10px;
+}
+
+.flex-body {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+  display: flex;
+  text-align: center;
+  margin: 5px;
+}
+
+.flex-body {
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.flex-body div:not([class*="flex"]) {
+  flex: 1 1;
+}
+
+
+
+
+
