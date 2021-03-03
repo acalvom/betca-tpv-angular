@@ -49,6 +49,7 @@ import { AddArticleDialogComponent } from './articles-family/dialogs/add-article
 import { CustomerDiscountComponent } from './customer-discount/customer-discount.component';
 import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
 import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashier-closure.component';
+import { MessengerComponent } from './messenger/messenger.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashie
     CustomerDiscountComponent,
     CashMovementDialogComponent,
     CashierClosureComponent,
+    MessengerComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
