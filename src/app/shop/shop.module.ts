@@ -50,6 +50,7 @@ import { CustomerDiscountComponent } from './customer-discount/customer-discount
 import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
 import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashier-closure.component';
 import { MessengerComponent } from './messenger/messenger.component';
+import { MessengerService } from './messenger/messenger.service';
 
 @NgModule({
   declarations: [
@@ -114,6 +115,7 @@ import { MessengerComponent } from './messenger/messenger.component';
     SharedOfferService,
     SharedProviderService,
     ShoppingCartService,
+    MessengerService
   ],
 })
 export class ShopModule {
