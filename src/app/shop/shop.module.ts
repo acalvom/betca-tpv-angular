@@ -89,7 +89,7 @@ import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashie
     ProviderInvoicesComponent,
     CustomerDiscountComponent,
     CashMovementDialogComponent,
-    CashierClosureComponent,
+    CashierClosureComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
