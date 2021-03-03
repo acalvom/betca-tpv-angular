@@ -28,6 +28,7 @@ export class StockService {
       retailPrice: 1,
       description : 'Pantalon negro'
     }];
+
   constructor(private httpService: HttpService) {
   }
 
@@ -43,5 +44,9 @@ export class StockService {
     return of(this.articulos[0]);
     /* return this.httpService
       .get(EndPoints.STOCKS + '/' + barcode); */
+  }
+
+  searchByDate(start: Date, end: Date): Observable< Article[]>  {
+     return of(this.articulos);
   }
 }

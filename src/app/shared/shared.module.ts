@@ -10,6 +10,7 @@ import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
 import {NumberDialogComponent} from '@shared/dialogs/number-dialog.component';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 import {RegisterDialogComponent} from '@shared/dialogs/register-dialog.component';
+import {RecoverPasswordDialogComponent} from '@shared/dialogs/recoverPassword-dialog.component';
 
 import {UppercaseWords} from '@shared/pipes/UppercaseWordsPipe';
 
@@ -39,7 +40,8 @@ import {ProfileSettingsComponent} from '@shared/components/profile-settings/prof
     SearchComponent,
     UppercaseWords,
     RegisterDialogComponent,
-    ProfileSettingsComponent
+    ProfileSettingsComponent,
+    RecoverPasswordDialogComponent,
 
   ],
   exports: [
@@ -57,7 +59,8 @@ import {ProfileSettingsComponent} from '@shared/components/profile-settings/prof
     ReadDetailDialogComponent,
     SearchComponent,
     UppercaseWords,
-    RegisterDialogComponent
+    RegisterDialogComponent,
+    RecoverPasswordDialogComponent
   ],
   entryComponents: [
     CancelYesDialogComponent,
@@ -65,6 +68,7 @@ import {ProfileSettingsComponent} from '@shared/components/profile-settings/prof
     NumberDialogComponent,
     ReadDetailDialogComponent,
     RegisterDialogComponent,
+    RecoverPasswordDialogComponent,
   ]
 })
 export class SharedModule {
