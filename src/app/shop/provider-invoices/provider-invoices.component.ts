@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { of } from 'rxjs';
+import {Component} from '@angular/core';
+import {of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {ProviderInvoice} from './provider-invoice.model';
 import {ProviderInvoiceService} from './provider-invoice.service';
+import {ProviderInvoiceCreationUpdatingDialogComponent} from './provider-invoice-creation-updating-dialog.component';
 
 @Component({
   selector: 'app-provider-invoices',
@@ -13,10 +14,11 @@ export class ProviderInvoicesComponent {
   title = 'Provider Invoices Management';
   providerInvoices = of([]);
 
-  constructor(private dialog: MatDialog, private providerInvoiceService: ProviderInvoiceService) { }
+  constructor(private dialog: MatDialog, private providerInvoiceService: ProviderInvoiceService) {
+  }
 
   create(): void {
-    // this.dialog.open(ProviderInvoiceCreationUpdatingDialogComponent);
+    this.dialog.open(ProviderInvoiceCreationUpdatingDialogComponent);
   }
 
   read(providerInvoice: ProviderInvoice): void {
