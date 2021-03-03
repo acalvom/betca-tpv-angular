@@ -1,0 +1,31 @@
+<section>
+  <h1>Publish on Slack</h1>
+  <form>
+    <section>
+      <div>
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Content</mat-label>
+          <input matInput>
+        </mat-form-field>
+      </div>
+    </section>
+    <section>
+      <h3>Select the level of the message</h3>
+      <mat-radio-group aria-label="Select an option">
+        <mat-radio-button value="info">Info</mat-radio-button>
+        <mat-radio-button value="warning">Warning</mat-radio-button>
+        <mat-radio-button value="critical">Critical</mat-radio-button>
+      </mat-radio-group>
+    </section>
+    <section class="buttons">
+      <button mat-button>Close</button>
+      <button mat-raised-button color="accent">Send</button>
+    </section>
+  </form>
+</section>
