@@ -9,14 +9,16 @@ import {Cashier} from '../../shared/services/models/cashier.model';
 @Component({
   selector: 'app-cashier-closure',
   templateUrl: './cashier-closure.component.html',
-  styleUrls: ['./cashier-closure.component.css']
+  styleUrls: ['./cashier-closure.component.css'],
 })
 export class CashierClosureComponent implements OnInit {
 
   barcode: string;
   cashierClosure: CashierClosure;
   title = 'Cashier Closure Management';
+  title2 = 'Total Sales';
   cashiers = of([]);
+  totals = of([]);
 
   constructor(private dialog: MatDialog, private cashierClosureService: CashierClosureService) {
     this.resetSearch();
@@ -40,5 +42,6 @@ export class CashierClosureComponent implements OnInit {
 
   search(): void {
     this.cashiers = this.cashierClosureService.search(this.cashierClosure);
+    this.totals = this.cashierClosureService.totals(this.cashierClosure);
   }
 }

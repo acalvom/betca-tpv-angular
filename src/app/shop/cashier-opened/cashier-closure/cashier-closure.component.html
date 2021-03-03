@@ -1,5 +1,13 @@
-<button (click)="search()" mat-icon-button>
-  <mat-icon>search</mat-icon>
-</button>
-<app-crud [data]="cashiers" [deleteAction]="false" [createAction]="false" [updateAction]="false"
+<mat-card>
+  <mat-card-content>
+    <mat-form-field>
+
+    </mat-form-field>
+    <button (click)="search()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card><app-crud [data]="totals" [readAction]="false" [deleteAction]="false" [createAction]="false" [updateAction]="false"
+          [title]="title2"></app-crud>
+<app-crud [data]="cashiers" [readAction]="false" [deleteAction]="false" [createAction]="false" [updateAction]="false"
           [title]="title"></app-crud>
