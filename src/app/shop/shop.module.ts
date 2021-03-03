@@ -43,16 +43,24 @@ import { ManageDataProtectionActComponent } from './shared/components/manage-dat
 import { StockAlarmsCreationUpdatingDialogComponent } from './stock-alarms/stock-alarms-creation-updating-dialog.component';
 import { DataProtectionActDialogComponent } from './data-protection-act/data-protection-act-dialog.component';
 import { StockAlarmChipComponent } from './stock-alarms/stock-alarm-chip/stock-alarm-chip.component';
-
+import { StockAuditComponent } from './stock-audit/stock-audit.component';
+import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices.component';
+import {BudgetDialogComponent} from './cashier-opened/shopping-cart/budget-dialog.component';
+import { AddArticleDialogComponent } from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
+import { CustomerDiscountComponent } from './customer-discount/customer-discount.component';
+import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
+import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashier-closure.component';
 
 @NgModule({
   declarations: [
+    AddArticleDialogComponent,
     AddCreditLineDialogComponent,
     ArticleCreationUpdatingDialogComponent,
     ArticlesFamilyComponent,
     ArticleFamilyViewComponent,
     ArticleQuickCreationDialogComponent,
     ArticlesComponent,
+    BudgetDialogComponent,
     CashierClosedComponent,
     CashierDialogComponent,
     CashierOpenedComponent,
@@ -79,7 +87,11 @@ import { StockAlarmChipComponent } from './stock-alarms/stock-alarm-chip/stock-a
     StockAlarmsCreationUpdatingDialogComponent,
     DataProtectionActDialogComponent,
     StockAlarmChipComponent,
-
+    StockAuditComponent,
+    ProviderInvoicesComponent,
+    CustomerDiscountComponent,
+    CashMovementDialogComponent,
+    CashierClosureComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,

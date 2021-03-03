@@ -11,8 +11,13 @@ import {ShopComponent} from './shop.component';
 import {StockAlarmsComponent} from './stock-alarms/stock-alarms.component';
 import {TicketsComponent} from './cashier-opened/tickets/tickets.component';
 import {OffersComponent} from './offers/offers.component';
-import {ArticlesFamilyComponent} from "./articles-family/articles-family/articles-family.component";
+import {ArticlesFamilyComponent} from './articles-family/articles-family/articles-family.component';
 import {UsersComponent} from './users/users.component';
+import {ProfileSettingsComponent} from '@shared/components/profile-settings/profile-settings.component';
+import {StockAuditComponent} from './stock-audit/stock-audit.component';
+import {ProviderInvoicesComponent} from './provider-invoices/provider-invoices.component';
+import {CustomerDiscountComponent} from './customer-discount/customer-discount.component';
+import {CashierClosureComponent} from './cashier-opened/cashier-closure/cashier-closure.component';
 
 const routes: Routes = [
   {
@@ -24,12 +29,19 @@ const routes: Routes = [
       {path: 'articles', component: ArticlesComponent},
       {path: 'cashier-closed', component: CashierClosedComponent},
       {path: 'cashier-opened', component: CashierOpenedComponent},
+      {path: 'cashier-closure', component: CashierClosureComponent},
       {path: 'offers', component: OffersComponent},
       {path: 'providers', component: ProvidersComponent},
       {path: 'stock-alarms', component: StockAlarmsComponent},
       {path: 'tickets', component: TicketsComponent},
       {path: 'articles-family', component: ArticlesFamilyComponent},
-      {path: 'users', component: UsersComponent}
+      {path: 'users', component: UsersComponent},
+      {path: 'provider-invoices', component: ProviderInvoicesComponent},
+      {path: 'users', component: UsersComponent},
+      {path: 'stock-audit', component: StockAuditComponent},
+      {path: 'users', component: UsersComponent},
+      {path: 'profile', component: ProfileSettingsComponent},
+      {path: 'customer-discount', component: CustomerDiscountComponent}
     ]
   }
 ];

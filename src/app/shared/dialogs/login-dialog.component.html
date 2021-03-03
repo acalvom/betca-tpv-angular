@@ -11,6 +11,7 @@
     <input [(ngModel)]="password" matInput placeholder="Password" type="password"/>
   </mat-form-field>
 </mat-dialog-content>
+<a id="backup_password" (click)="recoverPassword()">Have you forgotten your password?</a>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
   <button (click)="login()" mat-button>Submit</button>

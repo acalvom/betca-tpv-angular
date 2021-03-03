@@ -7,10 +7,13 @@
       {{node.reference}}
 
       <div class="crudButtons">
-        <button (click)="createFamilyArticle(node)" mat-button mat-icon-button matSuffix>
+        <button *ngIf="(node.type!='ARTICLE')" (click)="createFamilyArticle(node)" mat-button mat-icon-button matSuffix>
           <mat-icon color="warn">add</mat-icon>
         </button>
-        <button (click)="editFamilyArticle(node)" mat-button mat-icon-button matSuffix>
+        <button *ngIf="(node.type!='ARTICLE')" (click)="addArticle(node)" mat-button mat-icon-button matSuffix>
+          <mat-icon color="primary">add</mat-icon>
+        </button>
+        <button *ngIf="(node.type!='ARTICLE')" (click)="editFamilyArticle(node)" mat-button mat-icon-button matSuffix>
           <mat-icon color="warn">mode_edit</mat-icon>
         </button>
         <button (click)="deleteFamilyArticle(node)" mat-button mat-icon-button matSuffix>
@@ -33,10 +36,14 @@
         {{node.reference}}
 
         <div class="crudButtons">
-          <button (click)="createFamilyArticle(node)" mat-button mat-icon-button matSuffix>
+          <button *ngIf="(node.type!='ARTICLE')" (click)="createFamilyArticle(node)" mat-button mat-icon-button
+                  matSuffix>
             <mat-icon color="warn">add</mat-icon>
           </button>
-          <button (click)="editFamilyArticle(node)"  mat-button mat-icon-button matSuffix>
+          <button *ngIf="(node.type!='ARTICLE')" (click)="addArticle(node)" mat-button mat-icon-button matSuffix>
+            <mat-icon color="primary">add</mat-icon>
+          </button>
+          <button *ngIf="(node.type!='ARTICLE')" (click)="editFamilyArticle(node)" mat-button mat-icon-button matSuffix>
             <mat-icon color="warn">mode_edit</mat-icon>
           </button>
           <button (click)="deleteFamilyArticle(node)" mat-button mat-icon-button matSuffix>

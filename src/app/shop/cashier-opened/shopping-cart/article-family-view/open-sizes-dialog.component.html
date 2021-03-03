@@ -3,8 +3,8 @@
   Select the size
 </h3>
 <mat-dialog-actions>
-  <div class="buttons" *ngFor="let size of sizes">
-    <button (click)="addShoppingCart(size)" color="primary" mat-dialog-close mat-raised-button>{{size}}</button>
+  <div class="buttons" *ngFor="let article of articles">
+    <button (click)="addShoppingCart(article)" color="primary" mat-dialog-close mat-raised-button>{{obtainSize(article)}}</button>
   </div>
 </mat-dialog-actions>
 <div class="cancelButton">

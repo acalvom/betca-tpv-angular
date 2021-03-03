@@ -8,27 +8,26 @@ import {Article} from './models/article.model';
 })
 export class SharedArticlesFamilyService {
   ARTICLES_DATA: ArticleFamilyModel[] = [{
-    reference: '1',
-    description: 'Zarzuela',
-    type: 'composite',
-    children:[]
-  }
-
-    /*{
-    id: '1',
-    name: 'ArticleFamily-Root',
+    reference: 'root',
+    description: 'root',
+    type: 'ARTICLES',
     children: [{
-      id: '2',
-      name: 'ArticleFamily-Sub1',
+      reference: 'Zz',
+      description: 'Zz',
+      type: 'ARTICLES',
       children: [{
-        id: '1',
-        name: 'ArticleFamily-Sub1-Sub1',
+        reference: 'Zz Falda',
+        description: 'Zz',
+        type: 'ARTICLES'
       }]
     },
       {
-        id: '3',
-        name: 'ArticleFamily-Sub2',
-      }]}*/
+        reference: 'Pantalon',
+        description: 'T2',
+        type: 'ARTICLE',
+      }
+    ]
+  }
   ];
 
   ARTICLES_FAMILY_DATA: ArticleFamilyModel[] = [
@@ -64,7 +63,20 @@ export class SharedArticlesFamilyService {
     }
   ];
 
-  SIZES: String [] = ['T2','T4','T6'];
+  ARTICLES: Article [] = [
+    {
+      barcode: '8400000000017',
+      description: 'zz-falda-T2',
+      retailPrice: 20,
+      providerCompany: 'pro1'
+    },
+    {
+      barcode: '8400000000024',
+      description: 'zz-falda-T4',
+      retailPrice: 27.8,
+      providerCompany: 'pro1'
+    }
+  ];
 
   constructor() {
   }
@@ -82,25 +94,24 @@ export class SharedArticlesFamilyService {
     return of(this.CHILDRENS_OF_ZZ);
   }
 
-  readSizes(articleFamily: ArticleFamilyModel) : Observable<String[]> {
-    return of(this.SIZES);
+  readArticles(articleFamily: ArticleFamilyModel): Observable<Article[]> {
+    return of(this.ARTICLES);
   }
 
-  createArticleFamily(articleFamilyModel: ArticleFamilyModel): Observable<ArticleFamilyModel> {
-    // HACER DIALOGO EDIT
-    console.log("SERVICIO:");
-    console.log(articleFamilyModel);
-    return of(articleFamilyModel);
+  createArticleFamily(articleFamilyModel: ArticleFamilyModel, reference: string): Observable<string> {
+    return of(articleFamilyModel + ' ref:' + reference);
   }
 
   editArticleFamily(articleFamilyModel: ArticleFamilyModel): Observable<ArticleFamilyModel> {
-    // HACER DIALOGO EDIT
     return of(articleFamilyModel);
-
   }
 
   deleteFamilyArticle(node: ArticleFamilyModel): Observable<void> {
-    // LLAMAR AL SERVICIO
     return of(console.log('Offer ' + node.reference + 'deleted successfully'));
+  }
+
+  addArticleToFamily(articleFamilyModel: ArticleFamilyModel, barcode: string): Observable<void> {
+    return of(console.log('Parent Reference: ' + articleFamilyModel.reference + 'Barcode product: ' + barcode));
+
   }
 }
