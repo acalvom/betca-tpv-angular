@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {RgpdUser} from '../shared/services/models/rgpd-user.model';
+import {Observable, of} from 'rxjs';
 import {RgpdType} from '../shared/services/models/RgpdType';
 
 @Component({
@@ -9,18 +10,25 @@ import {RgpdType} from '../shared/services/models/RgpdType';
 })
 export class DataProtectionActDialogComponent {
 
-  rgpdUser: RgpdUser;
+  userMobile: number;
+  mobiles: Observable<number[]> = of([]);
+  rgpdUser: RgpdUser = {};
 
   constructor() {
-    this.resetSearch();
   }
 
-  search(): void {
-    this.rgpdUser.rgpdType = RgpdType.ADVANCED;
+  findMobiles(): void {
+    this.mobiles = of([11111111, 22222222, 333333333]);
   }
 
-  resetSearch(): void {
+  findByMobile(): void {
+    this.rgpdUser = {
+      mobile: this.userMobile,
+      rgpdType: RgpdType.ADVANCED
+    };
+  }
+
+  reset(): void {
     this.rgpdUser = {};
   }
-
 }
