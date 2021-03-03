@@ -25,10 +25,10 @@
         <input [(ngModel)]="customerDiscount.user" matInput>
       </label>
     </mat-form-field>
-    <button (click)="searchCustomersDiscounts()" mat-icon-button>
+    <button (click)="getCustomersDiscounts()" mat-icon-button>
       <mat-icon>search</mat-icon>
     </button>
   </mat-card-content>
 </mat-card>
 <app-crud [data]="customers" [title]="title" (create)="createCustomerDiscount()" (read)="readCustomerDiscount($event)"
-          (update)="updateCustomerDiscount($event)"></app-crud>
+          (update)="setCustomerDiscount($event)"></app-crud>

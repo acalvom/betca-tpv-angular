@@ -1,4 +1,4 @@
-export interface CustomerDiscount {
+export class CustomerDiscountSearch {
   note?: string;
   registationDate?: string;
   discount?: number;
