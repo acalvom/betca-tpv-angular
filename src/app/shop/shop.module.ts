@@ -42,6 +42,7 @@ import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-a
 import { ManageDataProtectionActComponent } from './shared/components/manage-data-protection-act.component';
 import { StockAlarmsCreationUpdatingDialogComponent } from './stock-alarms/stock-alarms-creation-updating-dialog.component';
 import { DataProtectionActDialogComponent } from './data-protection-act/data-protection-act-dialog.component';
+import { StockAlarmChipComponent } from './stock-alarms/stock-alarm-chip/stock-alarm-chip.component';
 import { StockAuditComponent } from './stock-audit/stock-audit.component';
 import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices.component';
 import {BudgetDialogComponent} from './cashier-opened/shopping-cart/budget-dialog.component';
@@ -85,6 +86,7 @@ import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashie
     ManageDataProtectionActComponent,
     StockAlarmsCreationUpdatingDialogComponent,
     DataProtectionActDialogComponent,
+    StockAlarmChipComponent,
     StockAuditComponent,
     ProviderInvoicesComponent,
     CustomerDiscountComponent,
