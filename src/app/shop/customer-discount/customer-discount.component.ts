@@ -16,7 +16,7 @@ export class CustomerDiscountComponent implements OnInit {
   customerDiscount: CustomerDiscountSearch;
 
   constructor(private dialog: MatDialog, private customerDiscountService: CustomerDiscountService) {
-    this.customerDiscount = {};
+    this.cleanFilters();
   }
 
   ngOnInit(): void {
@@ -36,6 +36,10 @@ export class CustomerDiscountComponent implements OnInit {
   }
 
   deleteCustomerDiscount(customerDiscount: CustomerDiscount): void {
+  }
+
+  cleanFilters(): void {
+    this.customerDiscount = {};
   }
 
 }

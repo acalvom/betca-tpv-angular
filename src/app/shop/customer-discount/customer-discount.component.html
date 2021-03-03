@@ -28,7 +28,10 @@
     <button (click)="getCustomersDiscounts()" mat-icon-button>
       <mat-icon>search</mat-icon>
     </button>
+    <button (click)="cleanFilters()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-card-content>
 </mat-card>
 <app-crud [data]="customers" [title]="title" (create)="createCustomerDiscount()" (read)="readCustomerDiscount($event)"
-          (update)="setCustomerDiscount($event)"></app-crud>
+          (update)="setCustomerDiscount($event)" (delete)="deleteCustomerDiscount($event)"></app-crud>
