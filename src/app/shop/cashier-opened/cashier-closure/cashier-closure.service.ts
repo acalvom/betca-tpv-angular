@@ -6,6 +6,7 @@ import {CashierState} from './cashier-state.model';
 import {CashierClosure} from './cashier-closure.model';
 import {EndPoints} from '@shared/end-points';
 import {Cashier} from '../../shared/services/models/cashier.model';
+import {CashierTotals} from '../../shared/services/models/cashier-totals.model';
 
 
 @Injectable({
@@ -14,6 +15,7 @@ import {Cashier} from '../../shared/services/models/cashier.model';
 export class CashierClosureService {
   private static STATE = '/state';
   static SEARCH = '/search';
+  static TOTALS = '/totals';
 
   constructor(private httpService: HttpService) {
   }
@@ -38,37 +40,49 @@ export class CashierClosureService {
 
     const cashier: Cashier[] = ([
       {
-        initialCash : 1,
+        initialCash : 100,
         cashSales : 1,
         cardSales : 1,
         usedVouchers : 1,
         deposit : 1,
         withdrawal : 1,
-        comment : 'hola',
+        comment : 'comentario1',
         lostCard : 1,
         lostCash : 1,
         finalCash : 1,
         finalCard : 1,
-        openingDate : null,
-        closureDate : null
+        openingDate : new Date('2021-01-30T00:00:00'),
+        closureDate : new Date('2021-01-30T00:00:00')
       },
       {
-        initialCash : 1,
+        initialCash : 100,
         cashSales : 1,
         cardSales : 1,
         usedVouchers : 1,
         deposit : 1,
         withdrawal : 1,
-        comment : 'hola',
+        comment : 'comentario2',
         lostCard : 1,
         lostCash : 1,
         finalCash : 1,
         finalCard : 1,
-        openingDate : null,
-        closureDate : null
+        openingDate : new Date('2021-02-04'),
+        closureDate : new Date('2021-02-04')
       }
     ]);
     return of(cashier);
   }
 
+  totals(cashierClosure: CashierClosure): Observable<CashierTotals[]> {
+    /*return this.httpService
+      .paramsFrom(cashierClosure)
+      .get(EndPoints.CASHIERS + CashierClosureService.TOTALS);*/
+
+    const cashiertotals: CashierTotals[] = ([
+      {
+        cashTotalSales: 100,
+        cardTotalSales: 50
+      }
+      ]);
+    return of(cashiertotals);  }
 }
