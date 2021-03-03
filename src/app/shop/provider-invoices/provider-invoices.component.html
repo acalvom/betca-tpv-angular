@@ -1,1 +1,2 @@
-<p>provider-invoices works!</p>
+<app-crud (create)="create()" (read)="read($event)" (update)="update($event)" (delete)="delete($event)"
+          [data]="providerInvoices" [title]="title"></app-crud>
