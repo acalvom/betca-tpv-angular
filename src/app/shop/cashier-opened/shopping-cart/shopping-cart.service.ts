@@ -12,7 +12,7 @@ import {ArticleQuickCreationDialogComponent} from './article-quick-creation-dial
 import {ShoppingState} from '../../shared/services/models/shopping-state.model';
 import {EndPoints} from '@shared/end-points';
 import {SharedOfferService} from '../../shared/services/shared.offer.service';
-import {BudgetCreation} from './budget-creation.model';
+import {BudgetCreation} from '../../budgets/budget-creation.model';
 import {OfferShoppingCart} from './offer-shopping-cart.model';
 
 @Injectable({
