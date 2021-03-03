@@ -165,6 +165,15 @@ export class ShoppingCartComponent implements OnInit {
       , () => this.dialog.closeAll()
     );
   }
+  addBudget(budget): void {
+    this.shoppingCartService
+      .read(budget)
+      .subscribe(newShopping => {
+        this.shoppingCart.push(newShopping);
+        this.synchronizeShoppingCart();
+      });
+    this.elementRef.nativeElement.focus();
+  }
 
   addDiscount(mobile): void {
     // TODO add discount
