@@ -8,7 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ShoppingState} from '../../shared/services/models/shopping-state.model';
 import {NumberDialogComponent} from '@shared/dialogs/number-dialog.component';
 import {ArticleFamilyViewComponent} from './article-family-view/article-family-view.component';
-import {BudgetDialogComponent} from './budget-dialog.component';
+import {BudgetDialogComponent} from '../../budgets/budget-dialog.component';
 
 @Component({
   selector: 'app-shopping-cart',
