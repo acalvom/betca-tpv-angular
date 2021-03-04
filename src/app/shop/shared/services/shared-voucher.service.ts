@@ -1,12 +1,29 @@
 import {Injectable} from '@angular/core';
-import {EMPTY, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
+import {Voucher} from './models/voucher.model';
+import {HttpService} from '@core/http.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedVoucherService {
 
+  constructor(private httpService: HttpService) {}
+
   printVoucher(value: number): Observable<any> {
-    return EMPTY; // TODO create and print voucher
+    const voucher: Voucher = {
+      reference: '',
+      value,
+      creationDate: new Date(),
+      dateOfUse: undefined
+    };
+
+    return this.createAndPrint(voucher);
+  }
+
+  createAndPrint(voucher: Voucher): Observable<Voucher> {
+    return this.httpService
+      .pdf()
+      .post('', voucher);
   }
 }
