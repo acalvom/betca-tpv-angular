@@ -13,4 +13,5 @@ export class EndPoints {
   static USERS = environment.REST_USER + '/users';
   static STOCKS = environment.REST_CORE + '/stocks';
   static BUDGETS = environment.REST_CORE + '/budgets';
+  static AUDITS = environment.REST_CORE + '/audits';
 }
