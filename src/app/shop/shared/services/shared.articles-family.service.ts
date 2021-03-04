@@ -22,10 +22,9 @@ export class SharedArticlesFamilyService {
       }]
     },
       {
-        reference: 'Varios',
-        description: 'Zarzuela',
-        type: 'ARTICLES',
-        children: []
+        reference: 'Pantalon',
+        description: 'T2',
+        type: 'ARTICLE',
       }
     ]
   }
@@ -99,21 +98,20 @@ export class SharedArticlesFamilyService {
     return of(this.ARTICLES);
   }
 
-  createArticleFamily(articleFamilyModel: ArticleFamilyModel): Observable<ArticleFamilyModel> {
-    // HACER DIALOGO EDIT
-    console.log('SERVICIO: ');
-    console.log(articleFamilyModel);
-    return of(articleFamilyModel);
+  createArticleFamily(articleFamilyModel: ArticleFamilyModel, reference: string): Observable<string> {
+    return of(articleFamilyModel + ' ref:' + reference);
   }
 
   editArticleFamily(articleFamilyModel: ArticleFamilyModel): Observable<ArticleFamilyModel> {
-    // HACER DIALOGO EDIT
     return of(articleFamilyModel);
-
   }
 
   deleteFamilyArticle(node: ArticleFamilyModel): Observable<void> {
-    // LLAMAR AL SERVICIO
     return of(console.log('Offer ' + node.reference + 'deleted successfully'));
+  }
+
+  addArticleToFamily(articleFamilyModel: ArticleFamilyModel, barcode: string): Observable<void> {
+    return of(console.log('Parent Reference: ' + articleFamilyModel.reference + 'Barcode product: ' + barcode));
+
   }
 }
