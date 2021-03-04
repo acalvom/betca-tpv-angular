@@ -1,2 +1,37 @@
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Filters: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input [(ngModel)]="issueSearch.title" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Body</mat-label>
+      <input [(ngModel)]="issueSearch.body" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Labels</mat-label>
+      <input [(ngModel)]="issueSearch.labels" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>State</mat-label>
+      <input [(ngModel)]="issueSearch.state" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Milestone</mat-label>
+      <input [(ngModel)]="issueSearch.milestone" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Assignee</mat-label>
+      <input [(ngModel)]="issueSearch.assignee" matInput>
+    </mat-form-field>
+    <button (click)="search()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <button (click)="resetSearch()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>
 <app-crud (create)="create()" (read)="read($event)"
           [data]="issues" [deleteAction]="false" [updateAction]="false" [title]="title"></app-crud>

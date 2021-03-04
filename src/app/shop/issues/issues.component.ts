@@ -3,6 +3,8 @@ import {of} from 'rxjs';
 import {Issue} from './issue.model';
 import {MatDialog} from '@angular/material/dialog';
 import {IssueCreationDialogComponent} from './issue-creation-dialog/issue-creation-dialog.component';
+import {IssueSearch} from './issue-search.model';
+import {IssueService} from './issue.service';
 
 @Component({
   selector: 'app-issues',
@@ -12,8 +14,11 @@ import {IssueCreationDialogComponent} from './issue-creation-dialog/issue-creati
 export class IssuesComponent implements OnInit {
   title = 'Issues';
   issues = of([]);
+  issueSearch: IssueSearch;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private issueService: IssueService, private dialog: MatDialog) {
+    this.resetSearch();
+  }
 
   ngOnInit(): void {
   }
@@ -26,4 +31,11 @@ export class IssuesComponent implements OnInit {
     // TODO show details dialog
   }
 
+  search(): void {
+    this.issues = this.issueService.search(this.issueSearch);
+  }
+
+  resetSearch(): void {
+    this.issueSearch = {};
+  }
 }
