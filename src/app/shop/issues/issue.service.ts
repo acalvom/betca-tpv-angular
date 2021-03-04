@@ -15,4 +15,8 @@ export class IssueService {
   search(issueSearch: IssueSearch): Observable<Issue[]> {
     return of([]); // TODO
   }
+
+  create(issue: Issue): Observable<Issue> {
+    return of(issue); // TODO
+  }
 }

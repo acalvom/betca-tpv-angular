@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<mat-dialog-content>
+  <mat-form-field class="full-width">
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="issue.title" required type="text"/>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Body</mat-label>
+    <textarea matInput [(ngModel)]="issue.body" required></textarea>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Label</mat-label>
+    <mat-select [(ngModel)]="issue.labels" required>
+      <mat-option *ngFor="let label of labelValues" [value]="label">
+        {{label}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-dialog-close mat-raised-button>Close</button>
+  <button (click)="create()" [disabled]=invalid() color="primary" mat-raised-button>Publish Issue</button>
+</mat-dialog-actions>

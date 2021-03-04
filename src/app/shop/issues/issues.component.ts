@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {of} from 'rxjs';
 import {Issue} from './issue.model';
+import {MatDialog} from '@angular/material/dialog';
+import {IssueCreationDialogComponent} from './issue-creation-dialog/issue-creation-dialog.component';
 
 @Component({
   selector: 'app-issues',
@@ -11,13 +13,13 @@ export class IssuesComponent implements OnInit {
   title = 'Issues';
   issues = of([]);
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
   create(): void {
-    // TODO show creation dialog
+    this.dialog.open(IssueCreationDialogComponent);
   }
 
   read(issue: Issue): void {

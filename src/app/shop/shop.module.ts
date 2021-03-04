@@ -55,6 +55,7 @@ import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
 import {SalesPeopleComponent} from './salespeople/salespeople.component';
 import {SalesPeopleService} from './salespeople/salespeople.service';
 import { IssuesComponent } from './issues/issues.component';
+import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/issue-creation-dialog.component';
 
 
 @NgModule({
@@ -101,7 +102,8 @@ import { IssuesComponent } from './issues/issues.component';
     CustomerDiscountComponent,
     CashMovementDialogComponent,
     CashierClosureComponent,
-    SalesPeopleComponent
+    SalesPeopleComponent,
+    IssueCreationDialogComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
