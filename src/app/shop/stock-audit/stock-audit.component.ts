@@ -3,6 +3,7 @@ import {ArticleSearch} from '../articles/article-search.model';
 import {of} from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
+import {StockAuditService} from './stock-audit.service';
 
 @Component({
   selector: 'app-stock-audit',
@@ -21,10 +22,11 @@ export class StockAuditComponent implements OnInit {
   total = 300;
   closedAudit = false;
 
-  constructor(private snackBar: MatSnackBar, private router: Router) { }
+  constructor(private snackBar: MatSnackBar, private router: Router, private stockAuditService: StockAuditService) { }
 
   ngOnInit(): void {
     this.closedAudit = false;
+    this.articles = this.stockAuditService.readAll();
   }
   // tslint:disable-next-line:typedef
   saveAudit() {
@@ -32,17 +34,18 @@ export class StockAuditComponent implements OnInit {
       duration: 3500
     });
 
-    this.router.navigate(['/shop/cashier-opened']);
-
   }
 
-  // tslint:disable-next-line:typedef
-  closeAudit() {
+  closeAudit(): void {
     this.closedAudit = true;
+    // Commented but necessary when the API works
+    // this.stockAuditService.closeAudit('TEST-ID', ['8904598349435'], articleLossArray);
+    this.notAuditedArticles = this.stockAuditService.getNotAudit('TEST-ID');
+    this.articlesLoss = this.stockAuditService.getLosses('TEST-ID');
+    //
   }
 
-  // tslint:disable-next-line:typedef
-  newAudit() {
+  newAudit(): void {
     this.closedAudit = false;
   }
 }

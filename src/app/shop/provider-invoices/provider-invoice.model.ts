@@ -1,4 +1,4 @@
-import {Provider} from '../providers/provider.model';
+import {Provider} from '../shared/services/models/provider.model';
 
 export interface ProviderInvoice {
   number: number;

@@ -45,11 +45,15 @@ import { DataProtectionActDialogComponent } from './data-protection-act/data-pro
 import { StockAlarmChipComponent } from './stock-alarms/stock-alarm-chip/stock-alarm-chip.component';
 import { StockAuditComponent } from './stock-audit/stock-audit.component';
 import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices.component';
+import { ProviderInvoiceCreationUpdatingDialogComponent } from './provider-invoices/provider-invoice-creation-updating-dialog.component';
 import {BudgetDialogComponent} from './budgets/budget-dialog.component';
 import { AddArticleDialogComponent } from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
 import { CustomerDiscountComponent } from './customer-discount/customer-discount.component';
 import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
 import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashier-closure.component';
+import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
+import {SalesPeopleComponent} from './salespeople/salespeople.component';
+import {SalesPeopleService} from './salespeople/salespeople.service';
 
 @NgModule({
   declarations: [
@@ -73,6 +77,7 @@ import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashie
     ProvidersComponent,
     SearchByBarcodeComponent,
     SearchByCompanyComponent,
+    SearchByBudgetComponent,
     ShopComponent,
     ShoppingCartComponent,
     TicketsComponent,
@@ -89,9 +94,11 @@ import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashie
     StockAlarmChipComponent,
     StockAuditComponent,
     ProviderInvoicesComponent,
+    ProviderInvoiceCreationUpdatingDialogComponent,
     CustomerDiscountComponent,
     CashMovementDialogComponent,
-    CashierClosureComponent
+    CashierClosureComponent,
+    SalesPeopleComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
@@ -114,6 +121,7 @@ import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashie
     SharedOfferService,
     SharedProviderService,
     ShoppingCartService,
+    SalesPeopleService
   ],
 })
 export class ShopModule {
