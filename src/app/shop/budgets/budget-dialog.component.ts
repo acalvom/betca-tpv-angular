@@ -1,14 +1,14 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
-import {ShoppingCartService} from './shopping-cart.service';
+import {ShoppingCartService} from '../cashier-opened/shopping-cart/shopping-cart.service';
 import {BudgetCreation} from './budget-creation.model';
 
 
 
 @Component({
   templateUrl: 'budget-dialog.component.html',
-  styleUrls: ['shopping-cart.component.css']
+  styleUrls: ['../cashier-opened/shopping-cart/shopping-cart.component.css']
 })
 export class BudgetDialogComponent {
 

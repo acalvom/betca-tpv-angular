@@ -7,10 +7,10 @@ import {Observable, of} from 'rxjs';
   providedIn: 'root'
 })
 export class StockAlarmsService {
-  stockAlarmLine1: StockAlarmLine = {barcode: 'b1', warning: 2, critical: 4};
-  stockAlarmLine2: StockAlarmLine = {barcode: 'b2', warning: 5, critical: 3};
-  stockAlarmLine3: StockAlarmLine = {barcode: 'b3', critical: 4};
-  stockAlarmLine4: StockAlarmLine = {barcode: 'b3'};
+  stockAlarmLine1: StockAlarmLine = {barcode: 'b84000000000171', warning: 2, critical: 4};
+  stockAlarmLine2: StockAlarmLine = {barcode: 'b84000000000172', warning: 5, critical: 3};
+  stockAlarmLine3: StockAlarmLine = {barcode: 'b84000000000173', critical: 4};
+  stockAlarmLine4: StockAlarmLine = {barcode: 'b84000000000174'};
 
   stockAlarm1: StockAlarm = {
     name: 'sa1',
@@ -30,13 +30,28 @@ export class StockAlarmsService {
   constructor() {
   }
 
+  findAlarms(): Observable<StockAlarmLine[]> {
+    return of([this.stockAlarmLine2, this.stockAlarmLine3]);
+  }
+
   search(reference: string): Observable<StockAlarm[]> {
     return of([this.stockAlarm1, this.stockAlarm2]);
   }
 
   create(stockAlarm: StockAlarm): Observable<StockAlarm> {
-
     return of(stockAlarm);
+  }
+
+  update(name: string, stockAlarm: StockAlarm): Observable<StockAlarm> {
+    return of(stockAlarm);
+  }
+
+  read(name: string): Observable<StockAlarm> {
+    return of(this.stockAlarm1);
+  }
+
+  readArticle(barcode: string): Observable<StockAlarmLine> {
+    return of(this.stockAlarmLine2);
   }
 
 }
