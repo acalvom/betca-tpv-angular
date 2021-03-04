@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {VouchersService} from './vouchers.service';
 import {of} from 'rxjs';
 import {Voucher} from '../shared/services/models/voucher.model';
 import {MatDialog} from '@angular/material/dialog';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
+import {VoucherCreationUpdatingDialogComponent} from './voucher-creation-updating-dialog.component';
 
 @Component({
   selector: 'app-vouchers',
@@ -24,7 +25,9 @@ export class VouchersComponent {
   }
 
   create(): void {
-
+    this.dialog.open(VoucherCreationUpdatingDialogComponent)
+      .afterClosed()
+      .subscribe(() => this.findAll());
   }
 
   read(voucher: Voucher): void {

@@ -47,6 +47,7 @@ import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices
 import {BudgetDialogComponent} from './cashier-opened/shopping-cart/budget-dialog.component';
 import { AddArticleDialogComponent } from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
+import { VoucherCreationUpdatingDialogComponent } from './vouchers/voucher-creation-updating-dialog.component';
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import { VouchersComponent } from './vouchers/vouchers.component';
     StockAuditComponent,
     ProviderInvoicesComponent,
     VouchersComponent,
+    VoucherCreationUpdatingDialogComponent,
 
   ],
   entryComponents: [
