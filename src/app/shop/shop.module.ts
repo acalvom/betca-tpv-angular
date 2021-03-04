@@ -54,6 +54,7 @@ import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashie
 import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
 import {SalesPeopleComponent} from './salespeople/salespeople.component';
 import {SalesPeopleService} from './salespeople/salespeople.service';
+import { CustomerDiscountDialogComponent } from './customer-discount/customer-discount-dialog.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import {SalesPeopleService} from './salespeople/salespeople.service';
     CustomerDiscountComponent,
     CashMovementDialogComponent,
     CashierClosureComponent,
-    SalesPeopleComponent
+    SalesPeopleComponent,
+    CustomerDiscountDialogComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
