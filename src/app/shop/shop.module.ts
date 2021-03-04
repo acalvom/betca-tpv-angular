@@ -56,6 +56,7 @@ import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
 import {SalesPeopleComponent} from './salespeople/salespeople.component';
 import {SalesPeopleService} from './salespeople/salespeople.service';
 import { InvoicesComponent } from './invoices/invoices.component';
+import { CustomerDiscountDialogComponent } from './customer-discount/customer-discount-dialog.component';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,9 @@ import { InvoicesComponent } from './invoices/invoices.component';
     CashierClosureComponent,
     MessengerComponent,
     SalesPeopleComponent,
-    InvoicesComponent
+    InvoicesComponent,
+    SalesPeopleComponent,
+    CustomerDiscountDialogComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
