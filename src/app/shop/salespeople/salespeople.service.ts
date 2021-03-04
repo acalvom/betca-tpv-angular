@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from '../../../../../../../La practica de Spring/new/betca-tpv-angular/src/app/core/http.service';
+import {HttpService} from '@core/http.service';
 import {Observable, of} from 'rxjs';
 import {SalesPeopleSearch} from './salespeople-search.model';
 import {SalesPeople} from '../shared/services/models/salespeople.model';
