@@ -50,6 +50,8 @@ import { AddArticleDialogComponent } from './articles-family/dialogs/add-article
 import { CustomerDiscountComponent } from './customer-discount/customer-discount.component';
 import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
 import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashier-closure.component';
+import { MessengerComponent } from './messenger/messenger.component';
+import { MessengerService } from './messenger/messenger.service';
 import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
 import {SalesPeopleComponent} from './salespeople/salespeople.component';
 import {SalesPeopleService} from './salespeople/salespeople.service';
@@ -96,6 +98,7 @@ import {SalesPeopleService} from './salespeople/salespeople.service';
     CustomerDiscountComponent,
     CashMovementDialogComponent,
     CashierClosureComponent,
+    MessengerComponent,
     SalesPeopleComponent
   ],
   entryComponents: [
@@ -119,6 +122,7 @@ import {SalesPeopleService} from './salespeople/salespeople.service';
     SharedOfferService,
     SharedProviderService,
     ShoppingCartService,
+    MessengerService,
     SalesPeopleService
   ],
 })

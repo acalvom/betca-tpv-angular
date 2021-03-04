@@ -18,6 +18,7 @@ import {StockAuditComponent} from './stock-audit/stock-audit.component';
 import {ProviderInvoicesComponent} from './provider-invoices/provider-invoices.component';
 import {CustomerDiscountComponent} from './customer-discount/customer-discount.component';
 import {CashierClosureComponent} from './cashier-opened/cashier-closure/cashier-closure.component';
+import { MessengerComponent } from './messenger/messenger.component';
 import {SalesPeopleComponent} from './salespeople/salespeople.component';
 
 const routes: Routes = [
@@ -43,6 +44,7 @@ const routes: Routes = [
       {path: 'users', component: UsersComponent},
       {path: 'profile', component: ProfileSettingsComponent},
       {path: 'customer-discount', component: CustomerDiscountComponent},
+      {path: 'messenger', component: MessengerComponent},
       {path: 'salespeople', component: SalesPeopleComponent}
     ]
   }
