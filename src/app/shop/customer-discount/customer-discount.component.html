@@ -1,0 +1,37 @@
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Filters: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>Note</mat-label>
+      <label>
+        <input [(ngModel)]="customerDiscount.note" matInput>
+      </label>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Discount</mat-label>
+      <label>
+        <input [(ngModel)]="customerDiscount.discount" matInput>
+      </label>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Minimmum Purchase</mat-label>
+      <label>
+        <input [(ngModel)]="customerDiscount.minimmumPurchase" matInput>
+      </label>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>User</mat-label>
+      <label>
+        <input [(ngModel)]="customerDiscount.user" matInput>
+      </label>
+    </mat-form-field>
+    <button (click)="getCustomersDiscounts()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <button (click)="cleanFilters()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>
+<app-crud [data]="customers" [title]="title" (create)="createCustomerDiscount()" (read)="readCustomerDiscount($event)"
+          (update)="setCustomerDiscount($event)" (delete)="deleteCustomerDiscount($event)"></app-crud>

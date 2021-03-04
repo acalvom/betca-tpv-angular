@@ -1,4 +1,4 @@
-<h3 mat-dialog-title>New Family Article</h3>
+<h3 mat-dialog-title>Edit Family Article</h3>
 <mat-dialog-content>
   <mat-form-field>
     <input [(ngModel)]="reference" matInput placeholder="Reference" type="text"/>
@@ -8,7 +8,7 @@
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Type</mat-label>
-    <mat-select [value]="this.selectedType"  (selectionChange)="changeSelection($event.value)">
+    <mat-select [value]="this.selectedType" (selectionChange)="changeSelection($event.value)">
       <mat-option *ngFor="let type of types" [value]="type" >
         {{type}}
       </mat-option>
@@ -17,5 +17,5 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button (click)="updateArticlesFamily()" mat-button>Submit</button>
+  <button (click)="updateArticlesFamily()" mat-dialog-close mat-button>Submit</button>
 </mat-dialog-actions>

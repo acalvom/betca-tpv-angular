@@ -16,6 +16,8 @@ import {UsersComponent} from './users/users.component';
 import {ProfileSettingsComponent} from '@shared/components/profile-settings/profile-settings.component';
 import {StockAuditComponent} from './stock-audit/stock-audit.component';
 import {ProviderInvoicesComponent} from './provider-invoices/provider-invoices.component';
+import {CustomerDiscountComponent} from './customer-discount/customer-discount.component';
+import {CashierClosureComponent} from './cashier-opened/cashier-closure/cashier-closure.component';
 
 const routes: Routes = [
   {
@@ -27,6 +29,7 @@ const routes: Routes = [
       {path: 'articles', component: ArticlesComponent},
       {path: 'cashier-closed', component: CashierClosedComponent},
       {path: 'cashier-opened', component: CashierOpenedComponent},
+      {path: 'cashier-closure', component: CashierClosureComponent},
       {path: 'offers', component: OffersComponent},
       {path: 'providers', component: ProvidersComponent},
       {path: 'stock-alarms', component: StockAlarmsComponent},
@@ -37,7 +40,8 @@ const routes: Routes = [
       {path: 'users', component: UsersComponent},
       {path: 'stock-audit', component: StockAuditComponent},
       {path: 'users', component: UsersComponent},
-      {path: 'profile', component: ProfileSettingsComponent}
+      {path: 'profile', component: ProfileSettingsComponent},
+      {path: 'customer-discount', component: CustomerDiscountComponent}
     ]
   }
 ];

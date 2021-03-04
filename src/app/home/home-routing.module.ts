@@ -13,13 +13,18 @@ import {OffersComponent} from './offers/offers.component';
 import {ShoppingBasketComponent} from './shopping-basket/shopping-basket.component';
 import {ProfileSettingsComponent} from '@shared/components/profile-settings/profile-settings.component';
 import {StockManagementComponent} from './stock-management/stock-management.component';
+import {NewsComponent} from './adviser/news/news.component';
+import {PopularComponent} from './adviser/popular/popular.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     children: [
-      {path: 'adviser', component: AdviserComponent}, // public
+      {path: 'adviser', component: AdviserComponent},
+      {path: 'adviser/news', component: NewsComponent},
+      {path: 'adviser/popular', component: PopularComponent},
+      // public
       {path: 'offers', component: OffersComponent},
       {path: 'complaints', component: ComplaintsComponent, canActivate: [RoleGuardService], data: {roles: [Role.CUSTOMER]}},
       {path: 'ticket-tracking/:id', component: TicketTrackingComponent},

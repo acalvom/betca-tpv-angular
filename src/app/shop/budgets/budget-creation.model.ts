@@ -1,4 +1,4 @@
-import {Shopping} from '../../shared/services/models/shopping.model';
+import {Shopping} from '../shared/services/models/shopping.model';
 
 
 export interface BudgetCreation {

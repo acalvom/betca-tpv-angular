@@ -1,5 +1,38 @@
-<p>DEV MODE</p>
-<p>by David v0.1.0</p>
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Filters: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>Alarm Name</mat-label>
+      <input [(ngModel)]="reference" matInput>
+    </mat-form-field>
 
-<app-crud (create)="create()" (read)="read($event)" (update)="update($event)"
-           [data]="data" deleteAction="false" [title]="title" [updateAction]="false"></app-crud>
+    <button (click)="search()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <button (click)="resetSearch()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>
+<div class="parent">
+  <div class="flex-body">
+    <div class="flex-column" style="width: 75%">
+      <mat-card style="background-color: #E0E0E0">Config Alarm</mat-card>
+      <app-crud (create)="create()" (update)="update($event)" [readAction]="false"
+                [data]="data" deleteAction="false" [title]="title"></app-crud>
+    </div>
+    <div class="flex-column" style="width: 25%;">
+      <mat-card style="background-color: orange">Warning</mat-card>
+      <ng-container *ngFor="let current of alarms">
+        <app-stock-alarm-chip [data]="current"></app-stock-alarm-chip>
+      </ng-container>
+    </div>
+    <div class="flex-column" style="width: 25%;">
+      <mat-card style="background-color: red">Critical</mat-card>
+
+    </div>
+  </div>
+
+</div>
+
+
