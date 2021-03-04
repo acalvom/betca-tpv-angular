@@ -3,10 +3,10 @@ import {Router} from '@angular/router';
 import {AuthService} from '@core/auth.service';
 import {User} from '@core/user.model';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {UserService} from '../../../shop/users/user.service';
 import {of} from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {PROFILE_FORM} from '@shared/form.constant';
+import {UserCompleteService} from '@shared/services/userComplete.service';
 
 
 @Component({
@@ -23,7 +23,7 @@ export class ProfileSettingsComponent implements OnInit {
   public settingsFormGroup: FormGroup;
 
   constructor(private router: Router, private snackBar: MatSnackBar,
-              private authService: AuthService, private fb: FormBuilder, private userService: UserService) {
+              private authService: AuthService, private fb: FormBuilder, private userCompleteService: UserCompleteService) {
 
   }
 
@@ -33,11 +33,22 @@ export class ProfileSettingsComponent implements OnInit {
     this.settingsFormGroup = this.fb.group(PROFILE_FORM.CONF);
 
     if (this.authService.isAuthenticated()) {
-      this.settingsFormGroup.patchValue({
-        firstNameControl: this.authService.getName(),
-        mobileControl: this.authService.getMobile(),
-        passwordControl: this.authService.getPassword(),
-        roleControl: this.authService.getRole(),
+
+      this.userCompleteService.searchCompleteUser(this.authService.getMobile()).subscribe(user => {
+
+        this.settingsFormGroup.patchValue({
+          firstNameControl: user.firstName,
+          mobileControl: user.mobile,
+          familyNameControl: user.familyName,
+          emailControl: user.email,
+          dniControl: user.dni,
+          addressControl: user.address,
+          registrationDate: user.registrationDate.getDay() + '/' + (user.registrationDate.getMonth() + 1)
+            + '/' + user.registrationDate.getFullYear(),
+          passwordControl: user.password,
+          roleControl: user.role,
+        });
+
       });
     }
   }

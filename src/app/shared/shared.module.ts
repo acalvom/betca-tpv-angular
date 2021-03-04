@@ -19,6 +19,7 @@ import {DateComponent} from '@shared/components/date.component';
 import {FooterComponent} from '@shared/components/footer.component';
 import {SearchComponent} from '@shared/components/search.component';
 import {ProfileSettingsComponent} from '@shared/components/profile-settings/profile-settings.component';
+import {UserCompleteService} from '@shared/services/userComplete.service';
 
 @NgModule({
     imports: [
@@ -62,6 +63,7 @@ import {ProfileSettingsComponent} from '@shared/components/profile-settings/prof
     RegisterDialogComponent,
     RecoverPasswordDialogComponent
   ],
+  providers: [UserCompleteService],
   entryComponents: [
     CancelYesDialogComponent,
     LoginDialogComponent,

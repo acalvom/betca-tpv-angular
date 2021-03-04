@@ -48,12 +48,13 @@ import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices
 import { ProviderInvoiceCreationUpdatingDialogComponent } from './provider-invoices/provider-invoice-creation-updating-dialog.component';
 import {BudgetDialogComponent} from './budgets/budget-dialog.component';
 import { AddArticleDialogComponent } from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
-import {UserCreationDialogComponent} from "./users/dialog/user-creation/user-creation-dialog.component";
+import {UserCreationDialogComponent} from './users/dialog/user-creation/user-creation-dialog.component';
 
 import { CustomerDiscountComponent } from './customer-discount/customer-discount.component';
 import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
 import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashier-closure.component';
 import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
+import {UsersManagementComponent} from './users/component/users-management.component';
 
 @NgModule({
   declarations: [
@@ -94,8 +95,8 @@ import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
     StockAlarmChipComponent,
     StockAuditComponent,
     ProviderInvoicesComponent,
-    UserCreationDialogComponent
-
+    UserCreationDialogComponent,
+    UsersManagementComponent,
     ProviderInvoiceCreationUpdatingDialogComponent,
     CustomerDiscountComponent,
     CashMovementDialogComponent,
