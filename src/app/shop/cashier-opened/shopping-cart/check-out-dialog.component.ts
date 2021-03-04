@@ -2,10 +2,11 @@ import {Component, Inject} from '@angular/core';
 
 import {TicketCreation} from './ticket-creation.model';
 import {ShoppingCartService} from './shopping-cart.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ShoppingState} from '../../shared/services/models/shopping-state.model';
 import {UserService} from '../../users/user.service';
 import {UserSearch} from '../../users/user-search-model';
+import {UserCreationDialogComponent} from "../../users/dialog/user-creation/user-creation-dialog.component";
 
 @Component({
   templateUrl: 'check-out-dialog.component.html',
@@ -21,7 +22,7 @@ export class CheckOutDialogComponent {
   checkedCreditLine = false;
   userSearch: UserSearch;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data, private dialogRef: MatDialogRef<CheckOutDialogComponent>,
+  constructor(@Inject(MAT_DIALOG_DATA) data, private dialog: MatDialog, private dialogRef: MatDialogRef<CheckOutDialogComponent>,
               private shoppingCartService: ShoppingCartService, private userService: UserService) {
     this.ticketCreation = {cash: 0, card: 0, voucher: 0, shoppingList: data, note: ''};
     this.total();
@@ -48,7 +49,9 @@ export class CheckOutDialogComponent {
     if (mobile) {
       // TODO falta buscar el user en BD, si no existe, debe sacar un dialogo para crearlo
       if (this.userService.search(this.userSearch) === undefined) {
-
+        this.dialog.open(UserCreationDialogComponent).afterClosed().subscribe( () => {
+          console.log('usuario creado');
+        });
       }
 
       this.ticketCreation.user = {mobile: Number(mobile)};
