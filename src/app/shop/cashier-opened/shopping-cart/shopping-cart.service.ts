@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {EMPTY, iif, merge, Observable} from 'rxjs';
+import {EMPTY, iif, merge, Observable, of} from 'rxjs';
 import {catchError, concatMap, map} from 'rxjs/operators';
 
 import {HttpService} from '@core/http.service';
@@ -9,10 +9,11 @@ import {Shopping} from '../../shared/services/models/shopping.model';
 import {TicketCreation} from './ticket-creation.model';
 import {ArticleQuickCreationDialogComponent} from './article-quick-creation-dialog.component';
 
-import {ShoppingState} from './shopping-state.model';
+import {ShoppingState} from '../../shared/services/models/shopping-state.model';
 import {EndPoints} from '@shared/end-points';
-import {Offer} from '../../shared/services/models/offer.model';
 import {SharedOfferService} from '../../shared/services/shared.offer.service';
+import {BudgetCreation} from '../../budgets/budget-creation.model';
+import {OfferShoppingCart} from './offer-shopping-cart.model';
 
 @Injectable({
   providedIn: 'root',
@@ -87,8 +88,13 @@ export class ShoppingCartService {
   }
 
   createGiftTicketAndPrint(ticketId: string): Observable<void> {
-    console.log('Crear ticket regalo');
-    return EMPTY; // TODO change EMPTY
+    const giftTicket = { id: 'Ma35Mhdgd2454656', message: 'Gift ticket', ticketId}; // ticket provisional
+    return of(giftTicket)
+      .pipe(
+        source => {
+          return this.printTicket(ticketId);
+        }
+      );
   }
 
   createDataProtectionActAndPrint(ticket): Observable<void> {
@@ -99,8 +105,12 @@ export class ShoppingCartService {
     return EMPTY; // TODO change EMPTY (Hacer llamada para crear la credit sale y guardarla en base de datos)
   }
 
-  readOffer(offerReference: string): Observable<Offer> {
+  readOffer(offerReference: string): Observable<OfferShoppingCart> {
     return this.offerService
       .read(offerReference);
+  }
+
+  createBudget(budgetCreation: BudgetCreation): Observable<void> {
+    return of(console.log('Success'));
   }
 }

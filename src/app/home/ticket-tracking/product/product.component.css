@@ -1,0 +1,19 @@
+.product-in-card {
+  margin: 5px;
+}
+
+.committed {
+  background: darkseagreen;
+}
+
+.not_committed {
+    background: cornflowerblue;
+}
+
+.require_provider {
+  background: indianred;
+}
+
+.in_stock {
+  background: lightyellow;
+}

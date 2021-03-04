@@ -1,39 +1,41 @@
 <div class="content">
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
     <div [fxFlex]="(100/3) + '%'" fxFlex.xs="100%" fxFlex.sm="33%"
-         *ngFor="let dcard of cardData">
+         *ngFor="let articleFamily of articlesFamily">
 
-      <mat-card *ngIf="dcard.type=='composite'" (click)="updateArray()"
+      <mat-card *ngIf="articleFamily.type=='composite'" (click)="updateArray(articleFamily)"
                 class="mat-elevation-z4 composite centered">
         <mat-card-header>
           <mat-icon>category</mat-icon>
           <mat-card-title>
-            {{dcard.title}}
+            {{articleFamily.description}}
           </mat-card-title>
         </mat-card-header>
       </mat-card>
 
-      <mat-card *ngIf="dcard.type=='size'" (click)="openSizes()"
+      <mat-card *ngIf="articleFamily.type=='size'" (click)="openSizes(articleFamily)"
                 class="mat-elevation-z4 composite centered">
         <mat-card-header>
-          <mat-icon> format_size</mat-icon>
+          <mat-icon>format_size</mat-icon>
           <mat-card-title>
-            {{dcard.title}}
+            {{articleFamily.description}}
           </mat-card-title>
         </mat-card-header>
       </mat-card>
 
-      <mat-card *ngIf="dcard.type=='leaf'" class="mat-elevation-z4 leaf">
+      <mat-card *ngIf="articleFamily.type==null" class="mat-elevation-z4 leaf">
         <mat-card-header>
-          <mat-card-title>{{dcard.title}}</mat-card-title>
+          <mat-card-title>{{articleFamily.description}}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p style="text-align: right">
-            {{dcard.price}}€
+            {{articleFamily.retailPrice}}€
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary">ADD TO CARD</button>
+          <button (click)="addShoppingCart(articleFamily)" mat-raised-button color="primary">
+            ADD TO CART
+          </button>
         </mat-card-actions>
       </mat-card>
 

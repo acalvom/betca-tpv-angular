@@ -4,16 +4,19 @@
     <li class="mat-tree-node">
       <!-- use a disabled button to provide padding for tree leaf -->
       <button mat-icon-button disabled></button>
-      {{node.name}}
+      {{node.reference}}
 
       <div class="crudButtons">
-        <button mat-button mat-icon-button matSuffix>
+        <button *ngIf="(node.type!='ARTICLE')" (click)="createFamilyArticle(node)" mat-button mat-icon-button matSuffix>
           <mat-icon color="warn">add</mat-icon>
         </button>
-        <button mat-button mat-icon-button matSuffix>
+        <button *ngIf="(node.type!='ARTICLE')" (click)="addArticle(node)" mat-button mat-icon-button matSuffix>
+          <mat-icon color="primary">add</mat-icon>
+        </button>
+        <button *ngIf="(node.type!='ARTICLE')" (click)="editFamilyArticle(node)" mat-button mat-icon-button matSuffix>
           <mat-icon color="warn">mode_edit</mat-icon>
         </button>
-        <button (click)="deleteNode(node)" mat-button mat-icon-button matSuffix>
+        <button (click)="deleteFamilyArticle(node)" mat-button mat-icon-button matSuffix>
           <mat-icon color="warn">close</mat-icon>
         </button>
       </div>
@@ -30,16 +33,20 @@
             {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
           </mat-icon>
         </button>
-        {{node.name}}
+        {{node.reference}}
 
         <div class="crudButtons">
-          <button mat-button mat-icon-button matSuffix>
+          <button *ngIf="(node.type!='ARTICLE')" (click)="createFamilyArticle(node)" mat-button mat-icon-button
+                  matSuffix>
             <mat-icon color="warn">add</mat-icon>
           </button>
-          <button mat-button mat-icon-button matSuffix>
+          <button *ngIf="(node.type!='ARTICLE')" (click)="addArticle(node)" mat-button mat-icon-button matSuffix>
+            <mat-icon color="primary">add</mat-icon>
+          </button>
+          <button *ngIf="(node.type!='ARTICLE')" (click)="editFamilyArticle(node)" mat-button mat-icon-button matSuffix>
             <mat-icon color="warn">mode_edit</mat-icon>
           </button>
-          <button (click)="deleteNode(node)" mat-button mat-icon-button matSuffix>
+          <button (click)="deleteFamilyArticle(node)" mat-button mat-icon-button matSuffix>
             <mat-icon color="warn">close</mat-icon>
           </button>
         </div>
@@ -52,3 +59,4 @@
 
   </mat-nested-tree-node>
 </mat-tree>
+

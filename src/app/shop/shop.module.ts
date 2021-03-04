@@ -35,36 +35,73 @@ import {SharedOfferService} from './shared/services/shared.offer.service';
 import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
 import {UserCreationUpdatingDialogComponent} from './users/user-creation-updating-dialog.component';
 import { TicketEditingDialogComponent } from './cashier-opened/tickets/ticket-editing-dialog.component';
+import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-family-view/open-sizes-dialog.component';
+import {ListComponent} from './shared/components/list.component';
+import {NewArticleFamilyDialogComponent} from './articles-family/dialogs/new-article-family-dialog/new-article-family-dialog.component';
+import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-article-family-dialog/edit-article-family-dialog.component';
+import { ManageDataProtectionActComponent } from './shared/components/manage-data-protection-act.component';
+import { StockAlarmsCreationUpdatingDialogComponent } from './stock-alarms/stock-alarms-creation-updating-dialog.component';
+import { DataProtectionActDialogComponent } from './data-protection-act/data-protection-act-dialog.component';
+import { StockAlarmChipComponent } from './stock-alarms/stock-alarm-chip/stock-alarm-chip.component';
+import { StockAuditComponent } from './stock-audit/stock-audit.component';
+import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices.component';
+import { ProviderInvoiceCreationUpdatingDialogComponent } from './provider-invoices/provider-invoice-creation-updating-dialog.component';
+import {BudgetDialogComponent} from './budgets/budget-dialog.component';
+import { AddArticleDialogComponent } from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
+import { CustomerDiscountComponent } from './customer-discount/customer-discount.component';
+import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
+import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashier-closure.component';
+import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
+import {SalesPeopleComponent} from './salespeople/salespeople.component';
+import {SalesPeopleService} from './salespeople/salespeople.service';
 import { IssuesComponent } from './issues/issues.component';
 
 
 @NgModule({
   declarations: [
+    AddArticleDialogComponent,
     AddCreditLineDialogComponent,
     ArticleCreationUpdatingDialogComponent,
     ArticlesFamilyComponent,
     ArticleFamilyViewComponent,
     ArticleQuickCreationDialogComponent,
     ArticlesComponent,
+    BudgetDialogComponent,
     CashierClosedComponent,
     CashierDialogComponent,
     CashierOpenedComponent,
     CheckOutDialogComponent,
     CreditLinePayDialogComponent,
+    EditArticleFamilyDialogComponent,
+    ListComponent,
+    NewArticleFamilyDialogComponent,
     ProviderCreationUpdatingDialogComponent,
     ProvidersComponent,
     SearchByBarcodeComponent,
     SearchByCompanyComponent,
+    SearchByBudgetComponent,
     ShopComponent,
     ShoppingCartComponent,
     TicketsComponent,
     OffersComponent,
     OfferCreationUpdatingDialogComponent,
+    OpenSizesDialogComponent,
     StockAlarmsComponent,
     UsersComponent,
     UserCreationUpdatingDialogComponent,
     TicketEditingDialogComponent,
     IssuesComponent,
+    ManageDataProtectionActComponent,
+    StockAlarmsCreationUpdatingDialogComponent,
+    DataProtectionActDialogComponent,
+    StockAlarmChipComponent,
+    StockAuditComponent,
+    ProviderInvoicesComponent,
+    ProviderInvoiceCreationUpdatingDialogComponent,
+    CustomerDiscountComponent,
+    CashMovementDialogComponent,
+    CashierClosureComponent,
+    SalesPeopleComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
@@ -87,6 +124,7 @@ import { IssuesComponent } from './issues/issues.component';
     SharedOfferService,
     SharedProviderService,
     ShoppingCartService,
+    SalesPeopleService
   ],
 })
 export class ShopModule {

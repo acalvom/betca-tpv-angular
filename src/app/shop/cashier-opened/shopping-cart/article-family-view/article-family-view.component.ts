@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {SharedArticlesFamilyService} from '../../../shared/services/shared.articles-family.service';
+import {ArticleFamilyModel} from '../../../shared/services/models/article-family.model';
+import {Article} from '../../../shared/services/models/article.model';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {OpenSizesDialogComponent} from './open-sizes-dialog.component';
 
 @Component({
   selector: 'app-article-family-view',
@@ -7,51 +12,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticleFamilyViewComponent implements OnInit {
 
-  cardData: {
-    title: string;
-    price: number;
-    type: string;
-  }[] = [];
+  articlesFamily: (ArticleFamilyModel | Article)[];
 
-  constructor() {
+  constructor(private articlesFamilyService: SharedArticlesFamilyService,
+              private dialog: MatDialog,
+              private dialogRef: MatDialogRef<ArticleFamilyViewComponent>) {
+    this.articlesFamily = [];
   }
 
   ngOnInit(): void {
-    this.cardData = [
-      {
-        title: "Zarzuela",
-        price: 20,
-        type: "composite"
-      },
-      {
-        title: "Varios",
-        price: 20,
-        type: "composite"
+    this.articlesFamilyService.readChildren().subscribe(
+      result => {
+        this.articlesFamily = result;
       }
-    ];
+    );
   }
 
-  updateArray(): void {
-    this.cardData = [
-      {
-        title: "Zz Falda",
-        price: 20,
-        type: "size"
-      },
-      {
-        title: "Zz Polo",
-        price: 27.8,
-        type: "size"
-      },
-      {
-        title: "Descrip a3",
-        price: 10.12,
-        type: "leaf"
+  updateArray(articleFamily: ArticleFamilyModel): void {
+    this.articlesFamilyService.readChildrenTemporal(articleFamily).subscribe(
+      result => {
+        this.articlesFamily = result;
       }
-    ];
+    );
   }
 
-  openSizes(): void {
+  openSizes(articleFamily: ArticleFamilyModel): void{
+    let articles: Article[] = [];
+    this.articlesFamilyService.readArticles(articleFamily).subscribe(
+      result => {
+        articles = result;
+      }
+    );
+    this.dialog.open(OpenSizesDialogComponent, {
+      data: articles
+    }).afterClosed().subscribe(result => {
+      if (result !== true && result !== undefined) {
+        this.dialogRef.close(result);
+      }
+    });
+  }
 
+  addShoppingCart(article: Article): void {
+    this.dialogRef.close(article);
   }
 }

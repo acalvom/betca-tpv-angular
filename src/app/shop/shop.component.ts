@@ -9,6 +9,8 @@ import {SharedCashierService} from './shared/services/shared.cashier.service';
 import {CashierDialogComponent} from './cashier-opened/cashier-closure/cashier-dialog.component';
 import {AddCreditLineDialogComponent} from './shared/dialogs/add-credit-line-dialog.component';
 import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
+import {DataProtectionActDialogComponent} from './data-protection-act/data-protection-act-dialog.component';
+import {CashMovementDialogComponent} from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
 
 @Component({
   templateUrl: 'shop.component.html',
@@ -71,6 +73,16 @@ export class ShopComponent {
 
   creditLinePay(): void {
     this.dialog.open(CreditLinePayDialogComponent)
+      .afterClosed();
+  }
+
+  dataProtectionAct(): void {
+    this.dialog.open(DataProtectionActDialogComponent)
+      .afterClosed();
+  }
+
+  movementCash(): void {
+    this.dialog.open(CashMovementDialogComponent)
       .afterClosed();
   }
 
