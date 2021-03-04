@@ -42,6 +42,6 @@ export class VouchersService {
   findVouchersBetweenDates(dateFrom: Date, dateTo: Date): Observable<Voucher[]> {
     return of(this.vouchers
       .filter(voucher => voucher.creationDate.getTime() >= dateFrom.getTime()
-        && voucher.creationDate.getTime() <= dateTo.getTime() && voucher.dateOfUse !== undefined));
+        && voucher.creationDate.getTime() <= dateTo.getTime() && voucher.dateOfUse === undefined));
   }
 }
