@@ -55,6 +55,7 @@ import { MessengerService } from './messenger/messenger.service';
 import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
 import {SalesPeopleComponent} from './salespeople/salespeople.component';
 import {SalesPeopleService} from './salespeople/salespeople.service';
+import { InvoicesComponent } from './invoices/invoices.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import {SalesPeopleService} from './salespeople/salespeople.service';
     CashMovementDialogComponent,
     CashierClosureComponent,
     MessengerComponent,
-    SalesPeopleComponent
+    SalesPeopleComponent,
+    InvoicesComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
