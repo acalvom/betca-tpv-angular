@@ -52,6 +52,8 @@ import { CustomerDiscountComponent } from './customer-discount/customer-discount
 import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
 import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashier-closure.component';
 import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
+import {SalesPeopleComponent} from './salespeople/salespeople.component';
+import {SalesPeopleService} from './salespeople/salespeople.service';
 
 @NgModule({
   declarations: [
@@ -95,7 +97,8 @@ import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
     ProviderInvoiceCreationUpdatingDialogComponent,
     CustomerDiscountComponent,
     CashMovementDialogComponent,
-    CashierClosureComponent
+    CashierClosureComponent,
+    SalesPeopleComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
@@ -118,6 +121,7 @@ import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
     SharedOfferService,
     SharedProviderService,
     ShoppingCartService,
+    SalesPeopleService
   ],
 })
 export class ShopModule {
