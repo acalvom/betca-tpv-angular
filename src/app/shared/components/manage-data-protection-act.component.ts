@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {RgpdType} from '../services/models/RgpdType';
-import {RgpdUser} from '../services/models/rgpd-user.model';
+import {RgpdType} from '../models/RgpdType';
+import {RgpdUser} from '../models/rgpd-user.model';
 
 @Component({
   selector: 'app-manage-data-protection-act',

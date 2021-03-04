@@ -39,7 +39,6 @@ import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-f
 import {ListComponent} from './shared/components/list.component';
 import {NewArticleFamilyDialogComponent} from './articles-family/dialogs/new-article-family-dialog/new-article-family-dialog.component';
 import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-article-family-dialog/edit-article-family-dialog.component';
-import { ManageDataProtectionActComponent } from './shared/components/manage-data-protection-act.component';
 import { StockAlarmsCreationUpdatingDialogComponent } from './stock-alarms/stock-alarms-creation-updating-dialog.component';
 import { DataProtectionActDialogComponent } from './data-protection-act/data-protection-act-dialog.component';
 import { StockAlarmChipComponent } from './stock-alarms/stock-alarm-chip/stock-alarm-chip.component';
@@ -90,7 +89,6 @@ import {SalesPeopleService} from './salespeople/salespeople.service';
     UsersComponent,
     UserCreationUpdatingDialogComponent,
     TicketEditingDialogComponent,
-    ManageDataProtectionActComponent,
     StockAlarmsCreationUpdatingDialogComponent,
     DataProtectionActDialogComponent,
     StockAlarmChipComponent,

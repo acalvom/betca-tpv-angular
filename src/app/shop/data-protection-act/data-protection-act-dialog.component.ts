@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {RgpdUser} from '../shared/services/models/rgpd-user.model';
+import {RgpdUser} from '@shared/models/rgpd-user.model';
 import {Observable, of} from 'rxjs';
-import {RgpdType} from '../shared/services/models/RgpdType';
+import {RgpdType} from '@shared/models/RgpdType';
 
 @Component({
   selector: 'app-data-protection-act-dialog',
