@@ -1,4 +1,4 @@
-import { Status } from './message-status.enum';
+import { Status } from './status.enum';
 import { SlackPublisherService } from './slack-publisher.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -35,7 +35,8 @@ export class SlackPublisherComponent implements OnInit {
       status: this._getStatusEnumByText(this.slackForm.get('status').value),
     }
     
-    this.slackPublisherService.sendMessageToSlack(body);
+    this.slackPublisherService.sendMessageToSlack(body)
+      .subscribe();
   }
 
   private _getStatusEnumByText(status: string) {

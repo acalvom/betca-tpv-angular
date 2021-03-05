@@ -1,5 +1,5 @@
 import { HttpService } from './../../core/http.service';
-import { Status } from './message-status.enum';
+import { Status } from './status.enum';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -13,10 +13,9 @@ export class SlackPublisherService {
     this.SLACK_ENDPOINT = ''
   }
   
-  public sendMessageToSlack(body: { title: string; text: string; status: Status; }):void {
+  public sendMessageToSlack(body: { title: string; text: string; status: Status; }) {
     const bodyMessage = this._getBodyMessage(body);
-    this.httpService.post(this.SLACK_ENDPOINT, bodyMessage)
-      .subscribe();
+    return this.httpService.post(this.SLACK_ENDPOINT, bodyMessage);
   }
 
   private _getIconByStatus(status:Status) {
