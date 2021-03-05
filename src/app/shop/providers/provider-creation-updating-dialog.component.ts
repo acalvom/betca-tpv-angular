@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 
 import {ProviderService} from './provider.service';
-import {Provider} from './provider.model';
+import {Provider} from '../shared/services/models/provider.model';
 
 @Component({
   templateUrl: 'provider-creation-updating-dialog.component.html',

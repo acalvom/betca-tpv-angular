@@ -45,6 +45,8 @@
   <mat-form-field>
     <input [(ngModel)]="password" matInput placeholder="Password" type="password" required/>
   </mat-form-field>
+  <mat-label><b>Data Protection Act</b></mat-label>
+  <app-manage-data-protection-act [rgpdUser]="rgpdUser"></app-manage-data-protection-act>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>

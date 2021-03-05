@@ -18,6 +18,9 @@ import {StockAuditComponent} from './stock-audit/stock-audit.component';
 import {ProviderInvoicesComponent} from './provider-invoices/provider-invoices.component';
 import {CustomerDiscountComponent} from './customer-discount/customer-discount.component';
 import {CashierClosureComponent} from './cashier-opened/cashier-closure/cashier-closure.component';
+import { MessengerComponent } from './messenger/messenger.component';
+import {SalesPeopleComponent} from './salespeople/salespeople.component';
+import {InvoicesComponent} from './invoices/invoices.component';
 
 const routes: Routes = [
   {
@@ -34,6 +37,7 @@ const routes: Routes = [
       {path: 'providers', component: ProvidersComponent},
       {path: 'stock-alarms', component: StockAlarmsComponent},
       {path: 'tickets', component: TicketsComponent},
+      {path: 'invoices', component: InvoicesComponent },
       {path: 'articles-family', component: ArticlesFamilyComponent},
       {path: 'users', component: UsersComponent},
       {path: 'provider-invoices', component: ProviderInvoicesComponent},
@@ -41,7 +45,9 @@ const routes: Routes = [
       {path: 'stock-audit', component: StockAuditComponent},
       {path: 'users', component: UsersComponent},
       {path: 'profile', component: ProfileSettingsComponent},
-      {path: 'customer-discount', component: CustomerDiscountComponent}
+      {path: 'customer-discount', component: CustomerDiscountComponent},
+      {path: 'messenger', component: MessengerComponent},
+      {path: 'salespeople', component: SalesPeopleComponent}
     ]
   }
 ];

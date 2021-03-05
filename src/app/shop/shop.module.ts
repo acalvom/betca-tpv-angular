@@ -39,18 +39,24 @@ import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-f
 import {ListComponent} from './shared/components/list.component';
 import {NewArticleFamilyDialogComponent} from './articles-family/dialogs/new-article-family-dialog/new-article-family-dialog.component';
 import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-article-family-dialog/edit-article-family-dialog.component';
-import { ManageDataProtectionActComponent } from './shared/components/manage-data-protection-act.component';
 import { StockAlarmsCreationUpdatingDialogComponent } from './stock-alarms/stock-alarms-creation-updating-dialog.component';
 import { DataProtectionActDialogComponent } from './data-protection-act/data-protection-act-dialog.component';
 import { StockAlarmChipComponent } from './stock-alarms/stock-alarm-chip/stock-alarm-chip.component';
 import { StockAuditComponent } from './stock-audit/stock-audit.component';
 import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices.component';
+import { ProviderInvoiceCreationUpdatingDialogComponent } from './provider-invoices/provider-invoice-creation-updating-dialog.component';
 import {BudgetDialogComponent} from './budgets/budget-dialog.component';
 import { AddArticleDialogComponent } from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
 import { CustomerDiscountComponent } from './customer-discount/customer-discount.component';
 import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
 import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashier-closure.component';
+import { MessengerComponent } from './messenger/messenger.component';
+import { MessengerService } from './messenger/messenger.service';
 import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
+import {SalesPeopleComponent} from './salespeople/salespeople.component';
+import {SalesPeopleService} from './salespeople/salespeople.service';
+import { InvoicesComponent } from './invoices/invoices.component';
+import { CustomerDiscountDialogComponent } from './customer-discount/customer-discount-dialog.component';
 
 @NgModule({
   declarations: [
@@ -85,15 +91,20 @@ import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
     UsersComponent,
     UserCreationUpdatingDialogComponent,
     TicketEditingDialogComponent,
-    ManageDataProtectionActComponent,
     StockAlarmsCreationUpdatingDialogComponent,
     DataProtectionActDialogComponent,
     StockAlarmChipComponent,
     StockAuditComponent,
     ProviderInvoicesComponent,
+    ProviderInvoiceCreationUpdatingDialogComponent,
     CustomerDiscountComponent,
     CashMovementDialogComponent,
     CashierClosureComponent,
+    MessengerComponent,
+    SalesPeopleComponent,
+    InvoicesComponent,
+    SalesPeopleComponent,
+    CustomerDiscountDialogComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
@@ -116,6 +127,8 @@ import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
     SharedOfferService,
     SharedProviderService,
     ShoppingCartService,
+    MessengerService,
+    SalesPeopleService
   ],
 })
 export class ShopModule {
