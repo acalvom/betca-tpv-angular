@@ -52,6 +52,7 @@ import {ProfileSettingsComponent} from '@shared/components/profile-settings/prof
     FlexLayoutModule,
     FlexModule,
     FormsModule,
+    ReactiveFormsModule,
     FooterComponent,
     LoginDialogComponent,
     MaterialModule,
