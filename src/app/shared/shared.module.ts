@@ -54,6 +54,7 @@ import {ManageDataProtectionActComponent} from '@shared/components/data-protecti
     FlexLayoutModule,
     FlexModule,
     FormsModule,
+    ReactiveFormsModule,
     FooterComponent,
     LoginDialogComponent,
     ManageDataProtectionActComponent,
