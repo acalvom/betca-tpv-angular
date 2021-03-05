@@ -1,8 +1,14 @@
-<mat-card-content>
+<mat-card-content style="text-align: center;">
   <mat-button-toggle-group [(value)]="selectedRgpdType">
-    <mat-button-toggle [value]="rgpdTypes.BASIC">{{rgpdTypes.BASIC.valueOf()}}</mat-button-toggle>
-    <mat-button-toggle [value]="rgpdTypes.MEDIUM">{{rgpdTypes.MEDIUM.valueOf()}}</mat-button-toggle>
-    <mat-button-toggle [value]="rgpdTypes.ADVANCED">{{rgpdTypes.ADVANCED.valueOf()}}</mat-button-toggle>
+    <mat-button-toggle [value]="rgpdTypes.BASIC" [style.border-color]="getColor(rgpdTypes.BASIC)"
+                       [style.color]="getColor(rgpdTypes.BASIC)">
+      {{rgpdTypes.BASIC.valueOf()}}</mat-button-toggle>
+    <mat-button-toggle [value]="rgpdTypes.MEDIUM" [style.border-color]="getColor(rgpdTypes.MEDIUM)"
+                       [style.color]="getColor(rgpdTypes.MEDIUM)">
+      {{rgpdTypes.MEDIUM.valueOf()}}</mat-button-toggle>
+    <mat-button-toggle [value]="rgpdTypes.ADVANCED" [style.border-color]="getColor(rgpdTypes.ADVANCED)"
+                       [style.color]="getColor(rgpdTypes.ADVANCED)">
+      {{rgpdTypes.ADVANCED.valueOf()}}</mat-button-toggle>
   </mat-button-toggle-group>
   <br>
   <mat-card-content *ngIf="selectedRgpdType !== undefined">

@@ -5,7 +5,8 @@ import {DataProtectionActService} from '@shared/components/data-protection-act/d
 
 @Component({
   selector: 'app-manage-data-protection-act',
-  templateUrl: './manage-data-protection-act.component.html'
+  templateUrl: './manage-data-protection-act.component.html',
+  styleUrls: ['./manage-data-protection-act.component.css']
 })
 export class ManageDataProtectionActComponent {
 
@@ -20,6 +21,10 @@ export class ManageDataProtectionActComponent {
       rgpdType: undefined,
       agreement: undefined
     };
+  }
+
+  getColor(rgpdType: RgpdType): string {
+    return this.rgpdUser.rgpdType !== undefined && rgpdType === this.rgpdUser.rgpdType ? 'green' : 'gray';
   }
 
   isUserRgpdType(): boolean {
