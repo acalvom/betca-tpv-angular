@@ -4,6 +4,7 @@ import {TicketService} from './ticket.service';
 import {Ticket} from '../../shared/services/models/ticket.model';
 import {MatDialog} from '@angular/material/dialog';
 import {TicketEditingDialogComponent} from './ticket-editing-dialog.component';
+import {TicketSearch} from './ticket-search.model';
 
 @Component({
   selector: 'app-ticket',
@@ -13,7 +14,7 @@ import {TicketEditingDialogComponent} from './ticket-editing-dialog.component';
 export class TicketsComponent{
 
   title = 'Tickets Management';
-  key: string;
+  ticketSearch: TicketSearch;
   tickets = of([]);
 
   constructor(private dialog: MatDialog, private ticketService: TicketService) {
@@ -21,11 +22,11 @@ export class TicketsComponent{
   }
 
   search(): void {
-    this.tickets = this.ticketService.search(this.key);
+    this.tickets = this.ticketService.search(this.ticketSearch);
   }
 
   resetSearch(): void {
-    this.key = null;
+    this.ticketSearch = {};
   }
 
   update(ticket: Ticket): void {
