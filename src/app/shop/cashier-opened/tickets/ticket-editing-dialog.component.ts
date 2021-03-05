@@ -13,7 +13,6 @@ import {TicketService} from './ticket.service';
 export class TicketEditingDialogComponent implements OnInit{
 
   stateValues = Object.keys(ShoppingState).filter(key => isNaN(Number(key)));
-  indexShoppingList: 0;
   displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'actions'];
   shoppingList: Shopping[];
   ticket: TicketEdition;
@@ -25,7 +24,14 @@ export class TicketEditingDialogComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.updatePricesShopping();
     this.synchronizeShoppingCart();
+  }
+
+  updatePricesShopping(): void {
+    for (const shopping of this.shoppingList) {
+      shopping.updateTotal();
+    }
   }
 
   synchronizeShoppingCart(): void {
