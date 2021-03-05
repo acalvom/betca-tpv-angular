@@ -29,8 +29,30 @@ export class SalesPeopleService {
     },
     {
       salesperson: 'Lucia',
-      day: new Date('2019-03-16'),
+      day: new Date(Date.parse('2019/01')),
       ticket: '397465',
+      articles: '',
+      finalValue: 200
+    }];
+  salespeople2: SalesPeople[] = [
+    {
+      salesperson: 'Alonso',
+      day: new Date('2019-03-16'),
+      ticket: '424pcd',
+      articles: '',
+      finalValue: 200
+    },
+    {
+      salesperson: 'Alva',
+      day: new Date('2019-03-16'),
+      ticket: '684sdc',
+      articles: '',
+      finalValue: 200
+    },
+    {
+      salesperson: 'Andres',
+      day: new Date('2019-03-16'),
+      ticket: '641cwe',
       articles: '',
       finalValue: 200
     }];
@@ -39,6 +61,10 @@ export class SalesPeopleService {
 
   search(salesPeopleSearch: SalesPeopleSearch): Observable<SalesPeople[]> {
     return of(this.salespeople);
+  }
+
+  secondSearch(salesPeopleSearch: SalesPeopleSearch): Observable<SalesPeople[]>{
+    return of(this.salespeople2);
   }
 
   printSalesPeople(salesperson: string): Observable<void> {
