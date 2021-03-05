@@ -1,0 +1,14 @@
+.row {
+  width: 100%;
+}
+.size-type {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.size-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}

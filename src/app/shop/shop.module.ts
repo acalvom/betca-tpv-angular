@@ -62,6 +62,7 @@ import {SalesPeopleService} from './salespeople/salespeople.service';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { CustomerDiscountDialogComponent } from './customer-discount/customer-discount-dialog.component';
 import {UserDialogComponent} from "./users/dialog/user-dialog.component";
+import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-creation/articles-size-family-creation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +114,8 @@ import {UserDialogComponent} from "./users/dialog/user-dialog.component";
     InvoicesComponent,
     SalesPeopleComponent,
     CustomerDiscountDialogComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    ArticlesSizeFamilyCreationDialogComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
@@ -123,6 +125,7 @@ import {UserDialogComponent} from "./users/dialog/user-dialog.component";
     ProviderCreationUpdatingDialogComponent,
     UserCreationUpdatingDialogComponent,
     UserDialogComponent,
+    ArticlesSizeFamilyCreationDialogComponent,
   ],
   imports: [
     SharedModule,
