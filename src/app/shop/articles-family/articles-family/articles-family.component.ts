@@ -6,6 +6,9 @@ import {MatDialog} from '@angular/material/dialog';
 import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
 import {ArticleFamilyModel} from '../../shared/services/models/article-family.model';
 import {SharedArticlesFamilyService} from '../../shared/services/shared.articles-family.service';
+import {NewArticleFamilyDialogComponent} from '../dialogs/new-article-family-dialog/new-article-family-dialog.component';
+import {EditArticleFamilyDialogComponent} from '../dialogs/edit-article-family-dialog/edit-article-family-dialog.component';
+import {AddArticleDialogComponent} from '../dialogs/add-article-dialog/add-article-dialog.component';
 
 
 /**
@@ -28,6 +31,7 @@ export class ArticlesFamilyComponent implements OnInit {
 
   ngOnInit(): void {
     this.read();
+    console.log(this.TREE_DATA);
   }
 
   hasChild = (_: number, node: ArticleFamilyModel) => !!node.children && node.children.length > 0;
@@ -42,10 +46,25 @@ export class ArticlesFamilyComponent implements OnInit {
   }
 
   createFamilyArticle(node: ArticleFamilyModel): any {
-    // this.dialog.open()
+    this.dialog.open(NewArticleFamilyDialogComponent, {data: node})
+      .afterClosed().subscribe(
+      result => {
+        if (result) {
+          console.log(result);
+        }
+      }
+    );
   }
 
   editFamilyArticle(node: ArticleFamilyModel): any {
+    this.dialog.open(EditArticleFamilyDialogComponent, {
+      data: node
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        console.log(result);
+      }
+    });
+
   }
 
   deleteFamilyArticle(node: ArticleFamilyModel): any {
@@ -55,6 +74,16 @@ export class ArticlesFamilyComponent implements OnInit {
           this.sharedArticlesFamilyService.deleteFamilyArticle(node).subscribe(
             () => this.read()
           );
+        }
+      }
+    );
+  }
+
+  addArticle(node: ArticleFamilyModel): any {
+    this.dialog.open(AddArticleDialogComponent, {data: node}).afterClosed().subscribe(
+      result => {
+        if (result){
+          console.log(result);
         }
       }
     );

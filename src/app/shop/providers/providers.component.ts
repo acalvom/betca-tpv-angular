@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {of} from 'rxjs';
 
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
-import {Provider} from './provider.model';
+import {Provider} from '../shared/services/models/provider.model';
 import {ProviderService} from './provider.service';
 import {ProviderSearch} from './provider-search.model';
 import {ProviderCreationUpdatingDialogComponent} from './provider-creation-updating-dialog.component';

@@ -37,7 +37,7 @@
   </div>
 </mat-toolbar>
 <mat-menu #profile="matMenu" xPosition="before">
-  <button mat-menu-item>
+  <button mat-menu-item routerLink="/home/settings">
     <mat-icon>settings</mat-icon>
     <span>Settings</span>
   </button>
@@ -66,10 +66,10 @@
   <button [matMenuTriggerFor]="adviser" mat-button>Adviser</button>
   <mat-menu #adviser="matMenu">
     <button mat-menu-item>Sale</button>
-    <button mat-menu-item>Popular</button>
-    <button mat-menu-item>New</button>
+    <button mat-menu-item routerLink="/home/adviser/popular">Popular</button>
+    <button mat-menu-item routerLink="/home/adviser/news">New</button>
   </mat-menu>
-  <button mat-button>Top 5</button>
+  <button mat-button routerLink="/home/top5">Top 5</button>
   <button mat-button routerLink="/home/offers">
     <span>Offers</span>
   </button>

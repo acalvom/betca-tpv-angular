@@ -1,0 +1,7 @@
+<main class="flex-container">
+  <mat-card>
+    <mat-card-content>
+      <app-crud (update)="update($event)" [data]="data" [readAction]="true" [createAction]="false" [deleteAction]="false"  [title] = "'Users Management'"></app-crud>
+    </mat-card-content>
+  </mat-card>
+</main>

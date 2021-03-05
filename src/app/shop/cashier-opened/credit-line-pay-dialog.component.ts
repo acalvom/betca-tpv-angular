@@ -1,10 +1,9 @@
 import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {User} from '../shared/services/models/user.models';
+import {User} from '../shared/services/models/user.model';
 import {Observable, of} from 'rxjs';
 import {SharedCreditLineService} from '../shared/services/shared.credit-line.service';
 import {TicketCreditLine} from '../shared/services/models/ticket-credit-line.model';
-import {MatTableDataSource} from '@angular/material/table';
 
 
 @Component({

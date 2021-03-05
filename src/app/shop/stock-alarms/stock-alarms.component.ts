@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {of} from 'rxjs';
+import {StockAlarm} from '../shared/services/models/stock-alarm.model';
+import {StockAlarmsService} from './stock-alarms.service';
+import {map} from 'rxjs/operators';
+import {MatDialog} from '@angular/material/dialog';
+import {StockAlarmsCreationUpdatingDialogComponent} from './stock-alarms-creation-updating-dialog.component';
+import {StockAlarmLine} from '../shared/services/models/stock-alarm-line.model';
+
 
 @Component({
   selector: 'app-stock-alarms',
@@ -6,10 +14,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stock-alarms.component.css']
 })
 export class StockAlarmsComponent implements OnInit {
+  reference: string;
+  title = 'Stock Alarm';
+  data = of([]);
+  alarms: StockAlarmLine[];
 
-  constructor() { }
+  constructor(private stockAlarmsService: StockAlarmsService, private dialog: MatDialog) {
+  }
+
+  findAlarms(): void {
+    this.stockAlarmsService.findAlarms()
+      .subscribe(value => {
+        this.alarms = value;
+      });
+  }
+
+  search(): void {
+    this.data = this.stockAlarmsService.search(this.reference)
+      .pipe(map(value => value.map(value1 => ({...value1, stockAlarmLines: JSON.stringify(value1.stockAlarmLines)}))));
+  }
+
+  resetSearch(): void {
+    this.reference = '';
+  }
+
+  create(): void {
+    this.dialog.open(StockAlarmsCreationUpdatingDialogComponent);
+  }
+
+  update(stockAlarm: StockAlarm): void {
+    this.stockAlarmsService.read(stockAlarm.name)
+      .subscribe(fullStockAlarm => this.dialog.open(StockAlarmsCreationUpdatingDialogComponent, {data: fullStockAlarm}));
+  }
 
   ngOnInit(): void {
+    this.findAlarms();
   }
 
 }
