@@ -2,11 +2,30 @@
 <mat-dialog-content>
   <mat-form-field class="full-width">
     <mat-label>Mobile</mat-label>
-    <input [(ngModel)]="user.mobile" id="company" matInput required type="text" disabled/>
+    <input [(ngModel)]="user.mobile" id="company" matInput type="text"/>
+  </mat-form-field>
+  <p>
+
+  </p>
+  <mat-form-field class="full-width">
+    <mat-label>First Name</mat-label>
+    <input [(ngModel)]="user.firstName" matInput type="text"/>
   </mat-form-field>
   <mat-form-field class="full-width">
-    <mat-label>Name</mat-label>
-    <input [(ngModel)]="user.firstName" matInput required type="text" disabled/>
+    <mat-label>Family Name</mat-label>
+    <input [(ngModel)]="user.familyName" matInput type="text"/>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>DNI</mat-label>
+    <input [(ngModel)]="user.dni" matInput type="text"/>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Email</mat-label>
+    <input [(ngModel)]="user.email" matInput type="email"/>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Password</mat-label>
+    <input [(ngModel)]="user.email" matInput type="password"/>
   </mat-form-field>
   <mat-form-field class="full-width">
     <mat-label>Role</mat-label>
@@ -16,6 +35,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <mat-checkbox [(ngModel)]="user.active">Active Account</mat-checkbox>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
