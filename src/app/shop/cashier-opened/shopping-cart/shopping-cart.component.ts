@@ -167,16 +167,26 @@ export class ShoppingCartComponent implements OnInit {
   }
   addBudget(budget): void {
     this.shoppingCartService
-      .read(budget)
-      .subscribe(newShopping => {
-        this.shoppingCart.push(newShopping);
+      .readBudget(budget)
+      .subscribe(newbudget => {
+        this.shoppingCart.push(newbudget);
         this.synchronizeShoppingCart();
       });
     this.elementRef.nativeElement.focus();
   }
 
   addDiscount(mobile): void {
-    // TODO add discount
+    this.shoppingCartService
+      .addDiscount(mobile, this.totalShoppingCart)
+      .subscribe(discount => {
+        if (discount !== 0) {
+          this.shoppingCart.forEach(item => {
+            item.discount = discount;
+            item.updateTotal();
+          });
+        }
+      });
+    this.synchronizeShoppingCart();
   }
 
   addOffer(offer): void {

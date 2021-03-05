@@ -47,6 +47,14 @@
     <mat-icon>local_atm</mat-icon>
     <span>VAT Management</span>
   </button>
+  <button mat-menu-item routerLink="/shop/issues">
+    <mat-icon>bug_report</mat-icon>
+    <span>Issues</span>
+  </button>
+  <button (click)="slack()" mat-menu-item>
+    <mat-icon>textsms</mat-icon>
+    <span>Publish on Slack</span>
+  </button>
 </mat-menu>
 <!--   Menus  -->
 <mat-menu #cashiers="matMenu">
@@ -102,7 +110,7 @@
     <mat-icon>category</mat-icon>
     <span>Articles Family</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="">
+  <button (click)="createSizeFamily()" mat-menu-item routerLink="/shop/articles-size-family-creation">
     <mat-icon>view_module</mat-icon>
     <span>Articles Sizes Family Creator</span>
   </button>

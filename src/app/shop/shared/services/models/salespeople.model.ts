@@ -1,7 +1,10 @@
+import {Ticket} from './ticket.model';
+import {Article} from './article.model';
+
 export interface SalesPeople {
   salesperson: string;
-  day: Date;
-  ticket: string;
-  articles: string;
+  date: Date;
+  ticket?: Ticket;
+  articles?: Article;
   finalValue: number;
 }

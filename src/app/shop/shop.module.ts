@@ -30,10 +30,10 @@ import {OfferCreationUpdatingDialogComponent} from './offers/offer-creation-upda
 import {ArticlesFamilyComponent} from './articles-family/articles-family/articles-family.component';
 import {ArticleFamilyViewComponent} from './cashier-opened/shopping-cart/article-family-view/article-family-view.component';
 import {StockAlarmsComponent} from './stock-alarms/stock-alarms.component';
-import {UsersComponent} from './users/users.component';
+import {UsersComponent} from './users/components/users.component';
 import {SharedOfferService} from './shared/services/shared.offer.service';
 import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
-import {UserCreationUpdatingDialogComponent} from './users/user-creation-updating-dialog.component';
+import {UserCreationUpdatingDialogComponent} from './users/dialog/user-creation/user-creation-updating-dialog.component';
 import { TicketEditingDialogComponent } from './cashier-opened/tickets/ticket-editing-dialog.component';
 import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-family-view/open-sizes-dialog.component';
 import {ListComponent} from './shared/components/list.component';
@@ -47,16 +47,25 @@ import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices
 import { ProviderInvoiceCreationUpdatingDialogComponent } from './provider-invoices/provider-invoice-creation-updating-dialog.component';
 import {BudgetDialogComponent} from './budgets/budget-dialog.component';
 import { AddArticleDialogComponent } from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
+import {UserCreationDialogComponent} from './users/dialog/user-creation/user-creation-dialog.component';
+
 import { CustomerDiscountComponent } from './customer-discount/customer-discount.component';
 import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
 import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashier-closure.component';
+import { SlackPublisherComponent } from './slack-publisher/slack-publisher.component';
 import { MessengerComponent } from './messenger/messenger.component';
 import { MessengerService } from './messenger/messenger.service';
 import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
+import {UsersManagementComponent} from './users/components/users-management.component';
 import {SalesPeopleComponent} from './salespeople/salespeople.component';
 import {SalesPeopleService} from './salespeople/salespeople.service';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { InvoiceDialogComponent } from './invoices/invoice-dialog.component';
+import { CustomerDiscountDialogComponent } from './customer-discount/customer-discount-dialog.component';
+import {UserDialogComponent} from './users/dialog/user-dialog.component';
+import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-creation/articles-size-family-creation-dialog.component';
+import { IssuesComponent } from './issues/issues.component';
+import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/issue-creation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -91,19 +100,29 @@ import { InvoiceDialogComponent } from './invoices/invoice-dialog.component';
     UsersComponent,
     UserCreationUpdatingDialogComponent,
     TicketEditingDialogComponent,
+    IssuesComponent,
     StockAlarmsCreationUpdatingDialogComponent,
     DataProtectionActDialogComponent,
     StockAlarmChipComponent,
     StockAuditComponent,
     ProviderInvoicesComponent,
+    UserCreationDialogComponent,
+    UsersManagementComponent,
     ProviderInvoiceCreationUpdatingDialogComponent,
     CustomerDiscountComponent,
     CashMovementDialogComponent,
     CashierClosureComponent,
+    SlackPublisherComponent,
     MessengerComponent,
     SalesPeopleComponent,
     InvoicesComponent,
-    InvoiceDialogComponent
+    InvoiceDialogComponent,
+    SalesPeopleComponent,
+    CustomerDiscountDialogComponent,
+    UserDialogComponent,
+    ArticlesSizeFamilyCreationDialogComponent,
+    SalesPeopleComponent,
+    IssueCreationDialogComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
@@ -112,6 +131,8 @@ import { InvoiceDialogComponent } from './invoices/invoice-dialog.component';
     CheckOutDialogComponent,
     ProviderCreationUpdatingDialogComponent,
     UserCreationUpdatingDialogComponent,
+    UserDialogComponent,
+    ArticlesSizeFamilyCreationDialogComponent,
   ],
   imports: [
     SharedModule,

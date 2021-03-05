@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import {of} from 'rxjs';
-import {UserSearch} from './user-search-model';
-import {UserService} from './user.service';
+import {UserSearch} from '../models/user-search-model';
+import {UserService} from '../services/user.service';
 import {User} from '@core/user.model';
 import {MatDialog} from '@angular/material/dialog';
-import {UserCreationUpdatingDialogComponent} from './user-creation-updating-dialog.component';
+import {UserCreationUpdatingDialogComponent} from '../dialog/user-creation/user-creation-updating-dialog.component';
 
 @Component({
   selector: 'app-users',
