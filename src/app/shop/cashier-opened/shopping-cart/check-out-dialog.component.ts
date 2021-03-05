@@ -4,8 +4,8 @@ import {TicketCreation} from './ticket-creation.model';
 import {ShoppingCartService} from './shopping-cart.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ShoppingState} from '../../shared/services/models/shopping-state.model';
-import {UserService} from '../../users/user.service';
-import {UserSearch} from '../../users/user-search-model';
+import {UserService} from '../../users/services/user.service';
+import {UserSearch} from '../../users/models/user-search-model';
 import {UserCreationDialogComponent} from "../../users/dialog/user-creation/user-creation-dialog.component";
 
 @Component({

@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<mat-dialog-content>
+  <mat-form-field class="full-width">
+    <mat-label>Mobile</mat-label>
+    <input [(ngModel)]="user.mobile" id="company" matInput required type="text" disabled/>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Name</mat-label>
+    <input [(ngModel)]="user.firstName" matInput required type="text" disabled/>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Role</mat-label>
+    <mat-select [(ngModel)]="user.role">
+      <mat-option *ngFor="let role of roleValues" [value]="role">
+        {{role}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
+  <button (click)="update()" color="primary" mat-raised-button>Update
+  </button>
+</mat-dialog-actions>
