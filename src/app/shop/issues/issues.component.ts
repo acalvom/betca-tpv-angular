@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {IssueCreationDialogComponent} from './issue-creation-dialog/issue-creation-dialog.component';
 import {IssueSearch} from './issue-search.model';
 import {IssueService} from './issue.service';
+import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 
 @Component({
   selector: 'app-issues',
@@ -28,7 +29,12 @@ export class IssuesComponent implements OnInit {
   }
 
   read(issue: Issue): void {
-    // TODO show details dialog
+    this.dialog.open(ReadDetailDialogComponent, {
+      data: {
+        title: 'Issue Details',
+        object: this.issueService.read(issue.id)
+      }
+    });
   }
 
   search(): void {

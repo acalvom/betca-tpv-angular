@@ -12,6 +12,7 @@ export class IssueService {
 
   private issueMocks: Issue[] = [
     {
+      id: 1,
       title: 'Found a bug',
       body: 'I\'m having a problem with this.',
       labels: 'bug',
@@ -21,6 +22,7 @@ export class IssueService {
       created_at: '2011-04-10T20:09:31Z',
     },
     {
+      id: 2,
       title: 'Enhancement',
       body: 'This could be improved.',
       labels: 'enhancement',
@@ -40,5 +42,9 @@ export class IssueService {
 
   create(issue: Issue): Observable<Issue> {
     return of(issue); // TODO
+  }
+
+  read(id: number): Observable<Issue> {
+    return of(this.issueMocks.find(mock => mock.id === id)); // TODO
   }
 }
