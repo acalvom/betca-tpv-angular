@@ -9,13 +9,21 @@
       <mat-label>Body</mat-label>
       <input [(ngModel)]="issueSearch.body" matInput>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Labels</mat-label>
-      <input [(ngModel)]="issueSearch.labels" matInput>
+    <mat-form-field class="full-width">
+      <mat-label>Label</mat-label>
+      <mat-select [(ngModel)]="issueSearch.labels">
+        <mat-option *ngFor="let label of labelValues" [value]="label">
+          {{label}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="full-width">
       <mat-label>State</mat-label>
-      <input [(ngModel)]="issueSearch.state" matInput>
+      <mat-select [(ngModel)]="issueSearch.state">
+        <mat-option *ngFor="let state of stateValues" [value]="state">
+          {{state}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Milestone</mat-label>

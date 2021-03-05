@@ -6,6 +6,8 @@ import {IssueCreationDialogComponent} from './issue-creation-dialog/issue-creati
 import {IssueSearch} from './issue-search.model';
 import {IssueService} from './issue.service';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
+import {IssueLabel} from './issue-label.enum';
+import {IssueState} from './issue-state.enum';
 
 @Component({
   selector: 'app-issues',
@@ -14,6 +16,8 @@ import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.comp
 })
 export class IssuesComponent implements OnInit {
   title = 'Issues';
+  labelValues = Object.keys(IssueLabel).filter(key => isNaN(Number(key)));
+  stateValues = Object.keys(IssueState).filter(key => isNaN(Number(key)));
   issues = of([]);
   issueSearch: IssueSearch;
 
