@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserCompleteService} from '@shared/services/userComplete.service';
 import {User} from '@shared/models/userRegister.model';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-users-management',
@@ -8,11 +9,15 @@ import {User} from '@shared/models/userRegister.model';
 })
 export class UsersManagementComponent implements OnInit{
 
-  public user: User;
+  public users: User[];
   constructor(private userCompleteService: UserCompleteService) {
   }
 
   ngOnInit(): void {
+
+    this.userCompleteService.getCompleteUsers().subscribe( data => {
+      this.users = data;
+    });
   }
 
 }

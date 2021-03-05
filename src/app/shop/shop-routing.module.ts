@@ -18,6 +18,7 @@ import {StockAuditComponent} from './stock-audit/stock-audit.component';
 import {ProviderInvoicesComponent} from './provider-invoices/provider-invoices.component';
 import {CustomerDiscountComponent} from './customer-discount/customer-discount.component';
 import {CashierClosureComponent} from './cashier-opened/cashier-closure/cashier-closure.component';
+import {UsersManagementComponent} from './users/component/users-management.component';
 
 const routes: Routes = [
   {
@@ -35,11 +36,9 @@ const routes: Routes = [
       {path: 'stock-alarms', component: StockAlarmsComponent},
       {path: 'tickets', component: TicketsComponent},
       {path: 'articles-family', component: ArticlesFamilyComponent},
-      {path: 'users', component: UsersComponent},
       {path: 'provider-invoices', component: ProviderInvoicesComponent},
-      {path: 'users', component: UsersComponent},
+      {path: 'users', component: UsersManagementComponent},
       {path: 'stock-audit', component: StockAuditComponent},
-      {path: 'users', component: UsersComponent},
       {path: 'profile', component: ProfileSettingsComponent},
       {path: 'customer-discount', component: CustomerDiscountComponent}
     ]

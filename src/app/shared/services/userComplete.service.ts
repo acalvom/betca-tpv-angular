@@ -25,4 +25,8 @@ export class UserCompleteService {
     return of(this.users.find(user => user.mobile == mobile));
   }
 
+  getCompleteUsers(): Observable<User[]>{
+    return of(this.users);
+  }
+
 }
