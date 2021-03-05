@@ -24,11 +24,11 @@ export class CustomerDiscountComponent {
     this.dialog
       .open(CustomerDiscountDialogComponent)
       .afterClosed()
-      .subscribe(() => this.getCustomersDiscounts());
+      .subscribe(() => this.searchCustomersDiscounts());
   }
 
-  getCustomersDiscounts(): void {
-    this.customers = this.customerDiscountService.getCustomersDiscount(this.customerDiscount);
+  searchCustomersDiscounts(): void {
+    this.customers = this.customerDiscountService.searchCustomersDiscount(this.customerDiscount);
   }
 
   readCustomerDiscount(customerDiscount: CustomerDiscount): void {
@@ -45,13 +45,13 @@ export class CustomerDiscountComponent {
       .readCustomerDiscount(customerDiscount.id)
       .subscribe(customer => this.dialog.open(CustomerDiscountDialogComponent, {data: customer})
         .afterClosed()
-        .subscribe(() => this.getCustomersDiscounts()));
+        .subscribe(() => this.searchCustomersDiscounts()));
   }
 
   deleteCustomerDiscount(customerDiscount: CustomerDiscount): void {
     this.customerDiscountService
       .deleteCustomerDiscount(customerDiscount.id)
-      .subscribe(() => this.getCustomersDiscounts());
+      .subscribe(() => this.searchCustomersDiscounts());
   }
 
   cleanFilters(): void {
