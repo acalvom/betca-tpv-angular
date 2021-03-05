@@ -61,7 +61,11 @@ import {SalesPeopleComponent} from './salespeople/salespeople.component';
 import {SalesPeopleService} from './salespeople/salespeople.service';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { CustomerDiscountDialogComponent } from './customer-discount/customer-discount-dialog.component';
-import {UserDialogComponent} from "./users/dialog/user-dialog.component";
+import {UserDialogComponent} from './users/dialog/user-dialog.component';
+import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-creation/articles-size-family-creation-dialog.component';
+import { IssuesComponent } from './issues/issues.component';
+import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/issue-creation-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -96,6 +100,7 @@ import {UserDialogComponent} from "./users/dialog/user-dialog.component";
     UsersComponent,
     UserCreationUpdatingDialogComponent,
     TicketEditingDialogComponent,
+    IssuesComponent,
     StockAlarmsCreationUpdatingDialogComponent,
     DataProtectionActDialogComponent,
     StockAlarmChipComponent,
@@ -113,7 +118,10 @@ import {UserDialogComponent} from "./users/dialog/user-dialog.component";
     InvoicesComponent,
     SalesPeopleComponent,
     CustomerDiscountDialogComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    ArticlesSizeFamilyCreationDialogComponent,
+    SalesPeopleComponent,
+    IssueCreationDialogComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
@@ -123,6 +131,7 @@ import {UserDialogComponent} from "./users/dialog/user-dialog.component";
     ProviderCreationUpdatingDialogComponent,
     UserCreationUpdatingDialogComponent,
     UserDialogComponent,
+    ArticlesSizeFamilyCreationDialogComponent,
   ],
   imports: [
     SharedModule,
