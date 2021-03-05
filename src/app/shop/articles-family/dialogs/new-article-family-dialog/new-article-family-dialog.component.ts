@@ -1,8 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {Observable, of} from "rxjs";
-import {ArticleFamilyModel} from "../../../shared/services/models/article-family.model";
-import {SharedArticlesFamilyService} from "../../../shared/services/shared.articles-family.service";
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {ArticleFamilyModel} from '../../../shared/services/models/article-family.model';
+import {SharedArticlesFamilyService} from '../../../shared/services/shared.articles-family.service';
 
 @Component({
   selector: 'app-new-article-family-dialog',
@@ -14,25 +13,32 @@ export class NewArticleFamilyDialogComponent {
 
   reference: string;
   description: string;
-  types: string[]
-  selectedType: string
+  types: string[];
+  selectedType: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ArticleFamilyModel, private sharedArticlesFamilyService: SharedArticlesFamilyService) {
-    this.types = ["ARTICLES","SIZE"];
+
+  constructor(@Inject(MAT_DIALOG_DATA) public parent: ArticleFamilyModel,
+              private sharedArticlesFamilyService: SharedArticlesFamilyService,
+              private dialogRef: MatDialogRef<NewArticleFamilyDialogComponent>) {
+    this.types = ['ARTICLES', 'SIZE'];
     this.selectedType = this.types[0];
   }
 
-  createArticlesFamily(): Observable<ArticleFamilyModel> {
-    const articlesFamilyModel : ArticleFamilyModel = {
-      reference : this.reference,
-      description : this.description,
-      type : this.selectedType,
-    }
+  createArticlesFamily(): void {
+    const articlesFamilyModel: ArticleFamilyModel = {
+      reference: this.reference,
+      description: this.description,
+      type: this.selectedType,
+    };
 
-    return this.sharedArticlesFamilyService.createArticleFamily(articlesFamilyModel);
+    this.sharedArticlesFamilyService.createArticleFamily(articlesFamilyModel, this.parent.reference).subscribe(
+      result => {
+        this.dialogRef.close(result);
+      }
+    );
   }
 
-  changeSelection(value: any) {
+  changeSelection(value: any): void {
     this.selectedType = value;
   }
 }

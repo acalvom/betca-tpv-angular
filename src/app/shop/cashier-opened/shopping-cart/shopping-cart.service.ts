@@ -12,8 +12,9 @@ import {ArticleQuickCreationDialogComponent} from './article-quick-creation-dial
 import {ShoppingState} from '../../shared/services/models/shopping-state.model';
 import {EndPoints} from '@shared/end-points';
 import {SharedOfferService} from '../../shared/services/shared.offer.service';
-import {BudgetCreation} from './budget-creation.model';
+import {BudgetCreation} from '../../budgets/budget-creation.model';
 import {OfferShoppingCart} from './offer-shopping-cart.model';
+import {BudgetService} from '../../budgets/budget.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,7 @@ export class ShoppingCartService {
   static VARIOUS_LENGTH = 5;
 
   constructor(private dialog: MatDialog, private articleService: SharedArticleService,
-              private offerService: SharedOfferService, private httpService: HttpService) {
+              private offerService: SharedOfferService, private httpService: HttpService, private budgetService: BudgetService) {
   }
 
   read(newBarcode: string): Observable<Shopping> {
@@ -112,5 +113,9 @@ export class ShoppingCartService {
 
   createBudget(budgetCreation: BudgetCreation): Observable<void> {
     return of(console.log('Success'));
+  }
+  readBudget(budget: string): Observable<Shopping> {
+    return this.budgetService
+      .read(budget);
   }
 }

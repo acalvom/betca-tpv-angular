@@ -19,6 +19,7 @@ import {DateComponent} from '@shared/components/date.component';
 import {FooterComponent} from '@shared/components/footer.component';
 import {SearchComponent} from '@shared/components/search.component';
 import {ProfileSettingsComponent} from '@shared/components/profile-settings/profile-settings.component';
+import {ManageDataProtectionActComponent} from '@shared/components/data-protection-act/manage-data-protection-act.component';
 
 @NgModule({
     imports: [
@@ -35,6 +36,7 @@ import {ProfileSettingsComponent} from '@shared/components/profile-settings/prof
     DateComponent,
     FooterComponent,
     LoginDialogComponent,
+    ManageDataProtectionActComponent,
     NumberDialogComponent,
     ReadDetailDialogComponent,
     SearchComponent,
@@ -55,6 +57,7 @@ import {ProfileSettingsComponent} from '@shared/components/profile-settings/prof
     ReactiveFormsModule,
     FooterComponent,
     LoginDialogComponent,
+    ManageDataProtectionActComponent,
     MaterialModule,
     NumberDialogComponent,
     ReadDetailDialogComponent,

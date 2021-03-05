@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>{{dialogTitle}}</h2>
+<mat-dialog-content>
+  <mat-form-field class="full-width">
+    <mat-label>Note</mat-label>
+    <input [(ngModel)]="customerDiscount.note" matInput type="text"/>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Discount</mat-label>
+    <input [(ngModel)]="customerDiscount.discount" matInput required type="number"/>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Minimmun Purchase</mat-label>
+    <input [(ngModel)]="customerDiscount.minimmumPurchase" matInput required type="number">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>User</mat-label>
+    <input [(ngModel)]="customerDiscount.user" matInput required type="text">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
+  <button (click)="createCustomerDiscount()" *ngIf="isCreate()" [disabled]=invalid() color="primary" mat-raised-button>Create</button>
+  <button (click)="updateCustomerDiscount()" *ngIf="!isCreate()" [disabled]=invalid() color="primary" mat-raised-button>Update</button>
+</mat-dialog-actions>
+

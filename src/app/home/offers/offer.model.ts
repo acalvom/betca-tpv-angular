@@ -3,5 +3,5 @@ export interface Offer {
   description: string;
   expiryDate: Date;
   discount: number;
-  articleBarcodes: string[];
+  articleDescriptions: string[];
 }
