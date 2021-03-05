@@ -8,6 +8,7 @@ import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
 import {of} from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {RgpdUser} from '@shared/models/rgpd-user.model';
 
 @Component({
   templateUrl: 'register-dialog.component.html',
@@ -24,6 +25,7 @@ export class RegisterDialogComponent {
   role: Role;
   registrationDate: Date;
   active: boolean;
+  rgpdUser: RgpdUser = {};
   /*  private MESSAGE: string = 'Usuario ' + this.name + ' registrado correctamente.';
     user: User = {
       mobile: this.mobile,
