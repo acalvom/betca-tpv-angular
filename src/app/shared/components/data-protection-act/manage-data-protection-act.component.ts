@@ -9,17 +9,32 @@ import {DataProtectionActService} from '@shared/components/data-protection-act/d
 })
 export class ManageDataProtectionActComponent {
 
-  @Input() rgpdUser: RgpdUser = {};
+  @Input() rgpdUser: RgpdUser;
 
   rgpdTypes = RgpdType;
   selectedRgpdType: RgpdType;
-  file: File;
 
   constructor(private dataProtectionActService: DataProtectionActService) {
+    this.rgpdUser = {
+      mobile: undefined,
+      rgpdType: undefined,
+      agreement: undefined
+    };
   }
 
   isUserRgpdType(): boolean {
     return this.rgpdUser.rgpdType === this.selectedRgpdType;
+  }
+
+  onFileSelected(): void {
+    const inputNode: any = document.querySelector('#file');
+    if (typeof (FileReader) !== 'undefined') {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.rgpdUser.agreement = e.target.result;
+      };
+      reader.readAsArrayBuffer(inputNode.files[0]);
+    }
   }
 
   printUnsignedAgreement(): void {

@@ -13,10 +13,8 @@
     <mat-card-content *ngIf="!isUserRgpdType()">
       <button mat-stroked-button color="primary" (click)="printUnsignedAgreement()">Download PDF</button>
       <br>
-      <mat-form-field>
-        <mat-label>Choose a file (.pdf)</mat-label>
-        <input [(ngModel)]="file" type="file" accept="application/pdf">
-      </mat-form-field>
+      <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+      <input hidden (change)="onFileSelected()" #fileInput type="file" accept="application/pdf">
     </mat-card-content>
   </mat-card-content>
 </mat-card-content>

@@ -10,11 +10,11 @@ import {DataProtectionActService} from '@shared/components/data-protection-act/d
 })
 export class DataProtectionActDialogComponent {
 
-  userMobile: number;
   mobiles: Observable<number[]> = of([]);
-  rgpdUser: RgpdUser = {};
+  rgpdUser: RgpdUser;
 
   constructor(private dataProtectionActService: DataProtectionActService) {
+    this.reset();
   }
 
   findMobiles(): void {
@@ -23,11 +23,19 @@ export class DataProtectionActDialogComponent {
 
   findByMobile(): void {
     this.dataProtectionActService
-      .read(this.userMobile)
-      .subscribe(rgpdUser => this.rgpdUser = rgpdUser);
+      .read(this.rgpdUser.mobile)
+      .subscribe(searchRgpdUser => {
+          this.rgpdUser.mobile = searchRgpdUser.mobile;
+          this.rgpdUser.rgpdType = searchRgpdUser.rgpdType;
+        }
+      );
   }
 
   reset(): void {
-    this.rgpdUser = {};
+    this.rgpdUser = {
+      mobile: undefined,
+      rgpdType: undefined,
+      agreement: undefined
+    };
   }
 }
