@@ -20,6 +20,7 @@ import {FooterComponent} from '@shared/components/footer.component';
 import {SearchComponent} from '@shared/components/search.component';
 import {ProfileSettingsComponent} from '@shared/components/profile-settings/profile-settings.component';
 import {UserCompleteService} from '@shared/services/userComplete.service';
+import {ManageDataProtectionActComponent} from '@shared/components/manage-data-protection-act.component';
 
 @NgModule({
     imports: [
@@ -36,6 +37,7 @@ import {UserCompleteService} from '@shared/services/userComplete.service';
     DateComponent,
     FooterComponent,
     LoginDialogComponent,
+    ManageDataProtectionActComponent,
     NumberDialogComponent,
     ReadDetailDialogComponent,
     SearchComponent,
@@ -55,6 +57,7 @@ import {UserCompleteService} from '@shared/services/userComplete.service';
     FormsModule,
     FooterComponent,
     LoginDialogComponent,
+    ManageDataProtectionActComponent,
     MaterialModule,
     NumberDialogComponent,
     ReadDetailDialogComponent,
