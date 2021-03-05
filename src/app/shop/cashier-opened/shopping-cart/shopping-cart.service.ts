@@ -119,11 +119,11 @@ export class ShoppingCartService {
       .read(budget);
   }
 
-  addDiscount(mobile: string, purchate: number): Observable<number> {
+  addDiscount(mobile: string, purchase: number): Observable<number> {
     // TODO Search user mobile to get discount and check minimum purchase
     const minimumPurchase = 60;
     const discount = 50;
-    if (purchate < minimumPurchase) {
+    if (purchase < minimumPurchase) {
       return of(0);
     } else {
       return of(discount);
