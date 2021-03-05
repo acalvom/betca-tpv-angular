@@ -3,6 +3,8 @@ import {Observable, of} from 'rxjs';
 import {Ticket} from '../../shared/services/models/ticket.model';
 import {Shopping} from '../../shared/services/models/shopping.model';
 import {TicketEdition} from './ticket-edition.model';
+import {HttpService} from '@core/http.service';
+import {EndPoints} from '@shared/end-points';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +16,11 @@ export class TicketService {
   shopping1: Shopping = new Shopping('12345', 'description1', 5);
   shopping2: Shopping = new Shopping('54321', 'description2', 10);
 
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
   search(key: string): Observable<Ticket[]> {
-    return of(
-      [this.ticket1, this.ticket2]
-    );
+    return this.httpService
+      .get(EndPoints.TICKETS + '/' + key);
   }
 
   read(id: string): Observable<TicketEdition> {
