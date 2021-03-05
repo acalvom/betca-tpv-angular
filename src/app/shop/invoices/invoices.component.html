@@ -1,1 +1,21 @@
-<p>invoices works!</p>
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Filters: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>Phone</mat-label>
+      <input [(ngModel)]="invoiceSearch.phone" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ticket Id.</mat-label>
+      <input [(ngModel)]="invoiceSearch.ticketId" matInput>
+    </mat-form-field>
+    <button (click)="search()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <button (click)="resetSearch()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>
+<app-crud (create)="create()" (read)="print($event)" (update)="updateUserData($event)"
+          [data]="invoices" [deleteAction]="false" [title]="title"></app-crud>
