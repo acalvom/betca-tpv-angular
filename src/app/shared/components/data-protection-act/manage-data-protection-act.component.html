@@ -6,13 +6,12 @@
   </mat-button-toggle-group>
   <br>
   <mat-card-content *ngIf="selectedRgpdType !== undefined">
+    {{selectedRgpdType.valueOf()}} Data Protection Agreement<br>
     <mat-card-content *ngIf="isUserRgpdType()">
-      {{selectedRgpdType.valueOf()}} Data Protection Agreement<br>
-      <button mat-stroked-button color="primary">Download PDF</button>
+      <button mat-stroked-button color="primary" (click)="printSignedAgreement()">Download PDF</button>
     </mat-card-content>
     <mat-card-content *ngIf="!isUserRgpdType()">
-      {{selectedRgpdType.valueOf()}} Data Protection Agreement<br>
-      <button mat-stroked-button color="primary">Download PDF</button>
+      <button mat-stroked-button color="primary" (click)="printUnsignedAgreement()">Download PDF</button>
       <br>
       <mat-form-field>
         <mat-label>Choose a file (.pdf)</mat-label>

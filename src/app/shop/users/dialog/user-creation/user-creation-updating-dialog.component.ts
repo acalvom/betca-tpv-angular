@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 
 import {User} from '@core/user.model';
 import {Role} from '@core/role.model';
-import {UserService} from './user.service';
+import {UserService} from '../../services/user.service';
 
 @Component({
   templateUrl: 'user-creation-updating-dialog.component.html',

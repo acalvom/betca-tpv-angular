@@ -1,5 +1,5 @@
 import {CreditSale} from './credit-sale.model';
-import {User} from './user.models';
+import {User} from './user.model';
 
 export interface Credit{
   reference: string;
