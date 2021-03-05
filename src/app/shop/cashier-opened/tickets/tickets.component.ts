@@ -26,7 +26,7 @@ export class TicketsComponent{
   }
 
   resetSearch(): void {
-    this.ticketSearch.key = null;
+    this.ticketSearch = {};
   }
 
   update(ticket: Ticket): void {
