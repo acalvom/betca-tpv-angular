@@ -13,8 +13,6 @@ import {TicketSearch} from './ticket-search.model';
 export class TicketService {
 
   private static SEARCH = '/search';
-  shopping1: Shopping = new Shopping('12345', 'description1', 5);
-  shopping2: Shopping = new Shopping('54321', 'description2', 10);
 
   constructor(private httpService: HttpService) { }
 
@@ -25,8 +23,8 @@ export class TicketService {
   }
 
   read(id: string): Observable<TicketEdition> {
-    const ticketEdition: TicketEdition = {id, shoppingList: [this.shopping1, this.shopping2]};
-    return of(ticketEdition);
+    return this.httpService
+      .get(EndPoints.TICKETS + '/' + id);
   }
 
   update(id: string, shoppingList: Shopping[]): Observable<TicketEdition> {
