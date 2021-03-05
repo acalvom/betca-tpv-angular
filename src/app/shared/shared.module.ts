@@ -19,7 +19,7 @@ import {DateComponent} from '@shared/components/date.component';
 import {FooterComponent} from '@shared/components/footer.component';
 import {SearchComponent} from '@shared/components/search.component';
 import {ProfileSettingsComponent} from '@shared/components/profile-settings/profile-settings.component';
-import {ManageDataProtectionActComponent} from '@shared/components/manage-data-protection-act.component';
+import {ManageDataProtectionActComponent} from '@shared/components/data-protection-act/manage-data-protection-act.component';
 
 @NgModule({
     imports: [
