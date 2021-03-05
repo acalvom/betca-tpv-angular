@@ -1,6 +1,6 @@
 <mat-card>
   <mat-dialog-content>
-    <app-search title="Mobile" [(key)]="userMobile" [keys]="mobiles" (renew)="findMobiles()"
+    <app-search title="Mobile" [(key)]="this.rgpdUser.mobile" [keys]="mobiles" (renew)="findMobiles()"
                 (selected)="findByMobile()" (keyChange)="reset()"></app-search>
     <app-manage-data-protection-act [rgpdUser]="rgpdUser"></app-manage-data-protection-act>
   </mat-dialog-content>
