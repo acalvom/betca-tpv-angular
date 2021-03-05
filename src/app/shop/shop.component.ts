@@ -11,6 +11,7 @@ import {AddCreditLineDialogComponent} from './shared/dialogs/add-credit-line-dia
 import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
 import {DataProtectionActDialogComponent} from './data-protection-act/data-protection-act-dialog.component';
 import {CashMovementDialogComponent} from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
+import { SlackPublisherComponent } from './slack-publisher/slack-publisher.component';
 
 @Component({
   templateUrl: 'shop.component.html',
@@ -86,4 +87,10 @@ export class ShopComponent {
       .afterClosed();
   }
 
+  slack() {
+    this.dialog.open(SlackPublisherComponent)
+      .afterClosed();
+  }
+
 }
+

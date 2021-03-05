@@ -25,7 +25,8 @@ export class RegisterDialogComponent {
   role: Role;
   registrationDate: Date;
   active: boolean;
-  rgpdUser: RgpdUser = {};
+  rgpdUser: RgpdUser;
+
   /*  private MESSAGE: string = 'Usuario ' + this.name + ' registrado correctamente.';
     user: User = {
       mobile: this.mobile,
@@ -36,6 +37,7 @@ export class RegisterDialogComponent {
 
   constructor(private httpService: HttpService, private router: Router,
               private dialog: MatDialog, private snackBar: MatSnackBar) {
+    this.rgpdUser = {mobile: this.mobile};
   }
 
   register(): void {

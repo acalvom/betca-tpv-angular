@@ -20,7 +20,7 @@ import {FooterComponent} from '@shared/components/footer.component';
 import {SearchComponent} from '@shared/components/search.component';
 import {ProfileSettingsComponent} from '@shared/components/profile-settings/profile-settings.component';
 import {UserCompleteService} from '@shared/services/userComplete.service';
-import {ManageDataProtectionActComponent} from '@shared/components/manage-data-protection-act.component';
+import {ManageDataProtectionActComponent} from '@shared/components/data-protection-act/manage-data-protection-act.component';
 
 @NgModule({
     imports: [
@@ -47,27 +47,27 @@ import {ManageDataProtectionActComponent} from '@shared/components/manage-data-p
     RecoverPasswordDialogComponent,
 
   ],
-    exports: [
-        CancelYesDialogComponent,
-        CommonModule,
-        CrudComponent,
-        DateComponent,
-        FlexLayoutModule,
-        FlexModule,
-        FormsModule,
-        FooterComponent,
-        LoginDialogComponent,
-        ManageDataProtectionActComponent,
-        MaterialModule,
-        NumberDialogComponent,
-        ReadDetailDialogComponent,
-        SearchComponent,
-        UppercaseWords,
-        RegisterDialogComponent,
-        RecoverPasswordDialogComponent,
-        ProfileSettingsComponent
-    ],
   providers: [UserCompleteService],
+  exports: [
+    CancelYesDialogComponent,
+    CommonModule,
+    CrudComponent,
+    DateComponent,
+    FlexLayoutModule,
+    FlexModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FooterComponent,
+    LoginDialogComponent,
+    ManageDataProtectionActComponent,
+    MaterialModule,
+    NumberDialogComponent,
+    ReadDetailDialogComponent,
+    SearchComponent,
+    UppercaseWords,
+    RegisterDialogComponent,
+    RecoverPasswordDialogComponent
+  ],
   entryComponents: [
     CancelYesDialogComponent,
     LoginDialogComponent,
