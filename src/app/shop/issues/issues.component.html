@@ -1,0 +1,45 @@
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Filters: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input [(ngModel)]="issueSearch.title" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Body</mat-label>
+      <input [(ngModel)]="issueSearch.body" matInput>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Label</mat-label>
+      <mat-select [(ngModel)]="issueSearch.labels">
+        <mat-option *ngFor="let label of labelValues" [value]="label">
+          {{label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>State</mat-label>
+      <mat-select [(ngModel)]="issueSearch.state">
+        <mat-option *ngFor="let state of stateValues" [value]="state">
+          {{state}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Milestone</mat-label>
+      <input [(ngModel)]="issueSearch.milestone" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Assignee</mat-label>
+      <input [(ngModel)]="issueSearch.assignee" matInput>
+    </mat-form-field>
+    <button (click)="search()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <button (click)="resetSearch()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>
+<app-crud (create)="create()" (read)="read($event)"
+          [data]="issues" [deleteAction]="false" [updateAction]="false" [title]="title"></app-crud>

@@ -15,7 +15,7 @@ export class CustomerDiscountService {
 
   constructor() { }
 
-  getCustomersDiscount(customerDiscountSearch: CustomerDiscountSearch): Observable<CustomerDiscount[]> {
+  searchCustomersDiscount(customerDiscountSearch: CustomerDiscountSearch): Observable<CustomerDiscount[]> {
     return of(this.customerDiscounts);
   }
 
@@ -30,7 +30,7 @@ export class CustomerDiscountService {
     return of(this.customerDiscounts.find(customer => customer.id === id));
   }
 
-  setCustomerDiscount(id: string, customerDiscount: CustomerDiscount): Observable<CustomerDiscount> {
+  updateCustomerDiscount(id: string, customerDiscount: CustomerDiscount): Observable<CustomerDiscount> {
     const setCustomer = this.customerDiscounts.find(customer => customer.id === id);
     const index = this.customerDiscounts.indexOf(setCustomer);
     if (index > -1) {

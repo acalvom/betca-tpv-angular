@@ -15,46 +15,67 @@ export class SalesPeopleService {
   salespeople: SalesPeople[] = [
     {
       salesperson: 'Amaya',
-      day: new Date('2019-03-16'),
-      ticket: '684165',
-      articles: '',
+      date: new Date('2019-03-16'),
+      ticket: {
+        id: '3218',
+        reference: 'referenceTest',
+        mobile: 0
+      },
+      articles: {
+        barcode: '674651',
+        description: 'descriptionTest',
+        retailPrice: 2684,
+        providerCompany: 'providerCompanyTest'
+      },
       finalValue: 200
     },
     {
       salesperson: 'Martina',
-      day: new Date('2019-03-16'),
-      ticket: '223292',
-      articles: '',
-      finalValue: 200
+      date: new Date('2019-03-16'),
+      ticket: {
+        id: '3218',
+        reference: 'referenceTest',
+        mobile: 0
+      },
+      articles: {
+        barcode: '674651',
+        description: 'descriptionTest',
+        retailPrice: 2684,
+        providerCompany: 'providerCompanyTest'
+      },
+      finalValue: 69
     },
     {
       salesperson: 'Lucia',
-      day: new Date(Date.parse('2019/01')),
-      ticket: '397465',
-      articles: '',
-      finalValue: 200
+      date: new Date(Date.parse('2019/01')),
+      ticket: {
+        id: '3218',
+        reference: 'referenceTest',
+        mobile: 0
+      },
+      articles: {
+        barcode: '674651',
+        description: 'descriptionTest',
+        retailPrice: 2684,
+        providerCompany: 'providerCompanyTest'
+      },
+      finalValue: 234
     }];
   salespeople2: SalesPeople[] = [
     {
+      date: new Date('2019-03-16'),
       salesperson: 'Alonso',
-      day: new Date('2019-03-16'),
-      ticket: '424pcd',
-      articles: '',
       finalValue: 200
     },
     {
+      date: new Date('2019-03-16'),
       salesperson: 'Alva',
-      day: new Date('2019-03-16'),
-      ticket: '684sdc',
-      articles: '',
-      finalValue: 200
+      finalValue: 233
     },
     {
+      date: new Date('2019-03-16'),
       salesperson: 'Andres',
-      day: new Date('2019-03-16'),
-      ticket: '641cwe',
-      articles: '',
-      finalValue: 200
+      finalValue: 215
     }];
   constructor(private httpService: HttpService) {
   }

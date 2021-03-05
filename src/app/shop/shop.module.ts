@@ -61,8 +61,11 @@ import {SalesPeopleComponent} from './salespeople/salespeople.component';
 import {SalesPeopleService} from './salespeople/salespeople.service';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { CustomerDiscountDialogComponent } from './customer-discount/customer-discount-dialog.component';
-import {UserDialogComponent} from "./users/dialog/user-dialog.component";
+import {UserDialogComponent} from './users/dialog/user-dialog.component';
 import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-creation/articles-size-family-creation-dialog.component';
+import { IssuesComponent } from './issues/issues.component';
+import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/issue-creation-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -97,6 +100,7 @@ import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-
     UsersComponent,
     UserCreationUpdatingDialogComponent,
     TicketEditingDialogComponent,
+    IssuesComponent,
     StockAlarmsCreationUpdatingDialogComponent,
     DataProtectionActDialogComponent,
     StockAlarmChipComponent,
@@ -116,6 +120,8 @@ import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-
     CustomerDiscountDialogComponent,
     UserDialogComponent,
     ArticlesSizeFamilyCreationDialogComponent,
+    SalesPeopleComponent,
+    IssueCreationDialogComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
