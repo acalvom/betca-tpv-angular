@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../models/userRegister.model';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {of} from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
+import {ProfileSettingsService} from '@shared/components/profile-settings/profile-settings.service';
+import {User} from '@shared/models/userRegister.model';
 import {PROFILE_FORM} from '@shared/form.constant';
-import {UserCompleteService} from '@shared/services/userComplete.service';
-import {ProfileSettingsService} from './profile-settings.service';
 
 
 @Component({
@@ -13,18 +12,17 @@ import {ProfileSettingsService} from './profile-settings.service';
   templateUrl: 'profile-settings.component.html',
   styleUrls: ['profile-settings.component.css']
 })
-
 export class ProfileSettingsComponent implements OnInit {
-  user: User;
+
   settingsFormGroup: FormGroup;
-  editable = false;
-  mobileInputData: number;
-  passwordInputData: string;
   formManage: any;
+  user: User;
+  editable = false;
+
 
   constructor(private router: Router, private snackBar: MatSnackBar,
-              , private fb: FormBuilder,
-              private profileSettingsService: ProfileSettingsService, private authService: AuthService, private userCompleteService: UserCompleteService) {
+              private fb: FormBuilder, private profileSettingsService: ProfileSettingsService) {
+  }
 
   ngOnInit(): void {
     this.readUser();
@@ -32,29 +30,14 @@ export class ProfileSettingsComponent implements OnInit {
     this.fillForm(this.user);
   }
 
-    if (this.authService.isAuthenticated()) {
-
-      this.userCompleteService.searchCompleteUser(this.authService.getMobile()).subscribe(user => {
-
-        this.settingsFormGroup.patchValue({
-          firstNameControl: user.firstName,
-          mobileControl: user.mobile,
-          familyNameControl: user.familyName,
-          emailControl: user.email,
-          dniControl: user.dni,
-          addressControl: user.address,
-          registrationDate: user.registrationDate.getDay() + '/' + (user.registrationDate.getMonth() + 1)
-            + '/' + user.registrationDate.getFullYear(),
-          passwordControl: user.password,
-          roleControl: user.role,
-        });
-
   readUser(): void {
     this.profileSettingsService.read(this.profileSettingsService.getMobile())
       .subscribe(user => this.user = user);
   }
 
+
   fillForm(user: User): void {
+
     if (this.profileSettingsService.isAuthenticated()) {
       this.settingsFormGroup.patchValue({
         firstNameControl: user.firstName,
@@ -66,6 +49,7 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   update(): void {
+
     this.formDataToUser();
     this.profileSettingsService.update(this.profileSettingsService.getMobile(), this.user)
       .subscribe(() => {
@@ -73,6 +57,7 @@ export class ProfileSettingsComponent implements OnInit {
         this.openSnackBar('User successfully registered', 'OK');
       });
   }
+
 
   formDataToUser(): void {
     this.formManage = this.settingsFormGroup.getRawValue();
