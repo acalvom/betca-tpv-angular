@@ -51,6 +51,10 @@
     <mat-icon>bug_report</mat-icon>
     <span>Issues</span>
   </button>
+  <button (click)="slack()" mat-menu-item>
+    <mat-icon>textsms</mat-icon>
+    <span>Publish on Slack</span>
+  </button>
 </mat-menu>
 <!--   Menus  -->
 <mat-menu #cashiers="matMenu">
@@ -84,7 +88,7 @@
     <mat-icon>playlist_add_check</mat-icon>
     <span>Ticket tracking</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="">
+  <button mat-menu-item routerLink="/shop/invoices">
     <mat-icon>receipt</mat-icon>
     <span>Invoices</span>
   </button>
@@ -106,7 +110,7 @@
     <mat-icon>category</mat-icon>
     <span>Articles Family</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="">
+  <button (click)="createSizeFamily()" mat-menu-item routerLink="/shop/articles-size-family-creation">
     <mat-icon>view_module</mat-icon>
     <span>Articles Sizes Family Creator</span>
   </button>
@@ -158,7 +162,7 @@
     <mat-icon>money_off</mat-icon>
     <span>Customer Discount</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="">
+  <button mat-menu-item routerLink="messenger">
     <mat-icon>message</mat-icon>
     <span>Messengers</span>
   </button>
