@@ -85,7 +85,14 @@ export class ShoppingCartService {
   }
 
   createInvoiceAndPrint(ticketId: string): Observable<void> {
-    return EMPTY; // TODO change EMPTY
+    // return this.httpService.pdf().get(EndPoints.INVOICES + '/' + ticketId + ShoppingCartService.RECEIPT);
+    const ticket = { id: 'Ma35Mhdgd2454656', message: 'Invoice ticket', ticketId}; // invoice provisional
+    return of(ticket)
+      .pipe(
+        source => {
+          return this.printTicket(ticketId);
+        }
+      );
   }
 
   createGiftTicketAndPrint(ticketId: string): Observable<void> {
