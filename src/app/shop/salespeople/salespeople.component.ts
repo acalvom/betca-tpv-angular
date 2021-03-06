@@ -22,6 +22,10 @@ export class SalesPeopleComponent {
     this.salesPeoples = this.SalesPeopleService.search(this.salesPeopleSearch);
   }
 
+  secondSearch(): void {
+    this.salesPeoples = this.SalesPeopleService.secondSearch(this.salesPeopleSearch);
+  }
+
   resetSearch(): void {
     this.salesPeopleSearch = {};
   }

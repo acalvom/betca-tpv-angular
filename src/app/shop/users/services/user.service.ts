@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpService} from '@core/http.service';
 import {Observable, of} from 'rxjs';
 import {EndPoints} from '@shared/end-points';
-import {UserSearch} from './user-search-model';
+import {UserSearch} from '../models/user-search-model';
 import {Role} from '@core/role.model';
-import {User} from './userManagement.model';
+import {User} from '../models/user-basic.model';
 
 @Injectable({
   providedIn: 'root',

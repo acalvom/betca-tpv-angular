@@ -1,0 +1,26 @@
+section {
+    min-width: 500px;
+    padding: 10px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-radio-group {
+    width: 100%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons button {
+    margin: 0 50px;
+}

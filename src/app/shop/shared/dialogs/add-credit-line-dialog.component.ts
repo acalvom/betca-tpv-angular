@@ -1,6 +1,8 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {User} from '../services/models/user.models';
+import {User} from '../services/models/user.model';
+import {SharedUserService} from '../services/shared.user.service';
+import {SharedCreditLineService} from '../services/shared.credit-line.service';
 
 @Component({
   templateUrl: 'add-credit-line-dialog.component.html'
@@ -10,15 +12,16 @@ export class AddCreditLineDialogComponent {
 
   user: User;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data) {
+  constructor(@Inject(MAT_DIALOG_DATA) data, private userService: SharedUserService,
+              private creditLineService: SharedCreditLineService) {
 
   }
 
-  // TODO Extraer a shared lo de buscar usuario cuando vaya
-  searchUser(mobile: string): void {
+  searchUser(mobile: number): void {
     if (mobile) {
-      // TODO falta buscar el user en BD, si no existe, debe sacar un dialogo diciendolo
-      this.user = {mobile: Number(mobile)};
+      this.userService.read(mobile).subscribe(
+        value => this.user = value
+      );
     }
   }
 
@@ -31,7 +34,14 @@ export class AddCreditLineDialogComponent {
   }
 
   create(): void {
-    // TODO
+    this.creditLineService.findByUserReference(this.user.mobile.toString()).subscribe(
+      result => { if (result == null) {
+          console.error('No tiene linea de credito asi que se crea'); // TODO
+        } else {
+        // TODO si ya tiene linea de credito avisar
+      }
+      }
+    );
   }
 
 }
