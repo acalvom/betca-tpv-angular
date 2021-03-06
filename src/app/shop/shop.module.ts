@@ -67,6 +67,7 @@ import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-
 import { IssuesComponent } from './issues/issues.component';
 import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/issue-creation-dialog.component';
 import {ComplaintsShopComponent} from "./complaints-shop/complaints-shop.component";
+import { StaffComponent } from './staff/staff.component';
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import {ComplaintsShopComponent} from "./complaints-shop/complaints-shop.compone
     ArticlesSizeFamilyCreationDialogComponent,
     SalesPeopleComponent,
     IssueCreationDialogComponent,
+    StaffComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
