@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {UserCompleteService} from '@shared/services/userComplete.service';
 import {User} from '@shared/models/userRegister.model';
-import {of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
-import {UserDialogComponent} from '../dialog/user-dialog.component';
+import {UserUpdateDialogComponent} from '../dialog/user-update-dialog.component';
+import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
+import {RegisterDialogComponent} from '@shared/dialogs/register-dialog.component';
 
 @Component({
   selector: 'app-users-management',
@@ -22,12 +24,28 @@ export class UsersManagementComponent implements OnInit {
     this.data = this.userCompleteService.getBasicUsersInfo();
   }
 
-
-  update(user: User): void {
+  updateUser(user: User): void {
     this.userCompleteService.searchCompleteUser(user.mobile)
       .subscribe(data => {
-        this.dialog.open(UserDialogComponent, {data});
-        console.log(data);
+        this.dialog.open(UserUpdateDialogComponent, {data
+        })
+          .afterClosed()
+          .subscribe(() => (this.data = this.userCompleteService.getBasicUsersInfo()));
       });
+  }
+
+  readUser(user: User): void {
+    this.dialog.open(ReadDetailDialogComponent, {
+      data: {
+        title: 'User Details',
+        object: this.userCompleteService.searchCompleteUser(user.mobile)
+      }
+    });
+  }
+
+  createUser(): void {
+    this.dialog.open(RegisterDialogComponent)
+      .afterClosed()
+      .subscribe(() => this.data = this.userCompleteService.getBasicUsersInfo());
   }
 }

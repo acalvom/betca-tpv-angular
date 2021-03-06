@@ -3,7 +3,7 @@ import {HttpService} from '@core/http.service';
 import {Observable, of} from 'rxjs';
 import {User} from '@shared/models/userRegister.model';
 import {Role} from '@core/role.model';
-import {UserInfoModel} from "../../shop/users/models/user-info.model";
+import {UserInfoModel} from '../../shop/users/models/user-info.model';
 
 
 @Injectable({
@@ -40,5 +40,22 @@ export class UserCompleteService {
   getBasicUsersInfo(): Observable<any[]> {
     return of(this.users.map(user => new UserInfoModel(user.mobile, user.firstName, user.role)));
   }
+
+  setCompleteUser(oldMobile: number, newUser: User): Observable<User>{
+    const userToUpdate = this.users.find(off => off.mobile === oldMobile);
+    const index = this.users.indexOf(userToUpdate);
+    if (index > -1){
+      this.users.splice(index, 1, newUser);
+    }
+    return of(newUser);
+  }
+
+  createCompleteUser(user: User): Observable<User>{
+    user.registrationDate = new Date() ;
+    this.users.push(user);
+    return of(user);
+
+  }
+
 
 }
