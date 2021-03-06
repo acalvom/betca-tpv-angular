@@ -5,8 +5,10 @@ import {ShoppingCartService} from './shopping-cart.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ShoppingState} from '../../shared/services/models/shopping-state.model';
 import {UserSearch} from '../../users/models/user-search-model';
-import {UserUpdateDialogComponent} from '../../users/dialog/user-update-dialog.component';
 import {UserCompleteService} from '@shared/services/userComplete.service';
+import {SearchRgpdUser} from '@shared/components/data-protection-act/search-rgpd-user.model';
+import {RgpdType} from '@shared/models/RgpdType';
+import {DataProtectionActService} from '@shared/components/data-protection-act/data-protection-act.service';
 
 @Component({
   templateUrl: 'check-out-dialog.component.html',
@@ -23,7 +25,8 @@ export class CheckOutDialogComponent {
   userSearch: UserSearch;
 
   constructor(@Inject(MAT_DIALOG_DATA) data, private dialog: MatDialog, private dialogRef: MatDialogRef<CheckOutDialogComponent>,
-              private shoppingCartService: ShoppingCartService, private userService: UserCompleteService) {
+              private shoppingCartService: ShoppingCartService, private userService: UserCompleteService,
+              private dataProtectionActService: DataProtectionActService) {
     this.ticketCreation = {cash: 0, card: 0, voucher: 0, shoppingList: data, note: ''};
     this.total();
   }
@@ -47,13 +50,7 @@ export class CheckOutDialogComponent {
     };
 
     if (mobile) {
-      /*
       // TODO falta buscar el user en BD, si no existe, debe sacar un dialogo para crearlo
-      if (this.userService.search(this.userSearch) === undefined) {
-        this.dialog.open(UserUpdateDialogComponent).afterClosed().subscribe(() => {
-          console.log('usuario creado');
-        });
-      }*/
 
       this.ticketCreation.user = {mobile: Number(mobile)};
       // TODO me falta comprobar si tiene credit-line el usuario
@@ -177,6 +174,9 @@ export class CheckOutDialogComponent {
     if (returned > 0) {
       this.ticketCreation.note += ' Return: ' + this.round(returned) + '.';
     }
+    if (this.requestedDataProtectionAct) {
+      this.printUnsignedDataProtectionAgreement();
+    }
     this.shoppingCartService.createTicketAndPrintReceipts(this.ticketCreation, voucher,
       this.requestedInvoice, this.requestedGiftTicket, this.requestedDataProtectionAct, this.checkedCreditLine)
       .subscribe(() => this.dialogRef.close(true));
@@ -198,6 +198,14 @@ export class CheckOutDialogComponent {
         value.state = ShoppingState.COMMITTED;
       });
     }
+  }
+
+  printUnsignedDataProtectionAgreement(): void {
+    const searchRgpdUser: SearchRgpdUser = {
+      mobile: this.userSearch.mobile,
+      rgpdType: RgpdType.BASIC
+    };
+    this.dataProtectionActService.printUnsignedAgreement(searchRgpdUser);
   }
 
 }

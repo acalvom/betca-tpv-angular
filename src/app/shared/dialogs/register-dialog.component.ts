@@ -33,8 +33,11 @@ export class RegisterDialogComponent {
       active: undefined,
     };
 
-    this.rgpdUser = {mobile: this.user.mobile};
-
+    this.rgpdUser = {
+      mobile: this.user.mobile,
+      rgpdType: undefined,
+      agreement: undefined
+    };
   }
 
   register(): void {

@@ -12,9 +12,10 @@ import {AuthService} from '@core/auth.service';
 
 export class ComplaintCreationDialogComponent {
   complaint: Complaint;
+  action: string;
 
   constructor(private complaintService: ComplaintService, private dialog: MatDialog, private authService: AuthService) {
-    this.complaint = {barcode: undefined, description: undefined};
+    this.complaint = {barcode: undefined, description: undefined, state: undefined};
   }
 
   create(): void {

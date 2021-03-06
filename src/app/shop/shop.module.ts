@@ -58,7 +58,13 @@ import {UsersManagementComponent} from './users/components/users-management.comp
 import {SalesPeopleComponent} from './salespeople/salespeople.component';
 import {SalesPeopleService} from './salespeople/salespeople.service';
 import { InvoicesComponent } from './invoices/invoices.component';
+import { InvoiceDialogComponent } from './invoices/invoice-dialog.component';
 import { CustomerDiscountDialogComponent } from './customer-discount/customer-discount-dialog.component';
+import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-creation/articles-size-family-creation-dialog.component';
+import { IssuesComponent } from './issues/issues.component';
+import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/issue-creation-dialog.component';
+import {ComplaintsShopComponent} from './complaints-shop/complaints-shop.component';
+import { StaffComponent } from './staff/staff.component';
 import {UserUpdateDialogComponent} from './users/dialog/user-update-dialog.component';
 
 @NgModule({
@@ -81,6 +87,7 @@ import {UserUpdateDialogComponent} from './users/dialog/user-update-dialog.compo
     NewArticleFamilyDialogComponent,
     ProviderCreationUpdatingDialogComponent,
     ProvidersComponent,
+    ComplaintsShopComponent,
     SearchByBarcodeComponent,
     SearchByCompanyComponent,
     SearchByBudgetComponent,
@@ -92,6 +99,7 @@ import {UserUpdateDialogComponent} from './users/dialog/user-update-dialog.compo
     OpenSizesDialogComponent,
     StockAlarmsComponent,
     TicketEditingDialogComponent,
+    IssuesComponent,
     StockAlarmsCreationUpdatingDialogComponent,
     DataProtectionActDialogComponent,
     StockAlarmChipComponent,
@@ -107,9 +115,14 @@ import {UserUpdateDialogComponent} from './users/dialog/user-update-dialog.compo
     MessengerComponent,
     SalesPeopleComponent,
     InvoicesComponent,
+    InvoiceDialogComponent,
     SalesPeopleComponent,
     CustomerDiscountDialogComponent,
-    UserUpdateDialogComponent
+    UserUpdateDialogComponent,
+    ArticlesSizeFamilyCreationDialogComponent,
+    SalesPeopleComponent,
+    IssueCreationDialogComponent,
+    StaffComponent,
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
@@ -118,6 +131,7 @@ import {UserUpdateDialogComponent} from './users/dialog/user-update-dialog.compo
     CheckOutDialogComponent,
     ProviderCreationUpdatingDialogComponent,
     UserUpdateDialogComponent,
+    ArticlesSizeFamilyCreationDialogComponent,
   ],
   imports: [
     SharedModule,
