@@ -66,6 +66,7 @@ import {UserDialogComponent} from './users/dialog/user-dialog.component';
 import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-creation/articles-size-family-creation-dialog.component';
 import { IssuesComponent } from './issues/issues.component';
 import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/issue-creation-dialog.component';
+import {ComplaintsShopComponent} from "./complaints-shop/complaints-shop.component";
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/iss
     NewArticleFamilyDialogComponent,
     ProviderCreationUpdatingDialogComponent,
     ProvidersComponent,
+    ComplaintsShopComponent,
     SearchByBarcodeComponent,
     SearchByCompanyComponent,
     SearchByBudgetComponent,

@@ -3,40 +3,29 @@ import {Observable} from 'rxjs';
 
 import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
-import {Complaint} from './complaint.model';
-import {AuthService} from "@core/auth.service";
+import {Complaint} from "../../home/complaints/complaint.model";
 
 @Injectable({
   providedIn: 'root',
 })
-export class ComplaintService {
+export class ComplaintShopService {
   private static SEARCH = '/search';
-  private endPoint: string;
 
-  constructor(private httpService: HttpService, private authService: AuthService) {
-    const role = this.authService.getRole();
-    console.log('role: ' + role);
-    // CHANGE USER
-    role === 'CUSTOMER' ? this.endPoint = EndPoints.COMPLAINTS :
-      this.endPoint = EndPoints.COMPLAINTS_SHOP;
+  constructor(private httpService: HttpService) {
   }
 
   searchAll(): Observable<Complaint[]> {
     return this.httpService
-      .get(this.endPoint + ComplaintService.SEARCH);
+      .get(EndPoints.COMPLAINTS_SHOP + ComplaintShopService.SEARCH);
   }
-
+  //To CHANGE
   create(complaint: Complaint): Observable<Complaint> {
     return this.httpService
       .post(EndPoints.COMPLAINTS, complaint);
   }
-  //TO DO description
-  updateClient(complaint: Complaint): Observable<Complaint> {
-    return this.httpService
-      .put(EndPoints.COMPLAINTS, complaint);
-  }
+
   //TO DO client reply and change status auto
-  updateAdmin(complaint: Complaint): Observable<Complaint> {
+  update(complaint: Complaint): Observable<Complaint> {
     return this.httpService
       .put(EndPoints.COMPLAINTS, complaint);
   }
