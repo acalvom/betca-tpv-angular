@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Filters: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>Movil</mat-label>
+      <input [(ngModel)]="staffTime.mobile" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Introduce un rango de fechas</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input [(ngModel)]="staffTime.startDate" matStartDate placeholder="Fecha de inicio">
+        <input [(ngModel)]="staffTime.endDate" matEndDate placeholder="Fecha de fin">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Filtrar por:</mat-label>
+      <select [(ngModel)]="staffTime.typeOfSearch" matNativeControl>
+        <option value="day">Dias</option>
+        <option value="month">Mes</option>
+      </select>
+    </mat-form-field>
+    <button (click)="search()" mat-icon-button [disabled]="!staffTime.isComplete()">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button (click)="resetSearch()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>

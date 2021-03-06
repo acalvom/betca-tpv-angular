@@ -22,6 +22,8 @@ import {MessengerComponent} from './messenger/messenger.component';
 import {SalesPeopleComponent} from './salespeople/salespeople.component';
 import {IssuesComponent} from './issues/issues.component';
 import {InvoicesComponent} from './invoices/invoices.component';
+import {ComplaintsShopComponent} from "./complaints-shop/complaints-shop.component";
+import {StaffComponent} from './staff/staff.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,7 @@ const routes: Routes = [
       {path: 'cashier-closure', component: CashierClosureComponent},
       {path: 'offers', component: OffersComponent},
       {path: 'providers', component: ProvidersComponent},
+      {path: 'complaints', component: ComplaintsShopComponent},
       {path: 'stock-alarms', component: StockAlarmsComponent},
       {path: 'tickets', component: TicketsComponent},
       {path: 'invoices', component: InvoicesComponent},
@@ -48,7 +51,8 @@ const routes: Routes = [
       {path: 'salespeople', component: SalesPeopleComponent},
       {path: 'issues', component: IssuesComponent},
       {path: 'messenger', component: MessengerComponent},
-      {path: 'salespeople', component: SalesPeopleComponent}
+      {path: 'salespeople', component: SalesPeopleComponent},
+      {path: 'staff', component: StaffComponent}
     ]
   }
 ];

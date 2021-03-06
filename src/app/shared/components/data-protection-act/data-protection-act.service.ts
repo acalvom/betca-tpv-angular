@@ -3,14 +3,14 @@ import {RgpdUser} from '@shared/models/rgpd-user.model';
 import {RgpdType} from '@shared/models/RgpdType';
 import {HttpService} from '@core/http.service';
 import {Observable, of} from 'rxjs';
-import {CreateRgpdUser} from '@shared/components/data-protection-act/create-rgpd-user.model';
+import {SearchRgpdUser} from '@shared/components/data-protection-act/search-rgpd-user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataProtectionActService {
 
-  rgpdUser: RgpdUser = {
+  searchRgpdUser: SearchRgpdUser = {
     mobile: 123456789,
     rgpdType: RgpdType.ADVANCED
   };
@@ -18,19 +18,19 @@ export class DataProtectionActService {
   constructor(private httpService: HttpService) {
   }
 
-  create(createRgpdUser: CreateRgpdUser): Observable<CreateRgpdUser> {
-    return of(createRgpdUser);
+  create(rgpdUser: RgpdUser): Observable<RgpdUser> {
+    return of(rgpdUser);
   }
 
-  read(mobile: number): Observable<RgpdUser> {
-    return of(this.rgpdUser);
+  read(mobile: number): Observable<SearchRgpdUser> {
+    return of(this.searchRgpdUser);
   }
 
-  update(createRgpdUser: CreateRgpdUser): Observable<CreateRgpdUser> {
-    return of(createRgpdUser);
+  update(rgpdUser: RgpdUser): Observable<RgpdUser> {
+    return of(rgpdUser);
   }
 
-  printUnsignedAgreement(rgpdUser: RgpdUser): Observable<void> {
+  printUnsignedAgreement(searchRgpdUser: SearchRgpdUser): Observable<void> {
     return of();
   }
 

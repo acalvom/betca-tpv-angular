@@ -9,6 +9,6 @@ export interface User {
   address: string;
   password: string;
   role: Role;
-  registrationDate: Date;
   active: boolean;
+  registrationDate: Date;
 }

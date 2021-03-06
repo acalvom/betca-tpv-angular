@@ -85,7 +85,14 @@ export class ShoppingCartService {
   }
 
   createInvoiceAndPrint(ticketId: string): Observable<void> {
-    return EMPTY; // TODO change EMPTY
+    // return this.httpService.pdf().get(EndPoints.INVOICES + '/' + ticketId + ShoppingCartService.RECEIPT);
+    const ticket = { id: 'Ma35Mhdgd2454656', message: 'Invoice ticket', ticketId}; // invoice provisional
+    return of(ticket)
+      .pipe(
+        source => {
+          return this.printTicket(ticketId);
+        }
+      );
   }
 
   createGiftTicketAndPrint(ticketId: string): Observable<void> {
@@ -117,5 +124,16 @@ export class ShoppingCartService {
   readBudget(budget: string): Observable<Shopping> {
     return this.budgetService
       .read(budget);
+  }
+
+  addDiscount(mobile: string, purchase: number): Observable<number> {
+    // TODO Search user mobile to get discount and check minimum purchase
+    const minimumPurchase = 60;
+    const discount = 50;
+    if (purchase < minimumPurchase) {
+      return of(0);
+    } else {
+      return of(discount);
+    }
   }
 }
