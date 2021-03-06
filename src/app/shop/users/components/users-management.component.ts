@@ -44,6 +44,8 @@ export class UsersManagementComponent implements OnInit {
   }
 
   createUser(): void {
-    this.dialog.open(RegisterDialogComponent);
+    this.dialog.open(RegisterDialogComponent)
+      .afterClosed()
+      .subscribe(() => this.data = this.userCompleteService.getBasicUsersInfo());
   }
 }

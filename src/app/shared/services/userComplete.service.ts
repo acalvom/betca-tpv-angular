@@ -45,9 +45,16 @@ export class UserCompleteService {
     const userToUpdate = this.users.find(off => off.mobile === oldMobile);
     const index = this.users.indexOf(userToUpdate);
     if (index > -1){
-      this.users.splice(index,1, newUser);
+      this.users.splice(index, 1, newUser);
     }
     return of(newUser);
+  }
+
+  createCompleteUser(user: User): Observable<User>{
+    user.registrationDate = new Date() ;
+    this.users.push(user);
+    return of(user);
+
   }
 
 
