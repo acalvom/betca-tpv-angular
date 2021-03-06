@@ -184,7 +184,7 @@ export class CheckOutDialogComponent {
 
   invalidInvoice(): boolean {
     // TODO pendiente de calcular. Hace falta tener al usuario totalmente completado
-    return true;
+    return !this.ticketCreation.user;
   }
 
   useCreditLine(): void {
