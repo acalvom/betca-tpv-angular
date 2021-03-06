@@ -31,6 +31,11 @@ export class DataProtectionActDialogComponent {
       );
   }
 
+  isReady(): boolean {
+    return this.rgpdUser.mobile !== undefined && this.rgpdUser.rgpdType !== undefined &&
+      this.rgpdUser.agreement !== undefined;
+  }
+
   reset(): void {
     this.rgpdUser = {
       mobile: undefined,
