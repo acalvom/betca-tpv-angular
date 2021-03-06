@@ -5,21 +5,41 @@ import {DataProtectionActService} from '@shared/components/data-protection-act/d
 
 @Component({
   selector: 'app-manage-data-protection-act',
-  templateUrl: './manage-data-protection-act.component.html'
+  templateUrl: './manage-data-protection-act.component.html',
+  styleUrls: ['./manage-data-protection-act.component.css']
 })
 export class ManageDataProtectionActComponent {
 
-  @Input() rgpdUser: RgpdUser = {};
+  @Input() rgpdUser: RgpdUser;
 
   rgpdTypes = RgpdType;
   selectedRgpdType: RgpdType;
-  file: File;
 
   constructor(private dataProtectionActService: DataProtectionActService) {
+    this.rgpdUser = {
+      mobile: undefined,
+      rgpdType: undefined,
+      agreement: undefined
+    };
+  }
+
+  getColor(rgpdType: RgpdType): string {
+    return this.rgpdUser.rgpdType !== undefined && rgpdType === this.rgpdUser.rgpdType ? 'green' : 'gray';
   }
 
   isUserRgpdType(): boolean {
     return this.rgpdUser.rgpdType === this.selectedRgpdType;
+  }
+
+  onFileSelected(): void {
+    const inputNode: any = document.querySelector('#file');
+    if (typeof (FileReader) !== 'undefined') {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.rgpdUser.agreement = e.target.result;
+      };
+      reader.readAsArrayBuffer(inputNode.files[0]);
+    }
   }
 
   printUnsignedAgreement(): void {

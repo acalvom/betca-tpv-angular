@@ -118,4 +118,15 @@ export class ShoppingCartService {
     return this.budgetService
       .read(budget);
   }
+
+  addDiscount(mobile: string, purchase: number): Observable<number> {
+    // TODO Search user mobile to get discount and check minimum purchase
+    const minimumPurchase = 60;
+    const discount = 50;
+    if (purchase < minimumPurchase) {
+      return of(0);
+    } else {
+      return of(discount);
+    }
+  }
 }

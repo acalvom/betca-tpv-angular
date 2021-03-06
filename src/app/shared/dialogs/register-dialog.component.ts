@@ -37,7 +37,11 @@ export class RegisterDialogComponent {
 
   constructor(private httpService: HttpService, private router: Router,
               private dialog: MatDialog, private snackBar: MatSnackBar) {
-    this.rgpdUser = {mobile: this.mobile};
+    this.rgpdUser = {
+      mobile: this.mobile,
+      rgpdType: undefined,
+      agreement: undefined
+    };
   }
 
   register(): void {
