@@ -6,19 +6,18 @@ import {ComplaintService} from './complaint.service';
 import {AuthService} from '@core/auth.service';
 
 @Component({
-  templateUrl: 'complaint-creation-dialog.component.html',
+  templateUrl: 'complaint-update-dialog.component.html',
   styleUrls: ['complaint-dialog.component.css']
 })
 
-export class ComplaintCreationDialogComponent {
+export class ComplaintUpdateDialogComponent {
   complaint: Complaint;
-  action: string;
 
   constructor(private complaintService: ComplaintService, private dialog: MatDialog, private authService: AuthService) {
     this.complaint = {barcode: undefined, description: undefined, state: undefined};
   }
-
-  create(): void {
+  //TO DO
+  update(): void {
     this.complaintService
       .create(this.complaint)
       .subscribe(() => this.dialog.closeAll());

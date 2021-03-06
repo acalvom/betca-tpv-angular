@@ -54,5 +54,4 @@ export class CrudComponent {
   onDelete(item): void {
     this.delete.emit(item);
   }
-
 }

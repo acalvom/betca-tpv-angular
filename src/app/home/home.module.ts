@@ -20,12 +20,14 @@ import { Top5Component } from './top5/top5.component';
 import { StockManagementComponent } from './stock-management/stock-management.component';
 import { NewsComponent } from './adviser/news/news.component';
 import { PopularComponent } from './adviser/popular/popular.component';
+import {ComplaintUpdateDialogComponent} from "./complaints/complaint-update-dialog.component";
 
 @NgModule({
   declarations: [
     AdviserComponent,
     ComplaintsComponent,
     ComplaintCreationDialogComponent,
+    ComplaintUpdateDialogComponent,
     HomeComponent,
     ReviewsComponent,
     TicketTrackingComponent,

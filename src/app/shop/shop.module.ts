@@ -62,6 +62,7 @@ import {SalesPeopleService} from './salespeople/salespeople.service';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { CustomerDiscountDialogComponent } from './customer-discount/customer-discount-dialog.component';
 import {UserDialogComponent} from "./users/dialog/user-dialog.component";
+import {ComplaintsShopComponent} from "./complaints-shop/complaints-shop.component";
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import {UserDialogComponent} from "./users/dialog/user-dialog.component";
     NewArticleFamilyDialogComponent,
     ProviderCreationUpdatingDialogComponent,
     ProvidersComponent,
+    ComplaintsShopComponent,
     SearchByBarcodeComponent,
     SearchByCompanyComponent,
     SearchByBudgetComponent,
