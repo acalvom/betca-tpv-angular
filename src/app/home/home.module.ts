@@ -15,11 +15,12 @@ import { ScoreBarComponent } from './reviews/score-bar/score-bar.component';
 import { OffersComponent } from './offers/offers.component';
 import { ProductComponent } from './ticket-tracking/product/product.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
-import {ShoppingBasketComponent} from './shopping-basket/shopping-basket.component';
+import { ShoppingBasketComponent } from './shopping-basket/shopping-basket.component';
 import { Top5Component } from './top5/top5.component';
 import { StockManagementComponent } from './stock-management/stock-management.component';
 import { NewsComponent } from './adviser/news/news.component';
 import { PopularComponent } from './adviser/popular/popular.component';
+import { OnlineOrderComponent } from './online-order/online-order.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { PopularComponent } from './adviser/popular/popular.component';
     StockManagementComponent,
     NewsComponent,
     PopularComponent,
+    OnlineOrderComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,
