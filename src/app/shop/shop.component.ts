@@ -10,6 +10,9 @@ import {CashierDialogComponent} from './cashier-opened/cashier-closure/cashier-d
 import {AddCreditLineDialogComponent} from './shared/dialogs/add-credit-line-dialog.component';
 import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
 import {DataProtectionActDialogComponent} from './data-protection-act/data-protection-act-dialog.component';
+import {CashMovementDialogComponent} from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
+import { SlackPublisherComponent } from './slack-publisher/slack-publisher.component';
+import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-creation/articles-size-family-creation-dialog.component';
 
 @Component({
   templateUrl: 'shop.component.html',
@@ -80,4 +83,20 @@ export class ShopComponent {
       .afterClosed();
   }
 
+  movementCash(): void {
+    this.dialog.open(CashMovementDialogComponent)
+      .afterClosed();
+  }
+
+  slack() {
+    this.dialog.open(SlackPublisherComponent)
+      .afterClosed();
+  }
+
+  createSizeFamily(): void {
+    this.dialog.open(ArticlesSizeFamilyCreationDialogComponent)
+      .afterClosed();
+  }
+
 }
+

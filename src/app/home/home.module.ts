@@ -17,12 +17,17 @@ import { ProductComponent } from './ticket-tracking/product/product.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import {ShoppingBasketComponent} from './shopping-basket/shopping-basket.component';
 import { Top5Component } from './top5/top5.component';
+import { StockManagementComponent } from './stock-management/stock-management.component';
+import { NewsComponent } from './adviser/news/news.component';
+import { PopularComponent } from './adviser/popular/popular.component';
+import {ComplaintUpdateDialogComponent} from "./complaints/complaint-update-dialog.component";
 
 @NgModule({
   declarations: [
     AdviserComponent,
     ComplaintsComponent,
     ComplaintCreationDialogComponent,
+    ComplaintUpdateDialogComponent,
     HomeComponent,
     ReviewsComponent,
     TicketTrackingComponent,
@@ -32,6 +37,9 @@ import { Top5Component } from './top5/top5.component';
     ProductComponent,
     ShoppingBasketComponent,
     Top5Component,
+    StockManagementComponent,
+    NewsComponent,
+    PopularComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,

@@ -1,0 +1,36 @@
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Search by stock: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>Stock</mat-label>
+      <input [(ngModel)]="stockArticle.stock" matInput type="number">
+      <mat-hint align="start">Less than</mat-hint>
+    </mat-form-field>
+
+    <button (click)="searchByStock()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-card-content>
+  <app-crud (read)="read($event)"
+          [data]="articles" [deleteAction]="false" [createAction]="false" [updateAction]="false" [title]="title"></app-crud>
+</mat-card>
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Search by date: </strong></mat-label>
+  </mat-card-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input [(ngModel)]="start" matStartDate placeholder="Start date" >
+      <input [(ngModel)]="end" matEndDate placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+  <button (click)="searchByDate()" mat-icon-button>
+    <mat-icon>search</mat-icon>
+  </button>
+  <app-crud (read)="read($event)"
+          [data]="articlesByDate" [deleteAction]="false" [createAction]="false" [updateAction]="false" [title]="title"></app-crud>
+</mat-card>
+

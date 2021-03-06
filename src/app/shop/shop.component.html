@@ -9,7 +9,7 @@
       <mat-icon>person</mat-icon>
       <span>Logout</span>
     </button>
-    <button mat-button>
+    <button mat-button routerLink="/shop/profile">
       <mat-icon>account_box</mat-icon>
       <span>Profile</span>
     </button>
@@ -47,6 +47,14 @@
     <mat-icon>local_atm</mat-icon>
     <span>VAT Management</span>
   </button>
+  <button mat-menu-item routerLink="/shop/issues">
+    <mat-icon>bug_report</mat-icon>
+    <span>Issues</span>
+  </button>
+  <button (click)="slack()" mat-menu-item>
+    <mat-icon>textsms</mat-icon>
+    <span>Publish on Slack</span>
+  </button>
 </mat-menu>
 <!--   Menus  -->
 <mat-menu #cashiers="matMenu">
@@ -58,11 +66,11 @@
     <mat-icon>lock_open</mat-icon>
     <span>Open Cashier</span>
   </button>
-  <button *ngIf="!cashierClosed" disabled="disabled" mat-menu-item routerLink="">
+  <button (click)="movementCash()" *ngIf="!cashierClosed" mat-menu-item>
     <mat-icon>account_balance_wallet</mat-icon>
     <span>Cash Movement</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="">
+  <button mat-menu-item routerLink="/shop/cashier-closure">
     <mat-icon>account_balance</mat-icon>
     <span>Cashier Closure</span>
   </button>
@@ -80,7 +88,7 @@
     <mat-icon>playlist_add_check</mat-icon>
     <span>Ticket tracking</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="">
+  <button mat-menu-item routerLink="/shop/invoices">
     <mat-icon>receipt</mat-icon>
     <span>Invoices</span>
   </button>
@@ -102,13 +110,17 @@
     <mat-icon>category</mat-icon>
     <span>Articles Family</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="">
+  <button (click)="createSizeFamily()" mat-menu-item routerLink="/shop/articles-size-family-creation">
     <mat-icon>view_module</mat-icon>
     <span>Articles Sizes Family Creator</span>
   </button>
   <button mat-menu-item routerLink="/shop/providers">
     <mat-icon>local_shipping</mat-icon>
     <span>Providers</span>
+  </button>
+  <button mat-menu-item routerLink="/shop/complaints">
+    <mat-icon>markunread_mailbox</mat-icon>
+    <span>Complaints</span>
   </button>
   <button *ngIf="untilManager()" disabled="disabled" mat-menu-item routerLink="">
     <mat-icon>storage</mat-icon>
@@ -128,11 +140,11 @@
     <mat-icon>alarm</mat-icon>
     <span>Stock Alarm</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="/home/stock-management">
+  <button mat-menu-item routerLink="/home/stock-management">
     <mat-icon>equalizer</mat-icon>
     <span>Stock Management</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="/home/stock-management">
+  <button mat-menu-item routerLink="/shop/stock-audit">
     <mat-icon>assessment</mat-icon>
     <span>Stock Audit</span>
   </button>
@@ -142,7 +154,7 @@
     <mat-icon>account_circle</mat-icon>
     <span>Users</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="/shop/users">
+  <button mat-menu-item routerLink="/shop/salespeople">
     <mat-icon>assignment_ind</mat-icon>
     <span>Salespeople</span>
   </button>
@@ -150,11 +162,11 @@
     <mat-icon>gavel</mat-icon>
     <span>Data Protection Act</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="">
+  <button mat-menu-item routerLink="/shop/customer-discount">
     <mat-icon>money_off</mat-icon>
     <span>Customer Discount</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="">
+  <button mat-menu-item routerLink="messenger">
     <mat-icon>message</mat-icon>
     <span>Messengers</span>
   </button>
@@ -172,7 +184,7 @@
     <mat-icon>money</mat-icon>
     <span>Quarter VAT</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="/home/stock-management">
+  <button mat-menu-item routerLink="/shop/provider-invoices">
     <mat-icon>local_shipping</mat-icon>
     <span>Provider Invoice</span>
   </button>
