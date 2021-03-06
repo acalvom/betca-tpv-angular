@@ -2,32 +2,32 @@
 <mat-dialog-content>
   <mat-form-field class="full-width">
     <mat-label>Mobile</mat-label>
-    <input [(ngModel)]="user.mobile" id="company" matInput type="text"/>
+    <input [(ngModel)]="user.mobile" id="company" matInput required type="text"/>
   </mat-form-field>
   <p>
     <mat-form-field class="full-width">
       <mat-label>First Name</mat-label>
-      <input [(ngModel)]="user.firstName" matInput type="text"/>
+      <input [(ngModel)]="user.firstName" matInput required type="text"/>
     </mat-form-field>
     <mat-form-field class="full-width">
       <mat-label>Family Name</mat-label>
-      <input [(ngModel)]="user.familyName" matInput type="text"/>
+      <input [(ngModel)]="user.familyName" matInput required type="text"/>
     </mat-form-field>
   </p>
   <p>
     <mat-form-field class="full-width">
       <mat-label>DNI</mat-label>
-      <input [(ngModel)]="user.dni" matInput type="text"/>
+      <input [(ngModel)]="user.dni" matInput required type="text"/>
     </mat-form-field>
     <mat-form-field class="full-width">
       <mat-label>Email</mat-label>
-      <input [(ngModel)]="user.email" matInput type="email"/>
+      <input [(ngModel)]="user.email" matInput required type="email"/>
     </mat-form-field>
   </p>
   <p>
     <mat-form-field class="full-width">
       <mat-label>Password</mat-label>
-      <input [(ngModel)]="user.email" matInput type="password"/>
+      <input [(ngModel)]="user.password" matInput type="password"/>
     </mat-form-field>
   </p>
   <p>
@@ -41,11 +41,15 @@
     </mat-form-field>
   </p>
   <p>
-    <mat-checkbox [(ngModel)]="user.active" [disabled]="!editable" >Active Account</mat-checkbox>
+    <mat-checkbox [(ngModel)]="user.active" [disabled]="!editable">Active Account</mat-checkbox>
   </p>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
-  <button (click)="updateCompleteUser()" color="primary" mat-raised-button>Update
+  <button (click)="createCompleteUser()" *ngIf="isCreate()" [disabled]="isAuthenticated()" color="primary"
+          mat-raised-button>Create
+  </button>
+  <button (click)="updateCompleteUser()" *ngIf="!isCreate()" [disabled]="isAuthenticated()" color="primary"
+          mat-raised-button>Update
   </button>
 </mat-dialog-actions>

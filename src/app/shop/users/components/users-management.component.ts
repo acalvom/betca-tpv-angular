@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {UserCompleteService} from '@shared/services/userComplete.service';
 import {User} from '@shared/models/userRegister.model';
-import {Observable, of} from 'rxjs';
+import {of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {UserUpdateDialogComponent} from '../dialog/user-update-dialog.component';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
-import {RegisterDialogComponent} from '@shared/dialogs/register-dialog.component';
 
 @Component({
   selector: 'app-users-management',
@@ -44,7 +43,7 @@ export class UsersManagementComponent implements OnInit {
   }
 
   createUser(): void {
-    this.dialog.open(RegisterDialogComponent)
+    this.dialog.open(UserUpdateDialogComponent)
       .afterClosed()
       .subscribe(() => this.data = this.userCompleteService.getBasicUsersInfo());
   }

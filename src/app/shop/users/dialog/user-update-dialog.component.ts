@@ -8,7 +8,9 @@ import {UserCompleteService} from '@shared/services/userComplete.service';
 
 @Component({
   templateUrl: 'user-update-dialog.component.html',
-  styleUrls: ['user-update-dialog.component.css']
+  styleUrls: ['./user-update-dialog.component.css']
+
+
 })
 export class UserUpdateDialogComponent implements OnInit {
 
@@ -18,13 +20,24 @@ export class UserUpdateDialogComponent implements OnInit {
   editable = false;
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: User, private dialog: MatDialog, private authService: AuthService, private userService: UserCompleteService) {
-    this.title = 'Edit User';
-    this.user = data;
+  constructor(@Inject(MAT_DIALOG_DATA) data: User, private dialog: MatDialog,
+              private authService: AuthService, private userService: UserCompleteService) {
+    this.title = data ? 'Create User' : 'Edit User';
+    this.user = data ? data : {
+      mobile: undefined,
+      firstName: undefined,
+      familyName: undefined,
+      email: undefined,
+      dni: undefined,
+      address: undefined,
+      password: undefined,
+      role: Role.CUSTOMER,
+      active: true,
+      registrationDate: new Date()
+    };
   }
 
   ngOnInit(): void {
-    console.log('dentro');
 
     if (this.authService.getRole() == Role.ADMIN) {
       this.editable = true;
@@ -37,6 +50,20 @@ export class UserUpdateDialogComponent implements OnInit {
     this.userService
       .setCompleteUser(this.user.mobile, this.user)
       .subscribe(() => this.dialog.closeAll());
+  }
+
+  createCompleteUser(): void{
+    this.userService
+      .createCompleteUser(this.user)
+      .subscribe(() => this.dialog.closeAll());
+  }
+
+  isCreate(): boolean {
+    return this.user.mobile === undefined;
+  }
+
+  isAuthenticated(): boolean {
+    return !this.authService.isAuthenticated();
   }
 
 
