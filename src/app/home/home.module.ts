@@ -21,6 +21,8 @@ import { StockManagementComponent } from './stock-management/stock-management.co
 import { NewsComponent } from './adviser/news/news.component';
 import { PopularComponent } from './adviser/popular/popular.component';
 import {ComplaintUpdateDialogComponent} from "./complaints/complaint-update-dialog.component";
+import { OnlineOrderComponent } from './online-order/online-order.component';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import {ComplaintUpdateDialogComponent} from "./complaints/complaint-update-dial
     IconButtonComponent,
     ScoreBarComponent,
     OffersComponent,
+    OnlineOrderComponent,
     ProductComponent,
     ShoppingBasketComponent,
     Top5Component,
