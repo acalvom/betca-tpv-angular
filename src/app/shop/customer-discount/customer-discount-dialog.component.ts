@@ -36,7 +36,7 @@ export class CustomerDiscountDialogComponent {
 
   updateCustomerDiscount(): void {
     this.customerService
-      .setCustomerDiscount(this.oldCustomer, this.customerDiscount)
+      .updateCustomerDiscount(this.oldCustomer, this.customerDiscount)
       .subscribe(() => this.dialog.closeAll());
   }
 
