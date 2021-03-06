@@ -61,10 +61,9 @@ export class OfferService {
   }
 
   search(offerSearch: OfferSearch): Observable<OfferMenu[]> {
-    return of(this.offers);
-    /*return this.httpService
+    return this.httpService
       .paramsFrom(offerSearch)
-      .get(EndPoints.OFFERS + OfferService.SEARCH);*/
+      .get(EndPoints.OFFERS + OfferService.SEARCH);
   }
 
   create(newOffer: OfferCreateUpdate): Observable<OfferMenu> {
