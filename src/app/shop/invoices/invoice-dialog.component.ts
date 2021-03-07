@@ -48,4 +48,8 @@ export class InvoiceDialogComponent {
       .update(this.invoiceModel)
       .subscribe(() => this.dialog.closeAll());
   }
+
+  addTicket(ticket: string): void {
+    console.log('ticket selected' + ticket);
+  }
 }
