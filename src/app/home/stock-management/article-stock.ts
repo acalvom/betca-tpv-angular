@@ -4,4 +4,5 @@ export interface ArticleStock {
   description: string;
   stock?: number;
   dateSell?: Date;
+  dateStockEmpty?: Date;
 }
