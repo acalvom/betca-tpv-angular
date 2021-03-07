@@ -2,9 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ArticleSearch} from './article-search';
 import {of} from 'rxjs';
 import {StockService} from './stock-service';
-import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {Article} from '../shared/article.model';
+import {ArticleStock} from './article-stock';
 
 @Component({
   selector: 'app-stock-management',
@@ -16,11 +15,13 @@ export class StockManagementComponent implements OnInit {
   stockArticle: ArticleSearch;
   articles = of([]);
   articlesByDate = of([]);
+  stockFuture = of();
   title = 'Stock management';
   start: any;
   end: any;
   soldProducts = false;
   stock = false;
+  stockForescat = false;
 
   constructor(private dialog: MatDialog, private stockService: StockService) {
     this.stockArticle = {};
@@ -41,12 +42,9 @@ export class StockManagementComponent implements OnInit {
     this.articlesByDate = this.stockService.searchSoldProducts(firstDate, secondDate);
   }
 
-  read(article: Article): void {
-    this.dialog.open(ReadDetailDialogComponent, {
-      data: {
-        title: 'Stock Details',
-        object: this.stockService.read(article.barcode)
-      }
-    });
+  searchFutureStock(): void {
+    this.stockForescat = true;
+    this.stockFuture = this.stockService.searchFutureStock(this.stockArticle.barcode);
+
   }
 }
