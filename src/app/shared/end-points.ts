@@ -17,4 +17,5 @@ export class EndPoints {
   static AUDITS = environment.REST_CORE + '/audits';
   static CREDIT = environment.REST_CORE + '/credit';
   static STAFF = environment.REST_CORE + '/staff';
+  static REVIEWS = environment.REST_CUSTOMER_SUPPORT + '/reviews';
 }

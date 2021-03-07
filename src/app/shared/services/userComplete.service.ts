@@ -57,5 +57,16 @@ export class UserCompleteService {
 
   }
 
+  checkUser(mobile: number): boolean {
+    return (this.users.find( user => user.mobile == mobile)) ? true : false;
+  }
+
+  deleteCompleteUser(mobile: number): Observable<User[]>{
+    const deleteUser = this.users.find( item => item.mobile == mobile );
+    const index = this.users.indexOf(deleteUser);
+    this.users.splice(index, 1);
+    return of(this.users);
+  }
+
 
 }

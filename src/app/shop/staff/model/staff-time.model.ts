@@ -1,9 +1,9 @@
 export class StaffTime {
-  constructor(day: string, hours: number) {
-    this.day = day;
+  constructor(time: string, hours: number) {
+    this.time = time;
     this.hours = hours;
   }
 
-  day: string;
+  time: string;
   hours: number;
 }
