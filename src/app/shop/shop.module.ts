@@ -66,6 +66,7 @@ import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/iss
 import {ComplaintsShopComponent} from './complaints-shop/complaints-shop.component';
 import { StaffComponent } from './staff/staff.component';
 import {UserUpdateDialogComponent} from './users/dialog/user-update-dialog.component';
+import { SharedMessengerService } from './shared/services/shared-messenger.service';
 import {ProviderOrderDialogComponent} from "./provider-orders/provider-order-dialog.component";
 import {ProviderOrdersComponent} from "./provider-orders/provider-orders.component";
 
@@ -151,6 +152,7 @@ import {ProviderOrdersComponent} from "./provider-orders/provider-orders.compone
     SharedProviderService,
     ShoppingCartService,
     MessengerService,
+    SharedMessengerService,
     SalesPeopleService
   ],
 })
