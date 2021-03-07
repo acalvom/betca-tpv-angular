@@ -13,12 +13,13 @@
         <input [(ngModel)]="invoiceModel.creationDate" [disabled]=!isCreate() matInput required type="date">
       </label>
     </mat-form-field>
-    <mat-form-field class="full-width">
+    <mat-form-field *ngIf="!isCreate()"  class="full-width">
       <mat-label>Ticket Reference</mat-label>
       <label>
         <input [(ngModel)]="invoiceModel.ticketReference" [disabled]=!isCreate() matInput required type="text">
       </label>
     </mat-form-field>
+    <app-search-by-ticket-ref *ngIf="isCreate()" (add)="addTicket($event)"></app-search-by-ticket-ref>
   </div>
   <br/>
   <div>

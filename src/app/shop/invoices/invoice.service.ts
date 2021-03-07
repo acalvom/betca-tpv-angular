@@ -41,9 +41,9 @@ export class InvoiceService {
 
   constructor(private httpService: HttpService) {
     let invoiceItem: InvoiceItem;
-    for (const invoiceAux of this.invoices){
+    for (const invoiceAux of this.invoices) {
       invoiceItem = new InvoiceItem(invoiceAux.number, invoiceAux.creationDate, invoiceAux.baseTax,
-                    invoiceAux.taxValue, invoiceAux.user.phone, invoiceAux.ticket.reference);
+        invoiceAux.taxValue, invoiceAux.user.phone, invoiceAux.ticket.reference);
       this.invoicesItems.push(invoiceItem);
     }
   }

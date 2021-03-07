@@ -66,8 +66,11 @@ import {ComplaintsShopComponent} from './complaints-shop/complaints-shop.compone
 import {StaffComponent} from './staff/staff.component';
 import {UserUpdateCreateDialogComponent} from './users/dialog/user-update-create-dialog.component';
 import {SharedMessengerService} from './shared/services/shared-messenger.service';
-import {ProviderOrderDialogComponent} from "./provider-orders/provider-order-dialog.component";
-import {ProviderOrdersComponent} from "./provider-orders/provider-orders.component";
+import {ProviderOrderDialogComponent} from './provider-orders/provider-order-dialog.component';
+import {ProviderOrdersComponent} from './provider-orders/provider-orders.component';
+import { SearchByTicketRefComponent } from './shared/search-by-ticket-ref.component';
+import { StaffReportComponent } from './staff/components/staff-report/staff-report.component';
+
 
 @NgModule({
   declarations: [
@@ -125,7 +128,9 @@ import {ProviderOrdersComponent} from "./provider-orders/provider-orders.compone
     IssueCreationDialogComponent,
     StaffComponent,
     ProviderOrdersComponent,
-    ProviderOrderDialogComponent
+    ProviderOrderDialogComponent,
+    SearchByTicketRefComponent,
+    StaffReportComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
