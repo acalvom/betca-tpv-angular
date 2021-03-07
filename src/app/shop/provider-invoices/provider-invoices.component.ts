@@ -15,7 +15,7 @@ export class ProviderInvoicesComponent {
   providerInvoices = of([]);
 
   constructor(private dialog: MatDialog, private providerInvoiceService: ProviderInvoiceService) {
-     this.search();
+    this.search();
   }
 
   search(): void {
@@ -42,8 +42,7 @@ export class ProviderInvoicesComponent {
       .read(providerInvoice.number)
       .subscribe(fullProviderInvoice => this.dialog.open(ProviderInvoiceCreationUpdatingDialogComponent,
         {data: fullProviderInvoice})
-        // .afterClosed().subscribe()
-      );
+        .afterClosed().subscribe(() => this.search()));
   }
 
   delete(providerInvoice: ProviderInvoice): void {
