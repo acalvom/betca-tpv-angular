@@ -49,7 +49,14 @@ export class StockService {
       dateSell: new Date('2019-05-20T00:00:00')
     }
   ];
-
+  articuloStockVacio: ArticleStock =
+    {
+      barcode: '00003',
+      retailPrice: 1,
+      stock: 0,
+      description: 'Camiseta verde',
+      dateStockEmpty: new Date('2020-01-25T00:00:00')
+    };
   constructor(private httpService: HttpService) {
   }
 
@@ -66,5 +73,9 @@ export class StockService {
 
   searchFutureStock(barcode: string): Observable<ArticleStock> {
     return of(this.articulos[3]);
+  }
+
+  searchEmptyStock(barcode: string): Observable<ArticleStock> {
+    return of(this.articuloStockVacio);
   }
 }

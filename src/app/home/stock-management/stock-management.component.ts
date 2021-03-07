@@ -16,12 +16,14 @@ export class StockManagementComponent implements OnInit {
   articles = of([]);
   articlesByDate = of([]);
   stockFuture = of();
+  stockZero = of();
   title = 'Stock management';
   start: any;
   end: any;
   soldProducts = false;
   stock = false;
   stockForescat = false;
+  stockEmpty = false;
 
   constructor(private dialog: MatDialog, private stockService: StockService) {
     this.stockArticle = {};
@@ -46,5 +48,10 @@ export class StockManagementComponent implements OnInit {
     this.stockForescat = true;
     this.stockFuture = this.stockService.searchFutureStock(this.stockArticle.barcode);
 
+  }
+
+  searchEmptyStock(): void {
+    this.stockEmpty = true;
+    this.stockZero = this.stockService.searchEmptyStock(this.stockArticle.barcode);
   }
 }
