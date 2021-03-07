@@ -4,8 +4,7 @@ import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from '@core/auth.service';
 import {CheckOutDialogComponent} from '../../shop/cashier-opened/shopping-cart/check-out-dialog.component';
-import {Article} from "../shared/article.model";
-
+import {ShoppingBasketArticle} from '../shared/shopping-basket-article.model';
 
 @Component({
   selector: 'app-shopping-basket',
@@ -14,12 +13,12 @@ import {Article} from "../shared/article.model";
 })
 export class ShoppingBasketComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'barcode', 'description', 'retailPrice'];
-  article1: Article = {barcode: '000001', description: 'dagahajq', retailPrice: 23.67};
-  article2: Article = {barcode: '000002', description: 'hfgdsagh', retailPrice: 10.89};
-  article3: Article = {barcode: '000003', description: 'asdfghjg', retailPrice: 34.78};
-  article4: Article = {barcode: '000004', description: 'jghfdssa', retailPrice: 23.09};
-  article5: Article = {barcode: '000005', description: 'zxcngvhj', retailPrice: 5.20};
+  displayedColumns = ['photo', 'description', 'amount', 'retailPrice', 'actions'];
+  article1: ShoppingBasketArticle = {photo: '000001', description: 'dagahajq', amount: 2, retailPrice: 23.67};
+  article2: ShoppingBasketArticle = {photo: '000002', description: 'hfgdsagh', amount: 1, retailPrice: 10.89};
+  article3: ShoppingBasketArticle = {photo: '000003', description: 'asdfghjg', amount: 5, retailPrice: 34.78};
+  article4: ShoppingBasketArticle = {photo: '000004', description: 'jghfdssa', amount: 4, retailPrice: 23.09};
+  article5: ShoppingBasketArticle = {photo: '000005', description: 'zxcngvhj', amount: 7, retailPrice: 5.20};
   shoppingBasket = [this.article1, this.article2, this.article3, this.article4, this.article5];
   dataSource = this.shoppingBasket;
   username = undefined;
@@ -31,6 +30,27 @@ export class ShoppingBasketComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  incrementAmount(shoppingBasketArticle: ShoppingBasketArticle): void {
+    shoppingBasketArticle.amount++;
+    if (shoppingBasketArticle.amount === 0) {
+      shoppingBasketArticle.amount++;
+    }
+  }
+
+  decreaseAmount(shoppingBasketArticle: ShoppingBasketArticle): any {
+    shoppingBasketArticle.amount--;
+    if (shoppingBasketArticle.amount === 0) {
+      shoppingBasketArticle.amount--;
+    }
+  }
+
+  delete(shoppingBasketArticle: ShoppingBasketArticle): void {
+    const index = this.shoppingBasket.indexOf(shoppingBasketArticle);
+    if (index > -1) {
+      this.shoppingBasket.splice(index, 1);
+    }
   }
 
   login(): void {
@@ -52,5 +72,4 @@ export class ShoppingBasketComponent implements OnInit {
       }
     );
   }
-
 }

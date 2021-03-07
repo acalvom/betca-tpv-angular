@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-content>
-    <mat-label><strong>Calculate Quarterly Amount: </strong></mat-label>
+    <mat-label><strong>Calculate Total Tax: </strong></mat-label>
     <mat-form-field>
       <mat-label>Trimester</mat-label>
       <mat-select [(ngModel)]="selectedTrimester">
@@ -9,12 +9,16 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button (click)="calculateQuarterlyAmount()" mat-icon-button>
+    <button (click)="calculateTotalTax()" mat-icon-button>
       <mat-icon>search</mat-icon>
     </button>
-    <mat-form-field *ngIf="showQuarterlyAmount()">
-      <mat-label>Import:</mat-label>
-      <input [(ngModel)]="quarterlyAmount" type="text" readonly matInput/>
+    <mat-form-field>
+      <mat-label>Total Base Tax:</mat-label>
+      <input [(ngModel)]="totalTax.totalBaseTax" type="text" readonly matInput/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Total Tax Value:</mat-label>
+      <input [(ngModel)]="totalTax.totalTaxValue" type="text" readonly matInput/>
     </mat-form-field>
   </mat-card-content>
 </mat-card>
