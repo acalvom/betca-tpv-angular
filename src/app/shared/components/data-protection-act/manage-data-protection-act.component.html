@@ -1,8 +1,14 @@
-<mat-card-content>
+<mat-card-content style="text-align: center;">
   <mat-button-toggle-group [(value)]="selectedRgpdType">
-    <mat-button-toggle [value]="rgpdTypes.BASIC">{{rgpdTypes.BASIC.valueOf()}}</mat-button-toggle>
-    <mat-button-toggle [value]="rgpdTypes.MEDIUM">{{rgpdTypes.MEDIUM.valueOf()}}</mat-button-toggle>
-    <mat-button-toggle [value]="rgpdTypes.ADVANCED">{{rgpdTypes.ADVANCED.valueOf()}}</mat-button-toggle>
+    <mat-button-toggle [value]="rgpdTypes.BASIC" [style.border-color]="getColor(rgpdTypes.BASIC)"
+                       [style.color]="getColor(rgpdTypes.BASIC)">
+      {{rgpdTypes.BASIC.valueOf()}}</mat-button-toggle>
+    <mat-button-toggle [value]="rgpdTypes.MEDIUM" [style.border-color]="getColor(rgpdTypes.MEDIUM)"
+                       [style.color]="getColor(rgpdTypes.MEDIUM)">
+      {{rgpdTypes.MEDIUM.valueOf()}}</mat-button-toggle>
+    <mat-button-toggle [value]="rgpdTypes.ADVANCED" [style.border-color]="getColor(rgpdTypes.ADVANCED)"
+                       [style.color]="getColor(rgpdTypes.ADVANCED)">
+      {{rgpdTypes.ADVANCED.valueOf()}}</mat-button-toggle>
   </mat-button-toggle-group>
   <br>
   <mat-card-content *ngIf="selectedRgpdType !== undefined">
@@ -13,10 +19,8 @@
     <mat-card-content *ngIf="!isUserRgpdType()">
       <button mat-stroked-button color="primary" (click)="printUnsignedAgreement()">Download PDF</button>
       <br>
-      <mat-form-field>
-        <mat-label>Choose a file (.pdf)</mat-label>
-        <input [(ngModel)]="file" type="file" accept="application/pdf">
-      </mat-form-field>
+      <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+      <input hidden (change)="onFileSelected()" #fileInput type="file" accept="application/pdf">
     </mat-card-content>
   </mat-card-content>
 </mat-card-content>

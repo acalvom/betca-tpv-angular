@@ -30,10 +30,8 @@ import {OfferCreationUpdatingDialogComponent} from './offers/offer-creation-upda
 import {ArticlesFamilyComponent} from './articles-family/articles-family/articles-family.component';
 import {ArticleFamilyViewComponent} from './cashier-opened/shopping-cart/article-family-view/article-family-view.component';
 import {StockAlarmsComponent} from './stock-alarms/stock-alarms.component';
-import {UsersComponent} from './users/components/users.component';
 import {SharedOfferService} from './shared/services/shared.offer.service';
 import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
-import {UserCreationUpdatingDialogComponent} from './users/dialog/user-creation/user-creation-updating-dialog.component';
 import { TicketEditingDialogComponent } from './cashier-opened/tickets/ticket-editing-dialog.component';
 import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-family-view/open-sizes-dialog.component';
 import {ListComponent} from './shared/components/list.component';
@@ -60,14 +58,16 @@ import {UsersManagementComponent} from './users/components/users-management.comp
 import {SalesPeopleComponent} from './salespeople/salespeople.component';
 import {SalesPeopleService} from './salespeople/salespeople.service';
 import { InvoicesComponent } from './invoices/invoices.component';
+import { InvoiceDialogComponent } from './invoices/invoice-dialog.component';
 import { CustomerDiscountDialogComponent } from './customer-discount/customer-discount-dialog.component';
-import {UserDialogComponent} from './users/dialog/user-dialog.component';
 import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-creation/articles-size-family-creation-dialog.component';
 import { IssuesComponent } from './issues/issues.component';
 import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/issue-creation-dialog.component';
-import {ProviderOrdersComponent} from './provider-orders/provider-orders.component';
-import {ProviderOrderDialogComponent} from './provider-orders/provider-order-dialog.component';
-
+import {ComplaintsShopComponent} from './complaints-shop/complaints-shop.component';
+import { StaffComponent } from './staff/staff.component';
+import {UserUpdateDialogComponent} from './users/dialog/user-update-dialog.component';
+import {ProviderOrderDialogComponent} from "./provider-orders/provider-order-dialog.component";
+import {ProviderOrdersComponent} from "./provider-orders/provider-orders.component";
 
 @NgModule({
   declarations: [
@@ -89,6 +89,7 @@ import {ProviderOrderDialogComponent} from './provider-orders/provider-order-dia
     NewArticleFamilyDialogComponent,
     ProviderCreationUpdatingDialogComponent,
     ProvidersComponent,
+    ComplaintsShopComponent,
     SearchByBarcodeComponent,
     SearchByCompanyComponent,
     SearchByBudgetComponent,
@@ -99,8 +100,6 @@ import {ProviderOrderDialogComponent} from './provider-orders/provider-order-dia
     OfferCreationUpdatingDialogComponent,
     OpenSizesDialogComponent,
     StockAlarmsComponent,
-    UsersComponent,
-    UserCreationUpdatingDialogComponent,
     TicketEditingDialogComponent,
     IssuesComponent,
     StockAlarmsCreationUpdatingDialogComponent,
@@ -118,12 +117,14 @@ import {ProviderOrderDialogComponent} from './provider-orders/provider-order-dia
     MessengerComponent,
     SalesPeopleComponent,
     InvoicesComponent,
+    InvoiceDialogComponent,
     SalesPeopleComponent,
     CustomerDiscountDialogComponent,
-    UserDialogComponent,
+    UserUpdateDialogComponent,
     ArticlesSizeFamilyCreationDialogComponent,
     SalesPeopleComponent,
     IssueCreationDialogComponent,
+    StaffComponent,
     ProviderOrdersComponent,
     ProviderOrderDialogComponent
   ],
@@ -133,9 +134,8 @@ import {ProviderOrderDialogComponent} from './provider-orders/provider-order-dia
     CashierDialogComponent,
     CheckOutDialogComponent,
     ProviderCreationUpdatingDialogComponent,
-    UserCreationUpdatingDialogComponent,
-    UserDialogComponent,
-    ArticlesSizeFamilyCreationDialogComponent
+    UserUpdateDialogComponent,
+    ArticlesSizeFamilyCreationDialogComponent,
   ],
   imports: [
     SharedModule,
