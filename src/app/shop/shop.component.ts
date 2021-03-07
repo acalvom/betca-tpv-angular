@@ -15,6 +15,7 @@ import { SlackPublisherComponent } from './slack-publisher/slack-publisher.compo
 import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-creation/articles-size-family-creation-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SharedMessengerService } from './shared/services/shared-messenger.service';
+import {StaffTimeService} from './staff/staff-time.service';
 
 @Component({
   templateUrl: 'shop.component.html',
@@ -27,7 +28,8 @@ export class ShopComponent implements OnInit {
 
   constructor(private router: Router, private dialog: MatDialog, private httpService: HttpService,
               private tokensService: AuthService, private sharedCashierService: SharedCashierService,
-              private snackBar: MatSnackBar, private sharedMessengerService: SharedMessengerService) {
+              private snackBar: MatSnackBar, private sharedMessengerService: SharedMessengerService,
+              private logoutService: StaffTimeService) {
     this.username = tokensService.getName();
     this.cashierClosed = true;
     this.cashier();
@@ -59,6 +61,7 @@ export class ShopComponent implements OnInit {
   }
 
   logout(): void {
+    this.logoutService.logout();
     this.tokensService.logout();
   }
 
@@ -111,10 +114,10 @@ export class ShopComponent implements OnInit {
       let snackBarRef = this.snackBar.open(message, action, {
         duration: 8000,
       });
-  
-      var audio = new Audio('https://proxy.notificationsounds.com/message-tones/pristine-609/download/file-sounds-1150-pristine.mp3'); 
-      audio.play(); 
-  
+
+      var audio = new Audio('https://proxy.notificationsounds.com/message-tones/pristine-609/download/file-sounds-1150-pristine.mp3');
+      audio.play();
+
       snackBarRef.onAction().subscribe(() => {
         this.router.navigate(['shop', 'messenger']).then();
       });
@@ -124,6 +127,6 @@ export class ShopComponent implements OnInit {
 
   }
 
- 
+
 }
 
