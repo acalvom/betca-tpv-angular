@@ -68,6 +68,7 @@ import {UserUpdateCreateDialogComponent} from './users/dialog/user-update-create
 import {SharedMessengerService} from './shared/services/shared-messenger.service';
 import {ProviderOrderDialogComponent} from "./provider-orders/provider-order-dialog.component";
 import {ProviderOrdersComponent} from "./provider-orders/provider-orders.component";
+import { SearchByTicketRefComponent } from './shared/search-by-ticket-ref.component';
 
 @NgModule({
   declarations: [
@@ -125,7 +126,8 @@ import {ProviderOrdersComponent} from "./provider-orders/provider-orders.compone
     IssueCreationDialogComponent,
     StaffComponent,
     ProviderOrdersComponent,
-    ProviderOrderDialogComponent
+    ProviderOrderDialogComponent,
+    SearchByTicketRefComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
