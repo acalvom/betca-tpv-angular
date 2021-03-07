@@ -57,5 +57,9 @@ export class UserCompleteService {
 
   }
 
+  checkUser(mobile: number): boolean {
+    return (this.users.find( user => user.mobile == mobile)) ? true : false;
+  }
+
 
 }

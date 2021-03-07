@@ -22,7 +22,8 @@ export class UserUpdateDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) data: User, private dialog: MatDialog,
               private authService: AuthService, private userService: UserCompleteService) {
-    this.title = data ? 'Create User' : 'Edit User';
+    console.log(data);
+    this.title = data ? 'Edit User' : 'Create User';
     this.user = data ? data : {
       mobile: undefined,
       firstName: undefined,
