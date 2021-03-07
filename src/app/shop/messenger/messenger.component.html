@@ -1,37 +1,43 @@
 <mat-tab-group>
-    <mat-tab label="Received messages"> 
-      <mat-list role="list">
-        <mat-list-item role="listitem">Item 1</mat-list-item>
-        <mat-list-item role="listitem">Item 2</mat-list-item>
-        <mat-list-item role="listitem">Item 3</mat-list-item>
-      </mat-list>
+    <mat-tab label="Received messages">
+      <app-crud [data]="getReceivedMessages()" [readAction]="false" [deleteAction]="false" [createAction]="false" [updateAction]="false"
+                [title]="receivedMessagesTitle"></app-crud>
     </mat-tab>
    
-    <mat-tab label="Sent messages"> 
-      <mat-list role="list">
-        <mat-list-item role="listitem">Item 1</mat-list-item>
-        <mat-list-item role="listitem">Item 2</mat-list-item>
-        <mat-list-item role="listitem">Item 3</mat-list-item>
-      </mat-list>  
+    <mat-tab label="Sent messages">
+      <app-crud [data]="getSentMessages()" [readAction]="false" [deleteAction]="false" [createAction]="false" [updateAction]="false"
+                [title]="sentMessagesTitle"></app-crud>
     </mat-tab>
     
     <mat-tab label="New Message"> 
-      <form >
-        <mat-form-field appearance="fill">
-          <mat-label>Input</mat-label>
-          <input matInput>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Select</mat-label>
-          <mat-select>
-            <mat-option value="one">First option</mat-option>
-            <mat-option value="two">Second option</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Textarea</mat-label>
-          <textarea matInput></textarea>
-        </mat-form-field>
-      </form>
+      <div class="container message-container">
+        <form>
+          <div fxLayout="row" fxLayoutAlign="space-around center" class="message-header">
+            <mat-form-field appearance="fill" class="width:30%;">
+              <mat-label>Recipient telephone</mat-label>
+              <input type="tel" matInput [(ngModel)]="message.toUser" name="toUser" maxLength="9">
+              <mat-hint align="end">{{message.toUser.length}} / 9</mat-hint>
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="width:70%;">
+              <mat-label>Subject</mat-label>
+              <input type="text" matInput [(ngModel)]="message.subject" name="subject" maxLength="100">
+              <mat-hint align="end">{{message.subject.length}} / 100</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="fill" class="width:100%;">
+            <mat-label>Message</mat-label>
+            <textarea matInput rows="6" [(ngModel)]="message.text" name="text" maxLength="2000"></textarea>
+            <mat-hint align="end">{{message.text.length}} / 2000</mat-hint>
+
+            <button mat-mini-fab matSuffix color="primary" aria-label="Send message"
+                    (click)="sendMessage()" [disabled]="isSendDisabled()">
+              <mat-icon>send</mat-icon>
+            </button>
+          </mat-form-field>
+
+        </form>
+      </div>
     </mat-tab>
   </mat-tab-group>
