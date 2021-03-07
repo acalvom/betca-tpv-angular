@@ -10,17 +10,29 @@ import {StaffTime} from './model/staff-time.model';
 })
 export class StaffTimeService {
 
-  staffTime = [
+  staffTimeDay = [
     new StaffTime('20-12-2021', 4),
     new StaffTime('21-12-2021', 7)
+  ];
+
+  staffTimeMonth = [
+    new StaffTime('enero', 20),
+    new StaffTime('febrero', 30)
   ];
 
   constructor(private httpService: HttpService) { }
 
   find(staffTime: StaffTimeSearch): Observable<StaffTime[]> {
-    return of(this.staffTime);
+    if (staffTime.typeOfSearch === 'month') {
+      return of(this.staffTimeMonth);
+    }
+    return of(this.staffTimeDay);
     // return this.httpService
     //   .paramsFrom(staffTime)
     //   .get(EndPoints.STAFF + '/time');
+  }
+
+  logout(): Observable<void> {
+    return this.httpService.post(EndPoints.STAFF + '/logout');
   }
 }
