@@ -1,4 +1,5 @@
 export interface CustomerDiscount {
+  id?: string;
   note?: string;
   registationDate?: string;
   discount?: number;

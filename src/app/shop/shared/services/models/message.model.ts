@@ -1,9 +1,15 @@
-import { User } from "./user.models";
+import { User } from './user.model';
 
-export interface Message {
-    fromUser: User; 
-    toUser: User; 
-    subject: string; 
-    text: string
-  }
-  
+export class Message {
+    fromUser: string;
+    toUser: string;
+    subject: string;
+    text: string;
+
+    constructor(){
+        this.fromUser = "";
+        this.toUser = "";
+        this.subject = "";
+        this.text = "";
+    }
+}

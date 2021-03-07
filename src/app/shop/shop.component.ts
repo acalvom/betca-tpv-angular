@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
@@ -11,21 +11,30 @@ import {AddCreditLineDialogComponent} from './shared/dialogs/add-credit-line-dia
 import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
 import {DataProtectionActDialogComponent} from './data-protection-act/data-protection-act-dialog.component';
 import {CashMovementDialogComponent} from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
+import { SlackPublisherComponent } from './slack-publisher/slack-publisher.component';
+import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-creation/articles-size-family-creation-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SharedMessengerService } from './shared/services/shared-messenger.service';
 
 @Component({
   templateUrl: 'shop.component.html',
   styleUrls: ['shop.component.css'],
 
 })
-export class ShopComponent {
+export class ShopComponent implements OnInit {
   username: string;
   cashierClosed: boolean;
 
   constructor(private router: Router, private dialog: MatDialog, private httpService: HttpService,
-              private tokensService: AuthService, private sharedCashierService: SharedCashierService) {
+              private tokensService: AuthService, private sharedCashierService: SharedCashierService,
+              private snackBar: MatSnackBar, private sharedMessengerService: SharedMessengerService) {
     this.username = tokensService.getName();
     this.cashierClosed = true;
     this.cashier();
+  }
+
+  ngOnInit(): void {
+    this.openSnackBar("You have new messages!", "Go to messages 📧");
   }
 
   untilManager(): boolean {
@@ -86,4 +95,35 @@ export class ShopComponent {
       .afterClosed();
   }
 
+  slack() {
+    this.dialog.open(SlackPublisherComponent)
+      .afterClosed();
+  }
+
+  createSizeFamily(): void {
+    this.dialog.open(ArticlesSizeFamilyCreationDialogComponent)
+      .afterClosed();
+  }
+
+  openSnackBar(message: string, action: string) {
+
+    this.sharedMessengerService.checkNewMessages().subscribe((result: boolean) => {
+      let snackBarRef = this.snackBar.open(message, action, {
+        duration: 8000,
+      });
+  
+      var audio = new Audio('https://proxy.notificationsounds.com/message-tones/pristine-609/download/file-sounds-1150-pristine.mp3'); 
+      audio.play(); 
+  
+      snackBarRef.onAction().subscribe(() => {
+        this.router.navigate(['shop', 'messenger']).then();
+      });
+    }, error => {
+      console.error("Error checking if there are new messages");
+    });
+
+  }
+
+ 
 }
+

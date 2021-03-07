@@ -47,6 +47,14 @@
     <mat-icon>local_atm</mat-icon>
     <span>VAT Management</span>
   </button>
+  <button mat-menu-item routerLink="/shop/issues">
+    <mat-icon>bug_report</mat-icon>
+    <span>Issues</span>
+  </button>
+  <button (click)="slack()" mat-menu-item>
+    <mat-icon>textsms</mat-icon>
+    <span>Publish on Slack</span>
+  </button>
 </mat-menu>
 <!--   Menus  -->
 <mat-menu #cashiers="matMenu">
@@ -80,7 +88,7 @@
     <mat-icon>playlist_add_check</mat-icon>
     <span>Ticket tracking</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="">
+  <button mat-menu-item routerLink="/shop/invoices">
     <mat-icon>receipt</mat-icon>
     <span>Invoices</span>
   </button>
@@ -102,13 +110,17 @@
     <mat-icon>category</mat-icon>
     <span>Articles Family</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="">
+  <button (click)="createSizeFamily()" mat-menu-item>
     <mat-icon>view_module</mat-icon>
     <span>Articles Sizes Family Creator</span>
   </button>
   <button mat-menu-item routerLink="/shop/providers">
     <mat-icon>local_shipping</mat-icon>
     <span>Providers</span>
+  </button>
+  <button mat-menu-item routerLink="/shop/complaints">
+    <mat-icon>markunread_mailbox</mat-icon>
+    <span>Complaints</span>
   </button>
   <button *ngIf="untilManager()" disabled="disabled" mat-menu-item routerLink="">
     <mat-icon>storage</mat-icon>
@@ -141,6 +153,10 @@
   <button mat-menu-item routerLink="/shop/users">
     <mat-icon>account_circle</mat-icon>
     <span>Users</span>
+  </button>
+  <button mat-menu-item routerLink="/shop/staff">
+    <mat-icon>perm_identity</mat-icon>
+    <span>Staff</span>
   </button>
   <button mat-menu-item routerLink="/shop/salespeople">
     <mat-icon>assignment_ind</mat-icon>
