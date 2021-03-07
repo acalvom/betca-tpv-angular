@@ -65,6 +65,8 @@ import {UserDialogComponent} from './users/dialog/user-dialog.component';
 import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-creation/articles-size-family-creation-dialog.component';
 import { IssuesComponent } from './issues/issues.component';
 import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/issue-creation-dialog.component';
+import {ProviderOrdersComponent} from './provider-orders/provider-orders.component';
+import {ProviderOrderDialogComponent} from './provider-orders/provider-order-dialog.component';
 
 
 @NgModule({
@@ -122,6 +124,8 @@ import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/iss
     ArticlesSizeFamilyCreationDialogComponent,
     SalesPeopleComponent,
     IssueCreationDialogComponent,
+    ProviderOrdersComponent,
+    ProviderOrderDialogComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
@@ -131,7 +135,7 @@ import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/iss
     ProviderCreationUpdatingDialogComponent,
     UserCreationUpdatingDialogComponent,
     UserDialogComponent,
-    ArticlesSizeFamilyCreationDialogComponent,
+    ArticlesSizeFamilyCreationDialogComponent
   ],
   imports: [
     SharedModule,
