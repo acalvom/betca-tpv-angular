@@ -8,12 +8,12 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
-  templateUrl: 'user-update-dialog.component.html',
-  styleUrls: ['./user-update-dialog.component.css']
+  templateUrl: 'user-update-create-dialog.component.html',
+  styleUrls: ['./user-update-create-dialog.component.css']
 
 
 })
-export class UserUpdateDialogComponent implements OnInit {
+export class UserUpdateCreateDialogComponent implements OnInit {
 
   roleValues = Object.keys(Role).filter(key => isNaN(Number(key)));
   user: User;

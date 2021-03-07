@@ -64,7 +64,7 @@ import { IssuesComponent } from './issues/issues.component';
 import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/issue-creation-dialog.component';
 import {ComplaintsShopComponent} from './complaints-shop/complaints-shop.component';
 import { StaffComponent } from './staff/staff.component';
-import {UserUpdateDialogComponent} from './users/dialog/user-update-dialog.component';
+import {UserUpdateCreateDialogComponent} from './users/dialog/user-update-create-dialog.component';
 
 @NgModule({
   declarations: [
@@ -116,7 +116,7 @@ import {UserUpdateDialogComponent} from './users/dialog/user-update-dialog.compo
     InvoiceDialogComponent,
     SalesPeopleComponent,
     CustomerDiscountDialogComponent,
-    UserUpdateDialogComponent,
+    UserUpdateCreateDialogComponent,
     ArticlesSizeFamilyCreationDialogComponent,
     SalesPeopleComponent,
     IssueCreationDialogComponent,

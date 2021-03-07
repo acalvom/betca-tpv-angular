@@ -10,7 +10,7 @@ import {SearchRgpdUser} from '@shared/components/data-protection-act/search-rgpd
 import {RgpdType} from '@shared/models/RgpdType';
 import {DataProtectionActService} from '@shared/components/data-protection-act/data-protection-act.service';
 import {AuthService} from '@core/auth.service';
-import {UserUpdateDialogComponent} from '../../users/dialog/user-update-dialog.component';
+import {UserUpdateCreateDialogComponent} from '../../users/dialog/user-update-create-dialog.component';
 
 @Component({
   templateUrl: 'check-out-dialog.component.html',
@@ -49,7 +49,7 @@ export class CheckOutDialogComponent {
 
     if (mobile) {
       if (!this.authService.isAuthenticated() || !this.userService.checkUser(Number(mobile))){
-        this.dialog.open(UserUpdateDialogComponent);
+        this.dialog.open(UserUpdateCreateDialogComponent);
       }
       this.ticketCreation.user = {mobile: Number(mobile)};
       // TODO me falta comprobar si tiene credit-line el usuario

@@ -3,7 +3,7 @@ import {UserCompleteService} from '@shared/services/userComplete.service';
 import {User} from '@shared/models/userRegister.model';
 import {of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
-import {UserUpdateDialogComponent} from '../dialog/user-update-dialog.component';
+import {UserUpdateCreateDialogComponent} from '../dialog/user-update-create-dialog.component';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 import {AuthService} from '@core/auth.service';
 
@@ -27,7 +27,7 @@ export class UsersManagementComponent implements OnInit {
   updateUser(user: User): void {
     this.userCompleteService.searchCompleteUser(user.mobile)
       .subscribe(data => {
-        this.dialog.open(UserUpdateDialogComponent, {data
+        this.dialog.open(UserUpdateCreateDialogComponent, {data
         })
           .afterClosed()
           .subscribe(() => (this.data = this.userCompleteService.getBasicUsersInfo()));
@@ -44,7 +44,7 @@ export class UsersManagementComponent implements OnInit {
   }
 
   createUser(): void {
-    this.dialog.open(UserUpdateDialogComponent)
+    this.dialog.open(UserUpdateCreateDialogComponent)
       .afterClosed()
       .subscribe(() => this.data = this.userCompleteService.getBasicUsersInfo());
   }
