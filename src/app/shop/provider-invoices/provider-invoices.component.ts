@@ -13,6 +13,9 @@ import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.comp
 export class ProviderInvoicesComponent {
   title = 'Provider Invoices Management';
   providerInvoices = of([]);
+  trimesters = [1, 2, 3, 4];
+  selectedTrimester: number;
+  quarterlyAmount: number;
 
   constructor(private dialog: MatDialog, private providerInvoiceService: ProviderInvoiceService) {
     this.search();
@@ -49,6 +52,16 @@ export class ProviderInvoicesComponent {
     this.providerInvoiceService
       .delete(providerInvoice.number)
       .subscribe(() => this.search());
+  }
+
+  calculateQuarterlyAmount(): void {
+    console.log(this.selectedTrimester);
+    this.providerInvoiceService.calculateQuarterlyAmount(this.selectedTrimester)
+      .subscribe(amount => this.quarterlyAmount = amount);
+  }
+
+  showQuarterlyAmount(): boolean {
+    return this.quarterlyAmount !== undefined;
   }
 
 }

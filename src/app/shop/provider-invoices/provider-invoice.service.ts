@@ -59,4 +59,21 @@ export class ProviderInvoiceService {
      */
   }
 
+  calculateQuarterlyAmount(trimester: number): Observable<number> {
+    let amount = 0;
+    if (trimester === 1) {
+      amount = this.calculateAmount(this.providerInvoices[0]) +
+        this.calculateAmount(this.providerInvoices[1]);
+    }
+    return of(amount);
+    /*
+    return this.httpService
+      .get(EndPoints.PROVIDER_INVOICES + '/' + 'trimesters/' + trimester);
+     */
+  }
+
+  // TODO: Remove method
+  calculateAmount(providerInvoice: ProviderInvoice): number {
+    return providerInvoice.baseTax + (providerInvoice.baseTax * providerInvoice.taxValue / 100);
+  }
 }

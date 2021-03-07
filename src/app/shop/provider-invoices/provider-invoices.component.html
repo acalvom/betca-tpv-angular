@@ -1,4 +1,23 @@
-
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Calculate Quarterly Amount: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>Trimester</mat-label>
+      <mat-select [(ngModel)]="selectedTrimester">
+        <mat-option *ngFor="let trimester of trimesters" [value]="trimester">
+          {{trimester}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button (click)="calculateQuarterlyAmount()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <mat-form-field *ngIf="showQuarterlyAmount()">
+      <mat-label>Import:</mat-label>
+      <input [(ngModel)]="quarterlyAmount" type="text" readonly matInput/>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
 <app-crud (create)="create()" (read)="read($event)" (update)="update($event)" (delete)="delete($event)"
           [data]="providerInvoices" [title]="title"></app-crud>
 
