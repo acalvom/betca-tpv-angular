@@ -1,12 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {MatDialog} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {Role} from '@core/role.model';
-import {User} from '@core/user.model';
+import {User} from '../models/userRegister.model';
 import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
-import {of} from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {RgpdUser} from '@shared/models/rgpd-user.model';
 
@@ -15,44 +14,29 @@ import {RgpdUser} from '@shared/models/rgpd-user.model';
   styleUrls: ['./dialog.component.css']
 })
 export class RegisterDialogComponent {
-  mobile: number;
-  firstName = '';
-  familyName: string;
-  email: string;
-  dni: string;
-  address: string;
-  password: string;
-  role: Role;
-  registrationDate: Date;
-  active: boolean;
   rgpdUser: RgpdUser;
+  user: User;
+  hide = true;
 
-  /*  private MESSAGE: string = 'Usuario ' + this.name + ' registrado correctamente.';
-    user: User = {
-      mobile: this.mobile,
-      name: this.name,
-      token: this.password,
-      role: this.role
-    };*/
-
-  constructor(private httpService: HttpService, private router: Router,
+  constructor(@Inject(MAT_DIALOG_DATA) data: User, private httpService: HttpService, private router: Router,
               private dialog: MatDialog, private snackBar: MatSnackBar) {
+    this.user = data ? data : {
+      mobile: undefined, firstName: undefined, familyName: undefined, email: undefined, dni: undefined,
+      address: undefined, password: undefined, role: Role.CUSTOMER, active: true, registrationDate: new Date()
+    };
     this.rgpdUser = {
-      mobile: this.mobile,
+      mobile: this.user.mobile,
       rgpdType: undefined,
       agreement: undefined
     };
   }
 
   register(): void {
-    of(console.log(''))
-      .subscribe(() => {
-        this.dialog.closeAll();
-        this.openSnackBar('Usuario ' + this.firstName + ' registrado correctamente.', '');
-      });
     /*this.httpService.post(EndPoints.USERS, this.user)
-      .subscribe(() => {
+      .subscribe(response => {
+      console.log(response);
       this.dialog.closeAll();
+      this.openSnackBar('Usuario ' + this.user.firstName + ' registrado correctamente.', '');
     });*/
   }
 

@@ -20,12 +20,10 @@ export class SharedCreditLineService {
       .get(EndPoints.CREDIT + this.SEARCH + '?userReference=' + userReference);
   }
 
-  /*
-
-  create(article: Article): Observable<Article> {
+  create(credit: Credit): Observable<Credit> {
     return this.httpService
-      .post(EndPoints.ARTICLES, article);
-  }*/
+      .post(EndPoints.CREDIT, credit);
+  }
 
   searchUnpaidTickets(userPhone: string): Observable<TicketCreditLine[]> {
     /*return this.httpService

@@ -15,9 +15,6 @@ import {InvoiceUpdate} from './invoice-update.model';
 })
 export class InvoiceService {
   phones: number[] = [651112230, 651112231, 651112232];
-  invoicesItems: InvoiceItem[] = [{number: 111200300, creationDate: new Date(), baseTax: 1, taxValue: 1, phone: this.phones[0]},
-    {number: 111200301, creationDate: new Date(), baseTax: 1, taxValue: 1, phone: this.phones[1]},
-    {number: 111200302, creationDate: new Date(), baseTax: 1, taxValue: 1, phone: this.phones[2]}];
 
   users: User[] = [{phone: this.phones[0], dni: 'DNI_U1', name: 'User_1', familyName: 'FamU_1'},
     {phone: this.phones[1], dni: 'DNI_U2', name: 'User_2', familyName: 'FamU_2'},
@@ -40,26 +37,32 @@ export class InvoiceService {
       user: this.users[2], ticket: this.tickets[2]
     }];
 
+  invoicesItems: InvoiceItem[] = [];
+
   constructor(private httpService: HttpService) {
+    let invoiceItem: InvoiceItem;
+    for (const invoiceAux of this.invoices){
+      invoiceItem = new InvoiceItem(invoiceAux.number, invoiceAux.creationDate, invoiceAux.baseTax,
+                    invoiceAux.taxValue, invoiceAux.user.phone, invoiceAux.ticket.reference);
+      this.invoicesItems.push(invoiceItem);
+    }
   }
 
   search(invoiceSearch: InvoiceSearch): Observable<InvoiceItem[]> {
     console.log('Filtrando resultados por invoiceSearch');
-    console.log(invoiceSearch);
     const invoices: InvoiceItem[] = this.invoicesItems.filter(invo => invoiceSearch.phone === undefined ||
-      invo.phone === invoiceSearch.phone)
+      invo.userPhone === invoiceSearch.phone)
       .filter(invo => invoiceSearch.ticketId === undefined ||
         invo.number === invoiceSearch.ticketId);
     return of(invoices);
   }
 
   printPdf(numberInvoice: number): Observable<void> {
-    return of(console.log('Implementado'));
+    return of(console.log('Implementado impresion de factura'));
   }
 
   read(numberInvoice: number): Observable<Invoice> {
     const invoice: Invoice = this.invoices.find(invo => invo.number === numberInvoice);
-    console.log(invoice);
     return of(invoice);
   }
 
@@ -67,11 +70,11 @@ export class InvoiceService {
     const invoiceUpdated: InvoiceItem = this.invoicesItems.find(invo => invo.number === invoice.number);
     const invoiceFullUpdated: Invoice = this.invoices.find(invo => invo.number === invoice.number);
 
-    invoiceFullUpdated.user.dni = invoice.dniUser;
-    invoiceFullUpdated.user.name = invoice.nameUser;
+    invoiceFullUpdated.user.dni = invoice.userDni;
+    invoiceFullUpdated.user.name = invoice.userName;
     invoiceFullUpdated.user.familyName = invoice.familyNameUser;
-    invoiceFullUpdated.user.phone = invoice.phoneUser;
-    invoiceUpdated.phone = invoice.phoneUser;
+    invoiceFullUpdated.user.phone = invoice.userPhone;
+    invoiceUpdated.userPhone = invoice.userPhone;
     return of(invoiceUpdated);
   }
 }
