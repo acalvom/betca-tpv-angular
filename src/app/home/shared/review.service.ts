@@ -2,32 +2,25 @@ import { Injectable } from '@angular/core';
 import {Review} from '../reviews/review.model';
 import {Observable, of} from 'rxjs';
 import {AuthService} from '@core/auth.service';
-import {User} from '@core/user.model';
-import {Role} from '@core/role.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Article} from './article.model';
+import {EndPoints} from '@shared/end-points';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
-  // Data mock
-  private reviews: Review[];
-  private user: User = {
-    mobile: this.authService.getMobile(),
-    name: this.authService.getName(),
-    role: Role.CUSTOMER,
-    token: this.authService.getToken()
-  };
+  private endPoint = EndPoints.REVIEWS;
+  private reviews: Review[]; // Data mock
   constructor(private authService: AuthService, private snackBar: MatSnackBar) {
     this.reviews = [
-      { user: this.user, articleBarcode: '#00000001', score: 2.5, opinion: 'Is ok but not that much' },
-      { user: this.user, articleBarcode: '#00000002', score: 5, opinion: 'Best product' },
-      { user: this.user, articleBarcode: '#00000003', score: 0.5, opinion: 'Really bad' },
-      { user: this.user, articleBarcode: '#00000004' },
-      { user: this.user, articleBarcode: '#00000006' },
-      { user: this.user, articleBarcode: '#00000007' },
-      { user: this.user, articleBarcode: '#00000009' }
+      { mobile: this.authService.getMobile(), articleBarcode: '#00000001', score: 2.5, opinion: 'Is ok but not that much' },
+      { mobile: this.authService.getMobile(), articleBarcode: '#00000002', score: 5, opinion: 'Best product' },
+      { mobile: this.authService.getMobile(), articleBarcode: '#00000003', score: 0.5, opinion: 'Really bad' },
+      { articleBarcode: '#00000004' },
+      { articleBarcode: '#00000006' },
+      { articleBarcode: '#00000007' },
+      { articleBarcode: '#00000009' }
     ];
   }
   create(review: Review): Observable<Review> {

@@ -21,20 +21,20 @@ export class InvoiceDialogComponent {
       creationDate: data.creationDate,
       baseTax: data.baseTax,
       taxValue: data.taxValue,
-      phoneUser: data.user.phone,
+      userPhone: data.user.phone,
       ticketReference: data.ticket.reference,
-      dniUser: data.user.dni,
-      nameUser: data.user.name,
+      userDni: data.user.dni,
+      userName: data.user.name,
       familyNameUser: data.user.familyName
     } : {
       number: undefined,
       creationDate: undefined,
       baseTax: undefined,
       taxValue: undefined,
-      phoneUser: undefined,
+      userPhone: undefined,
       ticketReference: undefined,
-      dniUser: undefined,
-      nameUser: undefined,
+      userDni: undefined,
+      userName: undefined,
       familyNameUser: undefined
     };
   }

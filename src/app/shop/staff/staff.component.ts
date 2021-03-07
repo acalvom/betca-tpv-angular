@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {StaffTime} from './staff-time.model';
+import {StaffTimeSearch} from './model/staff-time-search.model';
+import {StaffTimeService} from './staff-time.service';
+import {response} from 'express';
+import {formatDate} from '@angular/common';
+import {StaffTime} from './model/staff-time.model';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-staff',
@@ -8,20 +13,25 @@ import {StaffTime} from './staff-time.model';
 })
 export class StaffComponent implements OnInit {
 
-  staffTime: StaffTime;
-  constructor() { }
+  staffTime: StaffTimeSearch;
+  startDate: Date;
+  endDate: Date;
+  data = of([]);
+
+  constructor(private staffTimeService: StaffTimeService) { }
 
   ngOnInit(): void {
-    this.staffTime = new StaffTime();
+    this.staffTime = new StaffTimeSearch();
   }
 
   search(): void {
-    console.log(this.staffTime);
+    this.staffTime.startDate = this.startDate.toLocaleDateString();
+    this.staffTime.endDate = this.endDate.toLocaleDateString();
+    this.data = this.staffTimeService.find(this.staffTime);
   }
 
   resetSearch(): void {
-    this.staffTime = new StaffTime();
-    console.log(this.staffTime);
+    this.staffTime = new StaffTimeSearch();
   }
 
 }
