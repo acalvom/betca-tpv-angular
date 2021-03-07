@@ -1,8 +1,7 @@
-import {User} from '@core/user.model';
-
 export interface Review {
-  user: User;
+  id?: string;
   articleBarcode: string;
+  mobile?: number;
   score?: number;
   opinion?: string;
 }

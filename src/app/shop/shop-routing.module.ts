@@ -22,6 +22,7 @@ import {MessengerComponent} from './messenger/messenger.component';
 import {SalesPeopleComponent} from './salespeople/salespeople.component';
 import {IssuesComponent} from './issues/issues.component';
 import {InvoicesComponent} from './invoices/invoices.component';
+import {ProviderOrdersComponent} from './provider-orders/provider-orders.component';
 import {ComplaintsShopComponent} from "./complaints-shop/complaints-shop.component";
 import {StaffComponent} from './staff/staff.component';
 
@@ -52,7 +53,8 @@ const routes: Routes = [
       {path: 'issues', component: IssuesComponent},
       {path: 'messenger', component: MessengerComponent},
       {path: 'salespeople', component: SalesPeopleComponent},
-      {path: 'staff', component: StaffComponent}
+      {path: 'staff', component: StaffComponent},
+      {path: 'provider-orders', component: ProviderOrdersComponent}
     ]
   }
 ];

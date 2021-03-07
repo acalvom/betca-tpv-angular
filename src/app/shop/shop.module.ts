@@ -67,6 +67,8 @@ import {ComplaintsShopComponent} from './complaints-shop/complaints-shop.compone
 import { StaffComponent } from './staff/staff.component';
 import {UserUpdateDialogComponent} from './users/dialog/user-update-dialog.component';
 import { SharedMessengerService } from './shared/services/shared-messenger.service';
+import {ProviderOrderDialogComponent} from "./provider-orders/provider-order-dialog.component";
+import {ProviderOrdersComponent} from "./provider-orders/provider-orders.component";
 
 @NgModule({
   declarations: [
@@ -124,6 +126,8 @@ import { SharedMessengerService } from './shared/services/shared-messenger.servi
     SalesPeopleComponent,
     IssueCreationDialogComponent,
     StaffComponent,
+    ProviderOrdersComponent,
+    ProviderOrderDialogComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
