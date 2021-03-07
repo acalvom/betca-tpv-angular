@@ -5,6 +5,7 @@ import {ProviderInvoice} from './provider-invoice.model';
 import {ProviderInvoiceService} from './provider-invoice.service';
 import {ProviderInvoiceCreationUpdatingDialogComponent} from './provider-invoice-creation-updating-dialog.component';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
+import {TotalTax} from './total-tax.model';
 
 @Component({
   selector: 'app-provider-invoices',
@@ -15,7 +16,7 @@ export class ProviderInvoicesComponent {
   providerInvoices = of([]);
   trimesters = [1, 2, 3, 4];
   selectedTrimester: number;
-  quarterlyAmount: number;
+  totalTax: TotalTax = {totalBaseTax: 0, totalTaxValue: 0};
 
   constructor(private dialog: MatDialog, private providerInvoiceService: ProviderInvoiceService) {
     this.search();
@@ -43,9 +44,10 @@ export class ProviderInvoicesComponent {
   update(providerInvoice: ProviderInvoice): void {
     this.providerInvoiceService
       .read(providerInvoice.number)
-      .subscribe(fullProviderInvoice => this.dialog.open(ProviderInvoiceCreationUpdatingDialogComponent,
-        {data: fullProviderInvoice})
-        .afterClosed().subscribe(() => this.search()));
+      .subscribe((fullProviderInvoice: ProviderInvoice) =>
+        this.dialog.open(ProviderInvoiceCreationUpdatingDialogComponent,
+          {data: fullProviderInvoice})
+          .afterClosed().subscribe(() => this.search()));
   }
 
   delete(providerInvoice: ProviderInvoice): void {
@@ -54,14 +56,10 @@ export class ProviderInvoicesComponent {
       .subscribe(() => this.search());
   }
 
-  calculateQuarterlyAmount(): void {
-    console.log(this.selectedTrimester);
-    this.providerInvoiceService.calculateQuarterlyAmount(this.selectedTrimester)
-      .subscribe(amount => this.quarterlyAmount = amount);
-  }
-
-  showQuarterlyAmount(): boolean {
-    return this.quarterlyAmount !== undefined;
+  calculateTotalTax(): void {
+    this.providerInvoiceService
+      .calculateTotalTax(this.selectedTrimester)
+      .subscribe((totalTax: TotalTax) => this.totalTax = totalTax);
   }
 
 }
