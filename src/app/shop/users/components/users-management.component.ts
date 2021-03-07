@@ -5,6 +5,7 @@ import {of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {UserUpdateDialogComponent} from '../dialog/user-update-dialog.component';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
+import {AuthService} from '@core/auth.service';
 
 @Component({
   selector: 'app-users-management',
@@ -15,7 +16,7 @@ export class UsersManagementComponent implements OnInit {
   public users = of([]);
   public data = of([]);
 
-  constructor(private userCompleteService: UserCompleteService, private dialog: MatDialog) {
+  constructor(private userCompleteService: UserCompleteService, private dialog: MatDialog, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -46,5 +47,13 @@ export class UsersManagementComponent implements OnInit {
     this.dialog.open(UserUpdateDialogComponent)
       .afterClosed()
       .subscribe(() => this.data = this.userCompleteService.getBasicUsersInfo());
+  }
+
+  deleteUser(user: User): void{
+    if (this.authService.isAdmin()){
+      this.userCompleteService
+        .deleteCompleteUser(user.mobile)
+        .subscribe(() => (this.data = this.userCompleteService.getBasicUsersInfo()));
+    }
   }
 }

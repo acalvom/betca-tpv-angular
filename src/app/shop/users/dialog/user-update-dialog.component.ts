@@ -4,6 +4,7 @@ import {User} from '@shared/models/userRegister.model';
 import {Role} from '@core/role.model';
 import {AuthService} from '@core/auth.service';
 import {UserCompleteService} from '@shared/services/userComplete.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -18,10 +19,11 @@ export class UserUpdateDialogComponent implements OnInit {
   user: User;
   title: string;
   editable = false;
+  oldUser: number;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) data: User, private dialog: MatDialog,
-              private authService: AuthService, private userService: UserCompleteService) {
+              private authService: AuthService, private userService: UserCompleteService, private snackBar: MatSnackBar) {
     console.log(data);
     this.title = data ? 'Edit User' : 'Create User';
     this.user = data ? data : {
@@ -36,6 +38,8 @@ export class UserUpdateDialogComponent implements OnInit {
       active: true,
       registrationDate: new Date()
     };
+
+    this.oldUser = data ? data.mobile : undefined;
   }
 
   ngOnInit(): void {
@@ -49,22 +53,32 @@ export class UserUpdateDialogComponent implements OnInit {
 
   updateCompleteUser(): void {
     this.userService
-      .setCompleteUser(this.user.mobile, this.user)
+      .setCompleteUser(this.oldUser, this.user)
       .subscribe(() => this.dialog.closeAll());
   }
 
   createCompleteUser(): void{
     this.userService
       .createCompleteUser(this.user)
-      .subscribe(() => this.dialog.closeAll());
+      .subscribe(() => {
+        this.openSnackBar('User successfully created', 'OK');
+      });
   }
 
   isCreate(): boolean {
-    return this.user.mobile === undefined;
+    return this.oldUser === undefined;
   }
 
-  isAuthenticated(): boolean {
-    return !this.authService.isAuthenticated();
+  openSnackBar(message: string, action: string): void {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+    });
+  }
+
+
+  invalid(): boolean {
+    return (this.user.mobile === undefined || null) ||
+      (this.user.firstName === undefined || null || this.user.firstName === '' );
   }
 
 

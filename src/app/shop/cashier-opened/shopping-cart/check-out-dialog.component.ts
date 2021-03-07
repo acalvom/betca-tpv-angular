@@ -9,8 +9,8 @@ import {UserCompleteService} from '@shared/services/userComplete.service';
 import {SearchRgpdUser} from '@shared/components/data-protection-act/search-rgpd-user.model';
 import {RgpdType} from '@shared/models/RgpdType';
 import {DataProtectionActService} from '@shared/components/data-protection-act/data-protection-act.service';
-import {AuthService} from "@core/auth.service";
-import {UserUpdateDialogComponent} from "../../users/dialog/user-update-dialog.component";
+import {AuthService} from '@core/auth.service';
+import {UserUpdateDialogComponent} from '../../users/dialog/user-update-dialog.component';
 
 @Component({
   templateUrl: 'check-out-dialog.component.html',
@@ -47,17 +47,11 @@ export class CheckOutDialogComponent {
 
   searchUser(mobile: string): void {
 
-    this.userSearch = {
-      mobile: Number(mobile)
-    };
-
     if (mobile) {
-
       if (!this.authService.isAuthenticated() || !this.userService.checkUser(Number(mobile))){
-        this.dialog.open(UserUpdateDialogComponent)
-          .afterClosed()
-          .subscribe(() => this.ticketCreation.user = {mobile: Number(mobile)});
+        this.dialog.open(UserUpdateDialogComponent);
       }
+      this.ticketCreation.user = {mobile: Number(mobile)};
       // TODO me falta comprobar si tiene credit-line el usuario
       this.credit = true;
     }
