@@ -11,6 +11,7 @@ import {RgpdType} from '@shared/models/RgpdType';
 import {DataProtectionActService} from '@shared/components/data-protection-act/data-protection-act.service';
 import {AuthService} from '@core/auth.service';
 import {UserUpdateCreateDialogComponent} from '../../users/dialog/user-update-create-dialog.component';
+import {SharedCreditLineService} from '../../shared/services/shared.credit-line.service';
 
 @Component({
   templateUrl: 'check-out-dialog.component.html',
@@ -28,7 +29,7 @@ export class CheckOutDialogComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) data, private dialog: MatDialog, private dialogRef: MatDialogRef<CheckOutDialogComponent>,
               private shoppingCartService: ShoppingCartService, private userService: UserCompleteService, private authService: AuthService,
-              private dataProtectionActService: DataProtectionActService) {
+              private dataProtectionActService: DataProtectionActService, private sharedCreditLineService: SharedCreditLineService) {
     this.ticketCreation = {cash: 0, card: 0, voucher: 0, shoppingList: data, note: ''};
     this.total();
   }
@@ -52,8 +53,13 @@ export class CheckOutDialogComponent {
         this.dialog.open(UserUpdateCreateDialogComponent);
       }
       this.ticketCreation.user = {mobile: Number(mobile)};
-      // TODO me falta comprobar si tiene credit-line el usuario
-      this.credit = true;
+      this.sharedCreditLineService.findByUserReference(this.ticketCreation.user.mobile.toString()).subscribe(
+        value => {
+          if (value != null){
+            this.credit = true;
+          }
+        }
+      );
     }
   }
 
