@@ -29,8 +29,6 @@ export class OfferCreationUpdatingDialogComponent {
     this.oldOffer = data ? data.reference : undefined;
   }
 
-  // TODO: change Math.random().toString(36).substring(7) to undefined when back-end is ready
-
   removeBarcode(barcode: string): void {
     const index = this.newOffer.articleBarcodes.indexOf(barcode);
     if (index >= 0) {
@@ -47,7 +45,6 @@ export class OfferCreationUpdatingDialogComponent {
       .read(barcode)
       .subscribe(article => {
         this.newOffer.articleBarcodes.push(article.barcode);
-        // console.log('barcodes ' + this.newOffer.articleBarcodes);
       });
   }
 
