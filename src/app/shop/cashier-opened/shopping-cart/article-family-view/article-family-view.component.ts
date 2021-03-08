@@ -27,17 +27,17 @@ export class ArticleFamilyViewComponent implements OnInit {
     );
   }
 
-  updateArray(articleFamily: ArticleFamilyViewModel): void {
-    this.articlesFamilyService.readChildrenTemporal(articleFamily).subscribe(
+  updateArray(articleFamilyViewModel: ArticleFamilyViewModel): void {
+    this.articlesFamilyService.readChildren(articleFamilyViewModel.reference).subscribe(
       result => {
         this.articlesFamily = result;
       }
     );
   }
 
-  openSizes(articleFamily: ArticleFamilyViewModel): void{
+  openSizes(articleFamilyViewModel: ArticleFamilyViewModel): void{
     let articlesFamilyViewModel: ArticleFamilyViewModel[] = [];
-    this.articlesFamilyService.readArticles(articleFamily).subscribe(
+    this.articlesFamilyService.readChildren(articleFamilyViewModel.reference).subscribe(
       result => {
         articlesFamilyViewModel = result;
       }

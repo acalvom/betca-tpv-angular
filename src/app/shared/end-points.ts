@@ -18,4 +18,5 @@ export class EndPoints {
   static CREDIT = environment.REST_CORE + '/credit';
   static STAFF = environment.REST_CORE + '/staff';
   static REVIEWS = environment.REST_CUSTOMER_SUPPORT + '/reviews';
+  static ARTICLES_FAMILY_VIEW = environment.REST_CORE + '/article-family-view';
 }
