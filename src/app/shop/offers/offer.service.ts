@@ -67,9 +67,6 @@ export class OfferService {
   }
 
   create(newOffer: Offer): Observable<Offer> {
-    // this.newOffers.push(newOffer);
-    // return of(newOffer);
-    console.log(newOffer);
     return this.httpService
       .post(EndPoints.OFFERS, newOffer);
   }
