@@ -2,7 +2,7 @@ import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {OfferService} from './offer.service';
 import {SharedArticleService} from '../shared/services/shared.article.service';
-import {OfferCreateUpdate} from './offer-creation-updating.model';
+import {Offer} from './offer-creation-updating.model';
 
 
 @Component({
@@ -12,7 +12,7 @@ import {OfferCreateUpdate} from './offer-creation-updating.model';
 
 export class OfferCreationUpdatingDialogComponent {
 
-  newOffer: OfferCreateUpdate;
+  newOffer: Offer;
   title: string;
   oldOffer: string;
   selectable = true;
@@ -20,12 +20,11 @@ export class OfferCreationUpdatingDialogComponent {
 
   @ViewChild('barcodeInput') barcodeInput: ElementRef<HTMLInputElement>;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: OfferCreateUpdate, private offerService: OfferService,
+  constructor(@Inject(MAT_DIALOG_DATA) data: Offer, private offerService: OfferService,
               private sharedArticleService: SharedArticleService, private dialog: MatDialog) {
     this.title = data ? 'Update Offer' : 'Create Offer';
     this.newOffer = data ? data : {
-      reference: Math.random().toString(36).substring(7), description: undefined,
-      expiryDate: undefined, discount: undefined, articleBarcodes: []
+      description: undefined, expiryDate: undefined, discount: undefined, articleBarcodes: []
     };
     this.oldOffer = data ? data.reference : undefined;
   }
