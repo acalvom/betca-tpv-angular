@@ -1,7 +1,8 @@
+import {Article} from '../shared/article.model';
+
 export interface Review {
   id?: string;
-  articleBarcode: string;
-  mobile?: number;
+  article: Article;
   score?: number;
   opinion?: string;
 }
