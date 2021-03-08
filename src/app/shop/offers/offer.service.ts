@@ -72,14 +72,6 @@ export class OfferService {
   }
 
   read(reference: string): Observable<Offer> {
-    // return of({
-    //   reference,
-    //   description: this.newOffers.find(off => off.reference === reference).description,
-    //   expiryDate: this.newOffers.find(off => off.reference === reference).expiryDate,
-    //   discount: this.newOffers.find(off => off.reference === reference).discount,
-    //   articleBarcodes: this.newOffers.find(off => off.reference === reference).articleBarcodes
-    // });
-    console.log(reference);
     return this.httpService
       .get(EndPoints.OFFERS + '/' + reference);
   }
