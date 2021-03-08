@@ -11,6 +11,8 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class StockAlarmsService {
+  static NAME = '/name';
+
   stockAlarmLine1: StockAlarmLine = {barcode: 'b84000000000171', warning: 2, critical: 4, stock: 4};
   stockAlarmLine2: StockAlarmLine = {barcode: 'b84000000000172', warning: 5, critical: 3, stock: 4};
   stockAlarmLine3: StockAlarmLine = {barcode: 'b84000000000173', critical: 4, stock: 4};
@@ -38,8 +40,10 @@ export class StockAlarmsService {
     return of([this.stockAlarmLine2, this.stockAlarmLine3]);
   }
 
-  search(reference: string): Observable<StockAlarm[]> {
-    return of([this.stockAlarm1, this.stockAlarm2]);
+  search(name: string): Observable<StockAlarm[]> {
+    return this.httpService
+      .param('name', name)
+      .get(EndPoints.STOCKS_ALARMS + StockAlarmsService.NAME);
   }
 
   create(stockAlarm: StockAlarm): Observable<StockAlarm> {
