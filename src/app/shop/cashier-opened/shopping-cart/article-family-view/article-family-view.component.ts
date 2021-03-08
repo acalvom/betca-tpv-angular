@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {SharedArticlesFamilyService} from '../../../shared/services/shared.articles-family.service';
-import {ArticleFamilyModel} from '../../../shared/services/models/article-family.model';
-import {Article} from '../../../shared/services/models/article.model';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {OpenSizesDialogComponent} from './open-sizes-dialog.component';
+import {ArticleFamilyViewModel} from './article-family-view.model';
 
 @Component({
   selector: 'app-article-family-view',
@@ -12,7 +11,7 @@ import {OpenSizesDialogComponent} from './open-sizes-dialog.component';
 })
 export class ArticleFamilyViewComponent implements OnInit {
 
-  articlesFamily: (ArticleFamilyModel | Article)[];
+  articlesFamily: ArticleFamilyViewModel [];
 
   constructor(private articlesFamilyService: SharedArticlesFamilyService,
               private dialog: MatDialog,
@@ -28,7 +27,7 @@ export class ArticleFamilyViewComponent implements OnInit {
     );
   }
 
-  updateArray(articleFamily: ArticleFamilyModel): void {
+  updateArray(articleFamily: ArticleFamilyViewModel): void {
     this.articlesFamilyService.readChildrenTemporal(articleFamily).subscribe(
       result => {
         this.articlesFamily = result;
@@ -36,15 +35,15 @@ export class ArticleFamilyViewComponent implements OnInit {
     );
   }
 
-  openSizes(articleFamily: ArticleFamilyModel): void{
-    let articles: Article[] = [];
+  openSizes(articleFamily: ArticleFamilyViewModel): void{
+    let articlesFamilyViewModel: ArticleFamilyViewModel[] = [];
     this.articlesFamilyService.readArticles(articleFamily).subscribe(
       result => {
-        articles = result;
+        articlesFamilyViewModel = result;
       }
     );
     this.dialog.open(OpenSizesDialogComponent, {
-      data: articles
+      data: articlesFamilyViewModel
     }).afterClosed().subscribe(result => {
       if (result !== true && result !== undefined) {
         this.dialogRef.close(result);
@@ -52,7 +51,7 @@ export class ArticleFamilyViewComponent implements OnInit {
     });
   }
 
-  addShoppingCart(article: Article): void {
-    this.dialogRef.close(article);
+  addShoppingCart(articleFamilyViewModel: ArticleFamilyViewModel): void {
+    this.dialogRef.close(articleFamilyViewModel.reference);
   }
 }

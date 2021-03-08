@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ArticleFamilyModel} from './models/article-family.model';
 import {Observable, of} from 'rxjs';
 import {Article} from './models/article.model';
+import {ArticleFamilyViewModel} from "../../cashier-opened/shopping-cart/article-family-view/article-family-view.model";
 
 @Injectable({
   providedIn: 'root'
@@ -44,12 +45,12 @@ export class SharedArticlesFamilyService {
     }
   ];
 
-  CHILDRENS_OF_ZZ: (ArticleFamilyModel | Article)[] = [
+  CHILDRENS_OF_ZZ: ArticleFamilyViewModel[] = [
     {
-      barcode: '8400000000031',
+      reference: '8400000000031',
       description: 'descrip-a3',
-      retailPrice: 10.12,
-      providerCompany: 'pro1'
+      type: 'article',
+      price: 10.12,
     },
     {
       reference: '1',
@@ -63,18 +64,18 @@ export class SharedArticlesFamilyService {
     }
   ];
 
-  ARTICLES: Article [] = [
+  ARTICLES: ArticleFamilyViewModel [] = [
     {
-      barcode: '8400000000017',
-      description: 'zz-falda-T2',
-      retailPrice: 20,
-      providerCompany: 'pro1'
+      reference: '8400000000017',
+      description: 'Zarzuela - falda T2',
+      type: 'article',
+      price: 20,
     },
     {
-      barcode: '8400000000024',
-      description: 'zz-falda-T4',
-      retailPrice: 27.8,
-      providerCompany: 'pro1'
+      reference: '8400000000024',
+      description: 'Zarzuela - falda T4',
+      type: 'article',
+      price: 27.8,
     }
   ];
 
@@ -86,15 +87,15 @@ export class SharedArticlesFamilyService {
 
   }
 
-  readChildren(articleFamilyModel?: ArticleFamilyModel): Observable<(ArticleFamilyModel | Article)[]> {
+  readChildren(articleFamilyViewModel?: ArticleFamilyModel): Observable<ArticleFamilyViewModel[]> {
     return of(this.ARTICLES_FAMILY_DATA);
   }
 
-  readChildrenTemporal(articleFamilyModel?: ArticleFamilyModel): Observable<(ArticleFamilyModel | Article)[]> {
+  readChildrenTemporal(articleFamilyViewModel?: ArticleFamilyModel): Observable<ArticleFamilyViewModel[]> {
     return of(this.CHILDRENS_OF_ZZ);
   }
 
-  readArticles(articleFamily: ArticleFamilyModel): Observable<Article[]> {
+  readArticles(articleFamilyViewModel: ArticleFamilyViewModel): Observable<ArticleFamilyViewModel[]> {
     return of(this.ARTICLES);
   }
 
