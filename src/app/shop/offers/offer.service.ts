@@ -3,7 +3,7 @@ import {HttpService} from '@core/http.service';
 import {Observable, of} from 'rxjs';
 import {EndPoints} from '@shared/end-points';
 import {OfferSearch} from './offer-search.model';
-import {OfferCreateUpdate} from './offer-creation-updating.model';
+import {Offer} from './offer-creation-updating.model';
 import {OfferMenu} from './offer-menu.model';
 
 
@@ -15,7 +15,7 @@ export class OfferService {
   private static SEARCH = '/search';
 
   articleBarcodes: string[] = ['8400000000017', '8400000000024', '8400000000031'];
-  newOffers: OfferCreateUpdate[] = [
+  newOffers: Offer[] = [
     {
       reference: '123abc',
       description: 'offer1',
@@ -66,14 +66,12 @@ export class OfferService {
       .get(EndPoints.OFFERS + OfferService.SEARCH);
   }
 
-  create(newOffer: OfferCreateUpdate): Observable<OfferMenu> {
-    this.newOffers.push(newOffer);
-    return of(newOffer);
-    /*return this.httpService
-      .post(EndPoints.OFFERS, offer);*/
+  create(newOffer: Offer): Observable<Offer> {
+    return this.httpService
+      .post(EndPoints.OFFERS, newOffer);
   }
 
-  read(reference: string): Observable<OfferCreateUpdate> {
+  read(reference: string): Observable<Offer> {
     return of({
       reference,
       description: this.newOffers.find(off => off.reference === reference).description,
@@ -85,7 +83,7 @@ export class OfferService {
       .get(EndPoints.OFFERS + '/' + reference);*/
   }
 
-  update(oldOfferReference: string, newOffer: OfferCreateUpdate): Observable<OfferMenu> {
+  update(oldOfferReference: string, newOffer: Offer): Observable<Offer> {
     const offerToUpdate = this.newOffers.find(off => off.reference === oldOfferReference);
     const index = this.newOffers.indexOf(offerToUpdate);
     if (index > -1) {
