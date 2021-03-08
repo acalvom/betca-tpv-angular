@@ -14,7 +14,7 @@ export class TicketEditingDialogComponent implements OnInit{
 
   stateValues = Object.keys(ShoppingState).filter(key => isNaN(Number(key)));
   displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'actions'];
-  shoppingList: Shopping[];
+  shoppingList: Shopping[] = [];
   ticket: TicketEdition;
   totalShoppingList = 0 ;
 
