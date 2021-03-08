@@ -15,6 +15,7 @@ import {ProfileSettingsComponent} from '@shared/components/profile-settings/prof
 import {StockManagementComponent} from './stock-management/stock-management.component';
 import {NewsComponent} from './adviser/news/news.component';
 import {PopularComponent} from './adviser/popular/popular.component';
+import {OnlineOrderComponent} from "./online-order/online-order.component";
 
 const routes: Routes = [
   {
@@ -32,7 +33,7 @@ const routes: Routes = [
       {path: 'reviews', component: ReviewsComponent, canActivate: [RoleGuardService], data: {roles: [Role.CUSTOMER]}},
       {path: 'shopping-basket', component: ShoppingBasketComponent},
       {path: 'settings', component: ProfileSettingsComponent},
-      {path: 'shopping-basket', component: ShoppingBasketComponent},
+      {path: 'online-order', component: OnlineOrderComponent},
       {path: 'stock-management', component: StockManagementComponent}
     ]
   }

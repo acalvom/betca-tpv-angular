@@ -9,6 +9,8 @@ import {UserCompleteService} from '@shared/services/userComplete.service';
 import {SearchRgpdUser} from '@shared/components/data-protection-act/search-rgpd-user.model';
 import {RgpdType} from '@shared/models/RgpdType';
 import {DataProtectionActService} from '@shared/components/data-protection-act/data-protection-act.service';
+import {AuthService} from '@core/auth.service';
+import {UserUpdateCreateDialogComponent} from '../../users/dialog/user-update-create-dialog.component';
 
 @Component({
   templateUrl: 'check-out-dialog.component.html',
@@ -25,7 +27,7 @@ export class CheckOutDialogComponent {
   userSearch: UserSearch;
 
   constructor(@Inject(MAT_DIALOG_DATA) data, private dialog: MatDialog, private dialogRef: MatDialogRef<CheckOutDialogComponent>,
-              private shoppingCartService: ShoppingCartService, private userService: UserCompleteService,
+              private shoppingCartService: ShoppingCartService, private userService: UserCompleteService, private authService: AuthService,
               private dataProtectionActService: DataProtectionActService) {
     this.ticketCreation = {cash: 0, card: 0, voucher: 0, shoppingList: data, note: ''};
     this.total();
@@ -45,13 +47,10 @@ export class CheckOutDialogComponent {
 
   searchUser(mobile: string): void {
 
-    this.userSearch = {
-      mobile: Number(mobile)
-    };
-
     if (mobile) {
-      // TODO falta buscar el user en BD, si no existe, debe sacar un dialogo para crearlo
-
+      if (!this.authService.isAuthenticated() || !this.userService.checkUser(Number(mobile))){
+        this.dialog.open(UserUpdateCreateDialogComponent);
+      }
       this.ticketCreation.user = {mobile: Number(mobile)};
       // TODO me falta comprobar si tiene credit-line el usuario
       this.credit = true;
@@ -184,7 +183,7 @@ export class CheckOutDialogComponent {
 
   invalidInvoice(): boolean {
     // TODO pendiente de calcular. Hace falta tener al usuario totalmente completado
-    return true;
+    return !this.ticketCreation.user;
   }
 
   useCreditLine(): void {

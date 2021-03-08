@@ -14,12 +14,6 @@
   max-height: 600px;
 }
 
-.mat-column- {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.mat-dialog-content {
-  display: flex;
-  flex-direction: column;
+table {
+  width: 100%;
 }

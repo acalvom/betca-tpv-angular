@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+<mat-dialog-content>
+  <mat-form-field class="full-width">
+    <mat-label>Description</mat-label>
+    <input [(ngModel)]="order.description" matInput required type="text"/>
+  </mat-form-field>
+  <app-search-by-company [(company)]="order.providerCompany" class="full-width"></app-search-by-company>
+  <mat-form-field class="full-width">
+    <mat-label>Opening</mat-label>
+    <input [(ngModel)]="order.openingDate" matInput required type="date"/>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Amount</mat-label>
+    <input [(ngModel)]="orderLine.requiredAmount" matInput required type="number"/>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Amount</mat-label>
+    <input [(ngModel)]="orderLine.finalAmount" matInput required type="number"/>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
+  <button (click)="create()" *ngIf="isCreate()"  color="primary" mat-raised-button>Create</button>
+  <button (click)="update()" *ngIf="!isCreate()"  color="primary" mat-raised-button>Update</button>
+</mat-dialog-actions>
