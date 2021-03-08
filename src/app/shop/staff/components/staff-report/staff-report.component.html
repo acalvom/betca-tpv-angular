@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-title>Staff Report</mat-card-title>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>Filtrar por:</mat-label>
+      <select [(ngModel)]="month" matNativeControl>
+        <option value="enero">Enero</option>
+        <option value="febrero">Febrero</option>
+        <option value="marzo">Marzo</option>
+        <option value="abril">Abril</option>
+        <option value="mayo">Mayo</option>
+        <option value="junio">Junio</option>
+        <option value="julio">Julio</option>
+        <option value="agosto">Agosto</option>
+        <option value="septiembre">Septiembre</option>
+        <option value="octubre">Octubre</option>
+        <option value="noviembre">Noviembre</option>
+        <option value="diciembre">Diciembre</option>
+      </select>
+    </mat-form-field>
+    <button (click)="search()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <app-crud [data]="data" [updateAction]="false" [readAction]="false" [createAction]="false" [deleteAction]="false" [title] = "'Staff report'"></app-crud>
+  </mat-card-content>
+</mat-card>

@@ -10,8 +10,12 @@ export class EndPoints {
   static CASH_MOVEMENT = EndPoints.CASHIERS + '/movement';
   static TICKETS = environment.REST_CORE + '/tickets';
   static COMPLAINTS = environment.REST_CUSTOMER_SUPPORT + '/complaints';
+  static COMPLAINTS_SHOP = environment.REST_CORE + '/complaints';
   static USERS = environment.REST_USER + '/users';
   static STOCKS = environment.REST_CORE + '/stocks';
   static BUDGETS = environment.REST_CORE + '/budgets';
   static AUDITS = environment.REST_CORE + '/audits';
+  static CREDIT = environment.REST_CORE + '/credit';
+  static STAFF = environment.REST_CORE + '/staff';
+  static REVIEWS = environment.REST_CUSTOMER_SUPPORT + '/reviews';
 }

@@ -1,7 +1,8 @@
 <main class="flex-container">
   <mat-card>
+    <p><button mat-button color="primary" (click)="createUser()">Add User</button></p>
     <mat-card-content>
-      <app-crud (update)="update($event)" [data]="data" [readAction]="true" [createAction]="false" [deleteAction]="false"  [title] = "'Users Management'"></app-crud>
+      <app-crud (update)="updateUser($event)"  (delete)="deleteUser($event)" (read)="readUser($event)" [data]="data" [readAction]="true" [createAction]="false" [deleteAction]="true" [title] = "'Users Management'"></app-crud>
     </mat-card-content>
   </mat-card>
 </main>

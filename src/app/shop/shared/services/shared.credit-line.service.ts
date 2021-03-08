@@ -3,25 +3,27 @@ import {Observable, of} from 'rxjs';
 
 import {HttpService} from '@core/http.service';
 import {TicketCreditLine} from './models/ticket-credit-line.model';
+import {Credit} from './models/credit.model';
+import {EndPoints} from '@shared/end-points';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedCreditLineService {
-  private static USER_PHONE = '/userPhone';
+  private SEARCH = '/search';
 
   constructor(private httpService: HttpService) {
   }
 
-  /*read(barcode: string): Observable<Article> { // TODO
+  findByUserReference(userReference: string): Observable<Credit> { // TODO
     return this.httpService
-      .get(EndPoints.ARTICLES + '/' + barcode);
+      .get(EndPoints.CREDIT + this.SEARCH + '?userReference=' + userReference);
   }
 
-  create(article: Article): Observable<Article> {
+  create(credit: Credit): Observable<Credit> {
     return this.httpService
-      .post(EndPoints.ARTICLES, article);
-  }*/
+      .post(EndPoints.CREDIT, credit);
+  }
 
   searchUnpaidTickets(userPhone: string): Observable<TicketCreditLine[]> {
     /*return this.httpService

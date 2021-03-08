@@ -30,41 +30,47 @@ import {OfferCreationUpdatingDialogComponent} from './offers/offer-creation-upda
 import {ArticlesFamilyComponent} from './articles-family/articles-family/articles-family.component';
 import {ArticleFamilyViewComponent} from './cashier-opened/shopping-cart/article-family-view/article-family-view.component';
 import {StockAlarmsComponent} from './stock-alarms/stock-alarms.component';
-import {UsersComponent} from './users/components/users.component';
 import {SharedOfferService} from './shared/services/shared.offer.service';
 import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
-import {UserCreationUpdatingDialogComponent} from './users/dialog/user-creation/user-creation-updating-dialog.component';
-import { TicketEditingDialogComponent } from './cashier-opened/tickets/ticket-editing-dialog.component';
+import {TicketEditingDialogComponent} from './cashier-opened/tickets/ticket-editing-dialog.component';
 import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-family-view/open-sizes-dialog.component';
 import {ListComponent} from './shared/components/list.component';
 import {NewArticleFamilyDialogComponent} from './articles-family/dialogs/new-article-family-dialog/new-article-family-dialog.component';
 import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-article-family-dialog/edit-article-family-dialog.component';
-import { StockAlarmsCreationUpdatingDialogComponent } from './stock-alarms/stock-alarms-creation-updating-dialog.component';
-import { DataProtectionActDialogComponent } from './data-protection-act/data-protection-act-dialog.component';
-import { StockAlarmChipComponent } from './stock-alarms/stock-alarm-chip/stock-alarm-chip.component';
-import { StockAuditComponent } from './stock-audit/stock-audit.component';
-import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices.component';
-import { ProviderInvoiceCreationUpdatingDialogComponent } from './provider-invoices/provider-invoice-creation-updating-dialog.component';
+import {StockAlarmsCreationUpdatingDialogComponent} from './stock-alarms/stock-alarms-creation-updating-dialog.component';
+import {DataProtectionActDialogComponent} from './data-protection-act/data-protection-act-dialog.component';
+import {StockAlarmChipComponent} from './stock-alarms/stock-alarm-chip/stock-alarm-chip.component';
+import {StockAuditComponent} from './stock-audit/stock-audit.component';
+import {ProviderInvoicesComponent} from './provider-invoices/provider-invoices.component';
+import {ProviderInvoiceCreationUpdatingDialogComponent} from './provider-invoices/provider-invoice-creation-updating-dialog.component';
 import {BudgetDialogComponent} from './budgets/budget-dialog.component';
-import { AddArticleDialogComponent } from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
-import {UserCreationDialogComponent} from './users/dialog/user-creation/user-creation-dialog.component';
+import {AddArticleDialogComponent} from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
 
-import { CustomerDiscountComponent } from './customer-discount/customer-discount.component';
-import { CashMovementDialogComponent } from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
-import { CashierClosureComponent } from './cashier-opened/cashier-closure/cashier-closure.component';
-import { SlackPublisherComponent } from './slack-publisher/slack-publisher.component';
-import { MessengerComponent } from './messenger/messenger.component';
-import { MessengerService } from './messenger/messenger.service';
+import {CustomerDiscountComponent} from './customer-discount/customer-discount.component';
+import {CashMovementDialogComponent} from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
+import {CashierClosureComponent} from './cashier-opened/cashier-closure/cashier-closure.component';
+import {SlackPublisherComponent} from './slack-publisher/slack-publisher.component';
+import {MessengerComponent} from './messenger/messenger.component';
+import {MessengerService} from './messenger/messenger.service';
 import {SearchByBudgetComponent} from './budgets/search-by-budgets.component';
 import {UsersManagementComponent} from './users/components/users-management.component';
 import {SalesPeopleComponent} from './salespeople/salespeople.component';
 import {SalesPeopleService} from './salespeople/salespeople.service';
-import { InvoicesComponent } from './invoices/invoices.component';
-import { CustomerDiscountDialogComponent } from './customer-discount/customer-discount-dialog.component';
-import {UserDialogComponent} from './users/dialog/user-dialog.component';
+import {InvoicesComponent} from './invoices/invoices.component';
+import {InvoiceDialogComponent} from './invoices/invoice-dialog.component';
+import {CustomerDiscountDialogComponent} from './customer-discount/customer-discount-dialog.component';
 import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-creation/articles-size-family-creation-dialog.component';
-import { IssuesComponent } from './issues/issues.component';
-import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/issue-creation-dialog.component';
+import {IssuesComponent} from './issues/issues.component';
+import {IssueCreationDialogComponent} from './issues/issue-creation-dialog/issue-creation-dialog.component';
+import {ComplaintsShopComponent} from './complaints-shop/complaints-shop.component';
+import {StaffComponent} from './staff/staff.component';
+import {UserUpdateCreateDialogComponent} from './users/dialog/user-update-create-dialog.component';
+import {SharedMessengerService} from './shared/services/shared-messenger.service';
+import {ProviderOrderDialogComponent} from './provider-orders/provider-order-dialog.component';
+import {ProviderOrdersComponent} from './provider-orders/provider-orders.component';
+import { SearchByTicketRefComponent } from './shared/search-by-ticket-ref.component';
+import { StaffReportComponent } from './staff/components/staff-report/staff-report.component';
+import { OnlineOrderComponent } from './online-order/online-order.component';
 
 
 @NgModule({
@@ -87,6 +93,7 @@ import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/iss
     NewArticleFamilyDialogComponent,
     ProviderCreationUpdatingDialogComponent,
     ProvidersComponent,
+    ComplaintsShopComponent,
     SearchByBarcodeComponent,
     SearchByCompanyComponent,
     SearchByBudgetComponent,
@@ -97,8 +104,6 @@ import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/iss
     OfferCreationUpdatingDialogComponent,
     OpenSizesDialogComponent,
     StockAlarmsComponent,
-    UsersComponent,
-    UserCreationUpdatingDialogComponent,
     TicketEditingDialogComponent,
     IssuesComponent,
     StockAlarmsCreationUpdatingDialogComponent,
@@ -106,7 +111,6 @@ import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/iss
     StockAlarmChipComponent,
     StockAuditComponent,
     ProviderInvoicesComponent,
-    UserCreationDialogComponent,
     UsersManagementComponent,
     ProviderInvoiceCreationUpdatingDialogComponent,
     CustomerDiscountComponent,
@@ -116,12 +120,19 @@ import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/iss
     MessengerComponent,
     SalesPeopleComponent,
     InvoicesComponent,
+    InvoiceDialogComponent,
     SalesPeopleComponent,
     CustomerDiscountDialogComponent,
-    UserDialogComponent,
+    UserUpdateCreateDialogComponent,
     ArticlesSizeFamilyCreationDialogComponent,
     SalesPeopleComponent,
     IssueCreationDialogComponent,
+    StaffComponent,
+    ProviderOrdersComponent,
+    ProviderOrderDialogComponent,
+    SearchByTicketRefComponent,
+    StaffReportComponent,
+    OnlineOrderComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,
@@ -129,8 +140,6 @@ import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/iss
     CashierDialogComponent,
     CheckOutDialogComponent,
     ProviderCreationUpdatingDialogComponent,
-    UserCreationUpdatingDialogComponent,
-    UserDialogComponent,
     ArticlesSizeFamilyCreationDialogComponent,
   ],
   imports: [
@@ -147,6 +156,7 @@ import { IssueCreationDialogComponent } from './issues/issue-creation-dialog/iss
     SharedProviderService,
     ShoppingCartService,
     MessengerService,
+    SharedMessengerService,
     SalesPeopleService
   ],
 })
