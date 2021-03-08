@@ -1,7 +1,7 @@
 <main class="flex-container">
   <mat-card *ngFor="let review of searchAll() | async" class="card-container">
     <mat-card-header>
-      <mat-card-title>Barcode: {{review.articleBarcode}}</mat-card-title>
+      <mat-card-title>{{review.article.description}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <textarea matInput placeholder="Ex. It makes me feel..." [(ngModel)]=review.opinion></textarea>
