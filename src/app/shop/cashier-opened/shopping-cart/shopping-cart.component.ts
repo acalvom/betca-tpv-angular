@@ -215,7 +215,7 @@ export class ShoppingCartComponent implements OnInit {
       minHeight: '300px'
     }).afterClosed().subscribe(result => {
       if (result !== true && result !== undefined) {
-        this.addBarcode(result.barcode);
+        this.addBarcode(result);
       }
     });
   }
