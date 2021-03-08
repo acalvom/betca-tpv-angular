@@ -5,6 +5,7 @@ import {HttpService} from '@core/http.service';
 import {TicketCreditLine} from './models/ticket-credit-line.model';
 import {Credit} from './models/credit.model';
 import {EndPoints} from '@shared/end-points';
+import {CreditSale} from './models/credit-sale.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,11 @@ export class SharedCreditLineService {
   create(credit: Credit): Observable<Credit> {
     return this.httpService
       .post(EndPoints.CREDIT, credit);
+  }
+
+  addCreditSale(userReference: string, creditSale: CreditSale): Observable<Credit>{
+    return this.httpService
+      .put(EndPoints.CREDIT + '/' + userReference, creditSale);
   }
 
   searchUnpaidTickets(userPhone: string): Observable<TicketCreditLine[]> {

@@ -1,7 +1,5 @@
-import {Ticket} from './ticket.model';
-
 export interface CreditSale{
   reference?: string;
-  ticket: Ticket;
+  ticketReference: string;
   payed: boolean;
 }
