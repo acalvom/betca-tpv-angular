@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import {Article} from '../../shared/article.model';
+import {Observable} from 'rxjs';
+import { HttpService } from '@core/http.service';
+import {EndPoints} from '@shared/end-points';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsService {
-  article1: Article = {barcode: '222222', description: 'News articles', retailPrice: 20};
-  article2: Article = {barcode: '333333', description: 'News article more', retailPrice: 30};
-  articlesNew = [this.article1, this.article2, this.article1, this.article2, this.article1];
+  static NEWS = '/news';
 
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
-  searchNewArticleByDay(): Article[]{
-    return this.articlesNew;
+  searchNewArticleByDay(): Observable<Article[]>{
+    return this.httpService
+      .get(EndPoints.ARTICLES + NewsService.NEWS);
   }
 }

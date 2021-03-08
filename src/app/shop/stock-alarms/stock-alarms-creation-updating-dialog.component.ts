@@ -31,13 +31,16 @@ export class StockAlarmsCreationUpdatingDialogComponent implements OnInit {
   }
 
   isCreate(): boolean {
-    return this.stockAlarm.name === undefined;
+    return this.oldName === undefined;
   }
 
   create(): void {
     this.stocksAlarmsSerive
       .create(this.stockAlarm)
-      .subscribe(() => this.dialog.closeAll());
+      .subscribe(() => {
+          this.dialog.closeAll();
+        }
+      );
   }
 
   update(): void {
@@ -53,7 +56,6 @@ export class StockAlarmsCreationUpdatingDialogComponent implements OnInit {
   removeAlarmLine(value: StockAlarmLine): void {
     this.stockAlarm.stockAlarmLines = this.stockAlarm.stockAlarmLines.filter(line => line.barcode !== value.barcode);
   }
-
 
   updateAlarmLine(value: StockAlarmLine): void {
     this.stockAlarm.stockAlarmLines.map(value1 => (value1.barcode === value.barcode ? {...value1, value} : value1));

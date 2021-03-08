@@ -13,6 +13,7 @@ export class EndPoints {
   static COMPLAINTS_SHOP = environment.REST_CORE + '/complaints';
   static USERS = environment.REST_USER + '/users';
   static STOCKS = environment.REST_CORE + '/stocks';
+  static STOCKS_ALARMS = environment.REST_CORE + '/stock-alarms';
   static BUDGETS = environment.REST_CORE + '/budgets';
   static AUDITS = environment.REST_CORE + '/audits';
   static CREDIT = environment.REST_CORE + '/credit';
