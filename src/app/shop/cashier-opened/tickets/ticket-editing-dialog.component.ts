@@ -20,17 +20,21 @@ export class TicketEditingDialogComponent implements OnInit{
 
   constructor(@Inject(MAT_DIALOG_DATA) data: TicketEdition, private ticketService: TicketService, private dialog: MatDialog) {
     this.ticket = data ? data : undefined;
-    this.shoppingList = this.ticket.shoppingList;
   }
 
   ngOnInit(): void {
-    this.updatePricesShopping();
+    this.getShoppingList();
     this.synchronizeShoppingCart();
   }
 
-  updatePricesShopping(): void {
-    for (const shopping of this.shoppingList) {
-      shopping.updateTotal();
+  getShoppingList(): void {
+    for (const shopping of this.ticket.shoppingList) {
+      const shoppingModel = new Shopping(shopping.barcode, shopping.description, shopping.retailPrice);
+      shoppingModel.amount = shopping.amount;
+      shoppingModel.discount = shopping.discount;
+      shoppingModel.state = shopping.state;
+      shoppingModel.updateTotal();
+      this.shoppingList.push(shoppingModel);
     }
   }
 
