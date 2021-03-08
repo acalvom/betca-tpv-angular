@@ -60,7 +60,7 @@ export class OfferService {
   constructor(private httpService: HttpService) {
   }
 
-  search(offerSearch: OfferSearch): Observable<OfferMenu[]> {
+  search(offerSearch: OfferSearch): Observable<Offer[]> {
     return this.httpService
       .paramsFrom(offerSearch)
       .get(EndPoints.OFFERS + OfferService.SEARCH);
@@ -76,18 +76,11 @@ export class OfferService {
       .get(EndPoints.OFFERS + '/' + reference);
   }
 
-  update(oldReference: string, updatedOffer: Offer): Observable<Offer> {
-    const offerToUpdate = this.newOffers.find(off => off.reference === oldReference);
-    const index = this.newOffers.indexOf(offerToUpdate);
-    if (index > -1) {
-      this.newOffers.splice(index, 1, updatedOffer);
-    }
-    this.search(new OfferSearch());
+  update(oldOffer: string, updatedOffer: Offer): Observable<Offer> {
     console.log(updatedOffer);
-    return of(updatedOffer);
-    // return this.httpService
-    //   .successful()
-    //   .put(EndPoints.OFFERS + '/' + oldReference, updatedOffer);
+    return this.httpService
+      .successful()
+      .put(EndPoints.OFFERS + '/' + oldOffer, updatedOffer);
   }
 
   printOffer(reference: string): Observable<void> {
