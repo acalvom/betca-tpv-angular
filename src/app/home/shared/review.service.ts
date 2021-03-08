@@ -11,16 +11,26 @@ import {EndPoints} from '@shared/end-points';
 })
 export class ReviewService {
   private endPoint = EndPoints.REVIEWS;
+  private articles: Article[];
   private reviews: Review[]; // Data mock
   constructor(private authService: AuthService, private snackBar: MatSnackBar) {
+    this.articles = [
+      { barcode: '#00000002', description: 'Mock most rated article', retailPrice: 30 },
+      { barcode: '#00000001', description: 'Mock second most rated article', retailPrice: 5, stock: 15 },
+      { barcode: '#00003201', description: 'Mock third most rated article', retailPrice: 305 },
+      { barcode: '#00003202', description: 'Nothing', retailPrice: 305 },
+      { barcode: '#00003203', description: 'Another article', retailPrice: 305 },
+      { barcode: '#00003204', description: 'Another of another article', retailPrice: 305 },
+      { barcode: '#00003205', description: 'Look at this article', retailPrice: 305 }
+    ];
     this.reviews = [
-      { mobile: this.authService.getMobile(), articleBarcode: '#00000001', score: 2.5, opinion: 'Is ok but not that much' },
-      { mobile: this.authService.getMobile(), articleBarcode: '#00000002', score: 5, opinion: 'Best product' },
-      { mobile: this.authService.getMobile(), articleBarcode: '#00000003', score: 0.5, opinion: 'Really bad' },
-      { articleBarcode: '#00000004' },
-      { articleBarcode: '#00000006' },
-      { articleBarcode: '#00000007' },
-      { articleBarcode: '#00000009' }
+      { article: this.articles[0], score: 2.5, opinion: 'Is ok but not that much' },
+      { article: this.articles[1], score: 5, opinion: 'Best product' },
+      { article: this.articles[2], score: 0.5, opinion: 'Really bad' },
+      { article: this.articles[3] },
+      { article: this.articles[4] },
+      { article: this.articles[5] },
+      { article: this.articles[6] }
     ];
   }
   create(review: Review): Observable<Review> {
@@ -41,31 +51,14 @@ export class ReviewService {
     return of(this.reviews);
   }
   searchIfExists(review: Review): Observable<boolean> {
-    if (review.articleBarcode === '#00000004' || review.articleBarcode === '#00000006' ||
-        review.articleBarcode === '#00000007' || review.articleBarcode === '#00000009') {
+    if (review.article.barcode === '#00003202' || review.article.barcode === '#00003203' ||
+        review.article.barcode === '#00003204' || review.article.barcode === '#00003205') {
       return of(false);
     } else {
       return of(true);
     }
   }
   searchTopRatedArticles(): Observable<Article[]> {
-    return of([
-      {
-        barcode: '#00000002',
-        description: 'Mock most rated article',
-        retailPrice: 30
-      },
-      {
-        barcode: '#00000001',
-        description: 'Mock second most rated article',
-        retailPrice: 5,
-        stock: 15
-      },
-      {
-        barcode: '#00003208',
-        description: 'Mock third most rated article',
-        retailPrice: 305
-      }
-    ]);
+    return of([this.articles[0], this.articles[1], this.articles[2]]);
   }
 }
