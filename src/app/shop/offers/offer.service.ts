@@ -72,28 +72,30 @@ export class OfferService {
   }
 
   read(reference: string): Observable<Offer> {
-    return of({
-      reference,
-      description: this.newOffers.find(off => off.reference === reference).description,
-      expiryDate: this.newOffers.find(off => off.reference === reference).expiryDate,
-      discount: this.newOffers.find(off => off.reference === reference).discount,
-      articleBarcodes: this.newOffers.find(off => off.reference === reference).articleBarcodes
-    });
-    /*return this.httpService
-      .get(EndPoints.OFFERS + '/' + reference);*/
+    // return of({
+    //   reference,
+    //   description: this.newOffers.find(off => off.reference === reference).description,
+    //   expiryDate: this.newOffers.find(off => off.reference === reference).expiryDate,
+    //   discount: this.newOffers.find(off => off.reference === reference).discount,
+    //   articleBarcodes: this.newOffers.find(off => off.reference === reference).articleBarcodes
+    // });
+    console.log(reference);
+    return this.httpService
+      .get(EndPoints.OFFERS + '/' + reference);
   }
 
-  update(oldOfferReference: string, newOffer: Offer): Observable<Offer> {
-    const offerToUpdate = this.newOffers.find(off => off.reference === oldOfferReference);
+  update(oldReference: string, updatedOffer: Offer): Observable<Offer> {
+    const offerToUpdate = this.newOffers.find(off => off.reference === oldReference);
     const index = this.newOffers.indexOf(offerToUpdate);
     if (index > -1) {
-      this.newOffers.splice(index, 1, newOffer);
+      this.newOffers.splice(index, 1, updatedOffer);
     }
     this.search(new OfferSearch());
-    return of(newOffer);
-    /*return this.httpService
-      .successful()
-      .put(EndPoints.OFFERS + '/' + oldOffer, offer);*/
+    console.log(updatedOffer);
+    return of(updatedOffer);
+    // return this.httpService
+    //   .successful()
+    //   .put(EndPoints.OFFERS + '/' + oldReference, updatedOffer);
   }
 
   printOffer(reference: string): Observable<void> {
