@@ -4,7 +4,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {OfferSearch} from './offer-search.model';
 import {OfferService} from './offer.service';
 import {OfferCreationUpdatingDialogComponent} from './offer-creation-updating-dialog.component';
-import {OfferMenu} from './offer-menu.model';
 import {Offer} from '../shared/services/models/offer.model';
 
 @Component({
@@ -35,7 +34,7 @@ export class OffersComponent {
       .subscribe(() => this.search());
   }
 
-  update(offer: OfferMenu): void {
+  update(offer: Offer): void {
     this.offerService
       .read(offer.reference)
       .subscribe(fullOffer => this.dialog.open(OfferCreationUpdatingDialogComponent, {data: fullOffer})
@@ -50,7 +49,7 @@ export class OffersComponent {
       .subscribe(() => this.dialog.closeAll());
   }
 
-  delete(offer: OfferMenu): void {
+  delete(offer: Offer): void {
     this.offerService
       .delete(offer.reference)
       .subscribe(() => this.search());

@@ -34,7 +34,7 @@ export class RegisterDialogComponent {
 
   register(): void {
     this.httpService.post(EndPoints.USERS + RegisterDialogComponent.CUSTOMER, this.user)
-      .subscribe(response => {
+      .subscribe(() => {
       this.dialog.closeAll();
       this.openSnackBar('User ' + this.user.firstName + ' successfully register.', 'OK');
     });

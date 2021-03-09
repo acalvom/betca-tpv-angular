@@ -1,67 +1,68 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {ProfileSettingsService} from '@shared/components/profile-settings/profile-settings.service';
-import {User} from '@shared/models/userRegister.model';
+import {User} from '@shared/models/userUpdate.model';
 import {PROFILE_FORM} from '@shared/form.constant';
-import {HttpService} from '@core/http.service';
-import {EndPoints} from '@shared/end-points';
-import {Role} from '@core/role.model';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-
 
 @Component({
   selector: 'app-settings',
   templateUrl: 'profile-settings.component.html',
   styleUrls: ['profile-settings.component.css']
 })
-export class ProfileSettingsComponent implements OnInit {
+export class ProfileSettingsComponent {
 
   settingsFormGroup: FormGroup;
   formManage: any;
-  user: User;
+  user: User = {
+    mobile: undefined,
+    firstName: undefined,
+    familyName: undefined,
+    email: undefined,
+    dni: undefined,
+    address: '',
+    role: undefined,
+    registrationDate: undefined,
+    active: undefined
+  };
   editable = false;
 
 
   constructor(private router: Router, private snackBar: MatSnackBar, private fb: FormBuilder,
-              private profileSettingsService: ProfileSettingsService, private httpService: HttpService) {
-  }
-
-  ngOnInit(): void {
-    this.readUser();
+              private profileSettingsService: ProfileSettingsService) {
     this.settingsFormGroup = this.fb.group(PROFILE_FORM.CONF);
-    this.fillForm(this.user);
+    this.readUser();
   }
 
   readUser(): void {
     this.profileSettingsService.read(this.profileSettingsService.getMobile())
       .subscribe(user => {
-        this.user = user;
+        Object.assign(this.user, user);
+        this.fillForm();
       });
   }
 
-  fillForm(user: User): void {
+  fillForm(): void {
     if (this.profileSettingsService.isAuthenticated()) {
       this.settingsFormGroup.patchValue({
-        firstNameControl: user.firstName,
-        familyNameControl: user.familyName,
-        dniControl: user.dni,
-        emailControl: user.email,
-        registrationDateControl: user.registrationDate,
-        activeControl: user.active,
-        mobileControl: user.mobile,
-        passwordControl: user.password,
-        roleControl: user.role,
+        firstNameControl: this.user.firstName,
+        familyNameControl: this.user.familyName,
+        dniControl: this.user.dni,
+        emailControl: this.user.email,
+        registrationDateControl: this.user.registrationDate,
+        activeControl: this.user.active,
+        mobileControl: this.user.mobile,
+        roleControl: this.user.role,
       });
     }
   }
 
   update(): void {
     this.formDataToUser();
-    this.httpService.put(EndPoints.USERS + '/' + this.profileSettingsService.getMobile(), this.user)
+    console.log(this.user);
+    this.profileSettingsService.update(this.profileSettingsService.getMobile(), this.user)
       .subscribe(() => {
-        this.profileSettingsService.reDoLogin(this.user.mobile, this.user.password);
         this.openSnackBar('User successfully registered', 'OK');
       });
   }
@@ -76,7 +77,6 @@ export class ProfileSettingsComponent implements OnInit {
     this.user.email = this.formManage.emailControl;
     this.user.dni = this.formManage.dniControl;
     this.user.address = this.formManage.addressControl;
-    this.user.password = this.formManage.passwordControl;
   }
 
   openSnackBar(message: string, action: string): void {
@@ -84,4 +84,5 @@ export class ProfileSettingsComponent implements OnInit {
       duration: 3000,
     });
   }
+
 }

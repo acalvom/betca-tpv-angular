@@ -16,50 +16,26 @@ export class SalesPeopleService {
     {
       salesperson: 'Amaya',
       date: new Date('2019-03-16'),
-      ticket: {
-        id: '3218',
-        reference: 'referenceTest',
-        mobile: 0
-      },
-      articles: {
-        barcode: '674651',
-        description: 'descriptionTest',
-        retailPrice: 2684,
-        providerCompany: 'providerCompanyTest'
-      },
-      finalValue: 200
+      ticket: ['ca5999c4a270', 'ca5999c4a279'],
+      articles: ['8400000000017'],
+      num_articles: 6,
+      finalValue: 20.4
     },
     {
-      salesperson: 'Martina',
+      salesperson: 'Amaya',
       date: new Date('2019-03-16'),
-      ticket: {
-        id: '3218',
-        reference: 'referenceTest',
-        mobile: 0
-      },
-      articles: {
-        barcode: '674651',
-        description: 'descriptionTest',
-        retailPrice: 2684,
-        providerCompany: 'providerCompanyTest'
-      },
-      finalValue: 69
+      ticket: ['ca5999c4a271'],
+      articles: ['8400000000018'],
+      num_articles: 5,
+      finalValue: 18
     },
     {
-      salesperson: 'Lucia',
-      date: new Date(Date.parse('2019/01')),
-      ticket: {
-        id: '3218',
-        reference: 'referenceTest',
-        mobile: 0
-      },
-      articles: {
-        barcode: '674651',
-        description: 'descriptionTest',
-        retailPrice: 2684,
-        providerCompany: 'providerCompanyTest'
-      },
-      finalValue: 234
+      salesperson: 'Amaya',
+      date: new Date('2019-03-16'),
+      ticket: ['ca5999c4a272'],
+      articles: ['8400000000019'],
+      num_articles: 4,
+      finalValue: 22.6
     }];
   salespeople2: SalesPeople[] = [
     {
