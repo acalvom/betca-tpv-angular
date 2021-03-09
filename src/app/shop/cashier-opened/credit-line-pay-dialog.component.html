@@ -1,6 +1,6 @@
 <h3 mat-dialog-title>Pay pending tickets</h3>
 <mat-dialog-content>
-  <app-search (renew)="searchUnpaidTicketsByUserPhone()" (selected)="onSelect($event)" [key]="userPhone"
+  <app-search (renew)="searchUnpaidTicketsByUserPhone()" (selected)="onSelect($event)" [(key)]="userPhone"
               title="User's phone">
   </app-search>
   <app-list *ngIf="user" [data]="unpaidTickets" [readAction]="false" [createAction]="false" [deleteAction]="false" [title]="title"></app-list>
