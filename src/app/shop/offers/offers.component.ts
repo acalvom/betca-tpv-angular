@@ -5,7 +5,7 @@ import {OfferSearch} from './offer-search.model';
 import {OfferService} from './offer.service';
 import {OfferCreationUpdatingDialogComponent} from './offer-creation-updating-dialog.component';
 import {OfferMenu} from './offer-menu.model';
-import {Offer} from './offer-creation-updating.model';
+import {Offer} from '../shared/services/models/offer.model';
 
 @Component({
   templateUrl: './offers.component.html',
