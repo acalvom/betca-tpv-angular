@@ -9,6 +9,7 @@ export class EndPoints {
   static CASHIERS_LAST = EndPoints.CASHIERS + '/last';
   static CASH_MOVEMENT = EndPoints.CASHIERS + '/movement';
   static TICKETS = environment.REST_CORE + '/tickets';
+  static GIFTTICKETS = environment.REST_CORE + '/giftTickets';
   static COMPLAINTS = environment.REST_CUSTOMER_SUPPORT + '/complaints';
   static COMPLAINTS_SHOP = environment.REST_CORE + '/complaints';
   static USERS = environment.REST_USER + '/users';
