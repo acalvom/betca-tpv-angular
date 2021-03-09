@@ -19,6 +19,7 @@ import {BudgetService} from '../../budgets/budget.service';
 import {SharedCreditLineService} from '../../shared/services/shared.credit-line.service';
 import {SharedCreditSaleService} from '../../shared/services/shared.credit-sale.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {User} from '@core/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,7 @@ export class ShoppingCartService {
   static VARIOUS_LENGTH = 5;
 
   creditSale: CreditSale;
+  user: User;
 
   constructor(private dialog: MatDialog, private articleService: SharedArticleService,
               private offerService: SharedOfferService, private httpService: HttpService,
@@ -79,7 +81,7 @@ export class ShoppingCartService {
           receipts = iif(() => requestedGiftTicket, merge(receipts, this.createGiftTicketAndPrint(ticket.id)), receipts);
           receipts = iif(() => requestDataProtectionAct, merge(receipts, this.createDataProtectionActAndPrint(ticket)), receipts);
           receipts = iif(() => checkedCreditLine, merge(receipts, this.createCreditSaleAndPrint(ticket.reference,
-            ticketCreation.user.mobile)), receipts);
+            ticketCreation.user)), receipts);
           return receipts;
         })// ,switchMap(() => EMPTY)
       );
@@ -119,23 +121,26 @@ export class ShoppingCartService {
   }
 
   createCreditSaleAndPrint(ticketReference, userReference): Observable<any> {
+    this.user = userReference;
     this.creditSale = {ticketReference: ticketReference.toString(), payed: false};
-    this.addCreditSaleToCreditLine(userReference);
+    this.addCreditSaleToCreditLine();
     return EMPTY;
   }
 
-  addCreditSaleToCreditLine(userReference): void {
-    this.sharedCreditSaleService.create(this.creditSale).subscribe(
-      result => {
-        this.sharedCreditLineService.addCreditSale(userReference, result).subscribe(
-          value1 => {
-            this.snackBar.open('Added to the credit-sales of the user.', 'Close', {
-              duration: 3000
-            });
-          }
-        );
-      }
-    );
+  addCreditSaleToCreditLine(): void {
+    if (this.user !== undefined) {
+      this.sharedCreditSaleService.create(this.creditSale).subscribe(
+        result => {
+          this.sharedCreditLineService.addCreditSale(this.user.mobile.toString(), result).subscribe(
+            value1 => {
+              this.snackBar.open('Added to the credit-sales of the user.', 'Close', {
+                duration: 3000
+              });
+            }
+          );
+        }
+      );
+    }
   }
 
   readOffer(offerReference: string): Observable<OfferShoppingCart> {
