@@ -4,7 +4,6 @@ export interface Complaint {
   barcode: string;
   description: string;
   registrationDate?: Date;
-  //state: ['opened', 'closed'];
-  state: string;
+  opened: boolean;
   reply?: string;
 }

@@ -1,30 +1,39 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {of} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
-import {Complaint} from "../../home/complaints/complaint.model";
+import {Complaint} from "@shared/models/complaint.model";
 import {ReadDetailDialogComponent} from "@shared/dialogs/read-detail.dialog.component";
-import {COMPLAINTS} from "../../home/complaints/complaints";
+import {COMPLAINTS} from "./complaints";
 import {ComplaintShopService} from "./complaint-shop.service";
+import {ComplaintUpdateShopDialogComponent} from "./complaint-update-shop-dialog.component";
+import {ComplaintUpdateDialogComponent} from "../../home/complaints/complaint-update-dialog.component";
 
 @Component({
   selector: 'app-complaints-shop',
   templateUrl: './complaints-shop.component.html',
-  styleUrls: ['./complaints-shop.component.css']
 })
+
 export class ComplaintsShopComponent {
   title: string = 'Complaints management';
-  //complaints = of([]);
+  // complaints = of([]);
   complaints = of(COMPLAINTS);
+  data = of();
 
   constructor(private dialog: MatDialog, private complaintShopService: ComplaintShopService) {
   }
-  //If status = closed?
+
   searchAll(): void {
     this.complaints = this.complaintShopService.searchAll();
   }
 
-  update(): void {
-    ///TO DO reply and automatic status
+  update(complaint: Complaint): void {
+    this.complaintShopService.update(complaint)
+      .subscribe(data => {
+        this.dialog.open(ComplaintUpdateShopDialogComponent, {data
+        })
+          .afterClosed()
+          .subscribe(() => this.searchAll());
+      })
   }
 
   read(complaint: Complaint): void {

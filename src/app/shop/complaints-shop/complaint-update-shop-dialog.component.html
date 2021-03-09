@@ -1,0 +1,20 @@
+<h2 mat-dialog-title> {{ title }} {{ complaint.barcode }} </h2>
+<mat-dialog-content>
+  <p><mat-form-field class="full-width">
+    <mat-label>Barcode</mat-label>
+    <input [(ngModel)]="complaint.barcode" matInput type="text" disabled/>
+  </mat-form-field></p>
+  <p><mat-form-field class="full-width">
+    <mat-label>Description</mat-label>
+    <input [(ngModel)]="complaint.description" matInput type="text" disabled/>
+  </mat-form-field></p>
+  <mat-form-field class="full-width">
+    <mat-label>Reply</mat-label>
+    <input [(ngModel)]="complaint.reply" matInput type="text" required/>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
+  <button (click)="update()" color="primary" mat-raised-button>Update
+  </button>
+</mat-dialog-actions>
