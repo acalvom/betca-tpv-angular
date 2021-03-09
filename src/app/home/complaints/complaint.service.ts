@@ -1,44 +1,42 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
-import {Complaint} from './complaint.model';
-import {AuthService} from "@core/auth.service";
+import {Complaint} from '@shared/models/complaint.model';
+import {COMPLAINTS} from "../../shop/complaints-shop/complaints";
 
 @Injectable({
   providedIn: 'root',
 })
 export class ComplaintService {
   private static SEARCH = '/search';
-  private endPoint: string;
+  private complaints = COMPLAINTS;
 
-  constructor(private httpService: HttpService, private authService: AuthService) {
-    const role = this.authService.getRole();
-    console.log('role: ' + role);
-    // CHANGE USER
-    role === 'CUSTOMER' ? this.endPoint = EndPoints.COMPLAINTS :
-      this.endPoint = EndPoints.COMPLAINTS_SHOP;
+  constructor(private httpService: HttpService) {
   }
 
   searchAll(): Observable<Complaint[]> {
     return this.httpService
-      .get(this.endPoint + ComplaintService.SEARCH);
+      .get(EndPoints.COMPLAINTS + ComplaintService.SEARCH);
   }
 
   create(complaint: Complaint): Observable<Complaint> {
+    console.log('create '+complaint.opened)
     return this.httpService
       .post(EndPoints.COMPLAINTS, complaint);
   }
   //TO DO description
-  updateClient(complaint: Complaint): Observable<Complaint> {
-    return this.httpService
-      .put(EndPoints.COMPLAINTS, complaint);
-  }
-  //TO DO client reply and change status auto
-  updateAdmin(complaint: Complaint): Observable<Complaint> {
-    return this.httpService
-      .put(EndPoints.COMPLAINTS, complaint);
+  update(complaint: Complaint): Observable<Complaint> {
+    let complaintUpdate =
+      this.complaints.find(c => c.id === complaint.id);
+    const i = this.complaints.indexOf(complaintUpdate);
+    if(i>=0) {
+      this.complaints.splice(i, 1, complaint);
+    }
+    return of(complaint);
+    /*return this.httpService
+      .put(EndPoints.COMPLAINTS, complaint);*/
   }
 
   read(id: string): Observable<Complaint> {
