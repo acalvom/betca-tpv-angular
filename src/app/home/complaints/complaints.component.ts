@@ -4,7 +4,7 @@ import {of} from 'rxjs';
 
 import {ComplaintCreationDialogComponent} from './complaint-creation-dialog.component';
 import {ComplaintService} from './complaint.service';
-import {Complaint} from './complaint.model';
+import {Complaint} from '@shared/models/complaint.model';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 import {ComplaintUpdateDialogComponent} from "./complaint-update-dialog.component";
 
@@ -14,7 +14,6 @@ import {ComplaintUpdateDialogComponent} from "./complaint-update-dialog.componen
 export class ComplaintsComponent {
   title: string = 'Complaints management';
   complaints = of([]);
-  deleteBool: boolean = true;
 
   constructor(private dialog: MatDialog, private complaintService: ComplaintService) {
   }
@@ -40,16 +39,16 @@ export class ComplaintsComponent {
   }
 
   update(complaint: Complaint): void {
-    this.dialog
-      .open(ComplaintUpdateDialogComponent, {
-        data: {
-          object: complaint
-        }
+    this.complaintService.update(complaint)
+      .subscribe(data => {
+        this.dialog.open(ComplaintUpdateDialogComponent, {data
+        })
+          .afterClosed()
+          .subscribe(() => this.searchAll());
       })
-      .afterClosed()
-      .subscribe(() => this.searchAll());
+
   }
-  // Si cerrada no eliminar
+
   delete(complaint: Complaint): void {
     this.complaintService
       .delete(complaint.id)
