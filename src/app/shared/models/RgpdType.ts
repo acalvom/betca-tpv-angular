@@ -1,5 +1,5 @@
 export enum RgpdType {
-  BASIC = 'Basic',
-  MEDIUM = 'Medium',
-  ADVANCED = 'Advanced'
+  BASIC,
+  MEDIUM,
+  ADVANCED
 }
