@@ -28,7 +28,7 @@ export class TicketService {
       .get(EndPoints.TICKETS + '/' + id);
   }
 
-  update(id: string, shoppingList: Shopping[], returnedMoney: number, commitedShopping: Shopping[]): Observable<TicketEdition> {
+  update(id: string, shoppingList: Shopping[], returnedMoney: number): Observable<TicketEdition> {
     return this.httpService
       .successful()
       .put(EndPoints.TICKETS + '/' + id, shoppingList);
