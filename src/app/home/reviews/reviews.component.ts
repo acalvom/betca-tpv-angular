@@ -27,7 +27,4 @@ export class ReviewsComponent {
   searchAll(): Observable<Review[]> {
     return this.reviewsService.searchAll();
   }
-  searchIfExists(review: Review): Observable<boolean> {
-    return this.reviewsService.searchIfExists(review);
-  }
 }
