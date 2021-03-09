@@ -7,6 +7,7 @@ import {EMPTY, Observable} from 'rxjs';
 export class SharedVoucherService {
 
   printVoucher(value: number): Observable<any> {
+    console.log(value);
     return EMPTY; // TODO create and print voucher
   }
 }

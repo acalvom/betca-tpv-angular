@@ -7,6 +7,7 @@ import {EndPoints} from '@shared/end-points';
 import {HttpService} from '@core/http.service';
 import {TicketSearch} from './ticket-search.model';
 import {SharedVoucherService} from '../../shared/services/shared-voucher.service';
+import {concatMap, mergeMap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,9 +29,14 @@ export class TicketService {
       .get(EndPoints.TICKETS + '/' + id);
   }
 
-  update(id: string, shoppingList: Shopping[], returnedMoney: number): Observable<TicketEdition> {
+  update(id: string, shoppingList: Shopping[], returnedMoney: number): Observable<void> {
     return this.httpService
       .successful()
-      .put(EndPoints.TICKETS + '/' + id, shoppingList);
+      .put(EndPoints.TICKETS + '/' + id, shoppingList)
+      .pipe(
+        mergeMap(() => {
+          return iif(() => returnedMoney > 0, this.sharedVoucherService.printVoucher(returnedMoney));
+        })
+      );
   }
 }
