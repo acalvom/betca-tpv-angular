@@ -107,13 +107,9 @@ export class ShoppingCartService {
   }
 
   createGiftTicketAndPrint(ticketId: string): Observable<void> {
-    const giftTicket = { id: 'Ma35Mhdgd2454656', message: 'Gift ticket', ticketId}; // ticket provisional
-    return of(giftTicket)
-      .pipe(
-        source => {
-          return this.printTicket(ticketId);
-        }
-      );
+    const giftTicket = { id: 'Ma35Mhdgd2454656', message: 'Gift ticket message', ticketId}; // ticket provisional
+    return this.httpService
+      .post(EndPoints.GIFTTICKETS, giftTicket);
   }
 
   createDataProtectionActAndPrint(ticket): Observable<void> {
