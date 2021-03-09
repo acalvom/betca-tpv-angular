@@ -56,7 +56,8 @@ export class StockAlarmsService {
   }
 
   read(name: string): Observable<StockAlarm> {
-    return of(this.stockAlarm1);
+    return this.httpService
+      .get(EndPoints.STOCKS_ALARMS + '/' + name);
   }
 
   readArticle(barcode: string): Observable<StockAlarmLine> {
