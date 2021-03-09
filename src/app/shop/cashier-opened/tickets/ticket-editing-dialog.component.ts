@@ -15,8 +15,10 @@ export class TicketEditingDialogComponent implements OnInit{
   stateValues = Object.keys(ShoppingState).filter(key => isNaN(Number(key)));
   displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'actions'];
   shoppingList: Shopping[] = [];
+  commitedShopping: Shopping[] = [];
   ticket: TicketEdition;
   totalShoppingList = 0;
+  originalPrice = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: TicketEdition, private ticketService: TicketService, private dialog: MatDialog) {
     this.ticket = data ? data : undefined;
@@ -25,6 +27,7 @@ export class TicketEditingDialogComponent implements OnInit{
   ngOnInit(): void {
     this.getShoppingList();
     this.synchronizeShoppingCart();
+    this.originalPrice = this.totalShoppingList;
   }
 
   getShoppingList(): void {
@@ -48,17 +51,24 @@ export class TicketEditingDialogComponent implements OnInit{
   }
 
   decreaseAmount(shopping: Shopping): void {
-    shopping.amount--;
-    if (shopping.amount === 0) {
+    if (shopping.amount > 0) {
       shopping.amount--;
-      shopping.state = ShoppingState.COMMITTED;
+      shopping.updateTotal();
+      this.synchronizeShoppingCart();
     }
-    shopping.updateTotal();
-    this.synchronizeShoppingCart();
+  }
+
+  verifyEstate(shopping: Shopping): void{
+    if (shopping.state.toString() === ShoppingState[ShoppingState.COMMITTED]) {
+      this.commitedShopping.push(shopping);
+      console.log(this.commitedShopping);
+    }
   }
 
   update(): void {
-    this.ticketService.update(this.ticket.id, this.shoppingList)
+    this.shoppingList
+      .filter(shopping => shopping.amount > 0);
+    this.ticketService.update(this.ticket.id, this.shoppingList, (this.originalPrice - this.totalShoppingList), this.commitedShopping)
       .subscribe( () => this.dialog.closeAll());
   }
 }

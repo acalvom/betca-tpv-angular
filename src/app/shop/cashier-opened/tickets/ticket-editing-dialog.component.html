@@ -20,7 +20,7 @@
       <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef fxFlex="20%"> Amount</mat-header-cell>
         <mat-cell *matCellDef="let item" fxFlex="20%">
-          <button (click)="decreaseAmount(item)" color="accent" mat-icon-button>
+          <button (click)="decreaseAmount(item)" color="accent" mat-icon-button [disabled]="item.amount==0">
             <mat-icon>remove_circle_outline</mat-icon>
           </button>
           {{item.amount}}
@@ -37,7 +37,7 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef fxFlex="15%"> State</mat-header-cell>
         <mat-cell *matCellDef="let item" fxFlex="15%">
-          <mat-select [(ngModel)]="item.state" [disabled]="item.amount<0">
+          <mat-select [(ngModel)]="item.state" [disabled]="item.amount==0" (ngModelChange)="verifyEstate(item)">
             <mat-option *ngFor="let state of stateValues" [value]="state">
               {{state}}
             </mat-option>
