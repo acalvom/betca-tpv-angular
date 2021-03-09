@@ -66,19 +66,21 @@ export class TicketEditingDialogComponent implements OnInit{
   }
 
   update(): void {
-    this.shoppingList
+    this.shoppingList = this.shoppingList
       .filter(shopping => shopping.amount > 0);
     this.ticketService.update(this.ticket.id, this.shoppingList, (this.originalPrice - this.totalShoppingList))
       .subscribe(
         () => {
           this.dialog.closeAll();
-          this.dialog.open(CheckOutDialogComponent, {data: this.commitedShopping}).afterClosed().subscribe(
-            result => {
-              if (result) {
-                this.ngOnInit();
+          if (this.commitedShopping.length > 0){
+            this.dialog.open(CheckOutDialogComponent, {data: this.commitedShopping}).afterClosed().subscribe(
+              result => {
+                if (result) {
+                  this.ngOnInit();
+                }
               }
-            }
-          );
+            );
+          }
         }
       );
   }

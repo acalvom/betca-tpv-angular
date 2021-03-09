@@ -30,7 +30,6 @@ export class TicketService {
   }
 
   update(id: string, shoppingList: Shopping[], returnedMoney: number): Observable<void> {
-    console.log('returned money: ' + (returnedMoney > 0));
     return this.httpService
       .successful()
       .put(EndPoints.TICKETS + '/' + id, shoppingList)
@@ -39,10 +38,9 @@ export class TicketService {
           if (returnedMoney > 0){
             return this.sharedVoucherService.printVoucher(returnedMoney);
           }else{
-            return EMPTY;
+            return of(returnedMoney);
           }
-        }),
-        map(value => console.log('vLOR DEVUELTO: ' + value))
+        })
       );
   }
 }
