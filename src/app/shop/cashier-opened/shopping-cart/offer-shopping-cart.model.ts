@@ -1,5 +1,7 @@
 export interface OfferShoppingCart {
-  reference: string;
+  reference?: string;
+  description: string;
+  creationDate?: Date;
   expiryDate: Date;
   discount: number;
   articleBarcodes: string[];
