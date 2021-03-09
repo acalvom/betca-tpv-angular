@@ -16,9 +16,6 @@ export class NewsComponent {
 
   searchNewArticleByDay(): void {
     this.newsService.searchNewArticleByDay()
-      .subscribe(articles => {
-        this.newArticles = articles;
-        console.log('Articulos: ' + articles[1].barcode);
-      });
+      .subscribe(articles => this.newArticles = articles);
   }
 }
