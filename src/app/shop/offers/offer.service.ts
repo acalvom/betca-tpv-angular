@@ -13,6 +13,7 @@ import {OfferMenu} from './offer-menu.model';
 
 export class OfferService {
   private static SEARCH = '/search';
+  private static PRINT = '/print';
 
   articleBarcodes: string[] = ['8400000000017', '8400000000024', '8400000000031'];
   newOffers: Offer[] = [
@@ -83,14 +84,13 @@ export class OfferService {
       .put(EndPoints.OFFERS + '/' + oldOffer, updatedOffer);
   }
 
-  printOffer(reference: string): Observable<void> {
-    return of(console.log('Implementado'));
-    /*return this.httpService
+  print(reference: string): Observable<void> {
+    return this.httpService
       .pdf()
-      .get(EndPoints.OFFERS + '/' + reference);*/
+      .get(EndPoints.OFFERS + '/' + reference + OfferService.PRINT);
   }
 
-  deleteOffer(reference: string): Observable<void> {
+  delete(reference: string): Observable<void> {
     const offerToDelete = this.offers.find(off => off.reference === reference);
     const index = this.offers.indexOf(offerToDelete);
     if (index > -1) {

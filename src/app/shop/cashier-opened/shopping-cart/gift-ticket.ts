@@ -1,5 +1,5 @@
 export interface GiftTicket {
-  id: string;
+  id?: string;
   message: string;
   ticketId: string;
 }

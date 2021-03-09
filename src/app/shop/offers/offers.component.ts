@@ -46,13 +46,13 @@ export class OffersComponent {
 
   print(offer: Offer): void {
     this.offerService
-      .printOffer(offer.reference)
+      .print(offer.reference)
       .subscribe(() => this.dialog.closeAll());
   }
 
   delete(offer: OfferMenu): void {
     this.offerService
-      .deleteOffer(offer.reference)
+      .delete(offer.reference)
       .subscribe(() => this.search());
   }
 }
