@@ -1,7 +1,8 @@
 <h3 mat-dialog-title>Register</h3>
 <mat-dialog-content>
   <mat-form-field>
-    <input [(ngModel)]="user.mobile" matInput placeholder="Mobile" type="text" required/>
+    <input [(ngModel)]="user.mobile" matInput #input minlength="9" maxlength="9" placeholder="Mobile" type="tel" required/>
+    <mat-hint align="end">{{input.value?.length || 0}}/9</mat-hint>
     <button (click)="user.mobile=undefined" *ngIf="user.mobile" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
             matSuffix>
       <mat-icon>close</mat-icon>
