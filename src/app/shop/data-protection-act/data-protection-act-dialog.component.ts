@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {RgpdUser} from '@shared/models/rgpd-user.model';
 import {Observable, of} from 'rxjs';
 import {DataProtectionActService} from '@shared/components/data-protection-act/data-protection-act.service';
+import {RgpdType} from '@shared/models/RgpdType';
 
 @Component({
   selector: 'app-data-protection-act-dialog',
@@ -10,6 +11,7 @@ import {DataProtectionActService} from '@shared/components/data-protection-act/d
 })
 export class DataProtectionActDialogComponent {
 
+  mobile: string;
   mobiles: Observable<number[]> = of([]);
   rgpdUser: RgpdUser;
 
@@ -23,10 +25,10 @@ export class DataProtectionActDialogComponent {
 
   findByMobile(): void {
     this.dataProtectionActService
-      .read(this.rgpdUser.mobile)
+      .read(this.mobile)
       .subscribe(searchRgpdUser => {
           this.rgpdUser.mobile = searchRgpdUser.mobile;
-          this.rgpdUser.rgpdType = searchRgpdUser.rgpdType;
+          this.rgpdUser.rgpdType = (RgpdType as any)[searchRgpdUser.rgpdType];
         }
       );
   }
