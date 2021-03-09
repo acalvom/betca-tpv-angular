@@ -1,5 +1,5 @@
 <main class="flex-container">
-  <mat-card *ngFor="let review of searchAll() | async" class="card-container">
+  <mat-card *ngFor="let review of reviews | async" class="card-container">
     <mat-card-header>
       <mat-card-title>{{review.article.description}}</mat-card-title>
     </mat-card-header>
