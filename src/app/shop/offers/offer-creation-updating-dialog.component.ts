@@ -2,7 +2,7 @@ import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {OfferService} from './offer.service';
 import {SharedArticleService} from '../shared/services/shared.article.service';
-import {Offer} from './offer-creation-updating.model';
+import {Offer} from '../shared/services/models/offer.model';
 
 
 @Component({
