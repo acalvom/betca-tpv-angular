@@ -1,10 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {ProfileSettingsService} from '@shared/components/profile-settings/profile-settings.service';
 import {User} from '@shared/models/userRegister.model';
 import {PROFILE_FORM} from '@shared/form.constant';
+import {HttpService} from '@core/http.service';
+import {EndPoints} from '@shared/end-points';
+import {Role} from '@core/role.model';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
 @Component({
@@ -20,8 +24,8 @@ export class ProfileSettingsComponent implements OnInit {
   editable = false;
 
 
-  constructor(private router: Router, private snackBar: MatSnackBar,
-              private fb: FormBuilder, private profileSettingsService: ProfileSettingsService) {
+  constructor(private router: Router, private snackBar: MatSnackBar, private fb: FormBuilder,
+              private profileSettingsService: ProfileSettingsService, private httpService: HttpService) {
   }
 
   ngOnInit(): void {
@@ -32,15 +36,20 @@ export class ProfileSettingsComponent implements OnInit {
 
   readUser(): void {
     this.profileSettingsService.read(this.profileSettingsService.getMobile())
-      .subscribe(user => this.user = user);
+      .subscribe(user => {
+        this.user = user;
+      });
   }
 
-
   fillForm(user: User): void {
-
     if (this.profileSettingsService.isAuthenticated()) {
       this.settingsFormGroup.patchValue({
         firstNameControl: user.firstName,
+        familyNameControl: user.familyName,
+        dniControl: user.dni,
+        emailControl: user.email,
+        registrationDateControl: user.registrationDate,
+        activeControl: user.active,
         mobileControl: user.mobile,
         passwordControl: user.password,
         roleControl: user.role,
@@ -49,11 +58,10 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   update(): void {
-
     this.formDataToUser();
-    this.profileSettingsService.update(this.profileSettingsService.getMobile(), this.user)
+    this.httpService.put(EndPoints.USERS + '/' + this.profileSettingsService.getMobile(), this.user)
       .subscribe(() => {
-        // this.profileSettingsService.reDoLogin(this.user.mobile, this.user.password);
+        this.profileSettingsService.reDoLogin(this.user.mobile, this.user.password);
         this.openSnackBar('User successfully registered', 'OK');
       });
   }
