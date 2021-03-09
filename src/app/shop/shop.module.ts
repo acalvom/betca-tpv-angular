@@ -71,7 +71,7 @@ import {ProviderOrdersComponent} from './provider-orders/provider-orders.compone
 import { SearchByTicketRefComponent } from './shared/search-by-ticket-ref.component';
 import { StaffReportComponent } from './staff/components/staff-report/staff-report.component';
 import { OnlineOrderComponent } from './online-order/online-order.component';
-
+import {ComplaintUpdateShopDialogComponent} from "./complaints-shop/complaint-update-shop-dialog.component";
 
 @NgModule({
   declarations: [
@@ -132,7 +132,8 @@ import { OnlineOrderComponent } from './online-order/online-order.component';
     ProviderOrderDialogComponent,
     SearchByTicketRefComponent,
     StaffReportComponent,
-    OnlineOrderComponent
+    OnlineOrderComponent,
+    ComplaintUpdateShopDialogComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,

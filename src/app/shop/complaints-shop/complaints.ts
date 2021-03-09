@@ -1,4 +1,4 @@
-import {Complaint} from "./complaint.model";
+import {Complaint} from "@shared/models/complaint.model";
 
 export const COMPLAINTS: Complaint[] = [
   {
@@ -7,7 +7,7 @@ export const COMPLAINTS: Complaint[] = [
     "barcode": "8400000000017",
     "description": "string",
     "registrationDate": new Date(),
-    "state": 'opened',
+    "opened": false,
     "reply": "string"
   },
   {
@@ -16,7 +16,7 @@ export const COMPLAINTS: Complaint[] = [
     "barcode": "8400000000017",
     "description": "string",
     "registrationDate": new Date(),
-    "state": 'openedComplaint',
+    "opened": true,
   },
   {
     "id": "string",
@@ -24,7 +24,7 @@ export const COMPLAINTS: Complaint[] = [
     "barcode": "8400000000017",
     "description": "string",
     "registrationDate": new Date(),
-    "state": 'openedComplaint',
+    "opened": true,
     "reply": "string"
   }
 ]

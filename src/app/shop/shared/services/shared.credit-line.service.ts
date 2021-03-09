@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 
 import {HttpService} from '@core/http.service';
 import {TicketCreditLine} from './models/ticket-credit-line.model';
@@ -12,6 +12,7 @@ import {CreditSale} from './models/credit-sale.model';
 })
 export class SharedCreditLineService {
   private SEARCH = '/search';
+  private SEARCH_UNPAID = '/searchUnpaid';
 
   constructor(private httpService: HttpService) {
   }
@@ -29,6 +30,11 @@ export class SharedCreditLineService {
   addCreditSale(userReference: string, creditSale: CreditSale): Observable<Credit>{
     return this.httpService
       .put(EndPoints.CREDIT + '/' + userReference, creditSale);
+  }
+
+  findUnpaidTicketsFromCreditLine(userReference: string): Observable<TicketCreditLine[]> {
+    return this.httpService
+      .get(EndPoints.CREDIT + this.SEARCH_UNPAID + '?userReference=' + userReference);
   }
 
   /*searchUnpaidTickets(userPhone: string): Observable<TicketCreditLine[]> {

@@ -52,26 +52,18 @@ export class CreditLinePayDialogComponent {
         } else {
           if (this.user){
             this.total = 0;
-            this.sharedCreditLineService.findByUserReference(this.user.mobile.toString()).subscribe(
+            this.unpaidTickets = this.sharedCreditLineService.findUnpaidTicketsFromCreditLine(this.user.mobile.toString());
+            this.unpaidTickets.subscribe(
               value => {
-                console.log(value);
-                if (value.sales !== undefined){
-                  this.creditSales = value.sales;
-                  console.log(this.creditSales);
-                  this.creditSales.forEach( value1 => {
-                    if (!value1.payed) {
-                      console.log('sin pagar');
-                    }
-                  });
+                if (value.length !== 0){
+                  console.log('tiene');
+                  value.forEach(dataValues => this.total += dataValues.total.valueOf());
                 } else {
+                  console.log('no tiene a pagar');
                   // TODO PONER QUE NO TIENE NADA POR PAGAR
                 }
               }
             );
-            /*this.unpaidTickets = this.sharedCreditLineService.searchUnpaidTickets(this.user.mobile.toString());
-            this.unpaidTickets.subscribe(dataValue => {
-              dataValue.forEach(dataValues => this.total += dataValues.total.valueOf());
-            });*/
           }
         }
         }
