@@ -14,7 +14,12 @@ import {EndPoints} from '@shared/end-points';
 import {SharedOfferService} from '../../shared/services/shared.offer.service';
 import {BudgetCreation} from '../../budgets/budget-creation.model';
 import {OfferShoppingCart} from './offer-shopping-cart.model';
+import {CreditSale} from '../../shared/services/models/credit-sale.model';
 import {BudgetService} from '../../budgets/budget.service';
+import {SharedCreditLineService} from '../../shared/services/shared.credit-line.service';
+import {SharedCreditSaleService} from '../../shared/services/shared.credit-sale.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {User} from '@core/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -24,8 +29,13 @@ export class ShoppingCartService {
   static VARIOUS_BARCODE = '1';
   static VARIOUS_LENGTH = 5;
 
+  creditSale: CreditSale;
+  user: User;
+
   constructor(private dialog: MatDialog, private articleService: SharedArticleService,
-              private offerService: SharedOfferService, private httpService: HttpService, private budgetService: BudgetService) {
+              private offerService: SharedOfferService, private httpService: HttpService,
+              private budgetService: BudgetService, private sharedCreditLineService: SharedCreditLineService,
+              private sharedCreditSaleService: SharedCreditSaleService, private snackBar: MatSnackBar) {
   }
 
   read(newBarcode: string): Observable<Shopping> {
@@ -70,7 +80,8 @@ export class ShoppingCartService {
           receipts = iif(() => requestedInvoice, merge(receipts, this.createInvoiceAndPrint(ticket.id)), receipts);
           receipts = iif(() => requestedGiftTicket, merge(receipts, this.createGiftTicketAndPrint(ticket.id)), receipts);
           receipts = iif(() => requestDataProtectionAct, merge(receipts, this.createDataProtectionActAndPrint(ticket)), receipts);
-          receipts = iif(() => checkedCreditLine, merge(receipts, this.createCreditSaleAndPrint(ticket)), receipts);
+          receipts = iif(() => checkedCreditLine, merge(receipts, this.createCreditSaleAndPrint(ticket.reference,
+            ticketCreation.user)), receipts);
           return receipts;
         })// ,switchMap(() => EMPTY)
       );
@@ -85,12 +96,9 @@ export class ShoppingCartService {
   }
 
   createInvoiceAndPrint(ticketId: string): Observable<void> {
-    return EMPTY; // TODO change EMPTY
-  }
-
-  createGiftTicketAndPrint(ticketId: string): Observable<void> {
-    const giftTicket = { id: 'Ma35Mhdgd2454656', message: 'Gift ticket', ticketId}; // ticket provisional
-    return of(giftTicket)
+    // return this.httpService.pdf().get(EndPoints.INVOICES + '/' + ticketId + ShoppingCartService.RECEIPT);
+    const ticket = { id: 'Ma35Mhdgd2454656', message: 'Invoice ticket', ticketId}; // invoice provisional
+    return of(ticket)
       .pipe(
         source => {
           return this.printTicket(ticketId);
@@ -98,12 +106,37 @@ export class ShoppingCartService {
       );
   }
 
+  createGiftTicketAndPrint(ticketId: string): Observable<void> {
+    const giftTicket = { id: 'Ma35Mhdgd2454656', message: 'Gift ticket message', ticketId}; // ticket provisional
+    return this.httpService
+      .post(EndPoints.GIFTTICKETS, giftTicket);
+  }
+
   createDataProtectionActAndPrint(ticket): Observable<void> {
     return EMPTY; // TODO change EMPTY
   }
 
-  createCreditSaleAndPrint(ticket): Observable<void> {
-    return EMPTY; // TODO change EMPTY (Hacer llamada para crear la credit sale y guardarla en base de datos)
+  createCreditSaleAndPrint(ticketReference, userReference): Observable<any> {
+    this.user = userReference;
+    this.creditSale = {ticketReference: ticketReference.toString(), payed: false};
+    this.addCreditSaleToCreditLine();
+    return EMPTY;
+  }
+
+  addCreditSaleToCreditLine(): void {
+    if (this.user !== undefined) {
+      this.sharedCreditSaleService.create(this.creditSale).subscribe(
+        result => {
+          this.sharedCreditLineService.addCreditSale(this.user.mobile.toString(), result).subscribe(
+            value1 => {
+              this.snackBar.open('Added to the credit-sales of the user.', 'Close', {
+                duration: 3000
+              });
+            }
+          );
+        }
+      );
+    }
   }
 
   readOffer(offerReference: string): Observable<OfferShoppingCart> {

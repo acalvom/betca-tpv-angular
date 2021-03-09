@@ -4,6 +4,8 @@ import {User} from '../shared/services/models/user.model';
 import {Observable, of} from 'rxjs';
 import {SharedCreditLineService} from '../shared/services/shared.credit-line.service';
 import {TicketCreditLine} from '../shared/services/models/ticket-credit-line.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {CreditSale} from '../shared/services/models/credit-sale.model';
 
 
 @Component({
@@ -18,21 +20,14 @@ export class CreditLinePayDialogComponent {
   card = false;
   total = 0;
 
+  creditSales: CreditSale[];
   unpaidTickets: Observable<TicketCreditLine[]> = of([]);
 
   @Input() userPhone: string;
   @Output() add = new EventEmitter<string>();
 
-  constructor(@Inject(MAT_DIALOG_DATA) data, private sharedCreditLineService: SharedCreditLineService) {
+  constructor(@Inject(MAT_DIALOG_DATA) data, private sharedCreditLineService: SharedCreditLineService, private snackBar: MatSnackBar) {
 
-  }
-
-  // TODO Extraer a shared lo de buscar usuario cuando vaya
-  searchUser(mobile: string): void {
-    if (mobile) {
-      // TODO falta buscar el user en BD, si no existe, debe sacar un dialogo diciendolo; debe tener linea de credito
-      this.user = {mobile: Number(mobile)};
-    }
   }
 
   managedMobile(): boolean {// TODO ? VER SI LO HAGO
@@ -48,14 +43,39 @@ export class CreditLinePayDialogComponent {
   }
 
   searchUnpaidTicketsByUserPhone(): void {
-      // TODO falta buscar el user en BD, si no existe, debe sacar un dialogo diciendolo; debe tener linea de credito
       this.user = {mobile: Number(this.userPhone)};
-      if (this.user){
-        this.unpaidTickets = this.sharedCreditLineService.searchUnpaidTickets(this.user.mobile.toString());
-        this.unpaidTickets.subscribe(dataValue => {
-          dataValue.forEach(dataValues => this.total += dataValues.total.valueOf());
-        });
-      }
+      this.sharedCreditLineService.findByUserReference(this.user.mobile.toString()).subscribe(
+        result => { if (result == null) {
+          this.snackBar.open('That user doesn´t have a credit-line.', 'Close', {
+            duration: 3000
+          });
+        } else {
+          if (this.user){
+            this.total = 0;
+            this.sharedCreditLineService.findByUserReference(this.user.mobile.toString()).subscribe(
+              value => {
+                console.log(value);
+                if (value.sales !== undefined){
+                  this.creditSales = value.sales;
+                  console.log(this.creditSales);
+                  this.creditSales.forEach( value1 => {
+                    if (!value1.payed) {
+                      console.log('sin pagar');
+                    }
+                  });
+                } else {
+                  // TODO PONER QUE NO TIENE NADA POR PAGAR
+                }
+              }
+            );
+            /*this.unpaidTickets = this.sharedCreditLineService.searchUnpaidTickets(this.user.mobile.toString());
+            this.unpaidTickets.subscribe(dataValue => {
+              dataValue.forEach(dataValues => this.total += dataValues.total.valueOf());
+            });*/
+          }
+        }
+        }
+      );
   }
 
   payByCash(): void{

@@ -1,48 +1,59 @@
 <h2 mat-dialog-title>{{title}}</h2>
 <mat-dialog-content>
-  <mat-form-field class="full-width" *ngIf="!isCreate()">
-    <mat-label>Number Invoice</mat-label>
-    <label>
-      <input [(ngModel)]="invoiceModel.number" [disabled]=true matInput required type="text"/>
-    </label>
-  </mat-form-field>
-  <mat-form-field class="full-width">
-    <mat-label>Creation Date</mat-label>
-    <label>
-      <input [(ngModel)]="invoiceModel.creationDate" matInput required type="date">
-    </label>
-  </mat-form-field>
-  <mat-form-field class="full-width">
-    <mat-label>DNI</mat-label>
-    <label>
-      <input [(ngModel)]="invoiceModel.dniUser" matInput required type="text"/>
-    </label>
-  </mat-form-field>
-  <mat-form-field class="full-width">
-    <mat-label>User mobile</mat-label>
-    <label>
-      <input [(ngModel)]="invoiceModel.phoneUser" matInput required type="number"/>
-    </label>
-  </mat-form-field>
-  <mat-form-field class="full-width">
-    <mat-label>User name</mat-label>
-    <label>
-      <input [(ngModel)]="invoiceModel.nameUser" matInput required type="text"/>
-    </label>
-  </mat-form-field>
-  <mat-form-field class="full-width">
-    <mat-label>Family name</mat-label>
-    <label>
-      <input [(ngModel)]="invoiceModel.familyNameUser" matInput required type="text"/>
-    </label>
-  </mat-form-field>
+  <div>
+    <mat-form-field class="full-width" *ngIf="!isCreate()">
+      <mat-label>Number Invoice</mat-label>
+      <label>
+        <input [(ngModel)]="invoiceModel.number" [disabled]=true matInput required type="text"/>
+      </label>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Creation Date</mat-label>
+      <label>
+        <input [(ngModel)]="invoiceModel.creationDate" [disabled]=!isCreate() matInput required type="date">
+      </label>
+    </mat-form-field>
+    <mat-form-field *ngIf="!isCreate()"  class="full-width">
+      <mat-label>Ticket Reference</mat-label>
+      <label>
+        <input [(ngModel)]="invoiceModel.ticketReference" [disabled]=!isCreate() matInput required type="text">
+      </label>
+    </mat-form-field>
+    <app-search-by-ticket-ref *ngIf="isCreate()" (add)="addTicket($event)"></app-search-by-ticket-ref>
+  </div>
+  <br/>
+  <div>
+    <h2>User Data</h2>
+    <mat-form-field class="full-width">
+      <mat-label>DNI</mat-label>
+      <label>
+        <input [(ngModel)]="invoiceModel.userDni" matInput required type="text"/>
+      </label>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Phone</mat-label>
+      <label>
+        <input [(ngModel)]="invoiceModel.userPhone" matInput required type="number"/>
+      </label>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Name</mat-label>
+      <label>
+        <input [(ngModel)]="invoiceModel.userName" matInput required type="text"/>
+      </label>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Family Name</mat-label>
+      <label>
+        <input [(ngModel)]="invoiceModel.familyNameUser" matInput required type="text"/>
+      </label>
+    </mat-form-field>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
-  <!--
   <button (click)="create()" *ngIf="isCreate()" color="primary" mat-raised-button>Create
   </button>
-  -->
   <button (click)="update()" *ngIf="!isCreate()" color="primary" mat-raised-button>Update
   </button>
 

@@ -10,9 +10,6 @@
     <button (click)="searchUser(mobile.value)" *ngIf="!managedMobile()" mat-button mat-icon-button matSuffix>
       <mat-icon color="warn">search</mat-icon>
     </button>
-    <button *ngIf="managedMobile()" mat-button mat-icon-button matSuffix>
-      <mat-icon color="warn">mode_edit</mat-icon>
-    </button>
     <button (click)="resetMobile()" *ngIf="managedMobile()" mat-button mat-icon-button matSuffix>
       <mat-icon color="warn">close</mat-icon>
     </button>
@@ -44,7 +41,7 @@
   <mat-checkbox [(ngModel)]="requestedGiftTicket" [disabled]="false">
     <span>Create Gift Ticket</span>
   </mat-checkbox>
-  <mat-checkbox [(ngModel)]="requestedDataProtectionAct" [disabled]="true">
+  <mat-checkbox [(ngModel)]="requestedDataProtectionAct">
     <span>Data Protection Act</span>
   </mat-checkbox>
   <div *ngIf="!invalidCheckOut()&&returnedCash()>0" class="mat-raised-button mat-primary"> Cash Return:

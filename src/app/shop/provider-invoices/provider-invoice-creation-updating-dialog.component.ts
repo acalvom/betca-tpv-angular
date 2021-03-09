@@ -16,7 +16,7 @@ export class ProviderInvoiceCreationUpdatingDialogComponent {
               private providerInvoiceService: ProviderInvoiceService,
               private dialog: MatDialog
   ) {
-    this.title = data ? 'Update Provider' : 'Create Provider Invoice';
+    this.title = data ? 'Update Provider Invoice' : 'Create Provider Invoice';
     this.providerInvoice = data ? data : {
       number: undefined,
       creationDate: undefined,
@@ -44,13 +44,13 @@ export class ProviderInvoiceCreationUpdatingDialogComponent {
   create(): void {
     this.providerInvoiceService
       .create(this.providerInvoice)
-      .subscribe(() => {
-        this.dialog.closeAll();
-      });
+      .subscribe(() => { this.dialog.closeAll(); });
   }
 
   update(): void {
-    console.log('update');
+    this.providerInvoiceService
+      .update(this.oldProviderInvoiceNumber, this.providerInvoice)
+      .subscribe(() => { this.dialog.closeAll(); });
   }
 
   check(prop: any): boolean {

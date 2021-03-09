@@ -5,8 +5,8 @@ export class InvoiceUpdate {
   baseTax: number;
   taxValue: number;
   ticketReference: string;
-  phoneUser: number;
-  dniUser: string;
-  nameUser: string;
+  userPhone: number;
+  userDni: string;
+  userName: string;
   familyNameUser: string;
 }

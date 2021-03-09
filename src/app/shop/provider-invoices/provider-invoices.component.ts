@@ -5,6 +5,7 @@ import {ProviderInvoice} from './provider-invoice.model';
 import {ProviderInvoiceService} from './provider-invoice.service';
 import {ProviderInvoiceCreationUpdatingDialogComponent} from './provider-invoice-creation-updating-dialog.component';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
+import {TotalTax} from './total-tax.model';
 
 @Component({
   selector: 'app-provider-invoices',
@@ -13,9 +14,12 @@ import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.comp
 export class ProviderInvoicesComponent {
   title = 'Provider Invoices Management';
   providerInvoices = of([]);
+  trimesters = [1, 2, 3, 4];
+  selectedTrimester: number;
+  totalTax: TotalTax = {totalBaseTax: 0, totalTaxValue: 0};
 
   constructor(private dialog: MatDialog, private providerInvoiceService: ProviderInvoiceService) {
-     this.search();
+    this.search();
   }
 
   search(): void {
@@ -40,16 +44,22 @@ export class ProviderInvoicesComponent {
   update(providerInvoice: ProviderInvoice): void {
     this.providerInvoiceService
       .read(providerInvoice.number)
-      .subscribe(fullProviderInvoice => this.dialog.open(ProviderInvoiceCreationUpdatingDialogComponent,
-        {data: fullProviderInvoice})
-        // .afterClosed().subscribe()
-      );
+      .subscribe((fullProviderInvoice: ProviderInvoice) =>
+        this.dialog.open(ProviderInvoiceCreationUpdatingDialogComponent,
+          {data: fullProviderInvoice})
+          .afterClosed().subscribe(() => this.search()));
   }
 
   delete(providerInvoice: ProviderInvoice): void {
     this.providerInvoiceService
       .delete(providerInvoice.number)
       .subscribe(() => this.search());
+  }
+
+  calculateTotalTax(): void {
+    this.providerInvoiceService
+      .calculateTotalTax(this.selectedTrimester)
+      .subscribe((totalTax: TotalTax) => this.totalTax = totalTax);
   }
 
 }

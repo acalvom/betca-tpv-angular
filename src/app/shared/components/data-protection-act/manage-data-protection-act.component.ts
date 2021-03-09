@@ -32,6 +32,7 @@ export class ManageDataProtectionActComponent {
   }
 
   onFileSelected(): void {
+    this.rgpdUser.rgpdType = this.selectedRgpdType;
     const inputNode: any = document.querySelector('#file');
     if (typeof (FileReader) !== 'undefined') {
       const reader = new FileReader();
@@ -43,7 +44,6 @@ export class ManageDataProtectionActComponent {
   }
 
   printUnsignedAgreement(): void {
-    this.rgpdUser.rgpdType = this.selectedRgpdType;
     this.dataProtectionActService.printUnsignedAgreement(this.rgpdUser);
   }
 

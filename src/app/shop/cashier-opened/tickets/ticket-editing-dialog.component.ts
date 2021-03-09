@@ -13,19 +13,29 @@ import {TicketService} from './ticket.service';
 export class TicketEditingDialogComponent implements OnInit{
 
   stateValues = Object.keys(ShoppingState).filter(key => isNaN(Number(key)));
-  indexShoppingList: 0;
   displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'actions'];
-  shoppingList: Shopping[];
+  shoppingList: Shopping[] = [];
   ticket: TicketEdition;
   totalShoppingList = 0 ;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: TicketEdition, private ticketService: TicketService, private dialog: MatDialog) {
     this.ticket = data ? data : undefined;
-    this.shoppingList = this.ticket.shoppingList;
   }
 
   ngOnInit(): void {
+    this.getShoppingList();
     this.synchronizeShoppingCart();
+  }
+
+  getShoppingList(): void {
+    for (const shopping of this.ticket.shoppingList) {
+      const shoppingModel = new Shopping(shopping.barcode, shopping.description, shopping.retailPrice);
+      shoppingModel.amount = shopping.amount;
+      shoppingModel.discount = shopping.discount;
+      shoppingModel.state = shopping.state;
+      shoppingModel.updateTotal();
+      this.shoppingList.push(shoppingModel);
+    }
   }
 
   synchronizeShoppingCart(): void {

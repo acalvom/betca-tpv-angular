@@ -1,8 +1,8 @@
-import {User} from '@core/user.model';
+import {Article} from '../shared/article.model';
 
 export interface Review {
-  user: User;
-  articleBarcode: string;
+  id?: string;
+  article: Article;
   score?: number;
   opinion?: string;
 }

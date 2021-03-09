@@ -4,13 +4,13 @@ import {Observable, of} from 'rxjs';
 import {SalesPeopleSearch} from './salespeople-search.model';
 import {SalesPeople} from '../shared/services/models/salespeople.model';
 
-
 @Injectable({
   providedIn: 'root',
 })
 
 export class SalesPeopleService {
   private static SEARCH = '/search';
+
 
   salespeople: SalesPeople[] = [
     {
@@ -90,6 +90,10 @@ export class SalesPeopleService {
 
   printSalesPeople(salesperson: string): Observable<void> {
     return of(console.log('do nothing'));
+  }
+
+  read(salesPeopleSearch: SalesPeople): Observable<SalesPeople>{
+    return of(salesPeopleSearch);
   }
 }
 

@@ -3,7 +3,7 @@ import {HttpService} from '@core/http.service';
 import {Observable, of} from 'rxjs';
 import {EndPoints} from '@shared/end-points';
 import {OfferSearch} from './offer-search.model';
-import {OfferCreateUpdate} from './offer-creation-updating.model';
+import {Offer} from './offer-creation-updating.model';
 import {OfferMenu} from './offer-menu.model';
 
 
@@ -13,9 +13,10 @@ import {OfferMenu} from './offer-menu.model';
 
 export class OfferService {
   private static SEARCH = '/search';
+  private static PRINT = '/print';
 
   articleBarcodes: string[] = ['8400000000017', '8400000000024', '8400000000031'];
-  newOffers: OfferCreateUpdate[] = [
+  newOffers: Offer[] = [
     {
       reference: '123abc',
       description: 'offer1',
@@ -60,53 +61,36 @@ export class OfferService {
   constructor(private httpService: HttpService) {
   }
 
-  search(offerSearch: OfferSearch): Observable<OfferMenu[]> {
-    return of(this.offers);
-    /*return this.httpService
+  search(offerSearch: OfferSearch): Observable<Offer[]> {
+    return this.httpService
       .paramsFrom(offerSearch)
-      .get(EndPoints.OFFERS + OfferService.SEARCH);*/
+      .get(EndPoints.OFFERS + OfferService.SEARCH);
   }
 
-  create(newOffer: OfferCreateUpdate): Observable<OfferMenu> {
-    this.newOffers.push(newOffer);
-    return of(newOffer);
-    /*return this.httpService
-      .post(EndPoints.OFFERS, offer);*/
+  create(newOffer: Offer): Observable<Offer> {
+    return this.httpService
+      .post(EndPoints.OFFERS, newOffer);
   }
 
-  read(reference: string): Observable<OfferCreateUpdate> {
-    return of({
-      reference,
-      description: this.newOffers.find(off => off.reference === reference).description,
-      expiryDate: this.newOffers.find(off => off.reference === reference).expiryDate,
-      discount: this.newOffers.find(off => off.reference === reference).discount,
-      articleBarcodes: this.newOffers.find(off => off.reference === reference).articleBarcodes
-    });
-    /*return this.httpService
-      .get(EndPoints.OFFERS + '/' + reference);*/
+  read(reference: string): Observable<Offer> {
+    return this.httpService
+      .get(EndPoints.OFFERS + '/' + reference);
   }
 
-  update(oldOfferReference: string, newOffer: OfferCreateUpdate): Observable<OfferMenu> {
-    const offerToUpdate = this.newOffers.find(off => off.reference === oldOfferReference);
-    const index = this.newOffers.indexOf(offerToUpdate);
-    if (index > -1) {
-      this.newOffers.splice(index, 1, newOffer);
-    }
-    this.search(new OfferSearch());
-    return of(newOffer);
-    /*return this.httpService
+  update(oldOffer: string, updatedOffer: Offer): Observable<Offer> {
+    console.log(updatedOffer);
+    return this.httpService
       .successful()
-      .put(EndPoints.OFFERS + '/' + oldOffer, offer);*/
+      .put(EndPoints.OFFERS + '/' + oldOffer, updatedOffer);
   }
 
-  printOffer(reference: string): Observable<void> {
-    return of(console.log('Implementado'));
-    /*return this.httpService
+  print(reference: string): Observable<void> {
+    return this.httpService
       .pdf()
-      .get(EndPoints.OFFERS + '/' + reference);*/
+      .get(EndPoints.OFFERS + '/' + reference + OfferService.PRINT);
   }
 
-  deleteOffer(reference: string): Observable<void> {
+  delete(reference: string): Observable<void> {
     const offerToDelete = this.offers.find(off => off.reference === reference);
     const index = this.offers.indexOf(offerToDelete);
     if (index > -1) {

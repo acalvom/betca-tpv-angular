@@ -4,9 +4,11 @@ import {MatDialog} from '@angular/material/dialog';
 import {SalesPeopleSearch} from './salespeople-search.model';
 import {SalesPeopleService} from './salespeople.service';
 import {SalesPeople} from '../shared/services/models/salespeople.model';
+import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 
 @Component({
   templateUrl: './salespeople.component.html',
+  styleUrls: [ './salespeople.component.css' ]
 })
 
 export class SalesPeopleComponent {
@@ -36,4 +38,12 @@ export class SalesPeopleComponent {
       .subscribe(() => this.dialog.closeAll());
   }
 
+  read(salesPeople: SalesPeople): void{
+    this.dialog.open(ReadDetailDialogComponent, {
+      data: {
+       title: 'salesPeople Details',
+       object: this.SalesPeopleService.read(salesPeople)
+      }
+    });
+  }
 }

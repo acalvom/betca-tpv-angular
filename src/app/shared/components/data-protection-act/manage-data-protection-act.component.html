@@ -2,17 +2,17 @@
   <mat-button-toggle-group [(value)]="selectedRgpdType">
     <mat-button-toggle [value]="rgpdTypes.BASIC" [style.border-color]="getColor(rgpdTypes.BASIC)"
                        [style.color]="getColor(rgpdTypes.BASIC)">
-      {{rgpdTypes.BASIC.valueOf()}}</mat-button-toggle>
+      {{rgpdTypes[rgpdTypes.BASIC]}}</mat-button-toggle>
     <mat-button-toggle [value]="rgpdTypes.MEDIUM" [style.border-color]="getColor(rgpdTypes.MEDIUM)"
                        [style.color]="getColor(rgpdTypes.MEDIUM)">
-      {{rgpdTypes.MEDIUM.valueOf()}}</mat-button-toggle>
+      {{rgpdTypes[rgpdTypes.MEDIUM]}}</mat-button-toggle>
     <mat-button-toggle [value]="rgpdTypes.ADVANCED" [style.border-color]="getColor(rgpdTypes.ADVANCED)"
                        [style.color]="getColor(rgpdTypes.ADVANCED)">
-      {{rgpdTypes.ADVANCED.valueOf()}}</mat-button-toggle>
+      {{rgpdTypes[rgpdTypes.ADVANCED]}}</mat-button-toggle>
   </mat-button-toggle-group>
   <br>
   <mat-card-content *ngIf="selectedRgpdType !== undefined">
-    {{selectedRgpdType.valueOf()}} Data Protection Agreement<br>
+    {{rgpdTypes[selectedRgpdType]}} Data Protection Agreement<br>
     <mat-card-content *ngIf="isUserRgpdType()">
       <button mat-stroked-button color="primary" (click)="printSignedAgreement()">Download PDF</button>
     </mat-card-content>

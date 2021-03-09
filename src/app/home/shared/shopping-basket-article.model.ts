@@ -1,5 +1,5 @@
-export interface ArticleLossLine {
-  barcode: string;
+export class ShoppingBasketArticle {
+  photo: string;
   description: string;
   amount: number;
   retailPrice: number;
