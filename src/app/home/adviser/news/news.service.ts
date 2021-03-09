@@ -9,11 +9,12 @@ import {EndPoints} from '@shared/end-points';
 })
 export class NewsService {
   static NEWS = '/news';
+  static DAYS = '/30';
 
   constructor(private httpService: HttpService) { }
 
   searchNewArticleByDay(): Observable<Article[]>{
     return this.httpService
-      .get(EndPoints.ARTICLES + NewsService.NEWS);
+      .get(EndPoints.ARTICLES + NewsService.NEWS + NewsService.DAYS);
   }
 }
