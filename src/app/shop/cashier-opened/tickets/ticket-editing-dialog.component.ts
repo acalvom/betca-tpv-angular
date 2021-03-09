@@ -16,7 +16,7 @@ export class TicketEditingDialogComponent implements OnInit{
   displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'actions'];
   shoppingList: Shopping[] = [];
   ticket: TicketEdition;
-  totalShoppingList = 0 ;
+  totalShoppingList = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: TicketEdition, private ticketService: TicketService, private dialog: MatDialog) {
     this.ticket = data ? data : undefined;
