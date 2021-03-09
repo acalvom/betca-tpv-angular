@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from '@core/http.service';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {EndPoints} from '@shared/end-points';
 import {OfferSearch} from './offer-search.model';
 import {Offer} from '../shared/services/models/offer.model';
-import {OfferMenu} from './offer-menu.model';
 
 
 @Injectable({
@@ -14,49 +13,6 @@ import {OfferMenu} from './offer-menu.model';
 export class OfferService {
   private static SEARCH = '/search';
   private static PRINT = '/print';
-
-  articleBarcodes: string[] = ['8400000000017', '8400000000024', '8400000000031'];
-  newOffers: Offer[] = [
-    {
-      reference: '123abc',
-      description: 'offer1',
-      expiryDate: new Date('2020-03-16'),
-      discount: 10,
-      articleBarcodes: this.articleBarcodes
-    },
-    {
-      reference: '234bcd',
-      description: 'offer2',
-      expiryDate: new Date('2020-08-08'),
-      discount: 20,
-      articleBarcodes: []
-    },
-    {
-      reference: '345cde',
-      description: 'offer3',
-      expiryDate: new Date('2021-08-13'),
-      discount: 30,
-      articleBarcodes: this.articleBarcodes.slice(0, 1)
-    }];
-  offers: OfferMenu[] = [
-    {
-      reference: '123abc',
-      description: 'offer1',
-      expiryDate: new Date('2020-03-16'),
-      discount: 10,
-    },
-    {
-      reference: '234bcd',
-      description: 'offer2',
-      expiryDate: new Date('2020-08-08'),
-      discount: 20,
-    },
-    {
-      reference: '345cde',
-      description: 'offer3',
-      expiryDate: new Date('2021-08-13'),
-      discount: 30,
-    }];
 
   constructor(private httpService: HttpService) {
   }
@@ -78,7 +34,6 @@ export class OfferService {
   }
 
   update(oldOffer: string, updatedOffer: Offer): Observable<Offer> {
-    console.log(updatedOffer);
     return this.httpService
       .successful()
       .put(EndPoints.OFFERS + '/' + oldOffer, updatedOffer);
@@ -91,16 +46,9 @@ export class OfferService {
   }
 
   delete(reference: string): Observable<void> {
-    const offerToDelete = this.offers.find(off => off.reference === reference);
-    const index = this.offers.indexOf(offerToDelete);
-    if (index > -1) {
-      this.offers.splice(index, 1);
-    }
-    this.search(new OfferSearch());
-    return of(console.log('Offer ' + reference + ' deleted successfully'));
-    /*return this.httpService
+    return this.httpService
       .successful()
-      .delete(EndPoints.OFFERS + '/' + reference);*/
+      .delete(EndPoints.OFFERS + '/' + reference);
   }
 }
 
