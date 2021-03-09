@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {iif, merge, Observable, of} from 'rxjs';
+import {EMPTY, iif, merge, Observable, of} from 'rxjs';
 import {Ticket} from '../../shared/services/models/ticket.model';
 import {Shopping} from '../../shared/services/models/shopping.model';
 import {TicketEdition} from './ticket-edition.model';
@@ -7,7 +7,7 @@ import {EndPoints} from '@shared/end-points';
 import {HttpService} from '@core/http.service';
 import {TicketSearch} from './ticket-search.model';
 import {SharedVoucherService} from '../../shared/services/shared-voucher.service';
-import {concatMap, mergeMap} from 'rxjs/operators';
+import {concatMap, map, mergeMap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,13 +30,19 @@ export class TicketService {
   }
 
   update(id: string, shoppingList: Shopping[], returnedMoney: number): Observable<void> {
+    console.log('returned money: ' + (returnedMoney > 0));
     return this.httpService
       .successful()
       .put(EndPoints.TICKETS + '/' + id, shoppingList)
       .pipe(
-        mergeMap(() => {
-          return iif(() => returnedMoney > 0, this.sharedVoucherService.printVoucher(returnedMoney));
-        })
+        concatMap(() => {
+          if (returnedMoney > 0){
+            return this.sharedVoucherService.printVoucher(returnedMoney);
+          }else{
+            return EMPTY;
+          }
+        }),
+        map(value => console.log('vLOR DEVUELTO: ' + value))
       );
   }
 }
