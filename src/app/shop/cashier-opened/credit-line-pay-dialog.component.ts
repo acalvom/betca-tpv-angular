@@ -57,7 +57,7 @@ export class CreditLinePayDialogComponent {
               value => {
                 if (value.length !== 0){
                   console.log('tiene');
-                  value.forEach(dataValues => this.total += dataValues.total.valueOf());
+                  value.forEach(dataValues => this.total += dataValues.amount.valueOf());
                 } else {
                   console.log('no tiene a pagar');
                   // TODO PONER QUE NO TIENE NADA POR PAGAR
