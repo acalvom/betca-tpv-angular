@@ -14,11 +14,7 @@ export class OfferService {
   }
 
   read(reference: string): Observable<Offer> {
-    // reference = 'cmVmZXJlbmNlb2ZmZXIx';
-    console.log('Reference: ' + reference);
     return this.httpService
       .get(EndPoints.OFFERS + '/' + reference);
   }
 }
-
-
