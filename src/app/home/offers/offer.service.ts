@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from '@core/http.service';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {EndPoints} from '@shared/end-points';
 import {Offer} from './offer.model';
 
@@ -14,6 +14,8 @@ export class OfferService {
   }
 
   read(reference: string): Observable<Offer> {
+    // reference = 'cmVmZXJlbmNlb2ZmZXIx';
+    console.log('Reference: ' + reference);
     return this.httpService
       .get(EndPoints.OFFERS + '/' + reference);
   }
