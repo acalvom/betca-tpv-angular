@@ -22,7 +22,7 @@ export class EditArticleFamilyDialogComponent implements OnInit {
   ) {
     this.reference = selectedArticle.reference;
     this.description = selectedArticle.description;
-    this.selectedType = selectedArticle.type;
+    this.selectedType = selectedArticle.treeType;
     this.types = ['ARTICLES', 'SIZE'];
   }
 
@@ -34,7 +34,7 @@ export class EditArticleFamilyDialogComponent implements OnInit {
     const articlesFamilyModel: ArticleFamilyModel = {
       reference: this.reference,
       description: this.description,
-      type: this.selectedType,
+      treeType: this.selectedType,
     };
 
     this.articlesFamilyService.editArticleFamily(articlesFamilyModel).subscribe(

@@ -23,10 +23,11 @@ import {AddArticleDialogComponent} from '../dialogs/add-article-dialog/add-artic
 })
 export class ArticlesFamilyComponent implements OnInit {
   TREE_DATA: ArticleFamilyModel[];
-  treeControl = new NestedTreeControl<ArticleFamilyModel>(node => node.children);
+  treeControl = new NestedTreeControl<ArticleFamilyModel>(node => node.articleFamilyCrudList);
   dataSource = new MatTreeNestedDataSource<ArticleFamilyModel>();
 
   constructor(private sharedArticlesFamilyService: SharedArticlesFamilyService, public dialog: MatDialog) {
+    this.TREE_DATA = [];
   }
 
   ngOnInit(): void {
@@ -34,12 +35,13 @@ export class ArticlesFamilyComponent implements OnInit {
     console.log(this.TREE_DATA);
   }
 
-  hasChild = (_: number, node: ArticleFamilyModel) => !!node.children && node.children.length > 0;
+  hasChild = (_: number, node: ArticleFamilyModel) => !!node.articleFamilyCrudList && node.articleFamilyCrudList.length > 0;
 
   read(): void {
-    this.sharedArticlesFamilyService.readWithoutArticles().subscribe(
+     const reference = 'root';
+     this.sharedArticlesFamilyService.readWithoutArticles(reference).subscribe(
       data => {
-        this.TREE_DATA = data;
+        this.TREE_DATA.push(data);
         this.dataSource.data = this.TREE_DATA;
       }
     );
