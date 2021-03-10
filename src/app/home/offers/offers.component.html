@@ -1,1 +1,29 @@
-<h1>Offer Details</h1>
+<mat-card>
+  <mat-card-content>
+    <h2><strong>Offer Details</strong></h2>
+    <mat-list>
+      <mat-list-item> Reference: {{offer.reference}}
+        <mat-icon matListIcon>build</mat-icon>
+      </mat-list-item>
+      <mat-list-item> Description: {{offer.description}}
+        <mat-icon matListIcon>description</mat-icon>
+      </mat-list-item>
+      <mat-list-item> Expiry date: {{offer.expiryDate}}
+        <mat-icon matListIcon>date_range</mat-icon>
+      </mat-list-item>
+      <mat-list-item> Discount: {{offer.discount}} €
+        <mat-icon matListIcon>attach_money</mat-icon>
+      </mat-list-item>
+      <mat-list-item> Applied to articles:
+        <mat-icon matListIcon>list</mat-icon>
+      </mat-list-item>
+    </mat-list>
+    <mat-list>
+      <mat-list-item *ngFor="let barcode of offer.articleBarcodes"> &nbsp;&nbsp;&nbsp;&nbsp; {{ barcode }}
+        <mat-icon matListIcon> &nbsp;&nbsp;&nbsp;&nbsp;arrow_right</mat-icon>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-footer>
+  </mat-card-footer>
+</mat-card>
