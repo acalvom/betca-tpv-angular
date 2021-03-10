@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {EMPTY, Observable} from 'rxjs';
 import {Voucher} from './models/voucher.model';
 import {HttpService} from '@core/http.service';
 import {VoucherCreation} from '../../vouchers/voucher.creation';
@@ -29,5 +29,9 @@ export class SharedVoucherService {
     const voucherCreation: VoucherCreation = { value };
     return this.create(voucherCreation)
       .pipe(map(voucher => this.httpService.pdf().get(`${EndPoints.VOUCHERS}/${voucher.reference}`)));
+  }
+
+  consumeVoucher(voucherValue: number): Observable<any> {
+    return this.httpService.put(`${EndPoints.VOUCHERS}/${voucherValue}`);
   }
 }

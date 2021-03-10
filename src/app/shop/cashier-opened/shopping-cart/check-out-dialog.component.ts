@@ -12,6 +12,7 @@ import {DataProtectionActService} from '@shared/components/data-protection-act/d
 import {AuthService} from '@core/auth.service';
 import {UserUpdateCreateDialogComponent} from '../../users/dialog/user-update-create-dialog.component';
 import {SharedCreditLineService} from '../../shared/services/shared.credit-line.service';
+import {SharedVoucherService} from '../../shared/services/shared-voucher.service';
 
 @Component({
   templateUrl: 'check-out-dialog.component.html',
@@ -29,7 +30,8 @@ export class CheckOutDialogComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) data, private dialog: MatDialog, private dialogRef: MatDialogRef<CheckOutDialogComponent>,
               private shoppingCartService: ShoppingCartService, private userService: UserCompleteService, private authService: AuthService,
-              private dataProtectionActService: DataProtectionActService, private sharedCreditLineService: SharedCreditLineService) {
+              private dataProtectionActService: DataProtectionActService, private sharedCreditLineService: SharedCreditLineService,
+              private voucherService: SharedVoucherService) {
     this.ticketCreation = {cash: 0, card: 0, voucher: 0, shoppingList: data, note: ''};
     this.total();
   }
@@ -137,6 +139,7 @@ export class CheckOutDialogComponent {
 
   consumeVoucher(): void {
     // TODO consumir un vale que se entrega como parte del pago
+    this.voucherService.consumeVoucher(this.ticketCreation.voucher);
   }
 
   invalidCheckOut(): boolean {
