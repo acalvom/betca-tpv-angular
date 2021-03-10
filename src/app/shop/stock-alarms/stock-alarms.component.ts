@@ -14,7 +14,7 @@ import {StockAlarmLine} from '../shared/services/models/stock-alarm-line.model';
   styleUrls: ['./stock-alarms.component.css']
 })
 export class StockAlarmsComponent implements OnInit {
-  reference: string;
+  name: string;
   title = 'Stock Alarm';
   data = of([]);
   alarms: StockAlarmLine[];
@@ -30,12 +30,12 @@ export class StockAlarmsComponent implements OnInit {
   }
 
   search(): void {
-    this.data = this.stockAlarmsService.search(this.reference)
+    this.data = this.stockAlarmsService.search(this.name)
       .pipe(map(value => value.map(value1 => ({...value1, stockAlarmLines: JSON.stringify(value1.stockAlarmLines)}))));
   }
 
   resetSearch(): void {
-    this.reference = '';
+    this.name = '';
   }
 
   create(): void {

@@ -1,7 +1,10 @@
 import {Injectable} from '@angular/core';
 import {ArticleFamilyModel} from './models/article-family.model';
 import {Observable, of} from 'rxjs';
-import {Article} from './models/article.model';
+import {ArticleFamilyViewModel} from '../../cashier-opened/shopping-cart/article-family-view/article-family-view.model';
+import {EndPoints} from '@shared/end-points';
+import {HttpService} from '@core/http.service';
+import {TreetypeModel} from './models/treetype.model';
 
 @Injectable({
   providedIn: 'root'
@@ -40,45 +43,44 @@ export class SharedArticlesFamilyService {
       reference: '1',
       description: 'Varios',
       type: 'composite',
-
     }
   ];
 
-  CHILDRENS_OF_ZZ: (ArticleFamilyModel | Article)[] = [
+  CHILDRENS_OF_ZZ: ArticleFamilyViewModel[] = [
     {
-      barcode: '8400000000031',
+      reference: '8400000000031',
       description: 'descrip-a3',
-      retailPrice: 10.12,
-      providerCompany: 'pro1'
+      type: TreetypeModel.ARTICLE,
+      price: 10.12,
     },
     {
       reference: '1',
       description: 'Zz Falda',
-      type: 'size'
+      type: TreetypeModel.SIZES
     },
     {
-      reference: '1',
+      reference: '2',
       description: 'Zz Falda',
-      type: 'size'
+      type: TreetypeModel.SIZES
     }
   ];
 
-  ARTICLES: Article [] = [
+  ARTICLES: ArticleFamilyViewModel [] = [
     {
-      barcode: '8400000000017',
-      description: 'zz-falda-T2',
-      retailPrice: 20,
-      providerCompany: 'pro1'
+      reference: '8400000000017',
+      description: 'Zarzuela - falda T2',
+      type: TreetypeModel.ARTICLE,
+      price: 20,
     },
     {
-      barcode: '8400000000024',
-      description: 'zz-falda-T4',
-      retailPrice: 27.8,
-      providerCompany: 'pro1'
+      reference: '8400000000024',
+      description: 'Zarzuela - falda T4',
+      type: TreetypeModel.ARTICLE,
+      price: 27.8,
     }
   ];
 
-  constructor() {
+  constructor(private httpService: HttpService) {
   }
 
   readWithoutArticles(): Observable<ArticleFamilyModel[]> {
@@ -86,16 +88,9 @@ export class SharedArticlesFamilyService {
 
   }
 
-  readChildren(articleFamilyModel?: ArticleFamilyModel): Observable<(ArticleFamilyModel | Article)[]> {
-    return of(this.ARTICLES_FAMILY_DATA);
-  }
-
-  readChildrenTemporal(articleFamilyModel?: ArticleFamilyModel): Observable<(ArticleFamilyModel | Article)[]> {
-    return of(this.CHILDRENS_OF_ZZ);
-  }
-
-  readArticles(articleFamily: ArticleFamilyModel): Observable<Article[]> {
-    return of(this.ARTICLES);
+  readChildren(reference?: string): Observable<ArticleFamilyViewModel[]> {
+    return this.httpService
+      .get(EndPoints.ARTICLES_FAMILY_VIEW + '/' + reference);
   }
 
   createArticleFamily(articleFamilyModel: ArticleFamilyModel, reference: string): Observable<string> {

@@ -24,16 +24,12 @@
     <button (click)="resetSearch()" mat-icon-button>
       <mat-icon>close</mat-icon>
     </button>
+    <mat-label class="second-filters"><strong>Filters: </strong></mat-label>
     <mat-form-field>
       <mat-label>Date</mat-label>
       <label>
-        <mat-date-range-input [rangePicker]="secondPicker">
-          <input matStartDate placeholder="Start date">
-          <input matEndDate placeholder="End date">
-        </mat-date-range-input>
+        <input type="month" matInput>
       </label>
-      <mat-datepicker-toggle matSuffix [for]="secondPicker"></mat-datepicker-toggle>
-      <mat-date-range-picker #secondPicker></mat-date-range-picker>
     </mat-form-field>
         <button (click)="secondSearch()" mat-icon-button>
           <mat-icon>search</mat-icon>

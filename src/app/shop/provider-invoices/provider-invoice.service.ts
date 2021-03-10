@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {ProviderInvoice} from './provider-invoice.model';
+import {TotalTax} from './total-tax.model';
 // import {HttpService} from '@core/http.service';
 // import {EndPoints} from '@shared/end-points';
 
@@ -50,8 +51,7 @@ export class ProviderInvoiceService {
 
   delete(providerInvoiceNumber: number): Observable<void> {
     const index = this.providerInvoices.findIndex(pi => pi.number === providerInvoiceNumber);
-    const removedElements = this.providerInvoices.splice(index, 1);
-    console.log(removedElements);
+    this.providerInvoices.splice(index, 1);
     return of(null);
     /*
     return this.httpService
@@ -59,21 +59,17 @@ export class ProviderInvoiceService {
      */
   }
 
-  calculateQuarterlyAmount(trimester: number): Observable<number> {
-    let amount = 0;
+  calculateTotalTax(trimester: number): Observable<TotalTax> {
+    const total: TotalTax = {totalBaseTax: 0, totalTaxValue: 0};
     if (trimester === 1) {
-      amount = this.calculateAmount(this.providerInvoices[0]) +
-        this.calculateAmount(this.providerInvoices[1]);
+      total.totalBaseTax = this.providerInvoices[0].baseTax + this.providerInvoices[1].baseTax;
+      total.totalTaxValue = this.providerInvoices[0].taxValue + this.providerInvoices[1].taxValue;
     }
-    return of(amount);
+    return of(total);
     /*
     return this.httpService
       .get(EndPoints.PROVIDER_INVOICES + '/' + 'trimesters/' + trimester);
      */
   }
 
-  // TODO: Remove method
-  calculateAmount(providerInvoice: ProviderInvoice): number {
-    return providerInvoice.baseTax + (providerInvoice.baseTax * providerInvoice.taxValue / 100);
-  }
 }

@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Article} from '../../../shared/services/models/article.model';
+import {ArticleFamilyViewModel} from './article-family-view.model';
 
 @Component({
   templateUrl: 'open-sizes-dialog.component.html',
@@ -8,18 +8,18 @@ import {Article} from '../../../shared/services/models/article.model';
 })
 export class OpenSizesDialogComponent {
 
-  articles: Article[];
+  articlesFamilyViewModel: ArticleFamilyViewModel[];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Article[], private dialogRef: MatDialogRef<OpenSizesDialogComponent>) {
-    this.articles = this.data;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ArticleFamilyViewModel[], private dialogRef: MatDialogRef<OpenSizesDialogComponent>) {
+    this.articlesFamilyViewModel = this.data;
   }
 
-  addShoppingCart(article: Article): void {
-    this.dialogRef.close(article);
+  addShoppingCart(articleFamilyViewModel: ArticleFamilyViewModel): void {
+    this.dialogRef.close(articleFamilyViewModel.reference);
   }
 
-  obtainSize(article: Article): string {
-    const description = article.description.split('-');
+  obtainSize(articlesFamilyViewModel: ArticleFamilyViewModel): string {
+    const description = articlesFamilyViewModel.description.split(' ');
     return description[description.length - 1];
   }
 }

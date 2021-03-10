@@ -47,4 +47,72 @@
       <app-table-stock [data]="articlesByDate" [productSold]="true"></app-table-stock>
     </ng-container>
   </mat-card>
+  <mat-card>
+    <mat-card-title>
+      Product forecast
+    </mat-card-title>
+    <mat-card-subtitle>Given a product, it tells you what stock there will be the next week.
+    </mat-card-subtitle>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Enter a barcode</mat-label>
+        <input [(ngModel)]="stockArticle.barcode" matInput type="number">
+      </mat-form-field>
+      <button (click)="searchFutureStock()" mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-card-content>
+    <ng-container *ngIf="stockForescat">
+      <mat-card>
+        <mat-card-content>
+          <mat-label><strong>Barcode: </strong></mat-label>
+          <mat-label>{{(stockFuture|async)?.barcode}}</mat-label>
+        </mat-card-content>
+        <mat-card-content>
+          <mat-label><strong>Descripcion: </strong></mat-label>
+          <mat-label>{{(stockFuture|async)?.description}}</mat-label>
+        </mat-card-content>
+        <mat-card-content>
+          <mat-label><strong>Stock next week: </strong></mat-label>
+          <mat-label>{{(stockFuture|async)?.stock}}</mat-label>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </mat-card>
+  <mat-card>
+    <mat-card-title>
+      Empty stock forecast
+    </mat-card-title>
+    <mat-card-subtitle>Given a product, it tells you when it will be in stock 0
+    </mat-card-subtitle>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Enter a barcode</mat-label>
+        <input [(ngModel)]="stockArticle.barcode" matInput type="number">
+      </mat-form-field>
+      <button (click)="searchEmptyStock()" mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-card-content>
+    <ng-container *ngIf="stockEmpty">
+      <mat-card>
+        <mat-card-content>
+          <mat-label><strong>Barcode: </strong></mat-label>
+          <mat-label>{{(stockZero|async)?.barcode}}</mat-label>
+        </mat-card-content>
+        <mat-card-content>
+          <mat-label><strong>Descripcion: </strong></mat-label>
+          <mat-label>{{(stockZero|async)?.description}}</mat-label>
+        </mat-card-content>
+        <mat-card-content>
+          <mat-label><strong>Stock: </strong></mat-label>
+          <mat-label>{{(stockZero|async)?.stock}}</mat-label>
+        </mat-card-content>
+        <mat-card-content>
+          <mat-label><strong>Date empty stock:  </strong></mat-label>
+          <mat-label>{{(stockZero|async)?.dateStockEmpty}}</mat-label>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </mat-card>
 </mat-card>

@@ -80,7 +80,7 @@
     <mat-icon>toc</mat-icon>
     <span>Tickets</span>
   </button>
-  <button disabled="disabled" mat-menu-item routerLink="">
+  <button mat-menu-item routerLink="/shop/online-order">
     <mat-icon>shopping_basket</mat-icon>
     <span>Online Orders</span>
   </button>
@@ -119,7 +119,7 @@
     <span>Providers</span>
   </button>
   <button mat-menu-item routerLink="/shop/complaints">
-    <mat-icon>markunread_mailbox</mat-icon>
+    <mat-icon>sentiment_very_dissatisfied</mat-icon>
     <span>Complaints</span>
   </button>
   <button *ngIf="untilManager()" mat-menu-item routerLink="/shop/provider-orders">

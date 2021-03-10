@@ -28,6 +28,12 @@ export class StockService {
       stock: 20,
       retailPrice: 50,
       description: 'Pantalon negro'
+    },
+    {
+      barcode: '00009',
+      stock: 5,
+      retailPrice: 50,
+      description: 'Chaqueta negro'
     }];
   articulosVendidos: ArticleStock[] = [
     {
@@ -43,7 +49,14 @@ export class StockService {
       dateSell: new Date('2019-05-20T00:00:00')
     }
   ];
-
+  articuloStockVacio: ArticleStock =
+    {
+      barcode: '00003',
+      retailPrice: 1,
+      stock: 0,
+      description: 'Camiseta verde',
+      dateStockEmpty: new Date('2020-01-25T00:00:00')
+    };
   constructor(private httpService: HttpService) {
   }
 
@@ -54,14 +67,15 @@ export class StockService {
       .get(EndPoints.STOCKS + StockService.SEARCH);*/
   }
 
-  read(barcode: string): Observable<ArticleStock> {
-    return of(this.articulos[0]);
-    /* return this.httpService
-      .get(EndPoints.STOCKS + '/' + barcode); */
+  searchSoldProducts(start: Date, end: Date): Observable<ArticleStock[]> {
+    return of(this.articulosVendidos);
   }
 
-  searchSoldProducts(start: Date, end: Date): Observable<ArticleStock[]> {
-    console.log('En el servicio searchSoldProducts() ');
-    return of(this.articulosVendidos);
+  searchFutureStock(barcode: string): Observable<ArticleStock> {
+    return of(this.articulos[3]);
+  }
+
+  searchEmptyStock(barcode: string): Observable<ArticleStock> {
+    return of(this.articuloStockVacio);
   }
 }
