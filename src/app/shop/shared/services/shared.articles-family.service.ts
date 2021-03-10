@@ -13,21 +13,21 @@ export class SharedArticlesFamilyService {
   ARTICLES_DATA: ArticleFamilyModel[] = [{
     reference: 'root',
     description: 'root',
-    type: 'ARTICLES',
-    children: [{
+    treeType: 'ARTICLES',
+    articleFamilyCrudList: [{
       reference: 'Zz',
       description: 'Zz',
-      type: 'ARTICLES',
-      children: [{
+      treeType: 'ARTICLES',
+      articleFamilyCrudList: [{
         reference: 'Zz Falda',
         description: 'Zz',
-        type: 'ARTICLES'
+        treeType: 'ARTICLES'
       }]
     },
       {
         reference: 'Pantalon',
         description: 'T2',
-        type: 'ARTICLE',
+        treeType: 'ARTICLE',
       }
     ]
   }
@@ -37,12 +37,12 @@ export class SharedArticlesFamilyService {
     {
       reference: '1',
       description: 'Zarzuela',
-      type: 'composite'
+      treeType: 'composite'
     },
     {
       reference: '1',
       description: 'Varios',
-      type: 'composite',
+      treeType: 'composite',
     }
   ];
 
@@ -83,8 +83,9 @@ export class SharedArticlesFamilyService {
   constructor(private httpService: HttpService) {
   }
 
-  readWithoutArticles(): Observable<ArticleFamilyModel[]> {
-    return of(this.ARTICLES_DATA);
+  readWithoutArticles(reference): Observable<ArticleFamilyModel> {
+    return this.httpService
+      .get(EndPoints.ARTICLES_FAMILY_CRUD + '/' + reference);
 
   }
 
