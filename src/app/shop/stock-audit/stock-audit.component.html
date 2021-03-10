@@ -1,2 +1,77 @@
-<p>stock-audit works!</p>
-<p>MIKEL</p>
+<mat-card *ngIf="!closedAudit">
+  <mat-card-title>
+    <mat-icon color="primary">assessment</mat-icon>
+    Stock Audit
+  </mat-card-title>
+  <mat-card-content>
+    <mat-table [dataSource]="auditArticles" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef fxFlex="5%">Nº</mat-header-cell>
+        <mat-cell *matCellDef="let i = index" fxFlex="5%"> {{i + 1}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="barcode">
+        <mat-header-cell *matHeaderCellDef fxFlex="28%">Barcode</mat-header-cell>
+        <mat-cell *matCellDef="let article" fxFlex="28%"> {{article.barcode}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef fxFlex="28%"> Description</mat-header-cell>
+        <mat-cell *matCellDef="let article" fxFlex="28%"> {{article.description}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="stock">
+        <mat-header-cell *matHeaderCellDef fxFlex="11%"> Stock</mat-header-cell>
+        <mat-cell *matCellDef="let article" fxFlex="11%">{{article.stock}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="realStock">
+        <mat-header-cell *matHeaderCellDef fxFlex="20%"> Real stock</mat-header-cell>
+        <mat-cell *matCellDef="let x = index" fxFlex="20%">
+          <md-input-container>
+            <input mdInput type="number" [(ngModel)]="arrRealStock[x]"/>
+          </md-input-container>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumnsAudit"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsAudit;"></mat-row>
+    </mat-table>
+  </mat-card-content>
+  <button mat-raised-button (click)="saveAudit()" class="save-btn">Save</button>
+  <button mat-raised-button (click)="closeAudit()" color="primary">Close audit</button>
+</mat-card>
+<ng-container *ngIf="closedAudit">
+  <mat-card>
+    <mat-card-title>
+      <mat-icon color="primary">assessment</mat-icon>
+      Not audited articles
+    </mat-card-title>
+    <mat-card-content>
+      <li *ngFor="let notAudit of notAuditedArticles">
+        {{ notAudit }}
+      </li>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-title>
+      <mat-icon color="primary">assessment</mat-icon>
+      Articles Loss
+    </mat-card-title>
+    <mat-card-content>
+      <mat-table [dataSource]="articlesLoss" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef fxFlex="5%">Nº</mat-header-cell>
+          <mat-cell *matCellDef="let i = index" fxFlex="5%"> {{i + 1}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="barcode">
+          <mat-header-cell *matHeaderCellDef fxFlex="28%">Barcode</mat-header-cell>
+          <mat-cell *matCellDef="let article" fxFlex="28%"> {{article.barcode}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="amount">
+          <mat-header-cell *matHeaderCellDef fxFlex="11%"> Amount</mat-header-cell>
+          <mat-cell *matCellDef="let article" fxFlex="11%">{{article.amount}}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumnsArticleLoss"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumnsArticleLoss;"></mat-row>
+      </mat-table>
+    </mat-card-content>
+    <p style="margin-top: 1vw; font-size: xx-large;">TOTAL: {{lossValue}}€</p>
+  </mat-card>
+  <button mat-raised-button (click)="initAudit()" color="primary">New audit</button>
+</ng-container>

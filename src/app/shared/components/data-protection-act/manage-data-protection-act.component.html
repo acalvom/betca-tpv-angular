@@ -1,0 +1,26 @@
+<mat-card-content style="text-align: center;">
+  <mat-button-toggle-group [(value)]="selectedRgpdType">
+    <mat-button-toggle [value]="rgpdTypes.BASIC" [style.border-color]="getColor(rgpdTypes.BASIC)"
+                       [style.color]="getColor(rgpdTypes.BASIC)">
+      {{rgpdTypes[rgpdTypes.BASIC]}}</mat-button-toggle>
+    <mat-button-toggle [value]="rgpdTypes.MEDIUM" [style.border-color]="getColor(rgpdTypes.MEDIUM)"
+                       [style.color]="getColor(rgpdTypes.MEDIUM)">
+      {{rgpdTypes[rgpdTypes.MEDIUM]}}</mat-button-toggle>
+    <mat-button-toggle [value]="rgpdTypes.ADVANCED" [style.border-color]="getColor(rgpdTypes.ADVANCED)"
+                       [style.color]="getColor(rgpdTypes.ADVANCED)">
+      {{rgpdTypes[rgpdTypes.ADVANCED]}}</mat-button-toggle>
+  </mat-button-toggle-group>
+  <br>
+  <mat-card-content *ngIf="selectedRgpdType !== undefined">
+    {{rgpdTypes[selectedRgpdType]}} Data Protection Agreement<br>
+    <mat-card-content *ngIf="isUserRgpdType()">
+      <button mat-stroked-button color="primary" (click)="printSignedAgreement()">Download PDF</button>
+    </mat-card-content>
+    <mat-card-content *ngIf="!isUserRgpdType()">
+      <button mat-stroked-button color="primary" (click)="printUnsignedAgreement()">Download PDF</button>
+      <br>
+      <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+      <input hidden (change)="onFileSelected()" #fileInput type="file" accept="application/pdf">
+    </mat-card-content>
+  </mat-card-content>
+</mat-card-content>

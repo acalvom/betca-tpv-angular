@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Filters: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>SalesPeople</mat-label>
+      <label>
+        <input [(ngModel)]="salesPeopleSearch.salesperson" matInput>
+      </label>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Date</mat-label>
+      <label>
+          <mat-date-range-input [rangePicker]="firstPicker">
+            <input matStartDate placeholder="Start date">
+            <input matEndDate placeholder="End date">
+          </mat-date-range-input>
+        </label>
+        <mat-datepicker-toggle matSuffix [for]="firstPicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #firstPicker></mat-date-range-picker>
+    </mat-form-field>
+    <button (click)="search()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <button (click)="resetSearch()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-label class="second-filters"><strong>Filters: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>Date</mat-label>
+      <label>
+        <input type="month" matInput>
+      </label>
+    </mat-form-field>
+        <button (click)="secondSearch()" mat-icon-button>
+          <mat-icon>search</mat-icon>
+        </button>
+        <button (click)="resetSearch()" mat-icon-button>
+          <mat-icon>close</mat-icon>
+        </button>
+  </mat-card-content>
+</mat-card>
+<app-crud  (read)="read($event)" createAction="false" deleteAction="false" updateAction="false" [data]="salesPeoples" [title]="title">
+</app-crud>

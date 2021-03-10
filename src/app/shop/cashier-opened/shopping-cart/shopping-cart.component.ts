@@ -8,7 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ShoppingState} from '../../shared/services/models/shopping-state.model';
 import {NumberDialogComponent} from '@shared/dialogs/number-dialog.component';
 import {ArticleFamilyViewComponent} from './article-family-view/article-family-view.component';
-import {BudgetDialogComponent} from './budget-dialog.component';
+import {BudgetDialogComponent} from '../../budgets/budget-dialog.component';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -166,33 +166,58 @@ export class ShoppingCartComponent implements OnInit {
     );
   }
 
+  addBudget(budget): void {
+    this.shoppingCartService
+      .readBudget(budget)
+      .subscribe(newbudget => {
+        this.shoppingCart.push(newbudget);
+        this.synchronizeShoppingCart();
+      });
+    this.elementRef.nativeElement.focus();
+  }
+
   addDiscount(mobile): void {
-    // TODO add discount
+    this.shoppingCartService
+      .addDiscount(mobile, this.totalShoppingCart)
+      .subscribe(discount => {
+        if (discount !== 0) {
+          this.shoppingCart.forEach(item => {
+            item.discount = discount;
+            item.updateTotal();
+          });
+        }
+      });
+    this.synchronizeShoppingCart();
   }
 
   addOffer(offer): void {
     this.shoppingCartService
       .readOffer(offer)
       .subscribe(newOffer => {
-        this.shoppingCart.forEach(element => {
-          const search = newOffer.articles.find(art => art.barcode === element.barcode);
-          if (search !== undefined) {
-            element.discount = newOffer.discount;
+        this.shoppingCart
+          .forEach(element => {
+            const barcodeSearch = newOffer.articleBarcodes
+              .find(barcode => barcode === element.barcode);
+            const expireDateSearch = new Date(newOffer.expiryDate).getTime();
+            if (barcodeSearch !== undefined && (expireDateSearch > Date.now())) {
+              element.discount = newOffer.discount;
+            } else {
+              element.discount = 0;
+            }
             element.updateTotal();
-            this.synchronizeShoppingCart();
-          } else {
-            element.discount = 0;
-          }
-        });
+          });
+        this.synchronizeShoppingCart();
       });
   }
 
   openArticleFamily(): void {
-    this.dialog
-      .open(ArticleFamilyViewComponent, {
-          minWidth: '600px',
-          minHeight: '300px'
-        }
-      );
+    this.dialog.open(ArticleFamilyViewComponent, {
+      minWidth: '600px',
+      minHeight: '300px'
+    }).afterClosed().subscribe(result => {
+      if (result !== true && result !== undefined) {
+        this.addBarcode(result);
+      }
+    });
   }
 }

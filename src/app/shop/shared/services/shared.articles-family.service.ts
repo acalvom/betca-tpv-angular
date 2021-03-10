@@ -1,7 +1,10 @@
 import {Injectable} from '@angular/core';
 import {ArticleFamilyModel} from './models/article-family.model';
 import {Observable, of} from 'rxjs';
-import {Article} from './models/article.model';
+import {ArticleFamilyViewModel} from '../../cashier-opened/shopping-cart/article-family-view/article-family-view.model';
+import {EndPoints} from '@shared/end-points';
+import {HttpService} from '@core/http.service';
+import {TreetypeModel} from './models/treetype.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,40 +14,23 @@ export class SharedArticlesFamilyService {
     reference: 'root',
     description: 'root',
     type: 'ARTICLES',
-    children:[{
+    children: [{
       reference: 'Zz',
       description: 'Zz',
       type: 'ARTICLES',
-      children:[{
+      children: [{
         reference: 'Zz Falda',
         description: 'Zz',
         type: 'ARTICLES'
       }]
     },
       {
-        reference: 'Varios',
-        description: 'Zarzuela',
-        type: 'ARTICLES',
-        children:[]
+        reference: 'Pantalon',
+        description: 'T2',
+        type: 'ARTICLE',
       }
     ]
   }
-
-    /*{
-    id: '1',
-    name: 'ArticleFamily-Root',
-    children: [{
-      id: '2',
-      name: 'ArticleFamily-Sub1',
-      children: [{
-        id: '1',
-        name: 'ArticleFamily-Sub1-Sub1',
-      }]
-    },
-      {
-        id: '3',
-        name: 'ArticleFamily-Sub2',
-      }]}*/
   ];
 
   ARTICLES_FAMILY_DATA: ArticleFamilyModel[] = [
@@ -57,32 +43,44 @@ export class SharedArticlesFamilyService {
       reference: '1',
       description: 'Varios',
       type: 'composite',
-
     }
   ];
 
-  CHILDRENS_OF_ZZ: (ArticleFamilyModel | Article)[] = [
+  CHILDRENS_OF_ZZ: ArticleFamilyViewModel[] = [
     {
-      barcode: '8400000000031',
+      reference: '8400000000031',
       description: 'descrip-a3',
-      retailPrice: 10.12,
-      providerCompany: 'pro1'
+      type: TreetypeModel.ARTICLE,
+      price: 10.12,
     },
     {
       reference: '1',
       description: 'Zz Falda',
-      type: 'size'
+      type: TreetypeModel.SIZES
     },
     {
-      reference: '1',
+      reference: '2',
       description: 'Zz Falda',
-      type: 'size'
+      type: TreetypeModel.SIZES
     }
   ];
 
-  SIZES: String [] = ['T2','T4','T6'];
+  ARTICLES: ArticleFamilyViewModel [] = [
+    {
+      reference: '8400000000017',
+      description: 'Zarzuela - falda T2',
+      type: TreetypeModel.ARTICLE,
+      price: 20,
+    },
+    {
+      reference: '8400000000024',
+      description: 'Zarzuela - falda T4',
+      type: TreetypeModel.ARTICLE,
+      price: 27.8,
+    }
+  ];
 
-  constructor() {
+  constructor(private httpService: HttpService) {
   }
 
   readWithoutArticles(): Observable<ArticleFamilyModel[]> {
@@ -90,33 +88,25 @@ export class SharedArticlesFamilyService {
 
   }
 
-  readChildren(articleFamilyModel?: ArticleFamilyModel): Observable<(ArticleFamilyModel | Article)[]> {
-    return of(this.ARTICLES_FAMILY_DATA);
+  readChildren(reference?: string): Observable<ArticleFamilyViewModel[]> {
+    return this.httpService
+      .get(EndPoints.ARTICLES_FAMILY_VIEW + '/' + reference);
   }
 
-  readChildrenTemporal(articleFamilyModel?: ArticleFamilyModel): Observable<(ArticleFamilyModel | Article)[]> {
-    return of(this.CHILDRENS_OF_ZZ);
-  }
-
-  readSizes(articleFamily: ArticleFamilyModel) : Observable<String[]> {
-    return of(this.SIZES);
-  }
-
-  createArticleFamily(articleFamilyModel: ArticleFamilyModel): Observable<ArticleFamilyModel> {
-    // HACER DIALOGO EDIT
-    console.log("SERVICIO:");
-    console.log(articleFamilyModel);
-    return of(articleFamilyModel);
+  createArticleFamily(articleFamilyModel: ArticleFamilyModel, reference: string): Observable<string> {
+    return of(articleFamilyModel + ' ref:' + reference);
   }
 
   editArticleFamily(articleFamilyModel: ArticleFamilyModel): Observable<ArticleFamilyModel> {
-    // HACER DIALOGO EDIT
     return of(articleFamilyModel);
-
   }
 
   deleteFamilyArticle(node: ArticleFamilyModel): Observable<void> {
-    // LLAMAR AL SERVICIO
     return of(console.log('Offer ' + node.reference + 'deleted successfully'));
+  }
+
+  addArticleToFamily(articleFamilyModel: ArticleFamilyModel, barcode: string): Observable<void> {
+    return of(console.log('Parent Reference: ' + articleFamilyModel.reference + 'Barcode product: ' + barcode));
+
   }
 }

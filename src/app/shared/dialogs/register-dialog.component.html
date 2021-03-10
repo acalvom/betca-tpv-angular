@@ -1,50 +1,57 @@
 <h3 mat-dialog-title>Register</h3>
 <mat-dialog-content>
   <mat-form-field>
-    <input [(ngModel)]="mobile" matInput placeholder="Mobile" type="text" required/>
-    <button (click)="mobile=undefined" *ngIf="mobile" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
+    <input [(ngModel)]="user.mobile" matInput #input minlength="9" maxlength="9" placeholder="Mobile" type="tel" required/>
+    <mat-hint align="end">{{input.value?.length || 0}}/9</mat-hint>
+    <button (click)="user.mobile=undefined" *ngIf="user.mobile" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
+            matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-icon matSuffix>phone</mat-icon>
+  </mat-form-field>
+  <mat-form-field>
+    <input [(ngModel)]="user.firstName" matInput placeholder="First name" type="text" required/>
+    <button (click)="user.firstName=undefined" *ngIf="user.firstName" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
             matSuffix>
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
   <mat-form-field>
-    <input [(ngModel)]="firstName" matInput placeholder="First name" type="text" required/>
-    <button (click)="firstName=undefined" *ngIf="firstName" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
+    <input [(ngModel)]="user.familyName" matInput placeholder="Family name" type="text" required/>
+    <button (click)="user.familyName=undefined" *ngIf="user.familyName" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
             matSuffix>
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
   <mat-form-field>
-    <input [(ngModel)]="familyName" matInput placeholder="Family name" type="text" required/>
-    <button (click)="familyName=undefined" *ngIf="familyName" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
+    <input [(ngModel)]="user.email" matInput placeholder="Email" type="email" required/>
+    <button (click)="user.email=undefined" *ngIf="user.email" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
             matSuffix>
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
   <mat-form-field>
-    <input [(ngModel)]="email" matInput placeholder="Email" type="email" required/>
-    <button (click)="email=undefined" *ngIf="email" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
+    <input [(ngModel)]="user.dni" matInput placeholder="DNI" type="text" required/>
+    <button (click)="user.dni=undefined" *ngIf="user.dni" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
             matSuffix>
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
   <mat-form-field>
-    <input [(ngModel)]="dni" matInput placeholder="DNI" type="text" required/>
-    <button (click)="dni=undefined" *ngIf="dni" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
+    <input [(ngModel)]="user.address" matInput placeholder="Address" type="text" required/>
+    <button (click)="user.address=undefined" *ngIf="user.address" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
             matSuffix>
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
   <mat-form-field>
-    <input [(ngModel)]="address" matInput placeholder="Address" type="text" required/>
-    <button (click)="address=undefined" *ngIf="address" aria-label="Clear" cdkFocusInitial mat-button mat-icon-button
-            matSuffix>
-      <mat-icon>close</mat-icon>
+    <input [(ngModel)]="user.password" matInput [type]="hide ? 'password' : 'text'" placeholder="Password" type="password" required/>
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
   </mat-form-field>
-  <mat-form-field>
-    <input [(ngModel)]="password" matInput placeholder="Password" type="password" required/>
-  </mat-form-field>
+  <mat-label><b>Data Protection Act</b></mat-label>
+  <app-manage-data-protection-act [rgpdUser]="rgpdUser"></app-manage-data-protection-act>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>

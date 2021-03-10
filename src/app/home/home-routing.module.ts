@@ -13,21 +13,27 @@ import {OffersComponent} from './offers/offers.component';
 import {ShoppingBasketComponent} from './shopping-basket/shopping-basket.component';
 import {ProfileSettingsComponent} from '@shared/components/profile-settings/profile-settings.component';
 import {StockManagementComponent} from './stock-management/stock-management.component';
+import {NewsComponent} from './adviser/news/news.component';
+import {PopularComponent} from './adviser/popular/popular.component';
+import {OnlineOrderComponent} from "./online-order/online-order.component";
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     children: [
-      {path: 'adviser', component: AdviserComponent}, // public
-      {path: 'offers', component: OffersComponent},
+      {path: 'adviser', component: AdviserComponent},
+      {path: 'adviser/news', component: NewsComponent},
+      {path: 'adviser/popular', component: PopularComponent},
+      // public
+      {path: 'offers/:reference', component: OffersComponent},
       {path: 'complaints', component: ComplaintsComponent, canActivate: [RoleGuardService], data: {roles: [Role.CUSTOMER]}},
       {path: 'ticket-tracking/:id', component: TicketTrackingComponent},
       {path: 'top5', component: Top5Component},
       {path: 'reviews', component: ReviewsComponent, canActivate: [RoleGuardService], data: {roles: [Role.CUSTOMER]}},
       {path: 'shopping-basket', component: ShoppingBasketComponent},
       {path: 'settings', component: ProfileSettingsComponent},
-      {path: 'shopping-basket', component: ShoppingBasketComponent},
+      {path: 'online-order', component: OnlineOrderComponent},
       {path: 'stock-management', component: StockManagementComponent}
     ]
   }

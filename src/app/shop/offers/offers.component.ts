@@ -3,8 +3,8 @@ import {of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {OfferSearch} from './offer-search.model';
 import {OfferService} from './offer.service';
-import {Offer} from '../shared/services/models/offer.model';
 import {OfferCreationUpdatingDialogComponent} from './offer-creation-updating-dialog.component';
+import {Offer} from '../shared/services/models/offer.model';
 
 @Component({
   templateUrl: './offers.component.html',
@@ -45,13 +45,13 @@ export class OffersComponent {
 
   print(offer: Offer): void {
     this.offerService
-      .printOffer(offer.reference)
+      .print(offer.reference)
       .subscribe(() => this.dialog.closeAll());
   }
 
   delete(offer: Offer): void {
     this.offerService
-      .deleteOffer(offer.reference)
+      .delete(offer.reference)
       .subscribe(() => this.search());
   }
 }

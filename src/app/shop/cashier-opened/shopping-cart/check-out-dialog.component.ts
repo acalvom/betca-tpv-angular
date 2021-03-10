@@ -2,8 +2,16 @@ import {Component, Inject} from '@angular/core';
 
 import {TicketCreation} from './ticket-creation.model';
 import {ShoppingCartService} from './shopping-cart.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ShoppingState} from '../../shared/services/models/shopping-state.model';
+import {UserSearch} from '../../users/models/user-search-model';
+import {UserCompleteService} from '@shared/services/userComplete.service';
+import {SearchRgpdUser} from '@shared/components/data-protection-act/search-rgpd-user.model';
+import {RgpdType} from '@shared/models/RgpdType';
+import {DataProtectionActService} from '@shared/components/data-protection-act/data-protection-act.service';
+import {AuthService} from '@core/auth.service';
+import {UserUpdateCreateDialogComponent} from '../../users/dialog/user-update-create-dialog.component';
+import {SharedCreditLineService} from '../../shared/services/shared.credit-line.service';
 
 @Component({
   templateUrl: 'check-out-dialog.component.html',
@@ -17,9 +25,11 @@ export class CheckOutDialogComponent {
   requestedDataProtectionAct = false;
   credit = false;
   checkedCreditLine = false;
+  userSearch: UserSearch;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data, private dialogRef: MatDialogRef<CheckOutDialogComponent>,
-              private shoppingCartService: ShoppingCartService) {
+  constructor(@Inject(MAT_DIALOG_DATA) data, private dialog: MatDialog, private dialogRef: MatDialogRef<CheckOutDialogComponent>,
+              private shoppingCartService: ShoppingCartService, private userService: UserCompleteService, private authService: AuthService,
+              private dataProtectionActService: DataProtectionActService, private sharedCreditLineService: SharedCreditLineService) {
     this.ticketCreation = {cash: 0, card: 0, voucher: 0, shoppingList: data, note: ''};
     this.total();
   }
@@ -37,11 +47,19 @@ export class CheckOutDialogComponent {
   }
 
   searchUser(mobile: string): void {
+
     if (mobile) {
-      // TODO falta buscar el user en BD, si no existe, debe sacar un dialogo para crearlo
+      if (!this.authService.isAuthenticated() || !this.userService.checkUser(Number(mobile))){
+        this.dialog.open(UserUpdateCreateDialogComponent);
+      }
       this.ticketCreation.user = {mobile: Number(mobile)};
-      // TODO me falta comprobar si tiene credit-line el usuario
-      this.credit = true;
+      this.sharedCreditLineService.findByUserReference(this.ticketCreation.user.mobile.toString()).subscribe(
+        value => {
+          if (value != null){
+            this.credit = true;
+          }
+        }
+      );
     }
   }
 
@@ -122,7 +140,7 @@ export class CheckOutDialogComponent {
   }
 
   invalidCheckOut(): boolean {
-    if (!this.checkedCreditLine){
+    if (!this.checkedCreditLine) {
       return (this.totalPurchase + this.returnedAmount() - this.totalCommitted() < -0.01); // rounding errors
     }
     return false;
@@ -161,6 +179,9 @@ export class CheckOutDialogComponent {
     if (returned > 0) {
       this.ticketCreation.note += ' Return: ' + this.round(returned) + '.';
     }
+    if (this.requestedDataProtectionAct) {
+      this.printUnsignedDataProtectionAgreement();
+    }
     this.shoppingCartService.createTicketAndPrintReceipts(this.ticketCreation, voucher,
       this.requestedInvoice, this.requestedGiftTicket, this.requestedDataProtectionAct, this.checkedCreditLine)
       .subscribe(() => this.dialogRef.close(true));
@@ -168,10 +189,10 @@ export class CheckOutDialogComponent {
 
   invalidInvoice(): boolean {
     // TODO pendiente de calcular. Hace falta tener al usuario totalmente completado
-    return true;
+    return !this.ticketCreation.user;
   }
 
-  useCreditLine(): void{
+  useCreditLine(): void {
     if (this.checkedCreditLine) {
       this.checkedCreditLine = false;
     } else {
@@ -182,6 +203,14 @@ export class CheckOutDialogComponent {
         value.state = ShoppingState.COMMITTED;
       });
     }
+  }
+
+  printUnsignedDataProtectionAgreement(): void {
+    const searchRgpdUser: SearchRgpdUser = {
+      mobile: this.userSearch.mobile,
+      rgpdType: RgpdType.BASIC
+    };
+    this.dataProtectionActService.printUnsignedAgreement(searchRgpdUser);
   }
 
 }

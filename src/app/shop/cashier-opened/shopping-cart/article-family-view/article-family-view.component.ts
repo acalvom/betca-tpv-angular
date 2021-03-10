@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {SharedArticlesFamilyService} from "../../../shared/services/shared.articles-family.service";
-import {ArticleFamilyModel} from "../../../shared/services/models/article-family.model";
-import {Article} from "../../../shared/services/models/article.model";
-import {MatDialog} from "@angular/material/dialog";
-import {OpenSizesDialogComponent} from "./open-sizes-dialog.component";
+import {SharedArticlesFamilyService} from '../../../shared/services/shared.articles-family.service';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {OpenSizesDialogComponent} from './open-sizes-dialog.component';
+import {ArticleFamilyViewModel} from './article-family-view.model';
 
 @Component({
   selector: 'app-article-family-view',
@@ -12,37 +11,47 @@ import {OpenSizesDialogComponent} from "./open-sizes-dialog.component";
 })
 export class ArticleFamilyViewComponent implements OnInit {
 
-  cardData: (ArticleFamilyModel | Article)[];
+  articlesFamily: ArticleFamilyViewModel [];
 
-  constructor(private articlesFamilyService: SharedArticlesFamilyService, private dialog: MatDialog) {
-    this.cardData = [];
+  constructor(private articlesFamilyService: SharedArticlesFamilyService,
+              private dialog: MatDialog,
+              private dialogRef: MatDialogRef<ArticleFamilyViewComponent>) {
+    this.articlesFamily = [];
   }
 
   ngOnInit(): void {
     this.articlesFamilyService.readChildren().subscribe(
-      result=>{
-        this.cardData = result;
-      }
-    )
-  }
-
-  updateArray(articleFamily: ArticleFamilyModel): void {
-    this.articlesFamilyService.readChildrenTemporal(articleFamily).subscribe(
-      result=> {
-        this.cardData = result;
+      result => {
+        this.articlesFamily = result;
       }
     );
   }
 
-  openSizes(articleFamily: ArticleFamilyModel): void {
-    let sizes: String[] = [];
-    this.articlesFamilyService.readSizes(articleFamily).subscribe(
-      result=>{
-        sizes = result;
+  updateArray(articleFamilyViewModel: ArticleFamilyViewModel): void {
+    this.articlesFamilyService.readChildren(articleFamilyViewModel.reference).subscribe(
+      result => {
+        this.articlesFamily = result;
       }
-    )
+    );
+  }
+
+  openSizes(articleFamilyViewModel: ArticleFamilyViewModel): void{
+    let articlesFamilyViewModel: ArticleFamilyViewModel[] = [];
+    this.articlesFamilyService.readChildren(articleFamilyViewModel.reference).subscribe(
+      result => {
+        articlesFamilyViewModel = result;
+      }
+    );
     this.dialog.open(OpenSizesDialogComponent, {
-      data: sizes
+      data: articlesFamilyViewModel
+    }).afterClosed().subscribe(result => {
+      if (result !== true && result !== undefined) {
+        this.dialogRef.close(result);
+      }
     });
+  }
+
+  addShoppingCart(articleFamilyViewModel: ArticleFamilyViewModel): void {
+    this.dialogRef.close(articleFamilyViewModel.reference);
   }
 }

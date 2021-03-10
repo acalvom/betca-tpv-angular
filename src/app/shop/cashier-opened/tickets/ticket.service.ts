@@ -1,33 +1,46 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {EMPTY, iif, merge, Observable, of} from 'rxjs';
 import {Ticket} from '../../shared/services/models/ticket.model';
 import {Shopping} from '../../shared/services/models/shopping.model';
 import {TicketEdition} from './ticket-edition.model';
+import {EndPoints} from '@shared/end-points';
+import {HttpService} from '@core/http.service';
+import {TicketSearch} from './ticket-search.model';
+import {SharedVoucherService} from '../../shared/services/shared-voucher.service';
+import {concatMap, map, mergeMap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketService {
 
-  ticket1: Ticket = {id: '1', reference: '123', mobile: 654987125};
-  ticket2: Ticket = {id: '2', reference: '789', mobile: 698875321};
-  shopping1: Shopping = new Shopping('12345', 'description1', 5);
-  shopping2: Shopping = new Shopping('54321', 'description2', 10);
+  private static SEARCH = '/search';
 
-  constructor() { }
+  constructor(private httpService: HttpService, private sharedVoucherService: SharedVoucherService) { }
 
-  search(key: string): Observable<Ticket[]> {
-    return of(
-      [this.ticket1, this.ticket2]
-    );
+  search(ticketSearch: TicketSearch): Observable<Ticket[]> {
+    return this.httpService
+      .paramsFrom(ticketSearch)
+      .get(EndPoints.TICKETS + TicketService.SEARCH);
   }
 
   read(id: string): Observable<TicketEdition> {
-    const ticketEdition: TicketEdition = {id, shoppingList: [this.shopping1, this.shopping2]};
-    return of(ticketEdition);
+    return this.httpService
+      .get(EndPoints.TICKETS + '/' + id);
   }
 
-  update(id: string, shoppingList: Shopping[]): Observable<TicketEdition> {
-    return of({id, shoppingList});
+  update(id: string, shoppingList: Shopping[], returnedMoney: number): Observable<void> {
+    return this.httpService
+      .successful()
+      .put(EndPoints.TICKETS + '/' + id, shoppingList)
+      .pipe(
+        concatMap(() => {
+          if (returnedMoney > 0){
+            return this.sharedVoucherService.printVoucher(returnedMoney);
+          }else{
+            return of(returnedMoney);
+          }
+        })
+      );
   }
 }

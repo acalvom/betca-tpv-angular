@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-content>
+    <div class="container">
+      <mat-label><strong>Filters: </strong></mat-label>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input [(ngModel)]="orderSearch.description" matInput>
+      </mat-form-field>
+      <app-search-by-company [(company)]="orderSearch.providerCompany"></app-search-by-company>
+      <mat-form-field>
+        <mat-label>Opening</mat-label>
+        <label>
+          <mat-date-range-input [rangePicker]="firstPicker">
+            <input matStartDate placeholder="Start date">
+            <input matEndDate placeholder="End date">
+          </mat-date-range-input>
+        </label>
+        <mat-datepicker-toggle matSuffix [for]="firstPicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #firstPicker></mat-date-range-picker>
+      </mat-form-field>
+      <button (click)="search()" mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
+      <button (click)="reset()" mat-icon-button>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
+<app-crud (create)="create()" (update)="update($event)"
+          [data]="providerOrders"  [readAction]="false" [deleteAction]="false" [updateAction]="true" [title]="title"></app-crud>

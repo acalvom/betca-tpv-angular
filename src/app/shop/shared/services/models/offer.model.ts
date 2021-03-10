@@ -1,10 +1,8 @@
-import {Article} from './article.model';
-
 export interface Offer {
-  reference: string;
+  reference?: string;
   description: string;
-  creationDate: Date;
+  creationDate?: Date;
   expiryDate: Date;
   discount: number;
-  articles: Article[];
+  articleBarcodes: string[];
 }

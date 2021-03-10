@@ -18,22 +18,33 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import {ShoppingBasketComponent} from './shopping-basket/shopping-basket.component';
 import { Top5Component } from './top5/top5.component';
 import { StockManagementComponent } from './stock-management/stock-management.component';
+import { NewsComponent } from './adviser/news/news.component';
+import { PopularComponent } from './adviser/popular/popular.component';
+import {ComplaintUpdateDialogComponent} from "./complaints/complaint-update-dialog.component";
+import { OnlineOrderComponent } from './online-order/online-order.component';
+import { TableStockComponent } from './stock-management/table-stock/table-stock.component';
+
 
 @NgModule({
   declarations: [
     AdviserComponent,
     ComplaintsComponent,
     ComplaintCreationDialogComponent,
+    ComplaintUpdateDialogComponent,
     HomeComponent,
     ReviewsComponent,
     TicketTrackingComponent,
     IconButtonComponent,
     ScoreBarComponent,
     OffersComponent,
+    OnlineOrderComponent,
     ProductComponent,
     ShoppingBasketComponent,
     Top5Component,
     StockManagementComponent,
+    NewsComponent,
+    PopularComponent,
+    TableStockComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,

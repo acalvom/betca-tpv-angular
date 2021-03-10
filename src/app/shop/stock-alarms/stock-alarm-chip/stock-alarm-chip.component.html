@@ -1,0 +1,25 @@
+<div class="parent">
+  <div class="flex-body">
+    <div class="flex-row">
+      <div>
+        <div>BC: {{data.barcode}}</div>
+        <div>STK: {{data.stock}} </div>
+        <div>
+          <button (click)="click()" class="close" mat-mini-fab aria-label="Example icon-button with a heart icon">
+            <mat-icon class="min-icon">close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="flex-column">
+        <div>
+          <input [(ngModel)]="data.warning" placeholder="Warning" class="warning" (change)="changeWarning()"
+                 [value]="data.warning?data.warning:''"/>
+        </div>
+        <div>
+          <input [(ngModel)]="data.critical" placeholder="Critical" class="critical" (change)="changeCritical()"
+                 [value]="data.critical?data.critical:'' "/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

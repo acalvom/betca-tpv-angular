@@ -1,11 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from '@core/http.service';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {EndPoints} from '@shared/end-points';
 import {OfferSearch} from './offer-search.model';
 import {Offer} from '../shared/services/models/offer.model';
-import {Article} from '../shared/services/models/article.model';
-import {Tax} from '../shared/services/models/Tax';
 
 
 @Injectable({
@@ -14,126 +12,43 @@ import {Tax} from '../shared/services/models/Tax';
 
 export class OfferService {
   private static SEARCH = '/search';
-
-  articles: Article[] = [
-    {
-      barcode: '8400000000017',
-      description: 'Zarzuela - Falda T2',
-      retailPrice: 20,
-      reference: 'zz-falda-T2',
-      stock: 10,
-      discontinued: false,
-      registrationDate: new Date('2021-02-26 10:36:30'),
-      providerCompany: 'pro1'
-    },
-    {
-      barcode: '8400000000024',
-      description: 'Zarzuela - Falda T4',
-      retailPrice: 27.8,
-      reference: 'zz-falda-T4',
-      stock: 5,
-      discontinued: false,
-      registrationDate: new Date('2021-02-26 10:36:30'),
-      providerCompany: 'pro1'
-    },
-    {
-      barcode: '8400000000031',
-      description: 'descrip-a3',
-      retailPrice: 10.12,
-      reference: 'ref-a3',
-      stock: 8,
-      tax: Tax.FREE,
-      discontinued: false,
-      registrationDate: new Date('2021-02-26 10:36:30'),
-      providerCompany: 'pro1'
-    }];
-  offers: Offer[] = [
-    {
-      reference: '123abc',
-      description: 'offer1',
-      creationDate: new Date('2019-03-16'),
-      expiryDate: new Date('2020-03-16'),
-      discount: 10,
-      articles: this.articles
-    },
-    {
-      reference: '234bcd',
-      description: 'offer2',
-      creationDate: new Date('2019-03-16'),
-      expiryDate: new Date('2020-08-08'),
-      discount: 20,
-      articles: []
-    },
-    {
-      reference: '345cde',
-      description: 'offer3',
-      creationDate: new Date('2019-03-16'),
-      expiryDate: new Date('2021-08-13'),
-      discount: 30,
-      articles: this.articles.slice(0, 1)
-    }];
+  private static PRINT = '/print';
 
   constructor(private httpService: HttpService) {
   }
 
   search(offerSearch: OfferSearch): Observable<Offer[]> {
-    return of(this.offers);
-    /*return this.httpService
+    return this.httpService
       .paramsFrom(offerSearch)
-      .get(EndPoints.OFFERS + OfferService.SEARCH);*/
+      .get(EndPoints.OFFERS + OfferService.SEARCH);
   }
 
-  create(offer: Offer): Observable<Offer> {
-    this.offers.push(offer);
-    return of(offer);
-    /*return this.httpService
-      .post(EndPoints.OFFERS, offer);*/
+  create(newOffer: Offer): Observable<Offer> {
+    return this.httpService
+      .post(EndPoints.OFFERS, newOffer);
   }
 
   read(reference: string): Observable<Offer> {
-    return of({
-      reference,
-      description: this.offers.find(off => off.reference === reference).description,
-      creationDate: this.offers.find(off => off.reference === reference).creationDate,
-      expiryDate: this.offers.find(off => off.reference === reference).expiryDate,
-      discount: this.offers.find(off => off.reference === reference).discount,
-      articles: this.offers.find(off => off.reference === reference).articles
-    });
-    /*return this.httpService
-      .get(EndPoints.OFFERS + '/' + reference);*/
+    return this.httpService
+      .get(EndPoints.OFFERS + '/' + reference);
   }
 
-  update(oldOfferReference: string, offer: Offer): Observable<Offer> {
-    const offerToUpdate = this.offers.find(off => off.reference === oldOfferReference);
-    const index = this.offers.indexOf(offerToUpdate);
-    if (index > -1) {
-      this.offers.splice(index, 1, offer);
-    }
-    this.search(new OfferSearch());
-    return of(offer);
-    /*return this.httpService
+  update(oldOffer: string, updatedOffer: Offer): Observable<Offer> {
+    return this.httpService
       .successful()
-      .put(EndPoints.OFFERS + '/' + oldOffer, offer);*/
+      .put(EndPoints.OFFERS + '/' + oldOffer, updatedOffer);
   }
 
-  printOffer(reference: string): Observable<void> {
-    return of(console.log('Implementado'));
-    /*return this.httpService
+  print(reference: string): Observable<void> {
+    return this.httpService
       .pdf()
-      .get(EndPoints.OFFERS + '/' + reference);*/
+      .get(EndPoints.OFFERS + '/' + reference + OfferService.PRINT);
   }
 
-  deleteOffer(reference: string): Observable<void> {
-    const offerToDelete = this.offers.find(off => off.reference === reference);
-    const index = this.offers.indexOf(offerToDelete);
-    if (index > -1) {
-      this.offers.splice(index, 1);
-    }
-    this.search(new OfferSearch());
-    return of(console.log('Offer ' + reference + 'deleted successfully'));
-    /*return this.httpService
+  delete(reference: string): Observable<void> {
+    return this.httpService
       .successful()
-      .delete(EndPoints.OFFERS + '/' + reference);*/
+      .delete(EndPoints.OFFERS + '/' + reference);
   }
 }
 

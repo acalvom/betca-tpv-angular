@@ -1,32 +1,26 @@
-import {Component} from '@angular/core';
-import {of} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 import {OfferService} from './offer.service';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Offer} from './offer.model';
-
 
 @Component({
   templateUrl: './offers.component.html',
 })
-export class OffersComponent {
+export class OffersComponent implements OnInit {
+  private reference: string;
+  parameterValue: string;
+  offer: Offer;
 
-  title = 'List of offers';
-  offers = of([]);
-
-  constructor(private dialog: MatDialog, private offerService: OfferService) {
+  constructor(private dialog: MatDialog, private offerService: OfferService,
+              private router: Router, private activatedRoute: ActivatedRoute) {
   }
 
-  searchAll(): void {
-    this.offers = this.offerService.searchAll();
-  }
+  ngOnInit(): void {
+    this.reference = this.activatedRoute.snapshot.paramMap.get('reference');
+    this.parameterValue = this.reference;
+    this.activatedRoute.params.subscribe(parameter => this.parameterValue = parameter.key);
+    this.offerService.read(this.reference).subscribe(offer => this.offer = offer);
 
-  read(offer: Offer): void {
-    this.dialog.open(ReadDetailDialogComponent, {
-      data: {
-        title: 'Offer Details',
-        object: this.offerService.read(offer.reference)
-      }
-    });
   }
 }
