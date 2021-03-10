@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 import {VoucherCreationUpdatingDialogComponent} from './voucher-creation-updating-dialog.component';
 import {VoucherSearch} from './voucher.search';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-vouchers',

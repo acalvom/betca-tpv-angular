@@ -22,4 +22,5 @@ export class EndPoints {
   static REVIEWS = environment.REST_CUSTOMER_SUPPORT + '/reviews';
   static ARTICLES_FAMILY_VIEW = environment.REST_CORE + '/article-family-view';
   static DATA_PROTECTION_ACT = environment.REST_CORE + '/data-protection-act';
+  static VOUCHERS = environment.REST_CORE + '/vouchers';
 }

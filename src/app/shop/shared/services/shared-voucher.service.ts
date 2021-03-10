@@ -2,6 +2,10 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Voucher} from './models/voucher.model';
 import {HttpService} from '@core/http.service';
+import {VoucherCreation} from '../../vouchers/voucher.creation';
+import {map} from 'rxjs/operators';
+import {EndPoints} from '@shared/end-points';
+
 
 @Injectable({
   providedIn: 'root',
@@ -10,20 +14,20 @@ export class SharedVoucherService {
 
   constructor(private httpService: HttpService) {}
 
-  printVoucher(value: number): Observable<any> {
-    const voucher: Voucher = {
-      reference: '',
-      value,
+  create(voucher: VoucherCreation): Observable<Voucher> {
+    const createdVoucher: Voucher = {
+      reference: undefined,
+      value: voucher.value,
       creationDate: new Date(),
       dateOfUse: undefined
     };
 
-    return this.createAndPrint(voucher);
+    return this.httpService.post(EndPoints.VOUCHERS, createdVoucher);
   }
 
-  createAndPrint(voucher: Voucher): Observable<Voucher> {
-    return this.httpService
-      .pdf()
-      .post('', voucher);
+  printVoucher(value: number): Observable<any> {
+    const voucherCreation: VoucherCreation = { value };
+    return this.create(voucherCreation)
+      .pipe(map(voucher => this.httpService.pdf().get(`${EndPoints.VOUCHERS}/${voucher.reference}`)));
   }
 }
