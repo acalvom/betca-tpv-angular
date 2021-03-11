@@ -2,24 +2,32 @@
 <mat-dialog-content>
   <mat-form-field class="full-width">
     <mat-label>Description</mat-label>
-    <input [(ngModel)]="order.description" matInput required type="text"/>
+    <input [(ngModel)]="order.description" matInput required type="text" [disabled]="!isCreate()"/>
   </mat-form-field>
-  <app-search-by-company [(company)]="order.providerCompany" class="full-width"></app-search-by-company>
-  <mat-form-field class="full-width">
+  <app-search-by-company [(company)]="order.providerCompany" class="medium-width"></app-search-by-company>
+  <mat-form-field class="full-width" disabled="!isCreate()">
     <mat-label>Opening</mat-label>
-    <input [(ngModel)]="order.openingDate" matInput required type="date"/>
+    <input [(ngModel)]="order.openingDate" matInput required type="date" [disabled]="!isCreate()"/>
   </mat-form-field>
-  <mat-form-field class="full-width">
+  <app-search-by-barcode (add)="addBarcode($event)" class="medium-width"></app-search-by-barcode>
+  <mat-form-field class="medium-width">
     <mat-label>Amount</mat-label>
     <input [(ngModel)]="orderLine.requiredAmount" matInput required type="number"/>
   </mat-form-field>
-  <mat-form-field class="full-width">
-    <mat-label>Amount</mat-label>
-    <input [(ngModel)]="orderLine.finalAmount" matInput required type="number"/>
+  <mat-form-field class="medium-width">
+    <mat-label>Final</mat-label>
+    <input [(ngModel)]="orderLine.finalAmount" matInput type="number" [disabled]="!isCreate()"/>
   </mat-form-field>
+  <app-crud (create)="createOrderLine()"
+            [data]="providerOrderLines" [readAction]="false" [deleteAction]="false" [updateAction]="false"
+            [title]=""></app-crud>
 </mat-dialog-content>
+
 <mat-dialog-actions>
-  <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
-  <button (click)="create()" *ngIf="isCreate()"  color="primary" mat-raised-button>Create</button>
-  <button (click)="update()" *ngIf="!isCreate()"  color="primary" mat-raised-button>Update</button>
+  <button (click)="create()" *ngIf="isCreate()" [disabled]="validateFields()" color="primary" mat-raised-button>Create
+  </button>
+  <button (click)="update()" *ngIf="!isCreate()" [disabled]="validateFields()" color="primary" mat-raised-button>
+    Update
+  </button>
+  <button *ngIf="!isCreate()" cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
 </mat-dialog-actions>

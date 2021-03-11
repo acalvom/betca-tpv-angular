@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {OnlineOrderState} from '../../home/shared/online-order-state.model';
+import {OnlineOrder} from './online-order-model';
 
 @Component({
   selector: 'app-online-order',
@@ -7,12 +7,25 @@ import {OnlineOrderState} from '../../home/shared/online-order-state.model';
   styleUrls: ['./online-order.component.css']
 })
 export class OnlineOrderComponent implements OnInit {
-  displayedColumns = ['reference', 'deliveryDate', 'ticket', 'state'];
-  onlineOrder1: { reference: string; state: OnlineOrderState } = {reference: '888000001', state: OnlineOrderState.PREPARING};
-  onlineOrder2: { reference: string; state: OnlineOrderState } = {reference: '888000002', state: OnlineOrderState.SENT};
-  onlineOrder3: { reference: string; state: OnlineOrderState } = {reference: '888000003', state: OnlineOrderState.DELIVERED};
+  displayedColumns = ['reference', 'deliveryDate', 'totalPayed', 'state', 'saveState'];
+  onlineOrder1: OnlineOrder = {
+    reference: '80001',
+    deliveryDate: new Date('2020-01-01'),
+    totalPayed: 253,
+    state: 'PREPARING'};
+  onlineOrder2: OnlineOrder = {
+    reference: '80002',
+    deliveryDate: new Date('2020-05-06'),
+    totalPayed: 123,
+    state: 'SENT'};
+  onlineOrder3: OnlineOrder = {
+    reference: '80003',
+    deliveryDate: new Date('2020-08-26'),
+    totalPayed: 785,
+    state: 'DELIVERED'};
   onlineOrders = [this.onlineOrder1, this.onlineOrder2, this.onlineOrder3];
   dataSource = this.onlineOrders;
+  stateOptions = ['PREPARING', 'SENT', 'DELIVERED'];
 
   constructor() { }
 

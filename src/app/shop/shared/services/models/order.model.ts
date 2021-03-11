@@ -1,6 +1,6 @@
 import {OrderLine} from './orderLine.model';
 
-export interface Order {
+export class Order {
   reference?: string;
   description: string;
   providerCompany: string;
