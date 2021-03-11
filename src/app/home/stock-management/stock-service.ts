@@ -8,7 +8,7 @@ import {ArticleStock} from './article-stock';
   providedIn: 'root',
 })
 export class StockService {
-  static SEARCH = '/search';
+  static STOCK = '/stock';
 
   articulos: ArticleStock[] = [
     {
@@ -61,10 +61,10 @@ export class StockService {
   }
 
   searchStock(stock: number): Observable<ArticleStock[]> {
-    return of(this.articulos);
-    /* return this.httpService
-      .paramsFrom(stock)
-      .get(EndPoints.STOCKS + StockService.SEARCH);*/
+    // return of(this.articulos);
+     return this.httpService
+       .param('stock', String(stock))
+       .get(EndPoints.STOCK_MANAGER + StockService.STOCK);
   }
 
   searchSoldProducts(start: Date, end: Date): Observable<ArticleStock[]> {
