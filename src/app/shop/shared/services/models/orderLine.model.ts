@@ -1,4 +1,4 @@
-export interface OrderLine {
+export class OrderLine {
   articleBarcode: string;
   requiredAmount: number;
   finalAmount?: number;

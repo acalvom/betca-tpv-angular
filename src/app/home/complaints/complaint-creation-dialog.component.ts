@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 
-import {Complaint} from './complaint.model';
+import {Complaint} from '@shared/models/complaint.model';
 import {ComplaintService} from './complaint.service';
 import {AuthService} from '@core/auth.service';
 
@@ -14,8 +14,8 @@ export class ComplaintCreationDialogComponent {
   complaint: Complaint;
   action: string;
 
-  constructor(private complaintService: ComplaintService, private dialog: MatDialog, private authService: AuthService) {
-    this.complaint = {barcode: undefined, description: undefined, state: undefined};
+  constructor(private complaintService: ComplaintService, private dialog: MatDialog) {
+    this.complaint = {barcode: undefined, description: undefined, opened: undefined};
   }
 
   create(): void {

@@ -3,7 +3,7 @@
     <mat-label><strong>Filters: </strong></mat-label>
     <mat-form-field>
       <mat-label>Alarm Name</mat-label>
-      <input [(ngModel)]="reference" matInput>
+      <input [(ngModel)]="name" matInput>
     </mat-form-field>
 
     <button (click)="search()" mat-icon-button>
@@ -18,8 +18,8 @@
   <div class="flex-body">
     <div class="flex-column" style="width: 75%">
       <mat-card style="background-color: #E0E0E0">Config Alarm</mat-card>
-      <app-crud (create)="create()" (update)="update($event)" [readAction]="false"
-                [data]="data" deleteAction="false" [title]="title"></app-crud>
+      <app-crud (create)="create()" (update)="update($event)" (delete)="delete($event)" [readAction]="false"
+                [data]="data" [title]="title"></app-crud>
     </div>
     <div class="flex-column" style="width: 25%;">
       <mat-card style="background-color: orange">Warning</mat-card>

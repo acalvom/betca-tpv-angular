@@ -8,6 +8,7 @@ import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.comp
 
 @Component({
   templateUrl: './salespeople.component.html',
+  styleUrls: [ './salespeople.component.css' ]
 })
 
 export class SalesPeopleComponent {
