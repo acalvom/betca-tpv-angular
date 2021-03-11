@@ -19,6 +19,7 @@ export class CreditLinePayDialogComponent {
   cash = false;
   card = false;
   total = 0;
+  showUnpaidTickets = false;
 
   creditSales: CreditSale[];
   unpaidTickets: Observable<TicketCreditLine[]> = of([]);
@@ -46,6 +47,7 @@ export class CreditLinePayDialogComponent {
       this.user = {mobile: Number(this.userPhone)};
       this.sharedCreditLineService.findByUserReference(this.user.mobile.toString()).subscribe(
         result => { if (result == null) {
+          this.showUnpaidTickets = false;
           this.snackBar.open('That user doesn´t have a credit-line.', 'Close', {
             duration: 3000
           });
@@ -56,11 +58,13 @@ export class CreditLinePayDialogComponent {
             this.unpaidTickets.subscribe(
               value => {
                 if (value.length !== 0){
-                  console.log('tiene');
-                  value.forEach(dataValues => this.total += dataValues.amount.valueOf());
+                  this.showUnpaidTickets = true;
+                  value.forEach(dataValues => this.total += dataValues.amount.valueOf()); // TODO 4 cifras solo
                 } else {
-                  console.log('no tiene a pagar');
-                  // TODO PONER QUE NO TIENE NADA POR PAGAR
+                  this.showUnpaidTickets = false;
+                  this.snackBar.open('This user has no tickets to pay.', 'Close', {
+                    duration: 3000
+                  });
                 }
               }
             );
