@@ -56,6 +56,11 @@ export class StockAlarmsService {
       .put(EndPoints.STOCKS_ALARMS + '/' + name, stockAlarm);
   }
 
+  delete(name: string): Observable<StockAlarm> {
+    return this.httpService
+      .delete(EndPoints.STOCKS_ALARMS + '/' + name);
+  }
+
   read(name: string): Observable<StockAlarm> {
     return this.httpService
       .get(EndPoints.STOCKS_ALARMS + '/' + name);
