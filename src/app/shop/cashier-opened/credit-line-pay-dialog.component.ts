@@ -19,6 +19,7 @@ export class CreditLinePayDialogComponent {
   cash = false;
   card = false;
   total = 0;
+  showUnpaidTickets = false;
 
   creditSales: CreditSale[];
   unpaidTickets: Observable<TicketCreditLine[]> = of([]);
@@ -46,6 +47,7 @@ export class CreditLinePayDialogComponent {
       this.user = {mobile: Number(this.userPhone)};
       this.sharedCreditLineService.findByUserReference(this.user.mobile.toString()).subscribe(
         result => { if (result == null) {
+          this.showUnpaidTickets = false;
           this.snackBar.open('That user doesn´t have a credit-line.', 'Close', {
             duration: 3000
           });
@@ -56,11 +58,14 @@ export class CreditLinePayDialogComponent {
             this.unpaidTickets.subscribe(
               value => {
                 if (value.length !== 0){
-                  console.log('tiene');
+                  this.showUnpaidTickets = true;
                   value.forEach(dataValues => this.total += dataValues.amount.valueOf());
+                  this.total.toFixed(2);
                 } else {
-                  console.log('no tiene a pagar');
-                  // TODO PONER QUE NO TIENE NADA POR PAGAR
+                  this.showUnpaidTickets = false;
+                  this.snackBar.open('This user has no tickets to pay.', 'Close', {
+                    duration: 3000
+                  });
                 }
               }
             );
@@ -89,7 +94,27 @@ export class CreditLinePayDialogComponent {
   }
 
   pay(): void {
-    // TODO
+    if (this.card === true){
+      this.sharedCreditLineService.payUnpaidTicketsFromCreditLine(this.user.mobile.toString(), 'card').subscribe(
+        value => {
+          this.snackBar.open('Tickets have been paid successfully by card.', 'Close', {
+            duration: 3000
+          });
+          this.showUnpaidTickets = false;
+          this.unpaidTickets = undefined;
+        }
+      );
+    }else if (this.cash === true){
+      this.sharedCreditLineService.payUnpaidTicketsFromCreditLine(this.user.mobile.toString(), 'cash').subscribe(
+        value => {
+          this.snackBar.open('Tickets have been paid successfully by cash.', 'Close', {
+            duration: 3000
+          });
+          this.showUnpaidTickets = false;
+          this.unpaidTickets = undefined;
+        }
+      );
+    }
   }
 
 }

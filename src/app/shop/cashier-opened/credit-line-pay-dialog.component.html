@@ -3,8 +3,8 @@
   <app-search (renew)="searchUnpaidTicketsByUserPhone()" (selected)="onSelect($event)" [(key)]="userPhone"
               title="User's phone">
   </app-search>
-  <app-list *ngIf="user" [data]="unpaidTickets" [readAction]="false" [createAction]="false" [deleteAction]="false" [title]="title"></app-list>
-  <div *ngIf="user" style="font-size: x-small; margin-left: 30vw;">
+  <app-list *ngIf="showUnpaidTickets" [data]="unpaidTickets" [readAction]="false" [createAction]="false" [deleteAction]="false" [title]="title"></app-list>
+  <div *ngIf="showUnpaidTickets" style="font-size: x-small; margin-left: 30vw;">
     <mat-checkbox (change)="payByCash()" [checked]="cash" style="margin-right: 2vw; margin-top: 2vw;">Cash</mat-checkbox>
     <mat-checkbox (change)="payByCard()" [checked]="card">Card</mat-checkbox>
     <p style="margin-top: 1vw; font-size: xx-large;">TOTAL: {{total}}€</p>
@@ -12,6 +12,6 @@
 </mat-dialog-content>
 <mat-dialog-actions style="margin-top: -1vw;">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button (click)="pay()" [disabled]="!card && !cash" *ngIf="user" mat-button>Pay</button>
+  <button (click)="pay()" [disabled]="!card && !cash" *ngIf="showUnpaidTickets" mat-button>Pay</button>
 </mat-dialog-actions>
 
