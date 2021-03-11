@@ -8,9 +8,7 @@ import { Top5Service } from './top5.service';
   styleUrls: ['./top5.component.css']
 })
 export class Top5Component {
-  displayedColumns: string[] = ['position', 'barcode', 'description', 'retailPrice'];
   top5Articles: Article[] = [];
-  dataSource = this.top5Articles;
   constructor(private top5Service: Top5Service) {
     this.searchTop5Articles();
   }
