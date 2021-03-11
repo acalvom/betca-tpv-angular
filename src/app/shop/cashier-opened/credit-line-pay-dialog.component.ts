@@ -59,7 +59,8 @@ export class CreditLinePayDialogComponent {
               value => {
                 if (value.length !== 0){
                   this.showUnpaidTickets = true;
-                  value.forEach(dataValues => this.total += dataValues.amount.valueOf()); // TODO 4 cifras solo
+                  value.forEach(dataValues => this.total += dataValues.amount.valueOf());
+                  this.total.toFixed(2);
                 } else {
                   this.showUnpaidTickets = false;
                   this.snackBar.open('This user has no tickets to pay.', 'Close', {
@@ -93,7 +94,27 @@ export class CreditLinePayDialogComponent {
   }
 
   pay(): void {
-    // TODO
+    if (this.card === true){
+      this.sharedCreditLineService.payUnpaidTicketsFromCreditLine(this.user.mobile.toString(), 'card').subscribe(
+        value => {
+          this.snackBar.open('Tickets have been paid successfully by card.', 'Close', {
+            duration: 3000
+          });
+          this.showUnpaidTickets = false;
+          this.unpaidTickets = undefined;
+        }
+      );
+    }else if (this.cash === true){
+      this.sharedCreditLineService.payUnpaidTicketsFromCreditLine(this.user.mobile.toString(), 'cash').subscribe(
+        value => {
+          this.snackBar.open('Tickets have been paid successfully by cash.', 'Close', {
+            duration: 3000
+          });
+          this.showUnpaidTickets = false;
+          this.unpaidTickets = undefined;
+        }
+      );
+    }
   }
 
 }
