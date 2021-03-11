@@ -1,8 +1,8 @@
 <mat-card>
 
   <mat-card-title>
-    <mat-icon color="primary">shopping_basket</mat-icon>
-    Shopping Basket
+    <mat-icon color="primary">shopping_cart</mat-icon>
+    Shopping Basket --Total:{{totalShoppingBasket| currency:'EUR':'symbol'}}
   </mat-card-title>
 
   <mat-grid-list>
@@ -50,11 +50,6 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </mat-grid-list>
-
-  <mat-card-title>
-    <mat-icon color="primary">shopping_cart</mat-icon>
-    Total:{{totalShoppingBasket| currency:'EUR':'symbol'}}
-  </mat-card-title>
 
   <mat-card-content>
 

@@ -24,7 +24,6 @@ import {ComplaintUpdateDialogComponent} from "./complaints/complaint-update-dial
 import { OnlineOrderComponent } from './online-order/online-order.component';
 import { TableStockComponent } from './stock-management/table-stock/table-stock.component';
 
-
 @NgModule({
   declarations: [
     AdviserComponent,
