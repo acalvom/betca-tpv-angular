@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from '@core/http.service';
 import {Order} from '../shared/services/models/order.model';
 import {OrderLine} from '../shared/services/models/orderLine.model';
 import {Observable, of} from 'rxjs';
 import {OrderSearch} from "./order-search.model";
+import {TicketTrackingService} from "../../home/ticket-tracking/ticket-tracking.service";
+import {formatDate} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,7 @@ export class ProviderOrderService {
   ];
 
 
-  constructor(private httpService: HttpService) {
+  constructor(private ticketTrackingService: TicketTrackingService) {
 
   }
 
@@ -58,6 +59,11 @@ export class ProviderOrderService {
 
   create(order: Order): Observable<Order> {
     this.providerOrders.push(order);
+    /*
+    Update state a REQUIRE_PROVIDER to products
+    ticketTrackingService.update();
+    * */
+    order.openingDate = new Date(this.getDateFormatToString());
     return of(order);
   }
 
@@ -72,11 +78,33 @@ export class ProviderOrderService {
     return of(order);
   }
 
-  close(reference: string, order: Order): Observable<void> {
+  delete(reference: string): Observable<void> {
     const index = this.providerOrders.findIndex(order => order.reference === reference);
-    const removedElements = this.providerOrders.splice(index, 1);
-    console.log(removedElements);
+    this.providerOrders.splice(index, 1);
     return of(null);
+  }
+
+  close(reference: string, order: Order): Observable<Order> {
+    const index = this.providerOrders.findIndex(order => order.reference === reference);
+    console.log("cerrrar pedido " + index);
+    if (index > -1) {
+      order.closingDate = new Date(this.getDateFormatToString());
+      this.providerOrders[index] = order;
+      console.log("cerrrar pedido");
+      /*
+      Update state a IN_STOCK to products
+      ticketTrackingService.update();
+      * */
+    }
+    return of(order);
+  }
+
+  getDateFormatToString(): string {
+    const format = 'dd/MM/yyyy';
+    const myDate = new Date();
+    const locale = 'en-US';
+    const formattedDate = formatDate(myDate, format, locale);
+    return formattedDate;
   }
 
 
