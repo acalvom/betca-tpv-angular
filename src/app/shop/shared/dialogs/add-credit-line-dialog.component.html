@@ -5,9 +5,6 @@
     <button (click)="searchUser(mobile.value)" *ngIf="!managedMobile()" mat-button mat-icon-button matSuffix>
       <mat-icon color="warn">search</mat-icon>
     </button>
-    <button *ngIf="managedMobile()" mat-button mat-icon-button matSuffix>
-      <mat-icon color="warn">mode_edit</mat-icon>
-    </button>
     <button (click)="resetMobile()" *ngIf="managedMobile()" mat-button mat-icon-button matSuffix>
       <mat-icon color="warn">close</mat-icon>
     </button>

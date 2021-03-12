@@ -47,6 +47,10 @@ export class StockAlarmsComponent implements OnInit {
       .subscribe(fullStockAlarm => this.dialog.open(StockAlarmsCreationUpdatingDialogComponent, {data: fullStockAlarm}));
   }
 
+  delete(stockAlarm: StockAlarm): void {
+    this.stockAlarmsService.delete(stockAlarm.name).subscribe();
+  }
+
   ngOnInit(): void {
     this.findAlarms();
   }

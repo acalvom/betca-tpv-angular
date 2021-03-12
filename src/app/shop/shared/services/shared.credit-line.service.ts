@@ -13,6 +13,7 @@ import {CreditSale} from './models/credit-sale.model';
 export class SharedCreditLineService {
   private SEARCH = '/search';
   private SEARCH_UNPAID = '/searchUnpaid';
+  private PAY = '/pay';
 
   constructor(private httpService: HttpService) {
   }
@@ -37,12 +38,9 @@ export class SharedCreditLineService {
       .get(EndPoints.CREDIT + this.SEARCH_UNPAID + '?userReference=' + userReference);
   }
 
-  /*searchUnpaidTickets(userPhone: string): Observable<TicketCreditLine[]> {
-    return of([
-      {reference: '4354345df', total: 25, creationDate: '2018-02-27 12:26:30'},
-      {reference: '7354345df', total: 40, creationDate: '2018-03-09 10:20:35'},
-      {reference: '6354345df', total: 68, creationDate: '2018-03-12 12:09:12'},
-    ]);
-  }*/
+  payUnpaidTicketsFromCreditLine(userReference: string, cashOrCard: string): Observable<Credit>{
+    return this.httpService
+      .put(EndPoints.CREDIT + '/' + userReference + this.PAY + '/' + cashOrCard);
+  }
 
 }

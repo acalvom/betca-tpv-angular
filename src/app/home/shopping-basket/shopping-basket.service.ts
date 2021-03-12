@@ -14,3 +14,4 @@ export class ShoppingBasketService {
     console.log('Article added to shopping basket: ' + article.description);
   }
 }
+
