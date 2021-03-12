@@ -1,5 +1,5 @@
 export interface TicketCreditLine {
   reference: string;
-  total: number;
+  amount: number;
   creationDate: string;
 }

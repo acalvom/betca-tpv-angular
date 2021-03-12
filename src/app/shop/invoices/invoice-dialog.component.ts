@@ -3,6 +3,7 @@ import {Invoice} from '../shared/services/models/invoice';
 import {InvoiceUpdate} from './invoice-update.model';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {InvoiceService} from './invoice.service';
+import {Ticket} from '../shared/services/models/ticket.model';
 
 @Component({
   templateUrl: './invoice-dialog.component.html',
@@ -21,11 +22,11 @@ export class InvoiceDialogComponent {
       creationDate: data.creationDate,
       baseTax: data.baseTax,
       taxValue: data.taxValue,
-      userPhone: data.user.phone,
+      userPhone: data.ticket.user.mobile,
       ticketReference: data.ticket.reference,
-      userDni: data.user.dni,
-      userName: data.user.name,
-      familyNameUser: data.user.familyName
+      userDni: data.ticket.user.dni,
+      userName: data.ticket.user.name,
+      familyNameUser: data.ticket.user.familyName
     } : {
       number: undefined,
       creationDate: undefined,
@@ -46,6 +47,27 @@ export class InvoiceDialogComponent {
   update(): void {
     this.invoiceService
       .update(this.invoiceModel)
+      .subscribe(() => this.dialog.closeAll());
+  }
+
+  setTicketInModel(ticket: Ticket): void{
+    console.log(ticket);
+    this.invoiceModel.ticketReference = ticket.reference;
+    this.invoiceModel.userDni = ticket.user.dni;
+    this.invoiceModel.userName = ticket.user.name;
+    this.invoiceModel.familyNameUser = ticket.user.familyName;
+    this.invoiceModel.userPhone = ticket.user.mobile;
+  }
+
+  addTicket(ticketRef: string): void {
+    const ticket = this.invoiceService
+      .searchTicketByRef(ticketRef)
+      .subscribe(tk => this.setTicketInModel(tk));
+  }
+
+  create(): void {
+    this.invoiceService
+      .create(this.invoiceModel)
       .subscribe(() => this.dialog.closeAll());
   }
 }

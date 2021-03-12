@@ -1,10 +1,8 @@
-import {Ticket} from './ticket.model';
-import {Article} from './article.model';
-
 export interface SalesPeople {
   salesperson: string;
   date: Date;
-  ticket?: Ticket;
-  articles?: Article;
+  ticket?: string[];
+  articles?: string[];
+  num_articles?: number;
   finalValue: number;
 }

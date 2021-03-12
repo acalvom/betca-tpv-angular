@@ -165,6 +165,7 @@ export class ShoppingCartComponent implements OnInit {
       , () => this.dialog.closeAll()
     );
   }
+
   addBudget(budget): void {
     this.shoppingCartService
       .readBudget(budget)
@@ -197,7 +198,7 @@ export class ShoppingCartComponent implements OnInit {
           .forEach(element => {
             const barcodeSearch = newOffer.articleBarcodes
               .find(barcode => barcode === element.barcode);
-            const expireDateSearch = newOffer.expiryDate.getTime();
+            const expireDateSearch = new Date(newOffer.expiryDate).getTime();
             if (barcodeSearch !== undefined && (expireDateSearch > Date.now())) {
               element.discount = newOffer.discount;
             } else {
@@ -215,7 +216,7 @@ export class ShoppingCartComponent implements OnInit {
       minHeight: '300px'
     }).afterClosed().subscribe(result => {
       if (result !== true && result !== undefined) {
-        this.addBarcode(result.barcode);
+        this.addBarcode(result);
       }
     });
   }

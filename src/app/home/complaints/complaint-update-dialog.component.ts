@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 
-import {Complaint} from './complaint.model';
+import {Complaint} from '@shared/models/complaint.model';
 import {ComplaintService} from './complaint.service';
 import {AuthService} from '@core/auth.service';
 
@@ -11,15 +11,18 @@ import {AuthService} from '@core/auth.service';
 })
 
 export class ComplaintUpdateDialogComponent {
+  title: string = 'Update Complaint';
   complaint: Complaint;
 
-  constructor(private complaintService: ComplaintService, private dialog: MatDialog, private authService: AuthService) {
-    this.complaint = {barcode: undefined, description: undefined, state: undefined};
+  constructor(@Inject(MAT_DIALOG_DATA) data: Complaint, private complaintService: ComplaintService, private dialog: MatDialog) {
+    this.complaint = {id: data.id, mobile: data.mobile, barcode: data.barcode, registrationDate: data.registrationDate,
+      description: data.description, opened: data.opened};
   }
-  //TO DO
+
   update(): void {
+    this.complaint.opened = false;
     this.complaintService
-      .create(this.complaint)
+      .update(this.complaint)
       .subscribe(() => this.dialog.closeAll());
   }
 

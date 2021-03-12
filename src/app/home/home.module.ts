@@ -22,7 +22,7 @@ import { NewsComponent } from './adviser/news/news.component';
 import { PopularComponent } from './adviser/popular/popular.component';
 import {ComplaintUpdateDialogComponent} from "./complaints/complaint-update-dialog.component";
 import { OnlineOrderComponent } from './online-order/online-order.component';
-
+import { TableStockComponent } from './stock-management/table-stock/table-stock.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +43,7 @@ import { OnlineOrderComponent } from './online-order/online-order.component';
     StockManagementComponent,
     NewsComponent,
     PopularComponent,
+    TableStockComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,

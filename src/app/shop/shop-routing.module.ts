@@ -22,8 +22,10 @@ import {MessengerComponent} from './messenger/messenger.component';
 import {SalesPeopleComponent} from './salespeople/salespeople.component';
 import {IssuesComponent} from './issues/issues.component';
 import {InvoicesComponent} from './invoices/invoices.component';
+import {ProviderOrdersComponent} from './provider-orders/provider-orders.component';
 import {ComplaintsShopComponent} from './complaints-shop/complaints-shop.component';
 import {StaffComponent} from './staff/staff.component';
+import {OnlineOrderComponent} from './online-order/online-order.component';
 import {TagsComponent} from './tags/tags.component';
 
 const routes: Routes = [
@@ -54,8 +56,8 @@ const routes: Routes = [
       {path: 'messenger', component: MessengerComponent},
       {path: 'salespeople', component: SalesPeopleComponent},
       {path: 'staff', component: StaffComponent},
-      {path: 'salespeople', component: SalesPeopleComponent},
-      {path: 'customer-discount', component: CustomerDiscountComponent},
+      {path: 'provider-orders', component: ProviderOrdersComponent},
+      {path: 'online-order', component: OnlineOrderComponent},
       {path: 'tags', component: TagsComponent}
     ]
   }

@@ -1,36 +1,118 @@
+<mat-card-header>
+  <mat-card-title>
+    <mat-icon color="primary">equalizer</mat-icon>
+    Stock manager
+  </mat-card-title>
+</mat-card-header>
 <mat-card>
-  <mat-card-content>
-    <mat-label><strong>Search by stock: </strong></mat-label>
-    <mat-form-field>
-      <mat-label>Stock</mat-label>
-      <input [(ngModel)]="stockArticle.stock" matInput type="number">
-      <mat-hint align="start">Less than</mat-hint>
-    </mat-form-field>
-
-    <button (click)="searchByStock()" mat-icon-button>
-      <mat-icon>search</mat-icon>
-    </button>
-  </mat-card-content>
-  <app-crud (read)="read($event)"
-          [data]="articles" [deleteAction]="false" [createAction]="false" [updateAction]="false" [title]="title"></app-crud>
+  <mat-card>
+    <mat-card-title>
+      Stock products
+    </mat-card-title>
+    <mat-card-subtitle>Products below a stock</mat-card-subtitle>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Enter a stock</mat-label>
+        <input [(ngModel)]="stockArticle.stock" matInput type="number">
+        <mat-hint align="start">Less than</mat-hint>
+      </mat-form-field>
+      <button (click)="searchByStock()" mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-card-content>
+    <ng-container *ngIf="stock">
+      <app-table-stock [data]="articles" [stock]="true"></app-table-stock>
+    </ng-container>
+  </mat-card>
+  <mat-card>
+    <mat-card-title>
+      Sold products
+    </mat-card-title>
+    <mat-card-subtitle>Products sold in a time range</mat-card-subtitle>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input [(ngModel)]="start" matStartDate placeholder="Start date">
+          <input [(ngModel)]="end" matEndDate placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <button (click)="searchSoldProducts()" mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-card-content>
+    <ng-container *ngIf="soldProducts">
+      <app-table-stock [data]="articlesByDate" [productSold]="true"></app-table-stock>
+    </ng-container>
+  </mat-card>
+  <mat-card>
+    <mat-card-title>
+      Product forecast
+    </mat-card-title>
+    <mat-card-subtitle>Given a product, it tells you what stock there will be the next week.
+    </mat-card-subtitle>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Enter a barcode</mat-label>
+        <input [(ngModel)]="stockArticle.barcode" matInput type="number">
+      </mat-form-field>
+      <button (click)="searchFutureStock()" mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-card-content>
+    <ng-container *ngIf="stockForescat">
+      <mat-card>
+        <mat-card-content>
+          <mat-label><strong>Barcode: </strong></mat-label>
+          <mat-label>{{(stockFuture|async)?.barcode}}</mat-label>
+        </mat-card-content>
+        <mat-card-content>
+          <mat-label><strong>Descripcion: </strong></mat-label>
+          <mat-label>{{(stockFuture|async)?.description}}</mat-label>
+        </mat-card-content>
+        <mat-card-content>
+          <mat-label><strong>Stock next week: </strong></mat-label>
+          <mat-label>{{(stockFuture|async)?.stock}}</mat-label>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </mat-card>
+  <mat-card>
+    <mat-card-title>
+      Empty stock forecast
+    </mat-card-title>
+    <mat-card-subtitle>Given a product, it tells you when it will be in stock 0
+    </mat-card-subtitle>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Enter a barcode</mat-label>
+        <input [(ngModel)]="stockArticle.barcode" matInput type="number">
+      </mat-form-field>
+      <button (click)="searchEmptyStock()" mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-card-content>
+    <ng-container *ngIf="stockEmpty">
+      <mat-card>
+        <mat-card-content>
+          <mat-label><strong>Barcode: </strong></mat-label>
+          <mat-label>{{(stockZero|async)?.barcode}}</mat-label>
+        </mat-card-content>
+        <mat-card-content>
+          <mat-label><strong>Descripcion: </strong></mat-label>
+          <mat-label>{{(stockZero|async)?.description}}</mat-label>
+        </mat-card-content>
+        <mat-card-content>
+          <mat-label><strong>Stock: </strong></mat-label>
+          <mat-label>{{(stockZero|async)?.stock}}</mat-label>
+        </mat-card-content>
+        <mat-card-content>
+          <mat-label><strong>Date empty stock:  </strong></mat-label>
+          <mat-label>{{(stockZero|async)?.dateStockEmpty}}</mat-label>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </mat-card>
 </mat-card>
-<mat-card>
-  <mat-card-content>
-    <mat-label><strong>Search by date: </strong></mat-label>
-  </mat-card-content>
-  <mat-form-field appearance="fill">
-    <mat-label>Enter a date range</mat-label>
-    <mat-date-range-input [rangePicker]="picker">
-      <input [(ngModel)]="start" matStartDate placeholder="Start date" >
-      <input [(ngModel)]="end" matEndDate placeholder="End date">
-    </mat-date-range-input>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-date-range-picker #picker></mat-date-range-picker>
-  </mat-form-field>
-  <button (click)="searchByDate()" mat-icon-button>
-    <mat-icon>search</mat-icon>
-  </button>
-  <app-crud (read)="read($event)"
-          [data]="articlesByDate" [deleteAction]="false" [createAction]="false" [updateAction]="false" [title]="title"></app-crud>
-</mat-card>
-

@@ -14,6 +14,7 @@ import {RgpdUser} from '@shared/models/rgpd-user.model';
   styleUrls: ['./dialog.component.css']
 })
 export class RegisterDialogComponent {
+  static CUSTOMER = '/customers';
   rgpdUser: RgpdUser;
   user: User;
   hide = true;
@@ -22,7 +23,7 @@ export class RegisterDialogComponent {
               private dialog: MatDialog, private snackBar: MatSnackBar) {
     this.user = data ? data : {
       mobile: undefined, firstName: undefined, familyName: undefined, email: undefined, dni: undefined,
-      address: undefined, password: undefined, role: Role.CUSTOMER, active: true, registrationDate: new Date()
+      address: undefined, password: undefined, role: Role.CUSTOMER, active: undefined, registrationDate: new Date()
     };
     this.rgpdUser = {
       mobile: this.user.mobile,
@@ -32,12 +33,11 @@ export class RegisterDialogComponent {
   }
 
   register(): void {
-    /*this.httpService.post(EndPoints.USERS, this.user)
-      .subscribe(response => {
-      console.log(response);
+    this.httpService.post(EndPoints.USERS + RegisterDialogComponent.CUSTOMER, this.user)
+      .subscribe(() => {
       this.dialog.closeAll();
-      this.openSnackBar('Usuario ' + this.user.firstName + ' registrado correctamente.', '');
-    });*/
+      this.openSnackBar('User ' + this.user.firstName + ' successfully register.', 'OK');
+    });
   }
 
   openSnackBar(message: string, action: string): void {

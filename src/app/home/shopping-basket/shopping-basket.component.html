@@ -1,44 +1,55 @@
 <mat-card>
 
   <mat-card-title>
-    <mat-icon color="primary">shopping_basket</mat-icon>
-    Shopping Basket
-  </mat-card-title>
-
-  <mat-grid-list cols="1" rowHeight="4:1">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let article"> {{shoppingBasket.indexOf(article) + 1}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="barcode">
-      <th mat-header-cell *matHeaderCellDef> Barcode </th>
-      <td mat-cell *matCellDef="let article"> {{article.barcode}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef> Description </th>
-      <td mat-cell *matCellDef="let article"> {{article.description}} </td>
-    </ng-container>
-
-
-    <ng-container matColumnDef="retailPrice">
-      <th mat-header-cell *matHeaderCellDef> Price </th>
-      <td mat-cell *matCellDef="let article"> {{article.retailPrice}} €</td>
-    </ng-container>
-
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  </mat-grid-list>
-
-  <mat-card-title>
     <mat-icon color="primary">shopping_cart</mat-icon>
-    Total:{{totalShoppingBasket| currency:'EUR':'symbol'}}
+    Shopping Basket --Total:{{totalShoppingBasket| currency:'EUR':'symbol'}}
   </mat-card-title>
+
+  <mat-grid-list>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="photo">
+        <th mat-header-cell *matHeaderCellDef> Photo del Producto </th>
+        <td mat-cell *matCellDef="let article"> {{shoppingBasket.indexOf(article) + 1}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let article"> {{article.description}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef> Amount </th>
+        <td mat-cell *matCellDef="let article">
+          <button (click)="decreaseAmount(article)" color="accent" mat-icon-button>
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
+          {{article.amount}}
+          <button (click)="incrementAmount(article)" color="accent" mat-icon-button>
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="retailPrice">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let article"> {{article.retailPrice}} €</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td *matCellDef="let article">
+          <button (click)="delete(article)" mat-icon-button>
+            <mat-icon color="warn">close</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-grid-list>
 
   <mat-card-content>
 

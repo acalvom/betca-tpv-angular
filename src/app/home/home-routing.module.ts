@@ -26,7 +26,7 @@ const routes: Routes = [
       {path: 'adviser/news', component: NewsComponent},
       {path: 'adviser/popular', component: PopularComponent},
       // public
-      {path: 'offers', component: OffersComponent},
+      {path: 'offers/:reference', component: OffersComponent},
       {path: 'complaints', component: ComplaintsComponent, canActivate: [RoleGuardService], data: {roles: [Role.CUSTOMER]}},
       {path: 'ticket-tracking/:id', component: TicketTrackingComponent},
       {path: 'top5', component: Top5Component},

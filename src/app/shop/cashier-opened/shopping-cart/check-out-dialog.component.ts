@@ -9,6 +9,9 @@ import {UserCompleteService} from '@shared/services/userComplete.service';
 import {SearchRgpdUser} from '@shared/components/data-protection-act/search-rgpd-user.model';
 import {RgpdType} from '@shared/models/RgpdType';
 import {DataProtectionActService} from '@shared/components/data-protection-act/data-protection-act.service';
+import {AuthService} from '@core/auth.service';
+import {UserUpdateCreateDialogComponent} from '../../users/dialog/user-update-create-dialog.component';
+import {SharedCreditLineService} from '../../shared/services/shared.credit-line.service';
 
 @Component({
   templateUrl: 'check-out-dialog.component.html',
@@ -25,8 +28,8 @@ export class CheckOutDialogComponent {
   userSearch: UserSearch;
 
   constructor(@Inject(MAT_DIALOG_DATA) data, private dialog: MatDialog, private dialogRef: MatDialogRef<CheckOutDialogComponent>,
-              private shoppingCartService: ShoppingCartService, private userService: UserCompleteService,
-              private dataProtectionActService: DataProtectionActService) {
+              private shoppingCartService: ShoppingCartService, private userService: UserCompleteService, private authService: AuthService,
+              private dataProtectionActService: DataProtectionActService, private sharedCreditLineService: SharedCreditLineService) {
     this.ticketCreation = {cash: 0, card: 0, voucher: 0, shoppingList: data, note: ''};
     this.total();
   }
@@ -45,16 +48,18 @@ export class CheckOutDialogComponent {
 
   searchUser(mobile: string): void {
 
-    this.userSearch = {
-      mobile: Number(mobile)
-    };
-
     if (mobile) {
-      // TODO falta buscar el user en BD, si no existe, debe sacar un dialogo para crearlo
-
+      if (!this.authService.isAuthenticated() || !this.userService.checkUser(Number(mobile))){
+        this.dialog.open(UserUpdateCreateDialogComponent);
+      }
       this.ticketCreation.user = {mobile: Number(mobile)};
-      // TODO me falta comprobar si tiene credit-line el usuario
-      this.credit = true;
+      this.sharedCreditLineService.findByUserReference(this.ticketCreation.user.mobile.toString()).subscribe(
+        value => {
+          if (value != null){
+            this.credit = true;
+          }
+        }
+      );
     }
   }
 
@@ -177,8 +182,8 @@ export class CheckOutDialogComponent {
     if (this.requestedDataProtectionAct) {
       this.printUnsignedDataProtectionAgreement();
     }
-    this.shoppingCartService.createTicketAndPrintReceipts(this.ticketCreation, voucher,
-      this.requestedInvoice, this.requestedGiftTicket, this.requestedDataProtectionAct, this.checkedCreditLine)
+    // tslint:disable-next-line:max-line-length
+    this.shoppingCartService.createTicketAndPrintReceipts(this.ticketCreation, voucher, this.requestedInvoice, this.requestedGiftTicket, this.requestedDataProtectionAct, this.checkedCreditLine)
       .subscribe(() => this.dialogRef.close(true));
   }
 
