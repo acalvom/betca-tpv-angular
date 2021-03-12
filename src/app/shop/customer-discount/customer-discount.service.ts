@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {CustomerDiscount} from '../shared/services/models/customer-discount.model';
 import {CustomerDiscountSearch} from './customer-discount-search.model';
 import {Observable, of} from 'rxjs';
@@ -16,7 +16,8 @@ export class CustomerDiscountService {
     {id: '2', note: 'customer2', registationDate: '02/05/20', discount: 0, minimmumPurchase: 0, user: '77777'}
   ];
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {
+  }
 
   searchCustomersDiscount(customerDiscountSearch: CustomerDiscountSearch): Observable<CustomerDiscount[]> {
     return this.httpService
@@ -24,14 +25,14 @@ export class CustomerDiscountService {
       .get(EndPoints.CUSTOMERS_DISCOUNTS + CustomerDiscountService.SEARCH);
   }
 
-  createCustomerDiscount(customerDiscount: CustomerDiscount): Observable<CustomerDiscount>{
+  createCustomerDiscount(customerDiscount: CustomerDiscount): Observable<CustomerDiscount> {
     customerDiscount.id = (this.customerDiscounts.length + 1).toString();
     customerDiscount.registationDate = Date.now().toString();
     this.customerDiscounts.push(customerDiscount);
     return of(customerDiscount);
   }
 
-  readCustomerDiscount(id: string): Observable<CustomerDiscount>{
+  readCustomerDiscount(id: string): Observable<CustomerDiscount> {
     return of(this.customerDiscounts.find(customer => customer.id === id));
   }
 
