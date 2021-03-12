@@ -60,7 +60,6 @@ export class CreditLinePayDialogComponent {
                 if (value.length !== 0){
                   this.showUnpaidTickets = true;
                   value.forEach(dataValues => this.total += dataValues.amount.valueOf());
-                  this.total.toFixed(2);
                 } else {
                   this.showUnpaidTickets = false;
                   this.snackBar.open('This user has no tickets to pay.', 'Close', {
