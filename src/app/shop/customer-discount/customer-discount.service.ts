@@ -2,21 +2,26 @@ import { Injectable } from '@angular/core';
 import {CustomerDiscount} from '../shared/services/models/customer-discount.model';
 import {CustomerDiscountSearch} from './customer-discount-search.model';
 import {Observable, of} from 'rxjs';
+import {HttpService} from '@core/http.service';
+import {EndPoints} from '@shared/end-points';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerDiscountService {
+  private static SEARCH = '/search';
 
   private customerDiscounts: CustomerDiscount[] = [
     {id: '1', note: 'customer1', registationDate: '02/05/20', discount: 0, minimmumPurchase: 0, user: '66666'},
     {id: '2', note: 'customer2', registationDate: '02/05/20', discount: 0, minimmumPurchase: 0, user: '77777'}
   ];
 
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
   searchCustomersDiscount(customerDiscountSearch: CustomerDiscountSearch): Observable<CustomerDiscount[]> {
-    return of(this.customerDiscounts);
+    return this.httpService
+      .paramsFrom(customerDiscountSearch)
+      .get(EndPoints.CUSTOMERS_DISCOUNTS + CustomerDiscountService.SEARCH);
   }
 
   createCustomerDiscount(customerDiscount: CustomerDiscount): Observable<CustomerDiscount>{
