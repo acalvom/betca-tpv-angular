@@ -40,18 +40,18 @@ export class ArticleFamilyViewComponent implements OnInit {
     this.articlesFamilyService.readChildren(articleFamilyViewModel.reference).subscribe(
       result => {
         articlesFamilyViewModel = result;
+        this.dialog.open(OpenSizesDialogComponent, {
+          data: articlesFamilyViewModel
+        }).afterClosed().subscribe(resultDialog => {
+          if (resultDialog !== true && resultDialog !== undefined) {
+            this.dialogRef.close(resultDialog);
+          }
+        });
       }
     );
-    this.dialog.open(OpenSizesDialogComponent, {
-      data: articlesFamilyViewModel
-    }).afterClosed().subscribe(result => {
-      if (result !== true && result !== undefined) {
-        this.dialogRef.close(result);
-      }
-    });
   }
 
   addShoppingCart(articleFamilyViewModel: ArticleFamilyViewModel): void {
-    this.dialogRef.close(articleFamilyViewModel.reference);
+    this.dialogRef.close(articleFamilyViewModel.barcode);
   }
 }

@@ -3,8 +3,8 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from '@core/auth.service';
-import {CheckOutDialogComponent} from '../../shop/cashier-opened/shopping-cart/check-out-dialog.component';
 import {ShoppingBasketArticle} from '../shared/shopping-basket-article.model';
+import {CheckOutDialogComponent} from '../../shop/cashier-opened/shopping-cart/check-out-dialog.component';
 
 @Component({
   selector: 'app-shopping-basket',
@@ -48,7 +48,7 @@ export class ShoppingBasketComponent implements OnInit {
 
   delete(shoppingBasketArticle: ShoppingBasketArticle): void {
     const index = this.shoppingBasket.indexOf(shoppingBasketArticle);
-    if (index > -1) {
+    if (index > 0) {
       this.shoppingBasket.splice(index, 1);
     }
   }
