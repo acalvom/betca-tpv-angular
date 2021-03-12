@@ -41,7 +41,7 @@ export class TagsComponent {
 
   update(tag: Tag): void {
     this.tagService.read(tag.name)
-      .subscribe(fullTag => this.dialog.open(ArticleCreationUpdatingDialogComponent, {data: fullTag}));
+      .subscribe(fullTag => this.dialog.open(TagCreationUpdatingDialogComponent, {data: fullTag}));
   }
 
   read(tag: Tag): void {

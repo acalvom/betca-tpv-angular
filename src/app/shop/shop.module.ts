@@ -69,6 +69,7 @@ import {UserUpdateDialogComponent} from './users/dialog/user-update-dialog.compo
 import { SharedMessengerService } from './shared/services/shared-messenger.service';
 import { TagsComponent } from './tags/tags.component';
 import { TagCreationUpdatingDialogComponent } from './tags/tag-creation-updating-dialog.component';
+import { TagArticleCreationUpdatingDialogComponent } from './tags/tag-article-creation-updating-dialog.component';
 
 @NgModule({
   declarations: [
@@ -129,6 +130,7 @@ import { TagCreationUpdatingDialogComponent } from './tags/tag-creation-updating
     SalesPeopleComponent,
     TagsComponent,
     TagCreationUpdatingDialogComponent,
+    TagArticleCreationUpdatingDialogComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,

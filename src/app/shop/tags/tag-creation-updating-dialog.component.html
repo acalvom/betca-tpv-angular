@@ -12,6 +12,8 @@
     <mat-label>Description</mat-label>
     <input [(ngModel)]="tag.description" matInput required type="text"/>
   </mat-form-field>
+  <app-crud (create)="addArticle()" (read)="readArticle($event)" (update)="updateArticle($event)"
+            [data]="articles" [deleteAction]="false" [title]="tittleArticle"></app-crud>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
