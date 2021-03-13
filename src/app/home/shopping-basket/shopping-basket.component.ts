@@ -14,16 +14,16 @@ import {CheckOutDialogComponent} from '../../shop/cashier-opened/shopping-cart/c
 export class ShoppingBasketComponent implements OnInit {
 
   displayedColumns = ['photo', 'description', 'quantity', 'retailPrice', 'amount', 'actions'];
-  article1: ShoppingBasketArticle = {photo: '000001', description: 'dagahajq', quantity: 2, retailPrice: 23.67,
-    amount: 0};
-  article2: ShoppingBasketArticle = {photo: '000002', description: 'hfgdsagh', quantity: 1, retailPrice: 10.89,
-    amount: 0};
-  article3: ShoppingBasketArticle = {photo: '000003', description: 'asdfghjg', quantity: 5, retailPrice: 34.78,
-    amount: 0};
-  article4: ShoppingBasketArticle = {photo: '000004', description: 'jghfdssa', quantity: 4, retailPrice: 23.09,
-    amount: 0};
-  article5: ShoppingBasketArticle = {photo: '000005', description: 'zxcngvhj', quantity: 7, retailPrice: 5.20,
-    amount: 0};
+  article1: ShoppingBasketArticle = {photo: 'https://stylelovely.com/wp-content/uploads/ropa-para-ninos-primavera-2018-el-corte-ingles-peto-vaquero.jpg',
+    description: 'dagahajq', quantity: 2, retailPrice: 23.67, amount: 0};
+  article2: ShoppingBasketArticle = {photo: 'https://mundokawaii.store/wp-content/uploads/2019/05/ropa-kawaii-1-1200x1200.jpg',
+    description: 'hfgdsagh', quantity: 1, retailPrice: 10.89, amount: 0};
+  article3: ShoppingBasketArticle = {photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2XvoGaGEIGHxXsV6NJjYoJzCBW0QX6yp3Fg&usqp=CAU',
+    description: 'asdfghjg', quantity: 5, retailPrice: 34.78, amount: 0};
+  article4: ShoppingBasketArticle = {photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLkd0ur-V6Vb_urgwsrzrl4p8XtlVhz2t9YA&usqp=CAU',
+    description: 'jghfdssa', quantity: 4, retailPrice: 23.09, amount: 0};
+  article5: ShoppingBasketArticle = {photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-koXQj2fzy3zXR3GJYP4sAEXoF3_W2QKivQ&usqp=CAU',
+    description: 'zxcngvhj', quantity: 7, retailPrice: 5.20, amount: 0};
   shoppingBasket = [this.article1, this.article2, this.article3, this.article4, this.article5];
   dataSource = this.shoppingBasket;
   username = undefined;
@@ -45,12 +45,22 @@ export class ShoppingBasketComponent implements OnInit {
     if (shoppingBasketArticle.quantity === 0) {
       shoppingBasketArticle.quantity++;
     }
+    shoppingBasketArticle.amount = shoppingBasketArticle.quantity * shoppingBasketArticle.retailPrice;
+    this.totalShoppingBasket = 0;
+    for (let i = 0; i < this.shoppingBasket.length; i++) {
+      this.totalShoppingBasket += this.shoppingBasket[i].amount;
+    }
   }
 
   decreaseQuantity(shoppingBasketArticle: ShoppingBasketArticle): any {
     shoppingBasketArticle.quantity--;
     if (shoppingBasketArticle.quantity === 0) {
       shoppingBasketArticle.quantity--;
+    }
+    shoppingBasketArticle.amount = shoppingBasketArticle.quantity * shoppingBasketArticle.retailPrice;
+    this.totalShoppingBasket = 0;
+    for (let i = 0; i < this.shoppingBasket.length; i++) {
+      this.totalShoppingBasket += this.shoppingBasket[i].amount;
     }
   }
 
