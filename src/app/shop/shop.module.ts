@@ -71,7 +71,10 @@ import {ProviderOrdersComponent} from './provider-orders/provider-orders.compone
 import { SearchByTicketRefComponent } from './shared/search-by-ticket-ref.component';
 import { StaffReportComponent } from './staff/components/staff-report/staff-report.component';
 import { OnlineOrderComponent } from './online-order/online-order.component';
-import {ComplaintUpdateShopDialogComponent} from "./complaints-shop/complaint-update-shop-dialog.component";
+import {ComplaintUpdateShopDialogComponent} from './complaints-shop/complaint-update-shop-dialog.component';
+import { TagsComponent } from './tags/tags.component';
+import { TagCreationUpdatingDialogComponent } from './tags/tag-creation-updating-dialog.component';
+import { TagArticleCreationUpdatingDialogComponent } from './tags/tag-article-creation-updating-dialog.component';
 
 @NgModule({
   declarations: [
@@ -133,7 +136,10 @@ import {ComplaintUpdateShopDialogComponent} from "./complaints-shop/complaint-up
     SearchByTicketRefComponent,
     StaffReportComponent,
     OnlineOrderComponent,
-    ComplaintUpdateShopDialogComponent
+    ComplaintUpdateShopDialogComponent,
+    TagsComponent,
+    TagCreationUpdatingDialogComponent,
+    TagArticleCreationUpdatingDialogComponent
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,

@@ -23,4 +23,6 @@ export class EndPoints {
   static ARTICLES_FAMILY_VIEW = environment.REST_CORE + '/article-family-view';
   static ARTICLES_FAMILY_CRUD = environment.REST_CORE + '/article-family-crud';
   static DATA_PROTECTION_ACT = environment.REST_CORE + '/data-protection-act';
+  static CUSTOMERS_DISCOUNTS = environment.REST_CORE + '/customer-discount';
+  static TAGS = environment.REST_CORE + '/tags';
 }
