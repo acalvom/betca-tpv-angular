@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {of} from 'rxjs';
 import {TagSearch} from './tag-search.model';
 import {MatDialog} from '@angular/material/dialog';
@@ -6,7 +6,7 @@ import {TagCreationUpdatingDialogComponent} from './tag-creation-updating-dialog
 import {Tag} from '../shared/services/models/tag.model';
 import {TagService} from './tag.service';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
-import {ArticleCreationUpdatingDialogComponent} from '../articles/article-creation-updating-dialog.component';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-tags',
@@ -24,31 +24,40 @@ export class TagsComponent {
   }
 
   search(): void {
-    this.tags = this.tagService.search(this.tagSearch);
+    this.tags = this.tagService.search(this.tagSearch).pipe(map(tags =>
+      tags.map(tag => {
+          return {
+            name: tag.name,
+            group: tag.group,
+            description: tag.description
+          };
+        }
+      )
+    ));
   }
 
   resetSearch(): void {
     this.tagSearch = {};
   }
 
-  unfinished(): void {
-    this.tags = this.tagService.searchUnfinished();
-  }
-
   create(): void {
-    this.dialog.open(TagCreationUpdatingDialogComponent);
+    this.dialog.open(TagCreationUpdatingDialogComponent).afterClosed().subscribe(() =>
+      this.search()
+    );
   }
 
   update(tag: Tag): void {
     this.tagService.read(tag.name)
-      .subscribe(fullTag => this.dialog.open(TagCreationUpdatingDialogComponent, {data: fullTag}));
+      .subscribe(fullTag => this.dialog.open(TagCreationUpdatingDialogComponent, {data: fullTag}).afterClosed().subscribe(() =>
+        this.search()
+      ));
   }
 
   read(tag: Tag): void {
     this.dialog.open(ReadDetailDialogComponent, {
       data: {
         title: 'Tag Details',
-        object: this.tagService.read(tag.name)
+        object: of(tag)
       }
     });
   }

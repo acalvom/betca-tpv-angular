@@ -1,6 +1,9 @@
 <h2 mat-dialog-title>{{title}}</h2>
 <mat-dialog-content>
-  <app-search-by-barcode (add)="addBarcode($event)"></app-search-by-barcode>
+  <app-search-by-barcode (add)="addBarcode($event)" [barcode]="barcode"></app-search-by-barcode>
+  <div *ngIf="error" class="alert">
+    This article is already added.
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
