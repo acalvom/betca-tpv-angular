@@ -18,22 +18,27 @@
         <td mat-cell *matCellDef="let article"> {{article.description}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef> Amount </th>
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> Quantity </th>
         <td mat-cell *matCellDef="let article">
-          <button (click)="decreaseAmount(article)" color="accent" mat-icon-button>
+          <button (click)="decreaseQuantity(article)" color="accent" mat-icon-button>
             <mat-icon>remove_circle_outline</mat-icon>
           </button>
-          {{article.amount}}
-          <button (click)="incrementAmount(article)" color="accent" mat-icon-button>
+          {{article.quantity}}
+          <button (click)="incrementQuantity(article)" color="accent" mat-icon-button>
             <mat-icon>add_circle_outline</mat-icon>
           </button>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="retailPrice">
-        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <th mat-header-cell *matHeaderCellDef> Retail Price </th>
         <td mat-cell *matCellDef="let article"> {{article.retailPrice}} €</td>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef> Amount </th>
+        <td mat-cell *matCellDef="let article"> {{article.amount}} €</td>
       </ng-container>
 
       <ng-container matColumnDef="actions">

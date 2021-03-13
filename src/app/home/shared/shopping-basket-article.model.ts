@@ -1,6 +1,7 @@
 export class ShoppingBasketArticle {
   photo: string;
   description: string;
-  amount: number;
+  quantity: number;
   retailPrice: number;
+  amount: number;
 }
