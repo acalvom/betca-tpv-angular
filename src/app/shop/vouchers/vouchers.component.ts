@@ -4,7 +4,7 @@ import {of} from 'rxjs';
 import {Voucher} from '../shared/services/models/voucher.model';
 import {MatDialog} from '@angular/material/dialog';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
-import {VoucherCreationUpdatingDialogComponent} from './voucher-creation-updating-dialog.component';
+import {VoucherCreationDialogComponent} from './voucher-creation-dialog.component';
 import {VoucherSearch} from './voucher.search';
 import {map} from 'rxjs/operators';
 
@@ -33,7 +33,7 @@ export class VouchersComponent {
   }
 
   create(): void {
-    this.dialog.open(VoucherCreationUpdatingDialogComponent)
+    this.dialog.open(VoucherCreationDialogComponent)
       .afterClosed()
       .subscribe(() => this.findAll());
   }

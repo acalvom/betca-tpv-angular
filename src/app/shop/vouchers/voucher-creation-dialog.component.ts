@@ -5,10 +5,10 @@ import {VoucherCreation} from './voucher.creation';
 
 @Component({
   selector: 'app-voucher-creation-updating-dialog',
-  templateUrl: './voucher-creation-updating-dialog.component.html',
-  styleUrls: ['./voucher-creation-updating-dialog.component.css']
+  templateUrl: './voucher-creation-dialog.component.html',
+  styleUrls: ['./voucher-creation-dialog.component.css']
 })
-export class VoucherCreationUpdatingDialogComponent {
+export class VoucherCreationDialogComponent {
 
   voucher: VoucherCreation;
   title = 'Create voucher';

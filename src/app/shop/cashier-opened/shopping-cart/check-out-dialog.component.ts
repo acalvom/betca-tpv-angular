@@ -13,6 +13,7 @@ import {AuthService} from '@core/auth.service';
 import {UserUpdateCreateDialogComponent} from '../../users/dialog/user-update-create-dialog.component';
 import {SharedCreditLineService} from '../../shared/services/shared.credit-line.service';
 import {SharedVoucherService} from '../../shared/services/shared-voucher.service';
+import {VoucherConsumingComponent} from '../../vouchers/voucher-consuming/voucher-consuming-component';
 
 @Component({
   templateUrl: 'check-out-dialog.component.html',
@@ -139,7 +140,15 @@ export class CheckOutDialogComponent {
 
   consumeVoucher(): void {
     // TODO consumir un vale que se entrega como parte del pago
-    this.voucherService.consumeVoucher(this.ticketCreation.voucher);
+    this.voucherService.findAll().subscribe(
+      (v) => {
+        this.dialog.open(VoucherConsumingComponent, { data: v })
+          .afterClosed()
+          .subscribe((totalValue) => {
+            this.ticketCreation.voucher += totalValue;
+          });
+      }
+    );
   }
 
   invalidCheckOut(): boolean {

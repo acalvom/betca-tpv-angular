@@ -37,8 +37,7 @@ export class VouchersService {
   }
 
   findAll(): Observable<Voucher[]> {
-    // return this.httpService.get(EndPoints.VOUCHERS);
-    return of(this.vouchers);
+    return this.sharedVoucherService.findAll();
   }
 
   read(reference: string): Observable<Voucher> {

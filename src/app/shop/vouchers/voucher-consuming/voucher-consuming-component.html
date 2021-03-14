@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<mat-dialog-content>
+  <mat-selection-list #voucherList [(ngModel)]="selectedVouchers">
+    <mat-list-option *ngFor="let v of vouchers" [value]="v">
+      Ref: {{v.reference}} -- Value: {{v.value}}
+    </mat-list-option>
+  </mat-selection-list>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
+  <button (click)="consume()"
+          [disabled]=invalid()
+          color="primary" mat-raised-button>Consume</button>
+</mat-dialog-actions>
+

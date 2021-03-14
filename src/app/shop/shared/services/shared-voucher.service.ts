@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {EMPTY, Observable} from 'rxjs';
+import {EMPTY, Observable, of} from 'rxjs';
 import {Voucher} from './models/voucher.model';
 import {HttpService} from '@core/http.service';
 import {VoucherCreation} from '../../vouchers/voucher.creation';
@@ -31,7 +31,12 @@ export class SharedVoucherService {
       .pipe(map(voucher => this.httpService.pdf().get(`${EndPoints.VOUCHERS}/${voucher.reference}`)));
   }
 
-  consumeVoucher(voucherValue: number): Observable<any> {
-    return this.httpService.put(`${EndPoints.VOUCHERS}/${voucherValue}`);
+  consumeVoucher(vouchers: Voucher[]): Observable<any> {
+    return this.httpService.put(`${EndPoints.VOUCHERS}`, vouchers);
+  }
+
+  findAll(): Observable<Voucher[]> {
+    // return this.httpService.get(EndPoints.VOUCHERS);
+    return of([{reference: 'a', value: 12, creationDate: new Date(), dateOfUse: undefined}]);
   }
 }

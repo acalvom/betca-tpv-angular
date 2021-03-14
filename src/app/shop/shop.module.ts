@@ -45,7 +45,7 @@ import { StockAuditComponent } from './stock-audit/stock-audit.component';
 import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices.component';
 import { AddArticleDialogComponent } from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
-import { VoucherCreationUpdatingDialogComponent } from './vouchers/voucher-creation-updating-dialog.component';
+import { VoucherCreationDialogComponent } from './vouchers/voucher-creation-dialog.component';
 
 import {CustomerDiscountComponent} from './customer-discount/customer-discount.component';
 import {CashMovementDialogComponent} from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
@@ -77,6 +77,7 @@ import { TagsComponent } from './tags/tags.component';
 import { TagCreationUpdatingDialogComponent } from './tags/tag-creation-updating-dialog.component';
 import { TagArticleCreationUpdatingDialogComponent } from './tags/tag-article-creation-updating-dialog.component';
 import {BudgetDialogComponent} from './budgets/budget-dialog.component';
+import { VoucherConsumingComponent } from './vouchers/voucher-consuming/voucher-consuming-component';
 
 @NgModule({
   declarations: [
@@ -143,7 +144,8 @@ import {BudgetDialogComponent} from './budgets/budget-dialog.component';
     TagCreationUpdatingDialogComponent,
     TagArticleCreationUpdatingDialogComponent,
     VouchersComponent,
-    VoucherCreationUpdatingDialogComponent,
+    VoucherCreationDialogComponent,
+    VoucherConsumingComponent,
 
   ],
   entryComponents: [
