@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Article} from '../shared/article.model';
 
 @Component({
@@ -8,10 +8,13 @@ import {Article} from '../shared/article.model';
 })
 export class AdviserComponent implements OnInit{
   @Input() articles: Article[];
+  @Output() add = new EventEmitter<Article>();
 
   ngOnInit(): void {
   }
 
 
-
+  onClick(value): void {
+    this.add.emit(value);
+  }
 }
