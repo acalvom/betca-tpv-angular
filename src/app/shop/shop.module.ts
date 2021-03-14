@@ -73,6 +73,9 @@ import { SearchByTicketRefComponent } from './shared/search-by-ticket-ref.compon
 import { StaffReportComponent } from './staff/components/staff-report/staff-report.component';
 import { OnlineOrderComponent } from './online-order/online-order.component';
 import {ComplaintUpdateShopDialogComponent} from './complaints-shop/complaint-update-shop-dialog.component';
+import { TagsComponent } from './tags/tags.component';
+import { TagCreationUpdatingDialogComponent } from './tags/tag-creation-updating-dialog.component';
+import { TagArticleCreationUpdatingDialogComponent } from './tags/tag-article-creation-updating-dialog.component';
 import {BudgetDialogComponent} from './budgets/budget-dialog.component';
 
 @NgModule({
@@ -136,6 +139,9 @@ import {BudgetDialogComponent} from './budgets/budget-dialog.component';
     StaffReportComponent,
     OnlineOrderComponent,
     ComplaintUpdateShopDialogComponent,
+    TagsComponent,
+    TagCreationUpdatingDialogComponent,
+    TagArticleCreationUpdatingDialogComponent,
     VouchersComponent,
     VoucherCreationUpdatingDialogComponent,
 

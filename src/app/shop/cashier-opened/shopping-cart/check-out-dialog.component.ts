@@ -185,8 +185,8 @@ export class CheckOutDialogComponent {
     if (this.requestedDataProtectionAct) {
       this.printUnsignedDataProtectionAgreement();
     }
-    this.shoppingCartService.createTicketAndPrintReceipts(this.ticketCreation, voucher,
-      this.requestedInvoice, this.requestedGiftTicket, this.requestedDataProtectionAct, this.checkedCreditLine)
+    // tslint:disable-next-line:max-line-length
+    this.shoppingCartService.createTicketAndPrintReceipts(this.ticketCreation, voucher, this.requestedInvoice, this.requestedGiftTicket, this.requestedDataProtectionAct, this.checkedCreditLine)
       .subscribe(() => this.dialogRef.close(true));
   }
 

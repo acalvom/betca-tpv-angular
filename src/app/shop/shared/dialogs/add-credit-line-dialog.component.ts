@@ -29,7 +29,7 @@ export class AddCreditLineDialogComponent {
     }
   }
 
-  managedMobile(): boolean {// TODO ? VER SI LO HAGO
+  managedMobile(): boolean {
     return !!this.user;
   }
 

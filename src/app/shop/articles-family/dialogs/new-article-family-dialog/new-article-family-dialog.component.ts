@@ -28,7 +28,7 @@ export class NewArticleFamilyDialogComponent {
     const articlesFamilyModel: ArticleFamilyModel = {
       reference: this.reference,
       description: this.description,
-      type: this.selectedType,
+      treeType: this.selectedType,
     };
 
     this.sharedArticlesFamilyService.createArticleFamily(articlesFamilyModel, this.parent.reference).subscribe(

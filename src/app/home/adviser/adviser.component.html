@@ -1,17 +1,32 @@
-<mat-grid-list cols="1" rowHeight="4:1">
+<!--<mat-grid-list cols="1" rowHeight="4:1">-->
  <!--TO DO Carousel-->
 <!--  <carousel [cellsToShow]="2" [cellWidth]="150" [margin]="30" [height]="180" [width]="800"
             [arrowsOutside]="true" id="wrap">
     <div class="carousel-cell" *ngFor="let article of articles; let i = index;" id="wrap1"> -->
-  <li *ngFor="let article of articles; let i = index;" id="wrap1">
+<!--  <li *ngFor="let article of articles; let i = index;" id="wrap1">
       <strong>Article number {{i+1}} <br></strong>
       <strong>Barcode: </strong> {{article.barcode}} <br>
       <strong>Description: </strong> {{article.description}} <br>
-      <strong>Retail price: </strong> {{article.retailPrice}}
-  </li>
+      <strong>Retail price: </strong> {{article.retailPrice}}<br>
+    <button></button>
+  </li>-->
 <!--    </div>-->
 <!--  </carousel>-->
 
-</mat-grid-list>
+<!--</mat-grid-list>-->
+
+  <div fxLayout="row wrap" fxFlex="80%" fxLayoutAlign="center">
+    <mat-card  *ngFor="let article of articles; let i = index;">
+      <mat-card-header>
+        <mat-card-title><strong>{{article.description}}</strong></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <strong>Retail price: </strong> {{article.retailPrice}}<br>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button (click)="onClick(article)">Add to the basket <mat-icon aria-hidden="false" aria-label="add_shopping_cart">add_shopping_cart</mat-icon></button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 
 
