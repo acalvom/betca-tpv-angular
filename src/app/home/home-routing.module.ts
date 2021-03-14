@@ -16,6 +16,7 @@ import {StockManagementComponent} from './stock-management/stock-management.comp
 import {NewsComponent} from './adviser/news/news.component';
 import {PopularComponent} from './adviser/popular/popular.component';
 import {OnlineOrderComponent} from "./online-order/online-order.component";
+import {SaleComponent} from './adviser/sale/sale.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       {path: 'adviser', component: AdviserComponent},
       {path: 'adviser/news', component: NewsComponent},
       {path: 'adviser/popular', component: PopularComponent},
+      {path: 'adviser/sale', component: SaleComponent},
       // public
       {path: 'offers/:reference', component: OffersComponent},
       {path: 'complaints', component: ComplaintsComponent, canActivate: [RoleGuardService], data: {roles: [Role.CUSTOMER]}},

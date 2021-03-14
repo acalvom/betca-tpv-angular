@@ -11,7 +11,6 @@ import {map} from 'rxjs/operators';
 })
 export class TagService {
   static SEARCH = '/search';
-  static UNFINISHED = '/unfinished';
   tags = of([]);
 
   constructor(private httpService: HttpService) {
