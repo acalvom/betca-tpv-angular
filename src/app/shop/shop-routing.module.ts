@@ -26,6 +26,7 @@ import {ProviderOrdersComponent} from './provider-orders/provider-orders.compone
 import {ComplaintsShopComponent} from './complaints-shop/complaints-shop.component';
 import {StaffComponent} from './staff/staff.component';
 import {OnlineOrderComponent} from './online-order/online-order.component';
+import {VouchersComponent} from './vouchers/vouchers.component';
 import {TagsComponent} from './tags/tags.component';
 
 const routes: Routes = [
@@ -58,6 +59,7 @@ const routes: Routes = [
       {path: 'staff', component: StaffComponent},
       {path: 'provider-orders', component: ProviderOrdersComponent},
       {path: 'online-order', component: OnlineOrderComponent},
+      {path: 'vouchers', component: VouchersComponent},
       {path: 'tags', component: TagsComponent}
     ]
   }

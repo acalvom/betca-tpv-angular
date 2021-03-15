@@ -25,4 +25,5 @@ export class EndPoints {
   static DATA_PROTECTION_ACT = environment.REST_CORE + '/data-protection-act';
   static CUSTOMERS_DISCOUNTS = environment.REST_CORE + '/customer-discount';
   static TAGS = environment.REST_CORE + '/tags';
+  static VOUCHERS = environment.REST_CORE + '/vouchers';
 }
