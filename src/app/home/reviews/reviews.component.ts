@@ -23,12 +23,15 @@ export class ReviewsComponent implements OnInit {
       });
     } else {
       this.reviewsService.create(toOutReview(review))
-        .subscribe();
+        .subscribe(inReview => this.reviews = this.searchAll());
     }
   }
   update(review: Review): void {
     this.reviewsService.update(toOutReview(review))
-      .subscribe();
+      .subscribe(inReview => {
+        review.opinion = inReview.opinion;
+        review.score = inReview.score;
+      });
   }
   searchAll(): Observable<Review[]> {
     return this.reviewsService.searchAll();
