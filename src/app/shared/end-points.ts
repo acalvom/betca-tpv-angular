@@ -24,4 +24,7 @@ export class EndPoints {
   static ARTICLES_FAMILY_CRUD = environment.REST_CORE + '/article-family-crud';
   static DATA_PROTECTION_ACT = environment.REST_CORE + '/data-protection-act';
   static MESSENGER = environment.REST_CORE + '/messenger';
+  static CUSTOMERS_DISCOUNTS = environment.REST_CORE + '/customer-discount';
+  static TAGS = environment.REST_CORE + '/tags';
+  static VOUCHERS = environment.REST_CORE + '/vouchers';
 }

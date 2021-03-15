@@ -23,9 +23,11 @@ import {SalesPeopleComponent} from './salespeople/salespeople.component';
 import {IssuesComponent} from './issues/issues.component';
 import {InvoicesComponent} from './invoices/invoices.component';
 import {ProviderOrdersComponent} from './provider-orders/provider-orders.component';
-import {ComplaintsShopComponent} from "./complaints-shop/complaints-shop.component";
+import {ComplaintsShopComponent} from './complaints-shop/complaints-shop.component';
 import {StaffComponent} from './staff/staff.component';
 import {OnlineOrderComponent} from './online-order/online-order.component';
+import {VouchersComponent} from './vouchers/vouchers.component';
+import {TagsComponent} from './tags/tags.component';
 
 const routes: Routes = [
   {
@@ -56,7 +58,9 @@ const routes: Routes = [
       {path: 'salespeople', component: SalesPeopleComponent},
       {path: 'staff', component: StaffComponent},
       {path: 'provider-orders', component: ProviderOrdersComponent},
-      {path: 'online-order', component: OnlineOrderComponent}
+      {path: 'online-order', component: OnlineOrderComponent},
+      {path: 'vouchers', component: VouchersComponent},
+      {path: 'tags', component: TagsComponent}
     ]
   }
 ];

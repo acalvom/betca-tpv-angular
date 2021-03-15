@@ -44,8 +44,15 @@ export class ProviderOrdersComponent implements OnInit {
 
   }
 
+  delete(order: Order): void {
+    this.providerOrderService
+      .delete(order.reference)
+      .subscribe(() => this.search());
+  }
+
   reset(): void {
     this.providerOrders = of([]);
   }
+
 
 }

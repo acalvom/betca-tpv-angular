@@ -37,14 +37,15 @@ import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-f
 import {ListComponent} from './shared/components/list.component';
 import {NewArticleFamilyDialogComponent} from './articles-family/dialogs/new-article-family-dialog/new-article-family-dialog.component';
 import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-article-family-dialog/edit-article-family-dialog.component';
-import {StockAlarmsCreationUpdatingDialogComponent} from './stock-alarms/stock-alarms-creation-updating-dialog.component';
-import {DataProtectionActDialogComponent} from './data-protection-act/data-protection-act-dialog.component';
 import {StockAlarmChipComponent} from './stock-alarms/stock-alarm-chip/stock-alarm-chip.component';
-import {StockAuditComponent} from './stock-audit/stock-audit.component';
-import {ProviderInvoicesComponent} from './provider-invoices/provider-invoices.component';
 import {ProviderInvoiceCreationUpdatingDialogComponent} from './provider-invoices/provider-invoice-creation-updating-dialog.component';
-import {BudgetDialogComponent} from './budgets/budget-dialog.component';
-import {AddArticleDialogComponent} from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
+import { StockAlarmsCreationUpdatingDialogComponent } from './stock-alarms/stock-alarms-creation-updating-dialog.component';
+import { DataProtectionActDialogComponent } from './data-protection-act/data-protection-act-dialog.component';
+import { StockAuditComponent } from './stock-audit/stock-audit.component';
+import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices.component';
+import { AddArticleDialogComponent } from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
+import { VouchersComponent } from './vouchers/vouchers.component';
+import { VoucherCreationDialogComponent } from './vouchers/voucher-creation-dialog.component';
 
 import {CustomerDiscountComponent} from './customer-discount/customer-discount.component';
 import {CashMovementDialogComponent} from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
@@ -71,7 +72,12 @@ import {ProviderOrdersComponent} from './provider-orders/provider-orders.compone
 import { SearchByTicketRefComponent } from './shared/search-by-ticket-ref.component';
 import { StaffReportComponent } from './staff/components/staff-report/staff-report.component';
 import { OnlineOrderComponent } from './online-order/online-order.component';
-import {ComplaintUpdateShopDialogComponent} from "./complaints-shop/complaint-update-shop-dialog.component";
+import {ComplaintUpdateShopDialogComponent} from './complaints-shop/complaint-update-shop-dialog.component';
+import { TagsComponent } from './tags/tags.component';
+import { TagCreationUpdatingDialogComponent } from './tags/tag-creation-updating-dialog.component';
+import { TagArticleCreationUpdatingDialogComponent } from './tags/tag-article-creation-updating-dialog.component';
+import {BudgetDialogComponent} from './budgets/budget-dialog.component';
+import { VoucherConsumingComponent } from './vouchers/voucher-consuming/voucher-consuming-component';
 
 @NgModule({
   declarations: [
@@ -133,7 +139,14 @@ import {ComplaintUpdateShopDialogComponent} from "./complaints-shop/complaint-up
     SearchByTicketRefComponent,
     StaffReportComponent,
     OnlineOrderComponent,
-    ComplaintUpdateShopDialogComponent
+    ComplaintUpdateShopDialogComponent,
+    TagsComponent,
+    TagCreationUpdatingDialogComponent,
+    TagArticleCreationUpdatingDialogComponent,
+    VouchersComponent,
+    VoucherCreationDialogComponent,
+    VoucherConsumingComponent,
+
   ],
   entryComponents: [
     ArticleCreationUpdatingDialogComponent,

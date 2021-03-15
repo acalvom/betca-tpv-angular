@@ -23,6 +23,8 @@ import { PopularComponent } from './adviser/popular/popular.component';
 import {ComplaintUpdateDialogComponent} from "./complaints/complaint-update-dialog.component";
 import { OnlineOrderComponent } from './online-order/online-order.component';
 import { TableStockComponent } from './stock-management/table-stock/table-stock.component';
+import {SaleComponent} from './adviser/sale/sale.component';
+import {PayDialogComponent} from './shopping-basket/pay-dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { TableStockComponent } from './stock-management/table-stock/table-stock.
     NewsComponent,
     PopularComponent,
     TableStockComponent,
+    SaleComponent,
+    PayDialogComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,

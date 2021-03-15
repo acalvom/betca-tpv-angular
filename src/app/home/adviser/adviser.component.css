@@ -6,3 +6,8 @@
 #wrap1{
   margin: 10px auto;
 }
+mat-card{
+  text-align: center;
+  justify-content: center;
+;
+}
