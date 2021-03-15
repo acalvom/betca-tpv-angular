@@ -18,7 +18,7 @@ export class UserUpdateCreateDialogComponent implements OnInit {
   roleValues = Object.keys(Role).filter(key => isNaN(Number(key)));
   user: User;
   title: string;
-  editable = false;
+  editable;
   oldUser: number;
 
 
@@ -40,6 +40,7 @@ export class UserUpdateCreateDialogComponent implements OnInit {
     };
 
     this.oldUser = data ? data.mobile : undefined;
+    this.editable = false;
   }
 
   ngOnInit(): void {
@@ -54,7 +55,7 @@ export class UserUpdateCreateDialogComponent implements OnInit {
   updateCompleteUser(): void {
     this.userService
       .setCompleteUser(this.oldUser, this.user)
-      .subscribe(() => this.dialog.closeAll());
+      .subscribe(() => this.openSnackBar('User successfully registered', 'OK'));
   }
 
   createCompleteUser(): void{
@@ -80,6 +81,4 @@ export class UserUpdateCreateDialogComponent implements OnInit {
     return (this.user.mobile === undefined || null) ||
       (this.user.firstName === undefined || null || this.user.firstName === '' );
   }
-
-
 }

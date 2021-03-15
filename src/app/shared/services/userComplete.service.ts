@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {User} from '@shared/models/userRegister.model';
 import {Role} from '@core/role.model';
 import {UserInfoModel} from '../../shop/users/models/user-info.model';
+import {EndPoints} from '@shared/end-points';
 
 
 @Injectable({
@@ -30,8 +31,8 @@ export class UserCompleteService {
   }
 
   searchCompleteUser(mobile: number): Observable<User> {
-    return of(this.users.find(user => user.mobile == mobile));
-  }
+    return this.httpService
+      .get(EndPoints.USERS + '/' + mobile);  }
 
   getCompleteUsers(): Observable<User[]> {
     return of(this.users);
@@ -42,12 +43,9 @@ export class UserCompleteService {
   }
 
   setCompleteUser(oldMobile: number, newUser: User): Observable<User>{
-    const userToUpdate = this.users.find(off => off.mobile === oldMobile);
-    const index = this.users.indexOf(userToUpdate);
-    if (index > -1){
-      this.users.splice(index, 1, newUser);
-    }
-    return of(newUser);
+    return this.httpService
+      .successful()
+      .put(EndPoints.USERS + '/' + oldMobile, newUser);
   }
 
   createCompleteUser(user: User): Observable<User>{
