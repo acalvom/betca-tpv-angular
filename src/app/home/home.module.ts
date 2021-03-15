@@ -55,6 +55,7 @@ import { TableStockComponent } from './stock-management/table-stock/table-stock.
   ],
   providers: [
     ShoppingBasketService,
+    DatePipe,
   ]
 })
 export class HomeModule {

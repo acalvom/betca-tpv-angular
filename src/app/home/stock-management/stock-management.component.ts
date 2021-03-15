@@ -18,8 +18,8 @@ export class StockManagementComponent implements OnInit {
   stockFuture = of();
   stockZero = of();
   title = 'Stock management';
-  start: any;
-  end: any;
+  start: Date;
+  end: Date;
   soldProducts = false;
   stock = false;
   stockForescat = false;
