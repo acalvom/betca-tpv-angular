@@ -15,7 +15,7 @@ export class OpenSizesDialogComponent {
   }
 
   addShoppingCart(articleFamilyViewModel: ArticleFamilyViewModel): void {
-    this.dialogRef.close(articleFamilyViewModel.reference);
+    this.dialogRef.close(articleFamilyViewModel.barcode);
   }
 
   obtainSize(articlesFamilyViewModel: ArticleFamilyViewModel): string {

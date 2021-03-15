@@ -12,7 +12,7 @@ export class EndPoints {
   static COMPLAINTS = environment.REST_CUSTOMER_SUPPORT + '/complaints';
   static COMPLAINTS_SHOP = environment.REST_CORE + '/complaints';
   static USERS = environment.REST_USER + '/users';
-  static STOCKS = environment.REST_CORE + '/stocks';
+  static STOCK_MANAGER = environment.REST_CORE + '/stock-manager';
   static STOCKS_ALARMS = environment.REST_CORE + '/stock-alarms';
   static BUDGETS = environment.REST_CORE + '/budgets';
   static AUDITS = environment.REST_CORE + '/audits';
@@ -23,4 +23,7 @@ export class EndPoints {
   static ARTICLES_FAMILY_VIEW = environment.REST_CORE + '/article-family-view';
   static ARTICLES_FAMILY_CRUD = environment.REST_CORE + '/article-family-crud';
   static DATA_PROTECTION_ACT = environment.REST_CORE + '/data-protection-act';
+  static CUSTOMERS_DISCOUNTS = environment.REST_CORE + '/customer-discount';
+  static TAGS = environment.REST_CORE + '/tags';
+  static VOUCHERS = environment.REST_CORE + '/vouchers';
 }

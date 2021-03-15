@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Filters: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>From</mat-label>
+      <input [(ngModel)]="voucherSearch.dateFrom" matInput type="date">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>To</mat-label>
+      <input [(ngModel)]="voucherSearch.dateTo" matInput type="date">
+    </mat-form-field>
+    <button (click)="findVouchersBetweenDates()" color="primary" mat-raised-button>Search
+    </button>
+    <button (click)="findAll()" color="primary" mat-raised-button style="margin-left: 1%">Clear Search
+    </button>
+  </mat-card-content>
+</mat-card>
+<app-crud (create)="create()" (read)="read($event)"
+          [updateAction]="false"
+          [deleteAction]="false"
+          [data]="vouchers"
+          [title]="title"></app-crud>

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Review} from './review.model';
+import {OutReview, Review, toOutReview} from './review.model';
 import {ReviewService} from '../shared/review.service';
 import {Observable} from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -22,13 +22,16 @@ export class ReviewsComponent implements OnInit {
         duration: 3000
       });
     } else {
-      this.reviewsService.create(review)
-        .subscribe();
+      this.reviewsService.create(toOutReview(review))
+        .subscribe(inReview => this.reviews = this.searchAll());
     }
   }
   update(review: Review): void {
-    this.reviewsService.update(review)
-      .subscribe();
+    this.reviewsService.update(toOutReview(review))
+      .subscribe(inReview => {
+        review.opinion = inReview.opinion;
+        review.score = inReview.score;
+      });
   }
   searchAll(): Observable<Review[]> {
     return this.reviewsService.searchAll();
