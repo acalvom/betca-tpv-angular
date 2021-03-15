@@ -4,6 +4,7 @@ import {of} from 'rxjs';
 import {StockService} from './stock-service';
 import {MatDialog} from '@angular/material/dialog';
 import {ArticleStock} from './article-stock';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-stock-management',
@@ -39,8 +40,8 @@ export class StockManagementComponent implements OnInit {
 
   searchSoldProducts(): void {
     this.soldProducts = true;
-    const firstDate = new Date(this.start);
-    const secondDate = new Date(this.start);
+    const firstDate = this.setDateFormat(this.start);
+    const secondDate = this.setDateFormat(this.end);
     this.articlesByDate = this.stockService.searchSoldProducts(firstDate, secondDate);
   }
 
@@ -53,5 +54,9 @@ export class StockManagementComponent implements OnInit {
   searchEmptyStock(): void {
     this.stockEmpty = true;
     this.stockZero = this.stockService.searchEmptyStock(this.stockArticle.barcode);
+  }
+  setDateFormat(datePicker: Date): string {
+     return moment(datePicker).format('YYYY-MM-DD[T]HH:mm:ss');
+
   }
 }

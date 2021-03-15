@@ -57,7 +57,6 @@ import {SaleComponent} from './adviser/sale/sale.component';
   ],
   providers: [
     ShoppingBasketService,
-    DatePipe,
   ]
 })
 export class HomeModule {

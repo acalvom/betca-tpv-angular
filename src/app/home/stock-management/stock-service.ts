@@ -69,12 +69,12 @@ export class StockService {
        .get(EndPoints.STOCK_MANAGER + StockService.STOCK);
   }
 
-   searchSoldProducts(start: Date, end: Date): Observable<ArticleStock[]> {
+   searchSoldProducts(start: string, end: string): Observable<ArticleStock[]> {
 
       // return of(this.articulosVendidos);
-    return this.httpService
-      .param('initial', String(start))
-      .param('end', String(end))
+     return this.httpService
+      .param('initial', start)
+      .param('end', end)
       .get(EndPoints.STOCK_MANAGER + StockService.STOCK_SOLD);
   }
 
