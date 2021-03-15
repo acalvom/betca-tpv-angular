@@ -22,7 +22,7 @@ export class IssueCreationDialogComponent implements OnInit {
       body: undefined,
       labels: IssueLabel.BUG,
       state: IssueState.OPEN,
-      assignees: '',
+      assignee: '',
       created_at: undefined,
       milestone: ''
     };

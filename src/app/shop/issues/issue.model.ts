@@ -6,8 +6,8 @@ export class Issue {
   body: string;
   labels: string;
   state: IssueState;
-  assignees: string;
+  assignee: string;
   milestone: string;
   // tslint:disable-next-line:variable-name
-  created_at: any;
+  created_at: string;
 }
