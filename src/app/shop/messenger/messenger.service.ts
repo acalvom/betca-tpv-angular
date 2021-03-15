@@ -3,6 +3,7 @@ import {Observable, of} from 'rxjs';
 
 import {HttpService} from '@core/http.service';
 import { Message } from '../shared/services/models/message.model';
+import { EndPoints } from '@shared/end-points';
 
 @Injectable({
   providedIn: 'root',
@@ -35,8 +36,7 @@ export class MessengerService {
   }
 
   sendNewMessage(message: Message): Observable<void> {
-    this.sendMessages.push(message);
-    return of(void 0);
+    return this.httpService.post(EndPoints.MESSENGER, message);
   }
 
   getSentMessages(): Observable<Message[]> {
