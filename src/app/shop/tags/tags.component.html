@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Filters: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input [(ngModel)]="tagSearch.name" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Group</mat-label>
+      <input [(ngModel)]="tagSearch.group" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input [(ngModel)]="tagSearch.description" matInput>
+    </mat-form-field>
+    <button (click)="search()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <button (click)="resetSearch()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>
+<app-crud (create)="create()" (read)="read($event)" (update)="update($event)"
+          [data]="tags" [deleteAction]="false" [title]="title"></app-crud>
