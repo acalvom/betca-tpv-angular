@@ -12,30 +12,19 @@ import {EndPoints} from '@shared/end-points';
 })
 export class UserCompleteService {
 
-  private users: User[] = [
-    {
-      mobile: 66, firstName: 'Hector', familyName: 'Gomez', email: 'hectorgomez@hotmail.com', dni: '0000000001A',
-      address: 'C/Alan Turin', password: '6', role: Role.ADMIN, registrationDate: new Date(), active: true
-    },
-    {
-      mobile: 6, firstName: 'Laura', familyName: 'Perez', email: 'lauraperez@hotmail.com', dni: '1000000002B',
-      address: 'Avd/ Albufera', password: '6', role: Role.CUSTOMER, registrationDate: new Date(), active: true
-    },
-    {
-      mobile: 12678, firstName: 'David', familyName: 'Garcia', email: 'davidgarcia@hotmail.com', dni: '5100000003Y',
-      address: 'C/Pablo Neruda', password: '1234', role: Role.MANAGER, registrationDate: new Date(), active: true
-    },
-  ];
+  private users: User[];
 
   constructor(private httpService: HttpService) {
   }
 
   searchCompleteUser(mobile: number): Observable<User> {
     return this.httpService
-      .get(EndPoints.USERS + '/' + mobile);  }
+      .get(EndPoints.ADMIN + '/' + mobile);
+  }
 
   getCompleteUsers(): Observable<User[]> {
-    return of(this.users);
+    return this.httpService
+      .get(EndPoints.ADMIN);
   }
 
   getBasicUsersInfo(): Observable<any[]> {
@@ -45,7 +34,7 @@ export class UserCompleteService {
   setCompleteUser(oldMobile: number, newUser: User): Observable<User>{
     return this.httpService
       .successful()
-      .put(EndPoints.USERS + '/' + oldMobile, newUser);
+      .put(EndPoints.ADMIN + '/' + oldMobile, newUser);
   }
 
   createCompleteUser(user: User): Observable<User>{
