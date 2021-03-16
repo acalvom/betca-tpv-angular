@@ -24,24 +24,6 @@ mat-card-content {
   margin-top: 10px;
 }
 
-#NavTop{
-  width:120px;
-  height:160px;
-  margin-top:50px;
-  position:fixed;
-  right:0px;
-  top:150px;
-}
-
-.box{
-  width: auto;
-  text-align: center;
-}
-
-.display-columna{
-  padding: 14px;
-}
-
 #confirmation {
   background-color: #3F51B5;
 }
