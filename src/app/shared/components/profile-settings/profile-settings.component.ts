@@ -63,7 +63,8 @@ export class ProfileSettingsComponent {
     console.log(this.user);
     this.profileSettingsService.update(this.profileSettingsService.getMobile(), this.user)
       .subscribe(() => {
-        this.openSnackBar('User successfully registered', 'OK');
+        this.profileSettingsService.reDoLogin(this.user.mobile, this.profileSettingsService.getPassword());
+        this.openSnackBar('User successfully updated', 'OK');
       });
   }
 
