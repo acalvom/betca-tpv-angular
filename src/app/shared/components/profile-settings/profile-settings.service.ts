@@ -21,15 +21,25 @@ export class ProfileSettingsService {
     return this.authService.getMobile();
   }
 
+  getPassword(): string {
+    return this.authService.getPassword();
+  }
+
   read(mobile: number): Observable<User> {
     return this.httpService
-      .get(EndPoints.USERS + '/' + mobile);
+      .get(EndPoints.USERS_PROFILE + '/' + mobile);
   }
 
   update(mobile: number, user: User): Observable<User> {
     return this.httpService
       .successful()
       .put(EndPoints.USERS + '/' + mobile, user);
+  }
+
+  reDoLogin(mobile: number, password: string): void{
+    this.authService.setUser(undefined);
+    this.authService.login(mobile, password)
+      .subscribe();
   }
 
 }

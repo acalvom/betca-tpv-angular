@@ -92,4 +92,12 @@ export class AuthService {
     return this.user ? this.password : undefined;
   }
 
+  setMobile(mobile: number): void {
+    this.user.mobile = mobile;
+  }
+
+  setUser(user: User): void{
+    this.user = user;
+  }
+
 }
