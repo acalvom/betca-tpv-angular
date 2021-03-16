@@ -24,13 +24,8 @@ mat-card-content {
   margin-top: 10px;
 }
 
-#confirmation {
-  background-color: #3F51B5;
-}
-
 #reference {
   margin-top: 20px;
-  background-color: gold;
 }
 
 .mat-dialog-content {
