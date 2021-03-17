@@ -10,41 +10,21 @@ import { EndPoints } from '@shared/end-points';
 })
 export class MessengerService {
 
-  private sendMessages: Message [] = [];
-  private receivedMessages: Message [] = [];
+  private static GET_SENT_MESSAGES = '/sentMessages';
+  private static GET_RECEIVED_MESSAGES = '/receivedMessages';
 
-  constructor(private httpService: HttpService) {
-    // TODO This code is for testing purposes
-    for(let i = 0; i < 6; i++){
-      let message: Message = new Message();
-      message.fromUser = "6";
-      message.toUser = "6521" + i;
-      message.text = "Message sent" + i;
-      message.subject = "Subject sent " + i;
-      this.sendMessages.push(message);
-    }
-
-    for(let i = 0; i < 5; i++){
-      let message: Message = new Message();
-      message.toUser = "6";
-      message.fromUser = "6521" + i;
-      message.text = "Message received" + i;
-      message.subject = "Subject received " + i;
-      this.receivedMessages.push(message);
-    }
-
-  }
+  constructor(private httpService: HttpService) {  }
 
   sendNewMessage(message: Message): Observable<void> {
     return this.httpService.post(EndPoints.MESSENGER, message);
   }
 
   getSentMessages(): Observable<Message[]> {
-    return of(this.sendMessages);
+    return this.httpService.get(EndPoints.MESSENGER + MessengerService.GET_SENT_MESSAGES);
   }
 
   getReceivedMessages(): Observable<Message[]> {
-    return of(this.receivedMessages);
+    return this.httpService.get(EndPoints.MESSENGER + MessengerService.GET_RECEIVED_MESSAGES);
   }
 
 }
