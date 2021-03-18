@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpService} from '@core/http.service';
 import {Observable, of} from 'rxjs';
 import {User} from '@shared/models/userRegister.model';
-import {Role} from '@core/role.model';
 import {UserInfoModel} from '../../shop/users/models/user-info.model';
 import {EndPoints} from '@shared/end-points';
 
@@ -32,16 +31,15 @@ export class UserCompleteService {
   }
 
   setCompleteUser(oldMobile: number, newUser: User): Observable<User>{
+    console.log(newUser.active);
     return this.httpService
       .successful()
       .put(EndPoints.ADMIN + '/' + oldMobile, newUser);
   }
 
   createCompleteUser(user: User): Observable<User>{
-    user.registrationDate = new Date() ;
-    this.users.push(user);
-    return of(user);
-
+    return this.httpService
+      .post(EndPoints.ADMIN, user);
   }
 
   checkUser(mobile: number): boolean {
@@ -49,11 +47,7 @@ export class UserCompleteService {
   }
 
   deleteCompleteUser(mobile: number): Observable<User[]>{
-    const deleteUser = this.users.find( item => item.mobile == mobile );
-    const index = this.users.indexOf(deleteUser);
-    this.users.splice(index, 1);
-    return of(this.users);
+      return  this.httpService
+        .delete(EndPoints.ADMIN + '/' + mobile);
   }
-
-
 }

@@ -53,6 +53,7 @@ export class UserUpdateCreateDialogComponent implements OnInit {
   }
 
   updateCompleteUser(): void {
+    console.log(this.user.active);
     this.userService
       .setCompleteUser(this.oldUser, this.user)
       .subscribe(() => this.openSnackBar('User successfully registered', 'OK'));

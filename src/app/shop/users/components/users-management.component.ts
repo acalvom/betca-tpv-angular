@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {UserUpdateCreateDialogComponent} from '../dialog/user-update-create-dialog.component';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 import {AuthService} from '@core/auth.service';
+import {UserInfoModel} from '../models/user-info.model';
 
 @Component({
   selector: 'app-users-management',
@@ -21,7 +22,14 @@ export class UsersManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.users = this.userCompleteService.getCompleteUsers();
-    this.data = this.userCompleteService.getBasicUsersInfo();
+    // this.data = this.userCompleteService.getBasicUsersInfo();
+    this.getBasicInfo();
+  }
+
+  getBasicInfo(): void{
+    this.userCompleteService.getCompleteUsers().subscribe( users => {
+      this.data = of(users.map(user => new UserInfoModel(user.mobile, user.firstName, user.role)));
+    });
   }
 
   updateUser(user: User): void {
@@ -30,11 +38,17 @@ export class UsersManagementComponent implements OnInit {
         this.dialog.open(UserUpdateCreateDialogComponent, {data
         })
           .afterClosed()
-          .subscribe(() => (this.data = this.userCompleteService.getBasicUsersInfo()));
+          .subscribe(() => this.getBasicInfo());
       });
   }
 
   readUser(user: User): void {
+    this.userCompleteService.searchCompleteUser(user.mobile).subscribe( data => {
+      console.log('read user');
+      console.log(data);
+    });
+
+
     this.dialog.open(ReadDetailDialogComponent, {
       data: {
         title: 'User Details',
@@ -46,14 +60,14 @@ export class UsersManagementComponent implements OnInit {
   createUser(): void {
     this.dialog.open(UserUpdateCreateDialogComponent)
       .afterClosed()
-      .subscribe(() => this.data = this.userCompleteService.getBasicUsersInfo());
+      .subscribe(() => this.getBasicInfo());
   }
 
   deleteUser(user: User): void{
     if (this.authService.isAdmin()){
       this.userCompleteService
         .deleteCompleteUser(user.mobile)
-        .subscribe(() => (this.data = this.userCompleteService.getBasicUsersInfo()));
+        .subscribe(() =>  this.getBasicInfo());
     }
   }
 }
