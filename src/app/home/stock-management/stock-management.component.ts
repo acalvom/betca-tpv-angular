@@ -24,6 +24,7 @@ export class StockManagementComponent implements OnInit {
   stockForescat = false;
   stockEmpty = false;
   stockForescatError = false;
+  soldProductsError = false;
 
   constructor(private stockService: StockService) {
     this.stockArticle = {};
@@ -38,10 +39,17 @@ export class StockManagementComponent implements OnInit {
   }
 
   searchSoldProducts(): void {
-    this.soldProducts = true;
-    const firstDate = this.setDateFormat(this.start);
-    const secondDate = this.setDateFormat(this.end);
-    this.articlesByDate = this.stockService.searchSoldProducts(firstDate, secondDate);
+
+    if (this.start != null && this.end != null) {
+      const firstDate = this.setDateFormat(this.start);
+      const secondDate = this.setDateFormat(this.end);
+      this.soldProductsError = false;
+      this.soldProducts = true;
+      this.articlesByDate = this.stockService.searchSoldProducts(firstDate, secondDate);
+    } else {
+      this.soldProductsError = true;
+      this.soldProducts = false;
+    }
   }
 
   searchFutureStock(): void {

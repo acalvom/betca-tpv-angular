@@ -43,6 +43,13 @@
         <mat-icon>search</mat-icon>
       </button>
     </mat-card-content>
+    <ng-container *ngIf="soldProductsError">
+      <mat-card>
+        <mat-card-content>
+          <mat-label class="error"><strong>Fechas no válidas</strong></mat-label>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
     <ng-container *ngIf="soldProducts">
       <app-table-stock [data]="articlesByDate" [productSold]="true"></app-table-stock>
     </ng-container>
