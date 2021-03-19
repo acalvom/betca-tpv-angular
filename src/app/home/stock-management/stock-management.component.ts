@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ArticleSearch} from './article-search';
 import {of} from 'rxjs';
 import {StockService} from './stock-service';
-import {MatDialog} from '@angular/material/dialog';
-import {ArticleStock} from './article-stock';
 import * as moment from 'moment';
 
 @Component({
@@ -25,8 +23,9 @@ export class StockManagementComponent implements OnInit {
   stock = false;
   stockForescat = false;
   stockEmpty = false;
+  stockForescatError = false;
 
-  constructor(private dialog: MatDialog, private stockService: StockService) {
+  constructor(private stockService: StockService) {
     this.stockArticle = {};
   }
 
@@ -46,8 +45,13 @@ export class StockManagementComponent implements OnInit {
   }
 
   searchFutureStock(): void {
-    this.stockForescat = true;
-    this.stockFuture = this.stockService.searchFutureStock(this.stockArticle.barcode);
+    if (this.stockArticle.barcode != null) {
+      this.stockForescatError = false;
+      this.stockForescat = true;
+      this.stockFuture = this.stockService.searchFutureStock(this.stockArticle.barcode);
+    } else {
+      this.stockForescatError = true;
+    }
 
   }
 
@@ -55,8 +59,9 @@ export class StockManagementComponent implements OnInit {
     this.stockEmpty = true;
     this.stockZero = this.stockService.searchEmptyStock(this.stockArticle.barcode);
   }
+
   setDateFormat(datePicker: Date): string {
-     return moment(datePicker).format('YYYY-MM-DD[T]HH:mm:ss');
+    return moment(datePicker).format('YYYY-MM-DD[T]HH:mm:ss');
 
   }
 }
