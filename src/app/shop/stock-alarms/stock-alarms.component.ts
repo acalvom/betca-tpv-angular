@@ -25,6 +25,10 @@ export class StockAlarmsComponent implements OnInit {
   constructor(private stockAlarmsService: StockAlarmsService, private dialog: MatDialog) {
   }
 
+  ngOnInit(): void {
+    this.findAlarms();
+  }
+
   findAlarms(): void {
     this.stockAlarmsService.findAlarms(Alarms.WARNING + ',' + Alarms.CRITICAL)
       .subscribe(value => {
@@ -52,10 +56,6 @@ export class StockAlarmsComponent implements OnInit {
 
   delete(stockAlarm: StockAlarm): void {
     this.stockAlarmsService.delete(stockAlarm.name).subscribe();
-  }
-
-  ngOnInit(): void {
-    this.findAlarms();
   }
 
 }

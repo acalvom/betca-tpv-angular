@@ -5,6 +5,8 @@
 
 .flex-body {
   display: flex;
+  border-radius: 15px;
+  padding: 5px;
 }
 
 .flex-column {
@@ -14,16 +16,7 @@
   margin: 5px;
 }
 
-.flex-body {
-  border-radius: 15px;
-  padding: 5px;
-}
 
 .flex-body div:not([class*="flex"]) {
   flex: 1 1;
 }
-
-
-
-
-

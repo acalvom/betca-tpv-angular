@@ -3,7 +3,9 @@
     <mat-label><strong>Filters: </strong></mat-label>
     <mat-form-field>
       <mat-label>Alarm Name</mat-label>
-      <input [(ngModel)]="name" matInput>
+      <label>
+        <input [(ngModel)]="name" matInput>
+      </label>
     </mat-form-field>
 
     <button (click)="search()" mat-icon-button>
