@@ -20,9 +20,9 @@ export class CustomerDiscountDialogComponent {
     this.customerDiscount = data ? data : {
       id: undefined,
       note: undefined,
-      registationDate: undefined,
+      registrationDate: undefined,
       discount: undefined,
-      minimmumPurchase: undefined,
+      minimumPurchase: undefined,
       user: undefined
     };
     this.oldCustomer = data ? data.id : undefined;
@@ -45,7 +45,7 @@ export class CustomerDiscountDialogComponent {
   }
 
   invalid(): boolean {
-    return this.checkNumberAttributes(this.customerDiscount.minimmumPurchase)
+    return this.checkNumberAttributes(this.customerDiscount.minimumPurchase)
       || this.checkNumberAttributes(this.customerDiscount.discount)
       || this.checkStringAttributes(this.customerDiscount.user) ;
   }
