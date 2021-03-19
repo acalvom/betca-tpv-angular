@@ -1,17 +1,20 @@
 import {Injectable} from '@angular/core';
 import {StockAlarmLine} from '../shared/services/models/stock-alarm-line.model';
 import {StockAlarm} from '../shared/services/models/stock-alarm.model';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {EndPoints} from '@shared/end-points';
 import {HttpService} from '@core/http.service';
 import {SharedArticleService} from '../shared/services/shared.article.service';
 import {map} from 'rxjs/operators';
+import {StockAlarms} from './stock-alarms.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class StockAlarmsService {
   static NAME = '/name';
+  static ALARMS = '/alarms';
 
   stockAlarmLine1: StockAlarmLine = {barcode: 'b84000000000171', warning: 2, critical: 4, stock: 4};
   stockAlarmLine2: StockAlarmLine = {barcode: 'b84000000000172', warning: 5, critical: 3, stock: 4};
@@ -32,12 +35,18 @@ export class StockAlarmsService {
     critical: 2,
     stockAlarmLines: [this.stockAlarmLine2, this.stockAlarmLine3]
   };
+  stockAlarms: StockAlarms = {
+    criticalAlarms: [this.stockAlarmLine2, this.stockAlarmLine3],
+    warningAlarms: [this.stockAlarmLine2]
+  };
 
   constructor(private httpService: HttpService, private articleService: SharedArticleService) {
   }
 
-  findAlarms(): Observable<StockAlarmLine[]> {
-    return of([this.stockAlarmLine2, this.stockAlarmLine3]);
+  findAlarms(alarms: string): Observable<StockAlarms> {
+    return this.httpService
+      .param('alarms', alarms)
+      .get(EndPoints.STOCKS_ALARMS + StockAlarmsService.ALARMS);
   }
 
   search(name: string): Observable<StockAlarm[]> {
