@@ -4,6 +4,7 @@ import {CustomerDiscountSearch} from './customer-discount-search.model';
 import {Observable, of} from 'rxjs';
 import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class CustomerDiscountService {
   private static SEARCH = '/search';
 
   private customerDiscounts: CustomerDiscount[] = [
-    {id: '1', note: 'customer1', registationDate: '02/05/20', discount: 0, minimmumPurchase: 0, user: '66666'},
-    {id: '2', note: 'customer2', registationDate: '02/05/20', discount: 0, minimmumPurchase: 0, user: '77777'}
+    {id: '1', note: 'customer1', registrationDate: '02/05/20', discount: 0, minimumPurchase: 0, user: '66666'},
+    {id: '2', note: 'customer2', registrationDate: '02/05/20', discount: 0, minimumPurchase: 0, user: '77777'}
   ];
 
   constructor(private httpService: HttpService) {
@@ -27,7 +28,7 @@ export class CustomerDiscountService {
 
   createCustomerDiscount(customerDiscount: CustomerDiscount): Observable<CustomerDiscount> {
     customerDiscount.id = (this.customerDiscounts.length + 1).toString();
-    customerDiscount.registationDate = Date.now().toString();
+    customerDiscount.registrationDate = Date.now().toString();
     this.customerDiscounts.push(customerDiscount);
     return of(customerDiscount);
   }

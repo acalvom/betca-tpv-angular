@@ -1,8 +1,8 @@
 export interface CustomerDiscount {
   id?: string;
   note?: string;
-  registationDate?: string;
+  registrationDate?: string;
   discount?: number;
-  minimmumPurchase?: number;
+  minimumPurchase?: number;
   user?: string;
 }
