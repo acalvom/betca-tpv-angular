@@ -3,7 +3,9 @@
     <mat-label><strong>Filters: </strong></mat-label>
     <mat-form-field>
       <mat-label>Alarm Name</mat-label>
-      <input [(ngModel)]="name" matInput>
+      <label>
+        <input [(ngModel)]="name" matInput>
+      </label>
     </mat-form-field>
 
     <button (click)="search()" mat-icon-button>
@@ -23,13 +25,15 @@
     </div>
     <div class="flex-column" style="width: 25%;">
       <mat-card style="background-color: orange">Warning</mat-card>
-      <ng-container *ngFor="let current of alarms">
+      <ng-container *ngFor="let current of stockAlarms.warningAlarms">
         <app-stock-alarm-chip [data]="current"></app-stock-alarm-chip>
       </ng-container>
     </div>
     <div class="flex-column" style="width: 25%;">
       <mat-card style="background-color: red">Critical</mat-card>
-
+      <ng-container *ngFor="let current of stockAlarms.criticalAlarms">
+        <app-stock-alarm-chip [data]="current"></app-stock-alarm-chip>
+      </ng-container>
     </div>
   </div>
 
