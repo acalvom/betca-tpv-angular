@@ -4,7 +4,7 @@ import {CustomerDiscountSearch} from './customer-discount-search.model';
 import {Observable, of} from 'rxjs';
 import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
-import {map} from 'rxjs/operators';
+import {Credit} from '../shared/services/models/credit.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +27,8 @@ export class CustomerDiscountService {
   }
 
   createCustomerDiscount(customerDiscount: CustomerDiscount): Observable<CustomerDiscount> {
-    customerDiscount.id = (this.customerDiscounts.length + 1).toString();
-    customerDiscount.registrationDate = Date.now().toString();
-    this.customerDiscounts.push(customerDiscount);
-    return of(customerDiscount);
+    return this.httpService
+      .post(EndPoints.CUSTOMERS_DISCOUNTS, customerDiscount);
   }
 
   readCustomerDiscount(id: string): Observable<CustomerDiscount> {

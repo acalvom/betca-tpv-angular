@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {CustomerDiscount} from '../shared/services/models/customer-discount.model';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {CustomerDiscountService} from './customer-discount.service';
@@ -56,6 +56,21 @@ export class CustomerDiscountDialogComponent {
 
   checkStringAttributes(attr: string): boolean {
     return attr === undefined || null || attr === '';
+  }
+
+  managedMobile(): boolean {
+    return !!this.customerDiscount.user;
+  }
+
+  searchUser(mobile: string): void {
+    // TODO search if the user with the mobile exists
+    if (mobile) {
+      this.customerDiscount.user = mobile;
+    }
+  }
+
+  resetMobile(): void {
+    this.customerDiscount.user = undefined;
   }
 
 }
