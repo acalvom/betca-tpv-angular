@@ -9,12 +9,18 @@
     <input [(ngModel)]="customerDiscount.discount" matInput required type="number"/>
   </mat-form-field>
   <mat-form-field class="full-width">
-    <mat-label>Minimmun Purchase</mat-label>
+    <mat-label>Minimum Purchase</mat-label>
     <input [(ngModel)]="customerDiscount.minimumPurchase" matInput required type="number">
   </mat-form-field>
   <mat-form-field class="full-width">
-    <mat-label>User</mat-label>
-    <input [(ngModel)]="customerDiscount.user" matInput required type="text">
+    <mat-label>User Mobile</mat-label>
+    <input #mobile [disabled]="managedMobile()" matInput required type="text">
+    <button (click)="searchUser(mobile.value)" *ngIf="!managedMobile()" mat-button mat-icon-button matSuffix>
+      <mat-icon color="warn">search</mat-icon>
+    </button>
+    <button (click)="resetMobile()" *ngIf="managedMobile()" mat-button mat-icon-button matSuffix>
+      <mat-icon color="warn">close</mat-icon>
+    </button>
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
