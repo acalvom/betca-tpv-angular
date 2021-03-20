@@ -2,11 +2,13 @@
     <mat-tab label="Received messages">
       <app-crud [data]="getReceivedMessages()" [readAction]="false" [deleteAction]="false" [createAction]="false" [updateAction]="false"
                 [title]="receivedMessagesTitle"></app-crud>
+      <mat-card *ngIf="sentMessages==null">There is no received message</mat-card>
     </mat-tab>
    
     <mat-tab label="Sent messages">
       <app-crud [data]="getSentMessages()" [readAction]="false" [deleteAction]="false" [createAction]="false" [updateAction]="false"
                 [title]="sentMessagesTitle"></app-crud>
+      <mat-card *ngIf="sentMessages==null">There is no sent message</mat-card>
     </mat-tab>
     
     <mat-tab label="New Message"> 
@@ -15,8 +17,8 @@
           <div fxLayout="row" fxLayoutAlign="space-around center" class="message-header">
             <mat-form-field appearance="fill" class="width:30%;">
               <mat-label>Recipient telephone</mat-label>
-              <input type="tel" matInput [(ngModel)]="message.toUser" name="toUser" maxLength="9">
-              <mat-hint align="end">{{message.toUser.length}} / 9</mat-hint>
+              <input type="tel" matInput [(ngModel)]="message.userTo" name="toUser" maxLength="9">
+              <mat-hint align="end">{{message.userTo.length}} / 9</mat-hint>
             </mat-form-field>
   
             <mat-form-field appearance="fill" class="width:70%;">
