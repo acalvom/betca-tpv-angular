@@ -7,6 +7,7 @@ import {CashierClosure} from './cashier-closure.model';
 import {EndPoints} from '@shared/end-points';
 import {Cashier} from '../../shared/services/models/cashier.model';
 import {CashierTotals} from '../../shared/services/models/cashier-totals.model';
+import {CashierClosureSearch} from './cashier-closure-search.model';
 
 
 @Injectable({
@@ -33,44 +34,10 @@ export class CashierClosureService {
       .get(EndPoints.CASHIERS + '/' + id);
   }
 
-  search(cashierClosure: CashierClosure): Observable<Cashier[]> {
-    /*return this.httpService
-      .paramsFrom(cashierClosure)
-      .get(EndPoints.CASHIERS + CashierClosureService.SEARCH);*/
-
-    const cashier: Cashier[] = ([
-      {
-        initialCash : 100,
-        cashSales : 1,
-        cardSales : 1,
-        usedVouchers : 1,
-        deposit : 1,
-        withdrawal : 1,
-        comment : 'comentario1',
-        lostCard : 1,
-        lostCash : 1,
-        finalCash : 1,
-        finalCard : 1,
-        openingDate : new Date('2021-01-30T00:00:00'),
-        closureDate : new Date('2021-01-30T00:00:00')
-      },
-      {
-        initialCash : 100,
-        cashSales : 1,
-        cardSales : 1,
-        usedVouchers : 1,
-        deposit : 1,
-        withdrawal : 1,
-        comment : 'comentario2',
-        lostCard : 1,
-        lostCash : 1,
-        finalCash : 1,
-        finalCard : 1,
-        openingDate : new Date('2021-02-04'),
-        closureDate : new Date('2021-02-04')
-      }
-    ]);
-    return of(cashier);
+  search(cashierClosureSearch: CashierClosureSearch): Observable<Cashier[]> {
+    return this.httpService
+      .paramsFrom(cashierClosureSearch)
+      .get(EndPoints.CASHIERS + CashierClosureService.SEARCH);
   }
 
   totals(cashierClosure: CashierClosure): Observable<CashierTotals[]> {
