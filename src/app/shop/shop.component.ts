@@ -16,6 +16,7 @@ import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SharedMessengerService } from './shared/services/shared-messenger.service';
 import {StaffTimeService} from './staff/staff-time.service';
+import { Message } from './shared/services/models/message.model';
 
 @Component({
   templateUrl: 'shop.component.html',
@@ -36,7 +37,7 @@ export class ShopComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.openSnackBar("You have new messages!", "Go to messages 📧");
+    this.openSnackBar();
   }
 
   untilManager(): boolean {
@@ -108,25 +109,29 @@ export class ShopComponent implements OnInit {
       .afterClosed();
   }
 
-  openSnackBar(message: string, action: string) {
+  openSnackBar() {
 
-    this.sharedMessengerService.checkNewMessages().subscribe((result: boolean) => {
-      let snackBarRef = this.snackBar.open(message, action, {
-        duration: 8000,
-      });
+    this.sharedMessengerService.checkNewMessages().subscribe((unreadMessages: Message[]) => {
+      if(unreadMessages && unreadMessages.length > 0){
+        let message: string = "You have new messages!";
+        let action: string = "Go to messages 📧";
 
-      var audio = new Audio('https://proxy.notificationsounds.com/message-tones/pristine-609/download/file-sounds-1150-pristine.mp3');
-      audio.play();
-
-      snackBarRef.onAction().subscribe(() => {
-        this.router.navigate(['shop', 'messenger']).then();
-      });
+        let snackBarRef = this.snackBar.open(message, action, {
+          duration: 8000,
+        });
+  
+        var audio = new Audio('../../assets/pristine.mp3');
+        audio.play();
+  
+        snackBarRef.onAction().subscribe(() => {
+          this.router.navigate(['shop', 'messenger']).then();
+        });
+      }
     }, error => {
       console.error("Error checking if there are new messages");
     });
 
   }
-
-
+  
 }
 

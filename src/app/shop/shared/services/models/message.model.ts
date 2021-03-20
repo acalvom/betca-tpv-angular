@@ -1,14 +1,13 @@
-import { User } from './user.model';
 
 export class Message {
-    fromUser: string;
-    toUser: string;
+    userFrom: string;
+    userTo: string;
     subject: string;
-    text: string;
+    text: string;    
 
     constructor(){
-        this.fromUser = "";
-        this.toUser = "";
+        this.userFrom = "";
+        this.userTo = "";
         this.subject = "";
         this.text = "";
     }
