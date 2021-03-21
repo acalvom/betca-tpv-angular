@@ -6,9 +6,9 @@ import {MatDialog} from '@angular/material/dialog';
 import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
 import {ArticleFamilyModel} from '../../shared/services/models/article-family.model';
 import {SharedArticlesFamilyService} from '../../shared/services/shared.articles-family.service';
-import {NewArticleFamilyDialogComponent} from '../dialogs/new-article-family-dialog/new-article-family-dialog.component';
-import {EditArticleFamilyDialogComponent} from '../dialogs/edit-article-family-dialog/edit-article-family-dialog.component';
-import {AddArticleDialogComponent} from '../dialogs/add-article-dialog/add-article-dialog.component';
+import {NewArticleFamilyDialogComponent} from './new-article-family-dialog/new-article-family-dialog.component';
+import {EditArticleFamilyDialogComponent} from './edit-article-family-dialog/edit-article-family-dialog.component';
+import {AddArticleDialogComponent} from './add-article-dialog/add-article-dialog.component';
 
 
 /**
@@ -38,11 +38,13 @@ export class ArticlesFamilyComponent implements OnInit {
   hasChild = (_: number, node: ArticleFamilyModel) => !!node.articleFamilyCrudList && node.articleFamilyCrudList.length > 0;
 
   read(): void {
-     const reference = 'root';
-     this.sharedArticlesFamilyService.readWithoutArticles(reference).subscribe(
+    const reference = 'root';
+    this.sharedArticlesFamilyService.readWithoutArticles(reference).subscribe(
       data => {
+        this.TREE_DATA = [];
         this.TREE_DATA.push(data);
         this.dataSource.data = this.TREE_DATA;
+        console.log(this.dataSource.data);
       }
     );
   }
@@ -52,7 +54,7 @@ export class ArticlesFamilyComponent implements OnInit {
       .afterClosed().subscribe(
       result => {
         if (result) {
-          console.log(result);
+          this.read();
         }
       }
     );
@@ -63,17 +65,17 @@ export class ArticlesFamilyComponent implements OnInit {
       data: node
     }).afterClosed().subscribe(result => {
       if (result) {
-        console.log(result);
+        this.read();
       }
     });
 
   }
 
-  deleteFamilyArticle(node: ArticleFamilyModel): any {
+  deleteFamilyArticle(node: any): any {
     this.dialog.open(CancelYesDialogComponent).afterClosed().subscribe(
       result => {
         if (result) {
-          this.sharedArticlesFamilyService.deleteFamilyArticle(node).subscribe(
+          this.sharedArticlesFamilyService.delete(node).subscribe(
             () => this.read()
           );
         }
@@ -85,7 +87,7 @@ export class ArticlesFamilyComponent implements OnInit {
     this.dialog.open(AddArticleDialogComponent, {data: node}).afterClosed().subscribe(
       result => {
         if (result){
-          console.log(result);
+          this.read();
         }
       }
     );

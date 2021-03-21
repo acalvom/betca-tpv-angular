@@ -35,15 +35,15 @@ import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dia
 import {TicketEditingDialogComponent} from './cashier-opened/tickets/ticket-editing-dialog.component';
 import {OpenSizesDialogComponent} from './cashier-opened/shopping-cart/article-family-view/open-sizes-dialog.component';
 import {ListComponent} from './shared/components/list.component';
-import {NewArticleFamilyDialogComponent} from './articles-family/dialogs/new-article-family-dialog/new-article-family-dialog.component';
-import {EditArticleFamilyDialogComponent} from './articles-family/dialogs/edit-article-family-dialog/edit-article-family-dialog.component';
+import {NewArticleFamilyDialogComponent} from './articles-family/articles-family/new-article-family-dialog/new-article-family-dialog.component';
+import {EditArticleFamilyDialogComponent} from './articles-family/articles-family/edit-article-family-dialog/edit-article-family-dialog.component';
 import {StockAlarmChipComponent} from './stock-alarms/stock-alarm-chip/stock-alarm-chip.component';
 import {ProviderInvoiceCreationUpdatingDialogComponent} from './provider-invoices/provider-invoice-creation-updating-dialog.component';
 import { StockAlarmsCreationUpdatingDialogComponent } from './stock-alarms/stock-alarms-creation-updating-dialog.component';
 import { DataProtectionActDialogComponent } from './data-protection-act/data-protection-act-dialog.component';
 import { StockAuditComponent } from './stock-audit/stock-audit.component';
 import { ProviderInvoicesComponent } from './provider-invoices/provider-invoices.component';
-import { AddArticleDialogComponent } from './articles-family/dialogs/add-article-dialog/add-article-dialog.component';
+import { AddArticleDialogComponent } from './articles-family/articles-family/add-article-dialog/add-article-dialog.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { VoucherCreationDialogComponent } from './vouchers/voucher-creation-dialog.component';
 

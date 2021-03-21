@@ -1,36 +1,15 @@
 import {Injectable} from '@angular/core';
 import {ArticleFamilyModel} from './models/article-family.model';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {ArticleFamilyViewModel} from '../../cashier-opened/shopping-cart/article-family-view/article-family-view.model';
 import {EndPoints} from '@shared/end-points';
 import {HttpService} from '@core/http.service';
+import {ArticleBarcodeWithParentReference} from '../../articles-family/articles-family/article-barcode-with-parent-reference';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedArticlesFamilyService {
-  ARTICLES_DATA: ArticleFamilyModel[] = [{
-    reference: 'root',
-    description: 'root',
-    treeType: 'ARTICLES',
-    articleFamilyCrudList: [{
-      reference: 'Zz',
-      description: 'Zz',
-      treeType: 'ARTICLES',
-      articleFamilyCrudList: [{
-        reference: 'Zz Falda',
-        description: 'Zz',
-        treeType: 'ARTICLES'
-      }]
-    },
-      {
-        reference: 'Pantalon',
-        description: 'T2',
-        treeType: 'ARTICLE',
-      }
-    ]
-  }
-  ];
 
   constructor(private httpService: HttpService) {
   }
@@ -46,20 +25,21 @@ export class SharedArticlesFamilyService {
       .get(EndPoints.ARTICLES_FAMILY_VIEW + '/' + reference);
   }
 
-  createArticleFamily(articleFamilyModel: ArticleFamilyModel, reference: string): Observable<string> {
-    return of(articleFamilyModel + ' ref:' + reference);
+  createArticleFamily(articleFamilyModel: ArticleFamilyModel): Observable<string> {
+    return this.httpService
+      .post(EndPoints.ARTICLES_FAMILY_CRUD, articleFamilyModel);
   }
 
   editArticleFamily(articleFamilyModel: ArticleFamilyModel): Observable<ArticleFamilyModel> {
-    return of(articleFamilyModel);
+    return this.httpService.put(EndPoints.ARTICLES_FAMILY_CRUD, articleFamilyModel);
   }
 
-  deleteFamilyArticle(node: ArticleFamilyModel): Observable<void> {
-    return of(console.log('Offer ' + node.reference + 'deleted successfully'));
+  delete(node: ArticleFamilyModel): Observable<void> {
+    return this.httpService
+      .delete(EndPoints.ARTICLES_FAMILY_CRUD + '/' + node.id);
   }
 
-  addArticleToFamily(articleFamilyModel: ArticleFamilyModel, barcode: string): Observable<void> {
-    return of(console.log('Parent Reference: ' + articleFamilyModel.reference + 'Barcode product: ' + barcode));
-
+  addArticleToFamily(articleBarcodeWithParentReference: ArticleBarcodeWithParentReference): Observable<void> {
+    return this.httpService.post(EndPoints.SINGLE_ARTICLES_FAMILY_CRUD, articleBarcodeWithParentReference);
   }
 }
