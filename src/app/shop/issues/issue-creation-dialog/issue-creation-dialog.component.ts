@@ -21,7 +21,7 @@ export class IssueCreationDialogComponent implements OnInit {
       title: undefined,
       body: undefined,
       labels: IssueLabel.BUG,
-      state: IssueState.OPEN,
+      state: IssueState.open,
       assignee: '',
       created_at: undefined,
       milestone: ''
