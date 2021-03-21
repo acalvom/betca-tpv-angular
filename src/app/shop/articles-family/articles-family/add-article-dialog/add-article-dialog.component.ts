@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ArticleFamilyModel} from '../../../shared/services/models/article-family.model';
 import {SharedArticlesFamilyService} from '../../../shared/services/shared.articles-family.service';
+import {ArticleBarcodeWithParentReference} from '../article-barcode-with-parent-reference';
 
 @Component({
   selector: 'app-add-article-dialog',
@@ -18,7 +19,13 @@ export class AddArticleDialogComponent {
   }
 
   addArticleToFamily(): void {
-    this.articlesFamilyService.addArticleToFamily(this.data, this.barcode).subscribe(
+    console.log(this.data);
+    const articleBarcodeWithParentReference: ArticleBarcodeWithParentReference = {
+      barcode: this.barcode,
+      parentReference: this.data.reference
+    };
+
+    this.articlesFamilyService.addArticleToFamily(articleBarcodeWithParentReference).subscribe(
       result => {
         this.dialogRef.close(result);
       }
