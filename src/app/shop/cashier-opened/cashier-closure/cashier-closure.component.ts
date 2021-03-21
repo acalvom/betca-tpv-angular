@@ -33,6 +33,8 @@ export class CashierClosureComponent implements OnInit {
   }
 
   resetSearch(): void {
+    this.beginDate = null;
+    this.endDate = null;
     this.cashierClosure = {};
     this.cashierClosureSearch = {};
   }
