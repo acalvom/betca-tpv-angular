@@ -9,6 +9,7 @@ export class EndPoints {
   static CASH_MOVEMENT_IN = EndPoints.CASHIERS + '/last/movement-in';
   static CASH_MOVEMENT_OUT = EndPoints.CASHIERS + '/last/movement-out';
   static TICKETS = environment.REST_CORE + '/tickets';
+  static INVOICES = environment.REST_CORE + '/invoices';
   static GIFTTICKETS = environment.REST_CORE + '/giftTickets';
   static COMPLAINTS = environment.REST_CUSTOMER_SUPPORT + '/complaints';
   static COMPLAINTS_SHOP = environment.REST_CORE + '/complaints';
@@ -30,4 +31,5 @@ export class EndPoints {
   static CUSTOMERS_DISCOUNTS = environment.REST_CORE + '/customer-discount';
   static TAGS = environment.REST_CORE + '/tags';
   static VOUCHERS = environment.REST_CORE + '/vouchers';
+  static ISSUES = environment.REST_CORE + '/issues';
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {of} from 'rxjs';
 import {Issue} from './issue.model';
 import {MatDialog} from '@angular/material/dialog';
@@ -47,5 +47,6 @@ export class IssuesComponent implements OnInit {
 
   resetSearch(): void {
     this.issueSearch = {};
+    this.issueSearch.state = IssueState.all;
   }
 }

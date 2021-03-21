@@ -4,11 +4,13 @@ import {IssueSearch} from './issue-search.model';
 import {Observable, of} from 'rxjs';
 import {Issue} from './issue.model';
 import {IssueState} from './issue-state.enum';
+import {EndPoints} from '@shared/end-points';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IssueService {
+  static SEARCH = '/search';
 
   private issueMocks: Issue[] = [
     {
@@ -16,8 +18,8 @@ export class IssueService {
       title: 'Found a bug',
       body: 'I\'m having a problem with this.',
       labels: 'bug',
-      state: IssueState.OPEN,
-      assignees: 'octocat',
+      state: IssueState.closed,
+      assignee: 'octocat',
       milestone: 'v1.0',
       created_at: '2011-04-10T20:09:31Z',
     },
@@ -26,8 +28,8 @@ export class IssueService {
       title: 'Enhancement',
       body: 'This could be improved.',
       labels: 'enhancement',
-      state: IssueState.OPEN,
-      assignees: 'kazlunn',
+      state: IssueState.open,
+      assignee: 'kazlunn',
       milestone: 'v1.1',
       created_at: '2021-03-04T18:09:31Z',
     },
@@ -37,7 +39,9 @@ export class IssueService {
   }
 
   search(issueSearch: IssueSearch): Observable<Issue[]> {
-    return of(this.issueMocks); // TODO
+    return this.httpService
+      .paramsFrom(issueSearch)
+      .get(EndPoints.ISSUES + IssueService.SEARCH);
   }
 
   create(issue: Issue): Observable<Issue> {
