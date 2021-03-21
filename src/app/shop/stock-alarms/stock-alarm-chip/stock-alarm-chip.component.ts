@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {StockAlarmLine} from '../../shared/services/models/stock-alarm-line.model';
 
 @Component({
@@ -6,17 +6,11 @@ import {StockAlarmLine} from '../../shared/services/models/stock-alarm-line.mode
   templateUrl: './stock-alarm-chip.component.html',
   styleUrls: ['./stock-alarm-chip.component.css']
 })
-export class StockAlarmChipComponent implements OnInit {
+export class StockAlarmChipComponent {
 
   @Input() data: StockAlarmLine;
   @Output() update = new EventEmitter<StockAlarmLine>();
   @Output() delete = new EventEmitter<StockAlarmLine>();
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 
   public changeWarning(): void {
     this.update.emit(this.data);

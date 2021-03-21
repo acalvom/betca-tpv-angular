@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {StockAlarm} from '../shared/services/models/stock-alarm.model';
@@ -10,7 +10,7 @@ import {StockAlarmLine} from '../shared/services/models/stock-alarm-line.model';
   templateUrl: './stock-alarms-creation-updating-dialog.component.html',
   styleUrls: ['./stock-alarms-creation-updating-dialog.component.css']
 })
-export class StockAlarmsCreationUpdatingDialogComponent implements OnInit {
+export class StockAlarmsCreationUpdatingDialogComponent {
 
   title: string;
   stockAlarm: StockAlarm;
@@ -25,9 +25,6 @@ export class StockAlarmsCreationUpdatingDialogComponent implements OnInit {
         warning: 5, critical: 5, stockAlarmLines: []
       };
     this.oldName = data ? data.name : undefined;
-  }
-
-  ngOnInit(): void {
   }
 
   isCreate(): boolean {
@@ -58,7 +55,7 @@ export class StockAlarmsCreationUpdatingDialogComponent implements OnInit {
   }
 
   updateAlarmLine(value: StockAlarmLine): void {
-    this.stockAlarm.stockAlarmLines.map(value1 => (value1.barcode === value.barcode ? {...value1, value} : value1));
+    this.stockAlarm.stockAlarmLines.forEach(value1 => (value1.barcode === value.barcode ? {...value1, value} : value1));
   }
 
 }

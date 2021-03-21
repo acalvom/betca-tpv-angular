@@ -1,8 +1,6 @@
 export class CustomerDiscountSearch {
-  id?: string;
   note?: string;
-  registationDate?: string;
   discount?: number;
-  minimmumPurchase?: number;
+  minimumPurchase?: number;
   user?: string;
 }

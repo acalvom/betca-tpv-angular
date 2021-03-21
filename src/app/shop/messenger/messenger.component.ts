@@ -14,38 +14,44 @@ export class MessengerComponent implements OnInit {
   receivedMessagesTitle: string = "Received Messages";
   sentMessagesTitle: string = "Sent Messages";
 
+  receivedMessages: Observable<Message[]> = this.messengerService.getReceivedMessages();
+  sentMessages: Observable<Message[]> = this.messengerService.getSentMessages();
+
   message: Message = new Message();
 
   constructor(private messengerService: MessengerService,
-              private authService: AuthService) { }
+    private authService: AuthService) {
+  }
 
   ngOnInit(): void {
   }
 
-  getReceivedMessages(): Observable<Message[]>{
-   return this.messengerService.getReceivedMessages();
+  getReceivedMessages(): Observable<Message[]> {
+    return this.receivedMessages;
   }
 
-  getSentMessages(): Observable<Message[]>{
-    return this.messengerService.getSentMessages();
+  getSentMessages(): Observable<Message[]> {
+    return this.sentMessages;
   }
 
-  sendMessage(): void{
-    this.message.fromUser = this.authService.getMobile().toString();
+  sendMessage(): void {
+    this.message.userFrom = this.authService.getMobile().toString();
 
     this.messengerService.sendNewMessage(this.message).subscribe(arg => {
       this.message = new Message();
+      this.receivedMessages = this.messengerService.getReceivedMessages();
+      this.sentMessages = this.messengerService.getSentMessages();
     }, error => {
       console.error("Error sending message. " + error);
     });
   }
 
-  isSendDisabled(): boolean{
+  isSendDisabled(): boolean {
     let disabled: boolean = false;
 
-    if(this.message.toUser == ''
-        || this.message.subject == ''
-        || this.message.text == ''){
+    if (this.message.userTo == ''
+      || this.message.subject == ''
+      || this.message.text == '') {
 
       disabled = true;
     }

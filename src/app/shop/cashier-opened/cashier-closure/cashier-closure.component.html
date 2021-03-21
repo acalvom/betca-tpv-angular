@@ -1,17 +1,20 @@
 <mat-form-field appearance="fill">
   <mat-label>Fecha de inicio</mat-label>
-  <input matInput [matDatepicker]="picker">
+  <input [(ngModel)]="beginDate" matInput [readonly]="true" [matDatepicker]="picker">
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
 <mat-form-field appearance="fill">
   <mat-label>Fecha de fin</mat-label>
-  <input matInput [matDatepicker]="picker2">
+  <input [(ngModel)]="endDate" matInput [readonly]="true" [matDatepicker]="picker2">
   <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
   <mat-datepicker #picker2></mat-datepicker>
 </mat-form-field>
 <button (click)="search()" mat-icon-button>
   <mat-icon>search</mat-icon>
+</button>
+<button (click)="resetSearch()" mat-icon-button>
+  <mat-icon>close</mat-icon>
 </button>
 <app-crud [data]="totals" [readAction]="false" [deleteAction]="false" [createAction]="false" [updateAction]="false"
           [title]="title2"></app-crud>

@@ -6,6 +6,8 @@ import {map} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {StockAlarmsCreationUpdatingDialogComponent} from './stock-alarms-creation-updating-dialog.component';
 import {StockAlarmLine} from '../shared/services/models/stock-alarm-line.model';
+import {Alarms} from './alarms.enum';
+import {StockAlarms} from './stock-alarms.model';
 
 
 @Component({
@@ -17,15 +19,20 @@ export class StockAlarmsComponent implements OnInit {
   name: string;
   title = 'Stock Alarm';
   data = of([]);
+  stockAlarms: StockAlarms;
   alarms: StockAlarmLine[];
 
   constructor(private stockAlarmsService: StockAlarmsService, private dialog: MatDialog) {
   }
 
+  ngOnInit(): void {
+    this.findAlarms();
+  }
+
   findAlarms(): void {
-    this.stockAlarmsService.findAlarms()
+    this.stockAlarmsService.findAlarms(Alarms.WARNING + ',' + Alarms.CRITICAL)
       .subscribe(value => {
-        this.alarms = value;
+        this.stockAlarms = value;
       });
   }
 
@@ -49,10 +56,6 @@ export class StockAlarmsComponent implements OnInit {
 
   delete(stockAlarm: StockAlarm): void {
     this.stockAlarmsService.delete(stockAlarm.name).subscribe();
-  }
-
-  ngOnInit(): void {
-    this.findAlarms();
   }
 
 }

@@ -4,7 +4,6 @@ import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from '@core/auth.service';
 import {ShoppingBasketArticle} from '../shared/shopping-basket-article.model';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {PayDialogComponent} from './pay-dialog.component';
 
 @Component({
@@ -30,7 +29,7 @@ export class ShoppingBasketComponent implements OnInit {
   username = undefined;
   totalShoppingBasket = 0 ;
 
-  constructor(private dialog: MatDialog, private authService: AuthService, private snackBar: MatSnackBar) {
+  constructor(private dialog: MatDialog, private authService: AuthService) {
 
   }
 
@@ -90,12 +89,6 @@ export class ShoppingBasketComponent implements OnInit {
         }
       }
     );
-  }
-
-  confirm() {
-    this.snackBar.open('You have successfully paid for the order.', 'Close', {
-      duration: 3000
-    });
   }
 }
 
