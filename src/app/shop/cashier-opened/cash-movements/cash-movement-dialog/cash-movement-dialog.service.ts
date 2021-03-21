@@ -15,8 +15,12 @@ export class CashMovementDialogService {
   constructor(private httpService: HttpService) {
   }
 
-  movement(cashMovementDialog: CashMovementDialog): Observable<void> {
-    return this.httpService.patch(EndPoints.CASH_MOVEMENT, cashMovementDialog);
+  movementIn(cashMovementDialog: CashMovementDialog): Observable<void> {
+    return this.httpService.patch(EndPoints.CASH_MOVEMENT_IN, cashMovementDialog);
+  }
+
+  movementOut(cashMovementDialog: CashMovementDialog): Observable<void> {
+    return this.httpService.patch(EndPoints.CASH_MOVEMENT_OUT, cashMovementDialog);
   }
 
   readState(): Observable<CashMovementDialog> {

@@ -1,3 +1,3 @@
 export interface CashMovementDialog {
-  deposit: number;
+  amount: number;
 }
