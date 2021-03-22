@@ -63,7 +63,8 @@ export class ArticlesFamilyComponent implements OnInit {
   editFamilyArticle(node: ArticleFamilyModel): any {
     this.dialog.open(EditArticleFamilyDialogComponent, {
       data: node
-    }).afterClosed().subscribe(result => {
+    }).afterClosed().subscribe(
+      result => {
       if (result) {
         this.read();
       }

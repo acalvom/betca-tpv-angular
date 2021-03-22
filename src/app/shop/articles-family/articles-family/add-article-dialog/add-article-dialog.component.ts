@@ -6,8 +6,7 @@ import {ArticleBarcodeWithParentReference} from '../article-barcode-with-parent-
 
 @Component({
   selector: 'app-add-article-dialog',
-  templateUrl: './add-article-dialog.component.html',
-  styleUrls: ['./add-article-dialog.component.css']
+  templateUrl: './add-article-dialog.component.html'
 })
 export class AddArticleDialogComponent {
 
