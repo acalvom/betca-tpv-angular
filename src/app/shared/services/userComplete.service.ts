@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {User} from '@shared/models/userRegister.model';
 import {UserInfoModel} from '../../shop/users/models/user-info.model';
 import {EndPoints} from '@shared/end-points';
+import {AuthService} from '@core/auth.service';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ export class UserCompleteService {
 
   private users: User[];
 
-  constructor(private httpService: HttpService) {
+  constructor(private httpService: HttpService, private authService: AuthService) {
   }
 
   searchCompleteUser(mobile: number): Observable<User> {
@@ -31,7 +32,6 @@ export class UserCompleteService {
   }
 
   setCompleteUser(oldMobile: number, newUser: User): Observable<User>{
-    console.log(newUser.active);
     return this.httpService
       .successful()
       .put(EndPoints.ADMIN + '/' + oldMobile, newUser);
@@ -39,7 +39,7 @@ export class UserCompleteService {
 
   createCompleteUser(user: User): Observable<User>{
     return this.httpService
-      .post(EndPoints.ADMIN, user);
+      .post(EndPoints.ADMIN + '/' + this.authService.getRole(), user);
   }
 
   checkUser(mobile: number): boolean {
