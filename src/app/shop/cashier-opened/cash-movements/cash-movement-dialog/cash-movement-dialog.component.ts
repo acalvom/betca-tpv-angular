@@ -10,7 +10,7 @@ import {CashMovementDialog} from './cash-movement-dialog.model';
   styleUrls: ['./cash-movement-dialog.component.css']
 })
 export class CashMovementDialogComponent implements OnInit {
-  cashFinal: CashMovementDialog = {totalCash: null, movement: null, movementtype: null};
+  cashFinal: CashMovementDialog = {amount: null};
   cashMovementDialog: Observable<CashMovementDialog>;
 
 
@@ -23,18 +23,15 @@ export class CashMovementDialogComponent implements OnInit {
   }
 
   cashIn(): void {
-    /*this.cashFinal.movementtype = true;
-    this.cashMovementDialogService
-      .setMovement(this.cashFinal)
-      .subscribe(() => this.dialogRef.close());*/
-    this.dialogRef.close();
+      this.cashMovementDialogService
+        .movementIn(this.cashFinal)
+        .subscribe(() => this.dialogRef.close());
   }
 
   cashOut(): void {
-/*    this.cashFinal.movementtype = false;
     this.cashMovementDialogService
-      .setMovement(this.cashFinal)
-      .subscribe(() => this.dialogRef.close());*/
-    this.dialogRef.close();
+      .movementOut(this.cashFinal)
+      .subscribe(() => this.dialogRef.close());
   }
+
 }

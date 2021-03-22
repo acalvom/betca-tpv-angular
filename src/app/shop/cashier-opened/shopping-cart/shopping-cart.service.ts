@@ -77,7 +77,7 @@ export class ShoppingCartService {
         concatMap(ticket => {
           let receipts = this.printTicket(ticket.id);
           receipts = iif(() => voucher > 0, merge(receipts, this.createVoucherAndPrint(voucher)), receipts);
-          receipts = iif(() => requestedInvoice, merge(receipts, this.createInvoiceAndPrint(ticket.id)), receipts);
+          receipts = iif(() => requestedInvoice, merge(receipts, this.createInvoiceAndPrint(ticket.reference)), receipts);
           receipts = iif(() => requestedGiftTicket, merge(receipts, this.createGiftTicketAndPrint(ticket.id)), receipts);
           receipts = iif(() => requestDataProtectionAct, merge(receipts, this.createDataProtectionActAndPrint(ticket)), receipts);
           receipts = iif(() => checkedCreditLine, merge(receipts, this.createCreditSaleAndPrint(ticket.reference,
@@ -97,13 +97,8 @@ export class ShoppingCartService {
 
   createInvoiceAndPrint(ticketId: string): Observable<void> {
     // return this.httpService.pdf().get(EndPoints.INVOICES + '/' + ticketId + ShoppingCartService.RECEIPT);
-    const ticket = {id: 'Ma35Mhdgd2454656', message: 'Invoice ticket', ticketId}; // invoice provisional
-    return of(ticket)
-      .pipe(
-        source => {
-          return this.printTicket(ticketId);
-        }
-      );
+    const ticket = {reference: ticketId}; // invoice provisional
+    return this.httpService.pdf().post(EndPoints.INVOICES, ticket);
   }
 
   createGiftTicketAndPrint(ticketId: string): Observable<void> {

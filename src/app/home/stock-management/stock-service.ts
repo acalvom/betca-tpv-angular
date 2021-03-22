@@ -9,6 +9,9 @@ import {ArticleStock} from './article-stock';
 })
 export class StockService {
   static STOCK = '/stock';
+  static STOCK_SOLD = '/stock-sold';
+  static STOCK_FUTURE = '/stock-future';
+
 
   articulos: ArticleStock[] = [
     {
@@ -57,22 +60,30 @@ export class StockService {
       description: 'Camiseta verde',
       dateStockEmpty: new Date('2020-01-25T00:00:00')
     };
+
   constructor(private httpService: HttpService) {
   }
 
   searchStock(stock: number): Observable<ArticleStock[]> {
     // return of(this.articulos);
-     return this.httpService
-       .param('stock', String(stock))
-       .get(EndPoints.STOCK_MANAGER + StockService.STOCK);
+    return this.httpService
+      .param('stock', String(stock))
+      .get(EndPoints.STOCK_MANAGER + StockService.STOCK);
   }
 
-  searchSoldProducts(start: Date, end: Date): Observable<ArticleStock[]> {
-    return of(this.articulosVendidos);
+  searchSoldProducts(start: string, end: string): Observable<ArticleStock[]> {
+
+    // return of(this.articulosVendidos);
+    return this.httpService
+      .param('initial', start)
+      .param('end', end)
+      .get(EndPoints.STOCK_MANAGER + StockService.STOCK_SOLD);
   }
 
   searchFutureStock(barcode: string): Observable<ArticleStock> {
-    return of(this.articulos[3]);
+    return this.httpService
+      .param('barcode', barcode)
+      .get(EndPoints.STOCK_MANAGER + StockService.STOCK_FUTURE);
   }
 
   searchEmptyStock(barcode: string): Observable<ArticleStock> {

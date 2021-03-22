@@ -2,14 +2,14 @@
 
   <mat-card-title>
     <mat-icon color="primary">shopping_cart</mat-icon>
-    Shopping Basket --Total:{{totalShoppingBasket| currency:'EUR':'symbol'}}
+    Shopping Basket ------Total:{{ totalShoppingBasket| currency:'EUR':'symbol'}}
   </mat-card-title>
 
   <mat-grid-list>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
       <ng-container matColumnDef="photo">
-        <th mat-header-cell *matHeaderCellDef> Photo del Producto </th>
+        <th mat-header-cell *matHeaderCellDef> Product Photo </th>
         <td mat-cell *matCellDef="let article">
           <img src="{{article.photo}}">
         </td>

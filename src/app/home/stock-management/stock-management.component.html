@@ -43,6 +43,13 @@
         <mat-icon>search</mat-icon>
       </button>
     </mat-card-content>
+    <ng-container *ngIf="soldProductsError">
+      <mat-card>
+        <mat-card-content>
+          <mat-label class="error"><strong>Fechas no válidas</strong></mat-label>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
     <ng-container *ngIf="soldProducts">
       <app-table-stock [data]="articlesByDate" [productSold]="true"></app-table-stock>
     </ng-container>
@@ -56,12 +63,19 @@
     <mat-card-content>
       <mat-form-field>
         <mat-label>Enter a barcode</mat-label>
-        <input [(ngModel)]="stockArticle.barcode" matInput type="number">
+        <input [(ngModel)]="stockArticle.barcode" matInput type="string">
       </mat-form-field>
       <button (click)="searchFutureStock()" mat-icon-button>
         <mat-icon>search</mat-icon>
       </button>
     </mat-card-content>
+    <ng-container *ngIf="stockForescatError">
+      <mat-card>
+        <mat-card-content>
+          <mat-label class="error"><strong>BARCODE no válido</strong></mat-label>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
     <ng-container *ngIf="stockForescat">
       <mat-card>
         <mat-card-content>
@@ -109,7 +123,7 @@
           <mat-label>{{(stockZero|async)?.stock}}</mat-label>
         </mat-card-content>
         <mat-card-content>
-          <mat-label><strong>Date empty stock:  </strong></mat-label>
+          <mat-label><strong>Date empty stock: </strong></mat-label>
           <mat-label>{{(stockZero|async)?.dateStockEmpty}}</mat-label>
         </mat-card-content>
       </mat-card>

@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ArticleSearch} from './article-search';
 import {of} from 'rxjs';
 import {StockService} from './stock-service';
-import {MatDialog} from '@angular/material/dialog';
-import {ArticleStock} from './article-stock';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-stock-management',
@@ -18,14 +17,16 @@ export class StockManagementComponent implements OnInit {
   stockFuture = of();
   stockZero = of();
   title = 'Stock management';
-  start: any;
-  end: any;
+  start: Date;
+  end: Date;
   soldProducts = false;
   stock = false;
   stockForescat = false;
   stockEmpty = false;
+  stockForescatError = false;
+  soldProductsError = false;
 
-  constructor(private dialog: MatDialog, private stockService: StockService) {
+  constructor(private stockService: StockService) {
     this.stockArticle = {};
   }
 
@@ -38,20 +39,37 @@ export class StockManagementComponent implements OnInit {
   }
 
   searchSoldProducts(): void {
-    this.soldProducts = true;
-    const firstDate = new Date(this.start);
-    const secondDate = new Date(this.start);
-    this.articlesByDate = this.stockService.searchSoldProducts(firstDate, secondDate);
+
+    if (this.start != null && this.end != null) {
+      const firstDate = this.setDateFormat(this.start);
+      const secondDate = this.setDateFormat(this.end);
+      this.soldProductsError = false;
+      this.soldProducts = true;
+      this.articlesByDate = this.stockService.searchSoldProducts(firstDate, secondDate);
+    } else {
+      this.soldProductsError = true;
+      this.soldProducts = false;
+    }
   }
 
   searchFutureStock(): void {
-    this.stockForescat = true;
-    this.stockFuture = this.stockService.searchFutureStock(this.stockArticle.barcode);
+    if (this.stockArticle.barcode != null) {
+      this.stockForescatError = false;
+      this.stockForescat = true;
+      this.stockFuture = this.stockService.searchFutureStock(this.stockArticle.barcode);
+    } else {
+      this.stockForescatError = true;
+    }
 
   }
 
   searchEmptyStock(): void {
     this.stockEmpty = true;
     this.stockZero = this.stockService.searchEmptyStock(this.stockArticle.barcode);
+  }
+
+  setDateFormat(datePicker: Date): string {
+    return moment(datePicker).format('YYYY-MM-DD[T]HH:mm:ss');
+
   }
 }

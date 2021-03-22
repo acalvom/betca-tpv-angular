@@ -9,8 +9,26 @@ table {
   overflow: auto;
   max-height: 600px;
   width: 100%;
+  margin-top: 20px;
 }
 
 img {
   height: 100px;
+}
+
+mat-card {
+  width: 100%;
+}
+
+mat-card-content {
+  margin-top: 10px;
+}
+
+#reference {
+  margin-top: 20px;
+}
+
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
 }

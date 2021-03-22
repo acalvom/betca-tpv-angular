@@ -6,6 +6,7 @@ import {CustomerDiscount} from '../shared/services/models/customer-discount.mode
 import {CustomerDiscountSearch} from './customer-discount-search.model';
 import {CustomerDiscountDialogComponent} from './customer-discount-dialog.component';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-customer-discount',
