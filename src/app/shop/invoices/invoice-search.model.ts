@@ -1,4 +1,4 @@
 export class InvoiceSearch {
-  phone?: number;
-  ticketId?: number;
+  userPhone?: string;
+  ticketId?: string;
 }
