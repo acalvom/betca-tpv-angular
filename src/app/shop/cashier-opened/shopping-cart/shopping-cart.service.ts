@@ -140,7 +140,17 @@ export class ShoppingCartService {
   }
 
   createBudget(budgetCreation: BudgetCreation): Observable<void> {
-    return of(console.log('Success'));
+    return this.httpService
+      .post(EndPoints.BUDGETS, budgetCreation)
+      .pipe(
+        concatMap(budget => {
+          const receipts = this.printBudget(budget.id);
+          return receipts;
+        })
+      );
+  }
+  printBudget(budgetId: string): Observable<void> {
+    return this.httpService.pdf().get(EndPoints.BUDGETS + '/' + budgetId + ShoppingCartService.RECEIPT);
   }
 
   readBudget(budget: string): Observable<Shopping> {
