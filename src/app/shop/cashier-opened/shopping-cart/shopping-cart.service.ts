@@ -144,8 +144,8 @@ export class ShoppingCartService {
       .post(EndPoints.BUDGETS, budgetCreation)
       .pipe(
         concatMap(budget => {
-          const receipts = this.printBudget(budget.id);
-          return receipts;
+          const receipt = this.printBudget(budget.id);
+          return receipt;
         })
       );
   }
