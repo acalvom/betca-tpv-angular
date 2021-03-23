@@ -22,7 +22,7 @@ export class ProviderInvoiceCreationUpdatingDialogComponent {
       creationDate: undefined,
       baseTax: undefined,
       taxValue: undefined,
-      provider: undefined,
+      providerCompany: undefined,
       orderId: undefined
     };
     this.oldProviderInvoiceNumber = data ? data.number : undefined;
@@ -37,7 +37,7 @@ export class ProviderInvoiceCreationUpdatingDialogComponent {
       this.check(this.providerInvoice.creationDate) ||
       this.check(this.providerInvoice.baseTax) || this.providerInvoice.baseTax < 0 ||
       this.check(this.providerInvoice.taxValue) || this.providerInvoice.taxValue < 0 ||
-      this.check(this.providerInvoice.provider) ||
+      this.check(this.providerInvoice.providerCompany) ||
       this.check(this.providerInvoice.orderId);
   }
 

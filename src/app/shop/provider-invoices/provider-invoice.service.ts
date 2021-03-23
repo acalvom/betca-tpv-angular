@@ -2,23 +2,23 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {ProviderInvoice} from './provider-invoice.model';
 import {TotalTax} from './total-tax.model';
-// import {HttpService} from '@core/http.service';
-// import {EndPoints} from '@shared/end-points';
+import {HttpService} from '@core/http.service';
+import {EndPoints} from '@shared/end-points';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProviderInvoiceService {
   providerInvoices: ProviderInvoice[] = [
-    {number: 1, creationDate: new Date('2021-03-01'), baseTax: 1000, taxValue: 10, provider: 'pro1', orderId: '1'},
-    {number: 2, creationDate: new Date('2021-03-02'), baseTax: 2000, taxValue: 20, provider: 'pro2', orderId: '2'},
+    {number: 1, creationDate: new Date('2021-03-01'), baseTax: 1000, taxValue: 10, providerCompany: 'pro1', orderId: '1'},
+    {number: 2, creationDate: new Date('2021-03-02'), baseTax: 2000, taxValue: 20, providerCompany: 'pro2', orderId: '2'},
   ];
 
-  constructor(/* private httpService: HttpService */) {
+  constructor(private httpService: HttpService) {
   }
 
   findAll(): Observable<ProviderInvoice[]> {
-    return of(this.providerInvoices);
+    return this.httpService.get(EndPoints.PROVIDER_INVOICES);
   }
 
   create(providerInvoice: ProviderInvoice): Observable<ProviderInvoice> {

@@ -33,4 +33,5 @@ export class EndPoints {
   static VOUCHERS = environment.REST_CORE + '/vouchers';
   static ADMIN = environment.REST_USER + '/users-admin';
   static ISSUES = environment.REST_CORE + '/issues';
+  static PROVIDER_INVOICES = environment.REST_CORE + '/provider-invoices';
 }

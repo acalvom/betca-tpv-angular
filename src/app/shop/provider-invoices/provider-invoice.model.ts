@@ -3,6 +3,6 @@ export interface ProviderInvoice {
   creationDate: Date;
   baseTax: number;
   taxValue: number;
-  provider: string;
+  providerCompany: string;
   orderId: string;
 }
