@@ -36,7 +36,7 @@ export class IssuesComponent implements OnInit {
     this.dialog.open(ReadDetailDialogComponent, {
       data: {
         title: 'Issue Details',
-        object: this.issueService.read(issue.id)
+        object: this.issueService.read(issue.number)
       }
     });
   }
