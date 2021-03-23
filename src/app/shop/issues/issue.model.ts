@@ -1,7 +1,7 @@
 import {IssueState} from './issue-state.enum';
 
 export class Issue {
-  id: number;
+  number: number;
   title: string;
   labels: string;
   state: IssueState;

@@ -9,6 +9,7 @@ import {InvoiceItem} from './invoice-item.model';
 import {Ticket} from '../shared/services/models/ticket.model';
 import {InvoiceUpdate} from './invoice-update.model';
 import {User} from '../shared/services/models/user.model';
+import {EndPoints} from '@shared/end-points';
 
 @Injectable({
   providedIn: 'root'
@@ -48,12 +49,9 @@ export class InvoiceService {
   }
 
   search(invoiceSearch: InvoiceSearch): Observable<InvoiceItem[]> {
-    console.log('Filtrando resultados por invoiceSearch');
-    const invoices: InvoiceItem[] = this.invoicesItems.filter(invo => invoiceSearch.phone === undefined ||
-      invo.userPhone === invoiceSearch.phone)
-      .filter(invo => invoiceSearch.ticketId === undefined ||
-        invo.number === invoiceSearch.ticketId);
-    return of(invoices);
+    return this.httpService
+      .paramsFrom(invoiceSearch)
+      .get(EndPoints.INVOICES + '/search');
   }
 
   printPdf(numberInvoice: number): Observable<void> {

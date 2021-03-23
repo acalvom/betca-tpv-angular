@@ -17,7 +17,7 @@ export class IssueCreationDialogComponent implements OnInit {
 
   constructor(private issueService: IssueService, private dialog: MatDialog) {
     this.issue = {
-      id: undefined,
+      number: undefined,
       title: undefined,
       body: undefined,
       labels: IssueLabel.BUG,
