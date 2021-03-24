@@ -2,15 +2,15 @@
 <mat-dialog-content>
   <mat-form-field class="full-width">
     <mat-label>Title</mat-label>
-    <input matInput [(ngModel)]="issue.title" required type="text"/>
+    <input matInput [(ngModel)]="issueTitle" required type="text"/>
   </mat-form-field>
   <mat-form-field class="full-width">
     <mat-label>Body</mat-label>
-    <textarea matInput [(ngModel)]="issue.body" required></textarea>
+    <textarea matInput [(ngModel)]="issueBody"></textarea>
   </mat-form-field>
   <mat-form-field class="full-width">
     <mat-label>Label</mat-label>
-    <mat-select [(ngModel)]="issue.labels" required>
+    <mat-select [(ngModel)]="issueLabel">
       <mat-option *ngFor="let label of labelValues" [value]="label">
         {{label}}
       </mat-option>
