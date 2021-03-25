@@ -13,7 +13,7 @@ export class ProductComponent implements OnInit {
 
   @Input() barcode: string;
   @Input() description: string;
-  @Input() state: number;
+  @Input() state: string;
 
   constructor() { }
 
