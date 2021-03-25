@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Issue} from '../issue.model';
 import {IssueService} from '../issue.service';
 import {MatDialog} from '@angular/material/dialog';
 import {IssueLabel} from '../issue-label.enum';
-import {IssueState} from '../issue-state.enum';
+import {IssueCreation} from '../issue-creation.model';
 
 @Component({
   selector: 'app-issue-creation-dialog',
@@ -12,32 +11,33 @@ import {IssueState} from '../issue-state.enum';
 })
 export class IssueCreationDialogComponent implements OnInit {
   title = 'Issues';
-  issue: Issue;
+  issueCreation: IssueCreation;
+  issueTitle: string;
+  issueBody: string;
+  issueLabel: IssueLabel;
   labelValues = Object.keys(IssueLabel).filter(key => isNaN(Number(key)));
 
   constructor(private issueService: IssueService, private dialog: MatDialog) {
-    this.issue = {
-      number: undefined,
-      title: undefined,
-      body: undefined,
-      labels: IssueLabel.BUG,
-      state: IssueState.open,
-      assignee: '',
-      created_at: undefined,
-      milestone: ''
-    };
+    this.issueTitle = '';
+    this.issueBody = '';
+    this.issueLabel = undefined;
   }
 
   ngOnInit(): void {
   }
 
   create(): void {
-    this.issueService.create(this.issue)
+    this.issueCreation = {
+      title: this.issueTitle,
+      body: this.issueBody,
+      labels: [this.issueLabel]
+    };
+    this.issueService.create(this.issueCreation)
       .subscribe(() => this.dialog.closeAll());
   }
 
   invalid(): boolean {
-    return this.check(this.issue.title) || this.check(this.issue.body) || this.check(this.issue.labels);
+    return this.check(this.issueTitle) || this.check(this.issueBody) || this.check(this.issueLabel);
   }
 
   check(attr: string): boolean {
