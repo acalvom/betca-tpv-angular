@@ -22,12 +22,8 @@ export class ProviderInvoiceService {
   }
 
   create(providerInvoice: ProviderInvoice): Observable<ProviderInvoice> {
-    this.providerInvoices.push(providerInvoice);
-    return of(providerInvoice);
-    /*
     return this.httpService
       .post(EndPoints.PROVIDER_INVOICES, providerInvoice);
-    */
   }
 
   read(providerInvoiceNumber: number): Observable<ProviderInvoice> {
