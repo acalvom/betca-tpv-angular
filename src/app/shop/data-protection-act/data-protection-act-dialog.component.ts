@@ -3,6 +3,7 @@ import {RgpdUser} from '@shared/models/rgpd-user.model';
 import {Observable, of} from 'rxjs';
 import {DataProtectionActService} from '@shared/components/data-protection-act/data-protection-act.service';
 import {RgpdType} from '@shared/models/RgpdType';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-data-protection-act-dialog',
@@ -14,8 +15,9 @@ export class DataProtectionActDialogComponent {
   mobile: string;
   mobiles: Observable<number[]> = of([]);
   rgpdUser: RgpdUser;
+  isNew = true;
 
-  constructor(private dataProtectionActService: DataProtectionActService) {
+  constructor(private dataProtectionActService: DataProtectionActService, private dialog: MatDialog) {
     this.reset();
   }
 
@@ -27,10 +29,13 @@ export class DataProtectionActDialogComponent {
     this.dataProtectionActService
       .read(this.mobile)
       .subscribe(searchRgpdUser => {
-          this.rgpdUser.mobile = searchRgpdUser.mobile;
-          this.rgpdUser.rgpdType = (RgpdType as any)[searchRgpdUser.rgpdType];
+          if (searchRgpdUser !== null) {
+            this.rgpdUser.mobile = searchRgpdUser.mobile;
+            this.rgpdUser.rgpdType = (RgpdType as any)[searchRgpdUser.rgpdType];
+          }
         }
       );
+    this.isNew = this.rgpdUser.rgpdType === undefined;
   }
 
   isReady(): boolean {
@@ -38,11 +43,19 @@ export class DataProtectionActDialogComponent {
       this.rgpdUser.agreement !== undefined;
   }
 
+  submit(): void {
+    if (this.isNew) {
+      this.dataProtectionActService.create(this.rgpdUser)
+        .subscribe(() => this.dialog.closeAll());
+    }
+  }
+
   reset(): void {
     this.rgpdUser = {
-      mobile: undefined,
+      mobile: Number(this.mobile),
       rgpdType: undefined,
       agreement: undefined
     };
   }
+
 }

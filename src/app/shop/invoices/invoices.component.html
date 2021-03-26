@@ -3,11 +3,11 @@
     <mat-label><strong>Filters: </strong></mat-label>
     <mat-form-field>
       <mat-label>User Phone</mat-label>
-      <input [(ngModel)]="invoiceSearch.phone" matInput type="number">
+      <input [(ngModel)]="invoiceSearch.userPhone" matInput>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Ticket Id.</mat-label>
-      <input [(ngModel)]="invoiceSearch.ticketId" matInput type="number">
+      <input [(ngModel)]="invoiceSearch.ticketId" matInput>
     </mat-form-field>
     <button (click)="search()" mat-icon-button>
       <mat-icon>search</mat-icon>

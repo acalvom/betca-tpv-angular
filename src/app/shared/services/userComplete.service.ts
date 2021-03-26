@@ -2,8 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpService} from '@core/http.service';
 import {Observable, of} from 'rxjs';
 import {User} from '@shared/models/userRegister.model';
-import {Role} from '@core/role.model';
 import {UserInfoModel} from '../../shop/users/models/user-info.model';
+import {EndPoints} from '@shared/end-points';
+import {AuthService} from '@core/auth.service';
 
 
 @Injectable({
@@ -11,30 +12,19 @@ import {UserInfoModel} from '../../shop/users/models/user-info.model';
 })
 export class UserCompleteService {
 
-  private users: User[] = [
-    {
-      mobile: 66, firstName: 'Hector', familyName: 'Gomez', email: 'hectorgomez@hotmail.com', dni: '0000000001A',
-      address: 'C/Alan Turin', password: '6', role: Role.ADMIN, registrationDate: new Date(), active: true
-    },
-    {
-      mobile: 6, firstName: 'Laura', familyName: 'Perez', email: 'lauraperez@hotmail.com', dni: '1000000002B',
-      address: 'Avd/ Albufera', password: '6', role: Role.CUSTOMER, registrationDate: new Date(), active: true
-    },
-    {
-      mobile: 12678, firstName: 'David', familyName: 'Garcia', email: 'davidgarcia@hotmail.com', dni: '5100000003Y',
-      address: 'C/Pablo Neruda', password: '1234', role: Role.MANAGER, registrationDate: new Date(), active: true
-    },
-  ];
+  private users: User[];
 
-  constructor(private httpService: HttpService) {
+  constructor(private httpService: HttpService, private authService: AuthService) {
   }
 
   searchCompleteUser(mobile: number): Observable<User> {
-    return of(this.users.find(user => user.mobile == mobile));
+    return this.httpService
+      .get(EndPoints.ADMIN + '/' + mobile);
   }
 
   getCompleteUsers(): Observable<User[]> {
-    return of(this.users);
+    return this.httpService
+      .get(EndPoints.ADMIN);
   }
 
   getBasicUsersInfo(): Observable<any[]> {
@@ -42,19 +32,14 @@ export class UserCompleteService {
   }
 
   setCompleteUser(oldMobile: number, newUser: User): Observable<User>{
-    const userToUpdate = this.users.find(off => off.mobile === oldMobile);
-    const index = this.users.indexOf(userToUpdate);
-    if (index > -1){
-      this.users.splice(index, 1, newUser);
-    }
-    return of(newUser);
+    return this.httpService
+      .successful()
+      .put(EndPoints.ADMIN + '/' + oldMobile, newUser);
   }
 
   createCompleteUser(user: User): Observable<User>{
-    user.registrationDate = new Date() ;
-    this.users.push(user);
-    return of(user);
-
+    return this.httpService
+      .post(EndPoints.ADMIN + '/' + this.authService.getRole(), user);
   }
 
   checkUser(mobile: number): boolean {
@@ -62,11 +47,7 @@ export class UserCompleteService {
   }
 
   deleteCompleteUser(mobile: number): Observable<User[]>{
-    const deleteUser = this.users.find( item => item.mobile == mobile );
-    const index = this.users.indexOf(deleteUser);
-    this.users.splice(index, 1);
-    return of(this.users);
+      return  this.httpService
+        .delete(EndPoints.ADMIN + '/' + mobile);
   }
-
-
 }

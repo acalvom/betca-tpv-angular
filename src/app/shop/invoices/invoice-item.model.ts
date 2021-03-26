@@ -4,7 +4,7 @@ export class InvoiceItem {
   baseTax: number;
   taxValue: number;
   userPhone: number;
-  ticketRef: string;
+  ticketId: string;
 
   constructor(invoiceRef: number, creationDate: Date, baseTax: number, taxValue: number, phoneUser: number, ticketRef: string){
     this.number = invoiceRef;
@@ -12,6 +12,6 @@ export class InvoiceItem {
     this.baseTax = baseTax;
     this.taxValue = taxValue;
     this.userPhone = phoneUser;
-    this.ticketRef = ticketRef;
+    this.ticketId = ticketRef;
   }
 }

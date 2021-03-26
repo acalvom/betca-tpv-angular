@@ -4,5 +4,5 @@
                 (selected)="findByMobile()" (keyChange)="reset()"></app-search>
     <app-manage-data-protection-act [rgpdUser]="rgpdUser"></app-manage-data-protection-act>
   </mat-dialog-content>
-  <button mat-raised-button color="primary" [disabled]="!isReady()">Submit</button>
+  <button mat-raised-button color="primary" [disabled]="!isReady()" (click)="submit()">Submit</button>
 </mat-card>

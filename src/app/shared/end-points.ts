@@ -9,6 +9,7 @@ export class EndPoints {
   static CASH_MOVEMENT_IN = EndPoints.CASHIERS + '/last/movement-in';
   static CASH_MOVEMENT_OUT = EndPoints.CASHIERS + '/last/movement-out';
   static TICKETS = environment.REST_CORE + '/tickets';
+  static INVOICES = environment.REST_CORE + '/invoices';
   static GIFTTICKETS = environment.REST_CORE + '/giftTickets';
   static COMPLAINTS = environment.REST_CUSTOMER_SUPPORT + '/complaints';
   static COMPLAINTS_SHOP = environment.REST_CORE + '/complaints';
@@ -24,9 +25,13 @@ export class EndPoints {
   static REVIEWS = environment.REST_CUSTOMER_SUPPORT + '/reviews';
   static ARTICLES_FAMILY_VIEW = environment.REST_CORE + '/article-family-view';
   static ARTICLES_FAMILY_CRUD = environment.REST_CORE + '/article-family-crud';
+  static SINGLE_ARTICLES_FAMILY_CRUD = EndPoints.ARTICLES_FAMILY_CRUD + '/single';
   static DATA_PROTECTION_ACT = environment.REST_CORE + '/data-protection-act';
   static MESSENGER = environment.REST_CORE + '/messenger';
   static CUSTOMERS_DISCOUNTS = environment.REST_CORE + '/customer-discount';
   static TAGS = environment.REST_CORE + '/tags';
   static VOUCHERS = environment.REST_CORE + '/vouchers';
+  static ADMIN = environment.REST_USER + '/users-admin';
+  static ISSUES = environment.REST_CORE + '/issues';
+  static PROVIDER_INVOICES = environment.REST_CORE + '/provider-invoices';
 }

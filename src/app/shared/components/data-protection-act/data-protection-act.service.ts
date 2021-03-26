@@ -21,8 +21,9 @@ export class DataProtectionActService {
   constructor(private httpService: HttpService) {
   }
 
-  create(rgpdUser: RgpdUser): Observable<RgpdUser> {
-    return of(rgpdUser);
+  create(rgpdUser: RgpdUser): Observable<SearchRgpdUser> {
+    return this.httpService
+      .post(EndPoints.DATA_PROTECTION_ACT, rgpdUser);
   }
 
   read(mobile: string): Observable<SearchRgpdUser> {

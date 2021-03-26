@@ -8,6 +8,8 @@ import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {RgpdUser} from '@shared/models/rgpd-user.model';
+import {concatMap} from 'rxjs/operators';
+import {DataProtectionActService} from '@shared/components/data-protection-act/data-protection-act.service';
 
 @Component({
   templateUrl: 'register-dialog.component.html',
@@ -20,7 +22,7 @@ export class RegisterDialogComponent {
   hide = true;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: User, private httpService: HttpService, private router: Router,
-              private dialog: MatDialog, private snackBar: MatSnackBar) {
+              private dialog: MatDialog, private snackBar: MatSnackBar, private dataProtectionActService: DataProtectionActService) {
     this.user = data ? data : {
       mobile: undefined, firstName: undefined, familyName: undefined, email: undefined, dni: undefined,
       address: undefined, password: undefined, role: Role.CUSTOMER, active: undefined, registrationDate: new Date()
@@ -35,9 +37,12 @@ export class RegisterDialogComponent {
   register(): void {
     this.httpService.post(EndPoints.USERS + RegisterDialogComponent.CUSTOMER, this.user)
       .subscribe(() => {
-      this.dialog.closeAll();
-      this.openSnackBar('User ' + this.user.firstName + ' successfully register.', 'OK');
-    });
+        this.dataProtectionActService.create(this.rgpdUser)
+          .subscribe(() => {
+            this.dialog.closeAll();
+            this.openSnackBar('User ' + this.user.firstName + ' successfully register.', 'OK');
+          });
+      });
   }
 
   openSnackBar(message: string, action: string): void {
