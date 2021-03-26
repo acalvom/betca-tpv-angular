@@ -10,7 +10,6 @@ export interface Cashier {
   lostCard?: number;
   lostCash?: number;
   finalCash?: number;
-  finalCard?: number;
   openingDate?: Date;
   closureDate?: Date;
 }
