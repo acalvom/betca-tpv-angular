@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {HttpService} from '@core/http.service';
-import {EndPoints} from '@shared/end-points';
+/*import {HttpService} from '@core/http.service';*/
 
 /**
  * @title Radios with ngModel
@@ -18,7 +17,7 @@ export class RecoverPasswordDialogComponent {
     Validators.email,
   ]);
 
-  constructor(private httpService: HttpService) {
+  constructor(/*private httpService: HttpService*/) {
 
   }
 
