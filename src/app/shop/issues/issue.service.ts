@@ -1,50 +1,32 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from '@core/http.service';
 import {IssueSearch} from './issue-search.model';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Issue} from './issue.model';
-import {IssueState} from './issue-state.enum';
+import {EndPoints} from '@shared/end-points';
+import {IssueCreation} from './issue-creation.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IssueService {
-
-  private issueMocks: Issue[] = [
-    {
-      id: 1,
-      title: 'Found a bug',
-      body: 'I\'m having a problem with this.',
-      labels: 'bug',
-      state: IssueState.OPEN,
-      assignees: 'octocat',
-      milestone: 'v1.0',
-      created_at: '2011-04-10T20:09:31Z',
-    },
-    {
-      id: 2,
-      title: 'Enhancement',
-      body: 'This could be improved.',
-      labels: 'enhancement',
-      state: IssueState.OPEN,
-      assignees: 'kazlunn',
-      milestone: 'v1.1',
-      created_at: '2021-03-04T18:09:31Z',
-    },
-  ];
+  static SEARCH = '/search';
 
   constructor(private httpService: HttpService) {
   }
 
   search(issueSearch: IssueSearch): Observable<Issue[]> {
-    return of(this.issueMocks); // TODO
+    return this.httpService
+      .paramsFrom(issueSearch)
+      .get(EndPoints.ISSUES + IssueService.SEARCH);
   }
 
-  create(issue: Issue): Observable<Issue> {
-    return of(issue); // TODO
+  create(issueCreation: IssueCreation): Observable<Issue> {
+    return this.httpService.post(EndPoints.ISSUES, issueCreation);
   }
 
-  read(id: number): Observable<Issue> {
-    return of(this.issueMocks.find(mock => mock.id === id)); // TODO
+  // tslint:disable-next-line:variable-name
+  read(number: number): Observable<Issue> {
+    return this.httpService.get(EndPoints.ISSUES + '/' + number);
   }
 }

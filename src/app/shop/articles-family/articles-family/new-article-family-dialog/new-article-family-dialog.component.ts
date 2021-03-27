@@ -20,7 +20,7 @@ export class NewArticleFamilyDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public parent: ArticleFamilyModel,
               private sharedArticlesFamilyService: SharedArticlesFamilyService,
               private dialogRef: MatDialogRef<NewArticleFamilyDialogComponent>) {
-    this.types = ['ARTICLES', 'SIZE'];
+    this.types = ['ARTICLES', 'SIZES'];
     this.selectedType = this.types[0];
   }
 
@@ -29,9 +29,10 @@ export class NewArticleFamilyDialogComponent {
       reference: this.reference,
       description: this.description,
       treeType: this.selectedType,
+      parentReference: this.parent.reference
     };
 
-    this.sharedArticlesFamilyService.createArticleFamily(articlesFamilyModel, this.parent.reference).subscribe(
+    this.sharedArticlesFamilyService.createArticleFamily(articlesFamilyModel).subscribe(
       result => {
         this.dialogRef.close(result);
       }

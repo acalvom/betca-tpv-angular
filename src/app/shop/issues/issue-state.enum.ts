@@ -1,5 +1,5 @@
 export enum IssueState {
-  OPEN = 'open',
-  CLOSED = 'closed',
-  ALL = 'all'
+  open = 'open',
+  closed = 'closed',
+  all = 'all'
 }

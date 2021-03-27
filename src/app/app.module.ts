@@ -5,6 +5,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CoreModule} from '@core/core.module';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import {AppComponent} from './app.component';
   declarations: [
     AppComponent,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [DatePipe]
 })
 export class AppModule {
 }

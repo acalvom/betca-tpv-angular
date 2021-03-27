@@ -1,19 +1,51 @@
 <mat-form-field appearance="fill">
   <mat-label>Fecha de inicio</mat-label>
-  <input matInput [matDatepicker]="picker">
+  <input [(ngModel)]="beginDate" matInput [readonly]="true" [matDatepicker]="picker">
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
 <mat-form-field appearance="fill">
   <mat-label>Fecha de fin</mat-label>
-  <input matInput [matDatepicker]="picker2">
+  <input [(ngModel)]="endDate" matInput [readonly]="true" [matDatepicker]="picker2">
   <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
   <mat-datepicker #picker2></mat-datepicker>
 </mat-form-field>
 <button (click)="search()" mat-icon-button>
   <mat-icon>search</mat-icon>
 </button>
-<app-crud [data]="totals" [readAction]="false" [deleteAction]="false" [createAction]="false" [updateAction]="false"
-          [title]="title2"></app-crud>
+<button (click)="resetSearch()" mat-icon-button>
+  <mat-icon>close</mat-icon>
+</button>
+<mat-card>
+  <mat-card-title>{{title2}}</mat-card-title>
+</mat-card>
+<table>
+  <thead>
+  <tr>
+    <th>Initial Cash</th>
+    <th>Cash Sales</th>
+    <th>Card Sales</th>
+    <th>Used Vouchers</th>
+    <th>Deposit</th>
+    <th>Withdrawal</th>
+    <th>Lost Card</th>
+    <th>Lost Cash</th>
+    <th>Final Cash</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td> {{(totals | async)?.initialCash | number:'1.0-2'}}</td>
+    <td> {{(totals | async)?.cashSales | number:'1.0-2'}}</td>
+    <td> {{(totals | async)?.cardSales | number:'1.0-2'}}</td>
+    <td> {{(totals | async)?.usedVouchers | number:'1.0-2'}}</td>
+    <td> {{(totals | async)?.deposit | number:'1.0-2'}}</td>
+    <td> {{(totals | async)?.withdrawal | number:'1.0-2'}}</td>
+    <td> {{(totals | async)?.lostCard | number:'1.0-2'}}</td>
+    <td> {{(totals | async)?.lostCash | number:'1.0-2'}}</td>
+    <td> {{(totals | async)?.finalCash | number:'1.0-2'}}</td>
+  </tr>
+  </tbody>
+</table>
 <app-crud [data]="cashiers" [readAction]="false" [deleteAction]="false" [createAction]="false" [updateAction]="false"
           [title]="title"></app-crud>

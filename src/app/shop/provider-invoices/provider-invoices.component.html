@@ -14,11 +14,11 @@
     </button>
     <mat-form-field>
       <mat-label>Total Base Tax:</mat-label>
-      <input [(ngModel)]="totalTax.totalBaseTax" type="text" readonly matInput/>
+      <input matInput type="text" [value]="(totalTax | async)?.totalBaseTax" [readonly]="true">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Total Tax Value:</mat-label>
-      <input [(ngModel)]="totalTax.totalTaxValue" type="text" readonly matInput/>
+      <input matInput type="text" [value]="(totalTax | async)?.totalTaxValue" [readonly]="true">
     </mat-form-field>
   </mat-card-content>
 </mat-card>

@@ -158,7 +158,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   createBudget(): void {
-    this.dialog.open(BudgetDialogComponent).afterClosed().subscribe(
+    this.dialog.open(BudgetDialogComponent, {data: this.shoppingCart}).afterClosed().subscribe(
       () => {
         this.dialog.closeAll();
       }

@@ -16,7 +16,7 @@
     <mat-label>Tax Value</mat-label>
     <input [(ngModel)]="providerInvoice.taxValue" matInput required type="number"/>
   </mat-form-field>
-  <app-search-by-company [(company)]="providerInvoice.provider" class="full-width"></app-search-by-company>
+  <app-search-by-company [(company)]="providerInvoice.providerCompany" class="full-width"></app-search-by-company>
   <mat-form-field class="full-width">
     <mat-label>Order ID</mat-label>
     <input [(ngModel)]="providerInvoice.orderId" matInput required type="text"/>
