@@ -55,6 +55,9 @@ export class StockAuditComponent implements OnInit {
           });
         } else {
           this.stockAudit = stockAuditFound;
+          console.log(stockAuditFound.barcodesWithoutAudit);
+          console.log(stockAuditFound.losses);
+          console.log(stockAuditFound.id);
           this.assignSavedRealStockValues(stockAuditFound);
         }
       });
