@@ -11,11 +11,6 @@ import {EndPoints} from '@shared/end-points';
 export class CustomerDiscountService {
   private static SEARCH = '/search';
 
-  private customerDiscounts: CustomerDiscount[] = [
-    {id: '1', note: 'customer1', registrationDate: '02/05/20', discount: 0, minimumPurchase: 0, user: '66666'},
-    {id: '2', note: 'customer2', registrationDate: '02/05/20', discount: 0, minimumPurchase: 0, user: '77777'}
-  ];
-
   constructor(private httpService: HttpService) {
   }
 
@@ -41,10 +36,7 @@ export class CustomerDiscountService {
   }
 
   deleteCustomerDiscount(id: string): Observable<CustomerDiscount[]> {
-    const deleteCustomer = this.customerDiscounts.find(customer => customer.id === id);
-    const index = this.customerDiscounts.indexOf(deleteCustomer);
-    this.customerDiscounts.splice(index, 1);
-    return of(this.customerDiscounts);
+    return this.httpService.delete(EndPoints.CUSTOMERS_DISCOUNTS + '/' + id);
   }
 
 }
