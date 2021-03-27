@@ -36,12 +36,9 @@ export class CustomerDiscountService {
   }
 
   updateCustomerDiscount(id: string, customerDiscount: CustomerDiscount): Observable<CustomerDiscount> {
-    const setCustomer = this.customerDiscounts.find(customer => customer.id === id);
-    const index = this.customerDiscounts.indexOf(setCustomer);
-    if (index > -1) {
-      this.customerDiscounts.splice(index, 1, customerDiscount);
-    }
-    return of(customerDiscount);
+    return this.httpService
+      .successful()
+      .put(EndPoints.CUSTOMERS_DISCOUNTS + '/' + id, customerDiscount);
   }
 
   deleteCustomerDiscount(id: string): Observable<CustomerDiscount[]> {
