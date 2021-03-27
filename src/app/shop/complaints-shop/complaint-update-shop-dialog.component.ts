@@ -22,7 +22,6 @@ export class ComplaintUpdateShopDialogComponent {
   }
 
   update(): void {
-    console.log(this.complaint.reply);
     this.complaintShopService
       .update(this.complaint)
       .subscribe(() => this.dialog.closeAll());

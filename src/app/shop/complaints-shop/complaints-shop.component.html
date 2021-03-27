@@ -5,6 +5,12 @@
       <mat-icon>search</mat-icon>
     </button>
   </mat-card-content>
+  <mat-card-content>
+    <button (click)="searchOpened()" mat-icon-button>
+      <span> Search Opened </span>
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-card-content>
 </mat-card>
-<app-crud (update)="update($event)" (read)="read($event)" (delete)="delete($event)"
-          [data]="complaints" [title]="title" [createAction]="false"></app-crud>
+<app-crud (update)="update($event)" (read)="read($event)"
+          [data]="complaints" [title]="title" [createAction]="false" [deleteAction]="false"></app-crud>

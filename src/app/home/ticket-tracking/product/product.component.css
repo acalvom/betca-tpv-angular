@@ -2,18 +2,18 @@
   margin: 5px;
 }
 
-.committed {
+.COMMITTED {
   background: darkseagreen;
 }
 
-.not_committed {
-    background: cornflowerblue;
+.NOT_COMMITTED {
+  background: cornflowerblue;
 }
 
-.require_provider {
+.REQUIRE_PROVIDER {
   background: indianred;
 }
 
-.in_stock {
+.IN_STOCK {
   background: lightyellow;
 }

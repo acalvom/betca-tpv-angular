@@ -25,6 +25,7 @@ import { OnlineOrderComponent } from './online-order/online-order.component';
 import { TableStockComponent } from './stock-management/table-stock/table-stock.component';
 import {SaleComponent} from './adviser/sale/sale.component';
 import {PayDialogComponent} from './shopping-basket/pay-dialog.component';
+import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {PayDialogComponent} from './shopping-basket/pay-dialog.component';
     TableStockComponent,
     SaleComponent,
     PayDialogComponent,
+    ForgottenPasswordComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,

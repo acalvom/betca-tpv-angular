@@ -14,13 +14,13 @@ export class ComplaintUpdateDialogComponent {
   title: string = 'Update Complaint';
   complaint: Complaint;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: Complaint, private complaintService: ComplaintService, private dialog: MatDialog) {
+  constructor(@Inject(MAT_DIALOG_DATA) data: Complaint, private complaintService: ComplaintService,
+              private dialog: MatDialog) {
     this.complaint = {id: data.id, mobile: data.mobile, barcode: data.barcode, registrationDate: data.registrationDate,
       description: data.description, opened: data.opened};
   }
 
   update(): void {
-    this.complaint.opened = false;
     this.complaintService
       .update(this.complaint)
       .subscribe(() => this.dialog.closeAll());
