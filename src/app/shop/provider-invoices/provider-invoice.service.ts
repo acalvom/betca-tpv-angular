@@ -27,12 +27,8 @@ export class ProviderInvoiceService {
   }
 
   read(providerInvoiceNumber: number): Observable<ProviderInvoice> {
-    const providerInvoice = this.providerInvoices.find(pi => pi.number === providerInvoiceNumber);
-    return of({...providerInvoice});
-    /*
     return this.httpService
       .get(EndPoints.PROVIDER_INVOICES + '/' + providerInvoiceNumber);
-    */
   }
 
   update(oldProviderInvoiceNumber: number, providerInvoice: ProviderInvoice): Observable<ProviderInvoice> {
