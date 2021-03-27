@@ -4,7 +4,6 @@ import {CustomerDiscountSearch} from './customer-discount-search.model';
 import {Observable, of} from 'rxjs';
 import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
-import {Credit} from '../shared/services/models/credit.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +31,7 @@ export class CustomerDiscountService {
   }
 
   readCustomerDiscount(id: string): Observable<CustomerDiscount> {
-    return of(this.customerDiscounts.find(customer => customer.id === id));
+    return this.httpService.get(EndPoints.CUSTOMERS_DISCOUNTS + '/' + id);
   }
 
   updateCustomerDiscount(id: string, customerDiscount: CustomerDiscount): Observable<CustomerDiscount> {
