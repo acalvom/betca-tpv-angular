@@ -1,4 +1,4 @@
-<h2 mat-dialog-title> {{title}} {{complaint.opened}}</h2>
+<h2 mat-dialog-title> {{title}} </h2>
 <mat-dialog-content>
   <mat-form-field class="full-width">
     <mat-label>Barcode</mat-label>
@@ -7,16 +7,16 @@
   <mat-form-field class="full-width">
     <mat-label>Description</mat-label>
     <ng-container *ngIf="complaint.opened">
-      <input [(ngModel)]="complaint.description" matInput required type="text"/>
+      <input [(ngModel)]="complaint.description" matInput type="text"/>
     </ng-container>
     <ng-container *ngIf="!complaint.opened">
       <input [(ngModel)]="complaint.description" matInput type="text" disabled/>
-      <p>This complaint is closed!</p>
+      <p>This complaint is closed yet!</p>
     </ng-container>
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
-  <button (click)="update()" [disabled]="invalid" color="primary" mat-raised-button>Update
+  <button (click)="update()" color="primary" mat-raised-button>Update
   </button>
 </mat-dialog-actions>
