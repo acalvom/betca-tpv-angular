@@ -24,7 +24,7 @@ export class ComplaintsComponent {
       .afterClosed()
       .subscribe(() => this.searchAll());
   }
-  //SOLO VE SUS QUEJAS
+
   searchAll(): void {
     this.complaints = this.complaintService.searchAll();
   }
