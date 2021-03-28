@@ -30,7 +30,7 @@ export class SharedVoucherService {
   printVoucher(value: number): Observable<any> {
     const voucherCreation: VoucherCreation = { value };
     return this.create(voucherCreation)
-      .pipe(map(voucher => this.httpService.pdf().get(`${EndPoints.VOUCHERS}/${voucher.reference}`)));
+      .pipe(map(voucher => this.httpService.pdf().get(`${EndPoints.VOUCHERS}/${voucher.reference}/pdf`)));
   }
 
   consumeVoucher(voucher: Voucher): Observable<any> {
