@@ -20,7 +20,7 @@ export class SharedVoucherService {
     const createdVoucher: Voucher = {
       reference: undefined,
       value: voucher.value,
-      creationDate: new Date(),
+      creationDate: undefined,
       dateOfUse: undefined
     };
 
