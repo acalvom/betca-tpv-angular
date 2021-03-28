@@ -46,7 +46,9 @@ export class ProviderInvoicesComponent {
       .subscribe((fullProviderInvoice: ProviderInvoice) =>
         this.dialog.open(ProviderInvoiceCreationUpdatingDialogComponent,
           {data: fullProviderInvoice})
-          .afterClosed().subscribe(() => this.search()));
+          .afterClosed()
+          .subscribe(() => this.search())
+      );
   }
 
   delete(providerInvoice: ProviderInvoice): void {

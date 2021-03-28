@@ -32,13 +32,8 @@ export class ProviderInvoiceService {
   }
 
   update(oldProviderInvoiceNumber: number, providerInvoice: ProviderInvoice): Observable<ProviderInvoice> {
-    const index = this.providerInvoices.findIndex(pi => pi.number === oldProviderInvoiceNumber);
-    this.providerInvoices[index] = providerInvoice;
-    return of(providerInvoice);
-    /*
-     return this.httpService
-      .put(EndPoints.PROVIDER_INVOICES + '/' + providerInvoice.number, providerInvoice);
-     */
+    return this.httpService
+      .put(EndPoints.PROVIDER_INVOICES + '/' + oldProviderInvoiceNumber, providerInvoice);
   }
 
   delete(providerInvoiceNumber: number): Observable<void> {
