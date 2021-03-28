@@ -5,7 +5,6 @@ import {VoucherCreation} from './voucher.creation';
 import {SharedVoucherService} from '../shared/services/shared-voucher.service';
 import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
-import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,16 +23,7 @@ export class VouchersService {
   }
 
   create(voucher: VoucherCreation): Observable<Voucher> {
-    /*const voucherObservable = this.sharedVoucherService.create(voucher);*/
-    const voucherCreated: Voucher = {
-      reference: 'whatever',
-      value: voucher.value,
-      creationDate: new Date(),
-      dateOfUse: undefined
-    };
-
-    this.vouchers.push(voucherCreated);
-    return of(voucherCreated);
+    return this.sharedVoucherService.create(voucher);
   }
 
   findAll(): Observable<Voucher[]> {
@@ -41,8 +31,7 @@ export class VouchersService {
   }
 
   read(reference: string): Observable<Voucher> {
-    // return this.httpService.get(`${EndPoints.VOUCHERS}/${reference}`);
-    return of(this.vouchers.filter(v => v.reference === reference)[0]);
+    return this.httpService.get(`${EndPoints.VOUCHERS}/${reference}`);
   }
 
   findVouchersBetweenDates(dateFrom: Date, dateTo: Date): Observable<Voucher[]> {
