@@ -23,16 +23,7 @@ export class VouchersService {
   }
 
   create(voucher: VoucherCreation): Observable<Voucher> {
-    /*const voucherObservable = this.sharedVoucherService.create(voucher);*/
-    const voucherCreated: Voucher = {
-      reference: 'whatever',
-      value: voucher.value,
-      creationDate: new Date(),
-      dateOfUse: undefined
-    };
-
-    this.vouchers.push(voucherCreated);
-    return of(voucherCreated);
+    return this.sharedVoucherService.create(voucher);
   }
 
   findAll(): Observable<Voucher[]> {
