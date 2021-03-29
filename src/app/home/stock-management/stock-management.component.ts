@@ -3,6 +3,7 @@ import {ArticleSearch} from './article-search';
 import {of} from 'rxjs';
 import {StockService} from './stock-service';
 import * as moment from 'moment';
+import {ArticleStock} from './article-stock';
 
 @Component({
   selector: 'app-stock-management',
@@ -12,6 +13,7 @@ import * as moment from 'moment';
 export class StockManagementComponent implements OnInit {
 
   stockArticle: ArticleSearch;
+  stockArticleEmpty: ArticleStock;
   articles = of([]);
   articlesByDate = of([]);
   stockFuture = of();
@@ -27,7 +29,7 @@ export class StockManagementComponent implements OnInit {
   soldProductsError = false;
   barcodeEmpty: string;
   stockEmptyError = false;
-
+  stockNoEmpty = false;
   constructor(private stockService: StockService) {
     this.stockArticle = {};
   }
@@ -67,12 +69,23 @@ export class StockManagementComponent implements OnInit {
 
   searchEmptyStock(): void {
     if (this.barcodeEmpty != null) {
-      this.stockEmptyError = false;
-      this.stockEmpty = true;
-      this.stockZero = this.stockService.searchEmptyStock(this.barcodeEmpty);
+      this.stockService.searchEmptyStock(this.barcodeEmpty)
+        .subscribe(stock => {
+            if (stock.dateStockEmpty != null){
+              this.stockArticleEmpty  = stock;
+              this.stockEmptyError = false;
+              this.stockEmpty = true;
+              this.stockNoEmpty = false;
+            }else{
+              this.stockNoEmpty = true;
+              this.stockEmpty = false;
+              this.stockEmptyError = false;
+            }
+        });
     } else {
       this.stockEmptyError = true;
       this.stockEmpty = false;
+      this.stockNoEmpty = false;
     }
   }
 

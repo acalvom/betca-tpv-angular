@@ -115,23 +115,30 @@
         </mat-card-content>
       </mat-card>
     </ng-container>
+    <ng-container *ngIf="stockNoEmpty">
+      <mat-card>
+        <mat-card-content>
+          <mat-label class="stockNoVacio"><strong> Sin fecha de stock vacío </strong></mat-label>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
     <ng-container *ngIf="stockEmpty">
       <mat-card>
         <mat-card-content>
           <mat-label><strong>Barcode: </strong></mat-label>
-          <mat-label>{{(stockZero|async)?.barcode}}</mat-label>
+          <mat-label>{{stockArticleEmpty.barcode}}</mat-label>
         </mat-card-content>
         <mat-card-content>
           <mat-label><strong>Descripcion: </strong></mat-label>
-          <mat-label>{{(stockZero|async)?.description}}</mat-label>
+          <mat-label>{{stockArticleEmpty.description}}</mat-label>
         </mat-card-content>
         <mat-card-content>
           <mat-label><strong>Stock: </strong></mat-label>
-          <mat-label>{{(stockZero|async)?.stock}}</mat-label>
+          <mat-label>{{stockArticleEmpty.stock}}</mat-label>
         </mat-card-content>
         <mat-card-content>
           <mat-label><strong>Date empty stock: </strong></mat-label>
-          <mat-label>{{(stockZero|async)?.dateStockEmpty}}</mat-label>
+          <mat-label>{{stockArticleEmpty.dateStockEmpty}}</mat-label>
         </mat-card-content>
       </mat-card>
     </ng-container>
