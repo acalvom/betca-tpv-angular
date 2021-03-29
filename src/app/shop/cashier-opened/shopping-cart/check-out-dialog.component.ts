@@ -139,10 +139,10 @@ export class CheckOutDialogComponent {
   }
 
   consumeVoucher(): void {
-    // TODO consumir un vale que se entrega como parte del pago
     this.voucherService.findAll().subscribe(
       (v) => {
-        this.dialog.open(VoucherConsumingComponent, { data: v })
+        const unConsumedVouchers = v.filter(vs => vs.dateOfUse === undefined)
+        this.dialog.open(VoucherConsumingComponent, { data: unConsumedVouchers })
           .afterClosed()
           .subscribe((totalValue) => {
             this.ticketCreation.voucher += totalValue;

@@ -20,6 +20,7 @@ import {SharedCreditSaleService} from '../../shared/services/shared.credit-sale.
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {User} from '@core/user.model';
 import {Offer} from '../../shared/services/models/offer.model';
+import {SharedVoucherService} from '../../shared/services/shared-voucher.service';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +36,8 @@ export class ShoppingCartService {
   constructor(private dialog: MatDialog, private articleService: SharedArticleService,
               private offerService: SharedOfferService, private httpService: HttpService,
               private budgetService: BudgetService, private sharedCreditLineService: SharedCreditLineService,
-              private sharedCreditSaleService: SharedCreditSaleService, private snackBar: MatSnackBar) {
+              private sharedCreditSaleService: SharedCreditSaleService, private snackBar: MatSnackBar,
+              private sharedVoucherService: SharedVoucherService) {
   }
 
   read(newBarcode: string): Observable<Shopping> {
@@ -92,7 +94,7 @@ export class ShoppingCartService {
   }
 
   createVoucherAndPrint(voucher: number): Observable<void> {
-    return EMPTY; // TODO change EMPTY
+    return this.sharedVoucherService.printVoucher(voucher);
   }
 
   createInvoiceAndPrint(ticketId: string): Observable<void> {
