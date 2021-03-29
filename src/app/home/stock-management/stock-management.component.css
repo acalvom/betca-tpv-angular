@@ -1,3 +1,6 @@
 .error{
   color: red;
 }
+.stockNoVacio{
+  color: green;
+}
