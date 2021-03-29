@@ -25,6 +25,8 @@ export class StockManagementComponent implements OnInit {
   stockEmpty = false;
   stockForescatError = false;
   soldProductsError = false;
+  barcodeEmpty: string;
+  stockEmptyError = false;
 
   constructor(private stockService: StockService) {
     this.stockArticle = {};
@@ -59,12 +61,19 @@ export class StockManagementComponent implements OnInit {
       this.stockFuture = this.stockService.searchFutureStock(this.stockArticle.barcode);
     } else {
       this.stockForescatError = true;
+      this.stockForescat = false;
     }
   }
 
   searchEmptyStock(): void {
-    this.stockEmpty = true;
-    this.stockZero = this.stockService.searchEmptyStock(this.stockArticle.barcode);
+    if (this.barcodeEmpty != null) {
+      this.stockEmptyError = false;
+      this.stockEmpty = true;
+      this.stockZero = this.stockService.searchEmptyStock(this.barcodeEmpty);
+    } else {
+      this.stockEmptyError = true;
+      this.stockEmpty = false;
+    }
   }
 
   setDateFormat(datePicker: Date): string {
