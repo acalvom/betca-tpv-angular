@@ -12,10 +12,10 @@ export class TableStockComponent implements OnInit {
   @Input() data;
   @Input() productSold;
   @Input() stock;
+
   constructor() {
   }
 
   ngOnInit(): void {
   }
-
 }
