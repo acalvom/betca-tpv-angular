@@ -13,8 +13,8 @@ import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.comp
 export class ProviderInvoicesComponent {
   title = 'Provider Invoices Management';
   providerInvoices = of([]);
-  trimesters = [1, 2, 3, 4];
-  selectedTrimester: number;
+  quarters = [1, 2, 3, 4];
+  selectedQuarter: number;
   totalTax = of({totalBaseTax: 0, totalTaxValue: 0});
 
   constructor(private dialog: MatDialog, private providerInvoiceService: ProviderInvoiceService) {
@@ -59,7 +59,7 @@ export class ProviderInvoicesComponent {
 
   calculateTotalTax(): void {
     this.totalTax = this.providerInvoiceService
-      .calculateTotalTax(this.selectedTrimester);
+      .calculateTotalTax(this.selectedQuarter);
   }
 
 }
