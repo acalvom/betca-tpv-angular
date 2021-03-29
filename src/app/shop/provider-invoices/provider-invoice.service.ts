@@ -37,13 +37,8 @@ export class ProviderInvoiceService {
   }
 
   delete(providerInvoiceNumber: number): Observable<void> {
-    const index = this.providerInvoices.findIndex(pi => pi.number === providerInvoiceNumber);
-    this.providerInvoices.splice(index, 1);
-    return of(null);
-    /*
     return this.httpService
       .delete(EndPoints.PROVIDER_INVOICES + '/' + providerInvoiceNumber);
-     */
   }
 
   calculateTotalTax(trimester: number): Observable<TotalTax> {
