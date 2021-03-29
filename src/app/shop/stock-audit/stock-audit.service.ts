@@ -44,10 +44,10 @@ export class StockAuditService {
     // return of(this.stockAudits.find(stockAudit => stockAudit.closeDate == null));
   }
 
-  createAudit(stockAudit: StockAudit): Observable<StockAudit> {
-    /*return this.httpService
-      .post(EndPoints.AUDITS, stockAudit);*/
-    const stockAuditCreated: StockAudit = (
+  createAudit(barcodesWithoutAudit: string[]): Observable<StockAudit> {
+    return this.httpService
+      .post(EndPoints.AUDITS, barcodesWithoutAudit);
+    /* const stockAuditCreated: StockAudit = (
       {
         id: '3',
         creationDate: new Date(),
@@ -57,7 +57,7 @@ export class StockAuditService {
         losses: []
       });
     this.stockAudits.push(stockAuditCreated);
-    return of(stockAuditCreated);
+    return of(stockAuditCreated); */
   }
 
   saveAudit(stockAudit: StockAudit): Observable<StockAudit> {
