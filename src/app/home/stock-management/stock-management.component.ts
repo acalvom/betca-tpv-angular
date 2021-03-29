@@ -16,7 +16,7 @@ export class StockManagementComponent implements OnInit {
   articlesByDate = of([]);
   stockFuture = of();
   stockZero = of();
-  title = 'Stock management';
+  title = 'Stock manager';
   start: Date;
   end: Date;
   soldProducts = false;
@@ -60,7 +60,6 @@ export class StockManagementComponent implements OnInit {
     } else {
       this.stockForescatError = true;
     }
-
   }
 
   searchEmptyStock(): void {
@@ -70,6 +69,5 @@ export class StockManagementComponent implements OnInit {
 
   setDateFormat(datePicker: Date): string {
     return moment(datePicker).format('YYYY-MM-DD[T]HH:mm:ss');
-
   }
 }
