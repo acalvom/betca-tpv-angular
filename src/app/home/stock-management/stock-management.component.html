@@ -13,13 +13,20 @@
     <mat-card-content>
       <mat-form-field>
         <mat-label>Enter a stock</mat-label>
-        <input [(ngModel)]="stockArticle.stock" matInput type="number">
+        <input [(ngModel)]="stockProduct" matInput type="number">
         <mat-hint align="start">Less than</mat-hint>
       </mat-form-field>
       <button (click)="searchByStock()" mat-icon-button>
         <mat-icon>search</mat-icon>
       </button>
     </mat-card-content>
+    <ng-container *ngIf="stockError">
+      <mat-card>
+        <mat-card-content>
+          <mat-label class="error"><strong>Stock no válido</strong></mat-label>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
     <ng-container *ngIf="stock">
       <app-table-stock [data]="articles" [stock]="true"></app-table-stock>
     </ng-container>
