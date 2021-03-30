@@ -12,9 +12,10 @@ import {ArticleStock} from './article-stock';
 })
 export class StockManagementComponent implements OnInit {
 
-  stockArticle: ArticleSearch;
   stockArticleEmpty: ArticleStock;
   stockProduct: number;
+  barcodeFuture: string;
+  barcodeEmpty: string;
   articles = of([]);
   articlesByDate = of([]);
   stockFuture = of();
@@ -27,29 +28,26 @@ export class StockManagementComponent implements OnInit {
   stockEmpty = false;
   stockForescatError = false;
   soldProductsError = false;
-  barcodeEmpty: string;
   stockEmptyError = false;
   stockNoEmpty = false;
   stockError = false;
-  constructor(private stockService: StockService) {
-    this.stockArticle = {};
-  }
+
+  constructor(private stockService: StockService) {}
 
   ngOnInit(): void {}
 
   searchByStock(): void {
-    if (this.stockProduct != null){
+    if (this.stockProduct != null) {
       this.stock = true;
       this.stockError = false;
       this.articles = this.stockService.searchStock(this.stockProduct);
-    }else{
+    } else {
       this.stock = false;
       this.stockError = true;
     }
   }
 
   searchSoldProducts(): void {
-
     if (this.start != null && this.end != null) {
       const firstDate = this.setDateFormat(this.start);
       const secondDate = this.setDateFormat(this.end);
@@ -63,10 +61,10 @@ export class StockManagementComponent implements OnInit {
   }
 
   searchFutureStock(): void {
-    if (this.stockArticle.barcode != null) {
+    if (this.barcodeFuture != null) {
       this.stockForescatError = false;
       this.stockForescat = true;
-      this.stockFuture = this.stockService.searchFutureStock(this.stockArticle.barcode);
+      this.stockFuture = this.stockService.searchFutureStock(this.barcodeFuture);
     } else {
       this.stockForescatError = true;
       this.stockForescat = false;
@@ -77,16 +75,16 @@ export class StockManagementComponent implements OnInit {
     if (this.barcodeEmpty != null) {
       this.stockService.searchEmptyStock(this.barcodeEmpty)
         .subscribe(stock => {
-            if (stock.dateStockEmpty != null){
-              this.stockArticleEmpty  = stock;
-              this.stockEmptyError = false;
-              this.stockEmpty = true;
-              this.stockNoEmpty = false;
-            }else{
-              this.stockNoEmpty = true;
-              this.stockEmpty = false;
-              this.stockEmptyError = false;
-            }
+          if (stock.dateStockEmpty != null) {
+            this.stockArticleEmpty = stock;
+            this.stockEmptyError = false;
+            this.stockEmpty = true;
+            this.stockNoEmpty = false;
+          } else {
+            this.stockNoEmpty = true;
+            this.stockEmpty = false;
+            this.stockEmptyError = false;
+          }
         });
     } else {
       this.stockEmptyError = true;

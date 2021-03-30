@@ -23,7 +23,7 @@
     <ng-container *ngIf="stockError">
       <mat-card>
         <mat-card-content>
-          <mat-label class="error"><strong>Stock no válido</strong></mat-label>
+          <mat-label class="error"><strong>Stock is not valid</strong></mat-label>
         </mat-card-content>
       </mat-card>
     </ng-container>
@@ -53,7 +53,7 @@
     <ng-container *ngIf="soldProductsError">
       <mat-card>
         <mat-card-content>
-          <mat-label class="error"><strong>Fechas no válidas</strong></mat-label>
+          <mat-label class="error"><strong>Date is not valid</strong></mat-label>
         </mat-card-content>
       </mat-card>
     </ng-container>
@@ -70,7 +70,7 @@
     <mat-card-content>
       <mat-form-field>
         <mat-label>Enter a barcode</mat-label>
-        <input [(ngModel)]="stockArticle.barcode" matInput type="string">
+        <input [(ngModel)]="barcodeFuture" matInput type="number">
       </mat-form-field>
       <button (click)="searchFutureStock()" mat-icon-button>
         <mat-icon>search</mat-icon>
@@ -79,7 +79,7 @@
     <ng-container *ngIf="stockForescatError">
       <mat-card>
         <mat-card-content>
-          <mat-label class="error"><strong>BARCODE no válido</strong></mat-label>
+          <mat-label class="error"><strong>Barcode is not valid</strong></mat-label>
         </mat-card-content>
       </mat-card>
     </ng-container>
@@ -118,14 +118,14 @@
     <ng-container *ngIf="stockEmptyError">
       <mat-card>
         <mat-card-content>
-          <mat-label class="error"><strong>Barcode no válido</strong></mat-label>
+          <mat-label class="error"><strong>Barcode is not valid</strong></mat-label>
         </mat-card-content>
       </mat-card>
     </ng-container>
     <ng-container *ngIf="stockNoEmpty">
       <mat-card>
         <mat-card-content>
-          <mat-label class="stockNoVacio"><strong> Sin fecha de stock vacío </strong></mat-label>
+          <mat-label class="stockNoVacio"><strong> Product without empty stock date </strong></mat-label>
         </mat-card-content>
       </mat-card>
     </ng-container>
