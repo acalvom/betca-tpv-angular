@@ -14,10 +14,10 @@ export class StockManagementComponent implements OnInit {
 
   stockArticle: ArticleSearch;
   stockArticleEmpty: ArticleStock;
+  stockProduct: number;
   articles = of([]);
   articlesByDate = of([]);
   stockFuture = of();
-  stockZero = of();
   title = 'Stock manager';
   start: Date;
   end: Date;
@@ -30,16 +30,22 @@ export class StockManagementComponent implements OnInit {
   barcodeEmpty: string;
   stockEmptyError = false;
   stockNoEmpty = false;
+  stockError = false;
   constructor(private stockService: StockService) {
     this.stockArticle = {};
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   searchByStock(): void {
-    this.stock = true;
-    this.articles = this.stockService.searchStock(this.stockArticle.stock);
+    if (this.stockProduct != null){
+      this.stock = true;
+      this.stockError = false;
+      this.articles = this.stockService.searchStock(this.stockProduct);
+    }else{
+      this.stock = false;
+      this.stockError = true;
+    }
   }
 
   searchSoldProducts(): void {
