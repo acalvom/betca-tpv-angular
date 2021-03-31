@@ -9,7 +9,6 @@ import {StockAlarmLine} from '../shared/services/models/stock-alarm-line.model';
 import {Alarms} from './alarms.enum';
 import {StockAlarms} from './stock-alarms.model';
 
-
 @Component({
   selector: 'app-stock-alarms',
   templateUrl: './stock-alarms.component.html',
@@ -19,7 +18,7 @@ export class StockAlarmsComponent implements OnInit {
   name: string;
   title = 'Stock Alarm';
   data = of([]);
-  stockAlarms: StockAlarms;
+  stockAlarms = new StockAlarms();
   alarms: StockAlarmLine[];
 
   constructor(private stockAlarmsService: StockAlarmsService, private dialog: MatDialog) {
