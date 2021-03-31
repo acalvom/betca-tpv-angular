@@ -10,6 +10,7 @@ import {Ticket} from '../shared/services/models/ticket.model';
 import {InvoiceUpdate} from './invoice-update.model';
 import {User} from '../shared/services/models/user.model';
 import {EndPoints} from '@shared/end-points';
+import {tick} from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -77,7 +78,8 @@ export class InvoiceService {
 
   searchTicketByRef(ticketRef: string): Observable<Ticket> {
     const ticket: Ticket = this.tickets.find(tk => tk.reference === ticketRef);
-    return of(ticket);
+    return this.httpService
+      .get(EndPoints.TICKETS + '/' + ticketRef + '/reference/selected');
   }
 
   invoiceToItems(invoiceAux: Invoice): InvoiceItem {
@@ -107,7 +109,7 @@ export class InvoiceService {
     // {number: 111200300, creationDate: new Date(), baseTax: 1, taxValue: 1, ticket: this.tickets[0]}
     const invoice: Invoice = {
       number: this.incSequence(), ticket: this.tickets[sizeTickets],
-      taxValue: 1, baseTax: 1, creationDate: invoiceModel.creationDate
+      taxValue: 1, baseTax: 1, creationDate: new Date()
     };
     this.invoices.push(invoice);
 

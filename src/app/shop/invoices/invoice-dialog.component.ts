@@ -20,8 +20,6 @@ export class InvoiceDialogComponent {
     this.invoiceModel = data ? {
       number: data.number,
       creationDate: data.creationDate,
-      baseTax: data.baseTax,
-      taxValue: data.taxValue,
       userPhone: data.ticket.user.mobile,
       ticketReference: data.ticket.reference,
       userDni: data.ticket.user.dni,
@@ -30,8 +28,6 @@ export class InvoiceDialogComponent {
     } : {
       number: undefined,
       creationDate: undefined,
-      baseTax: undefined,
-      taxValue: undefined,
       userPhone: undefined,
       ticketReference: undefined,
       userDni: undefined,
@@ -53,6 +49,7 @@ export class InvoiceDialogComponent {
   setTicketInModel(ticket: Ticket): void{
     console.log(ticket);
     this.invoiceModel.ticketReference = ticket.reference;
+    this.invoiceModel.creationDate = ticket.creationDate;
     this.invoiceModel.userDni = ticket.user.dni;
     this.invoiceModel.userName = ticket.user.name;
     this.invoiceModel.familyNameUser = ticket.user.familyName;
