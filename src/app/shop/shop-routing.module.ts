@@ -28,6 +28,7 @@ import {StaffComponent} from './staff/staff.component';
 import {OnlineOrderComponent} from './online-order/online-order.component';
 import {VouchersComponent} from './vouchers/vouchers.component';
 import {TagsComponent} from './tags/tags.component';
+import {StockManagementComponent} from './stock-management/stock-management.component';
 
 const routes: Routes = [
   {
@@ -60,7 +61,8 @@ const routes: Routes = [
       {path: 'provider-orders', component: ProviderOrdersComponent},
       {path: 'online-order', component: OnlineOrderComponent},
       {path: 'vouchers', component: VouchersComponent},
-      {path: 'tags', component: TagsComponent}
+      {path: 'tags', component: TagsComponent},
+      {path: 'stock-management', component: StockManagementComponent}
     ]
   }
 ];
