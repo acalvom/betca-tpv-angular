@@ -11,6 +11,7 @@ export class StockAlarmChipComponent {
   @Input() data: StockAlarmLine;
   @Output() update = new EventEmitter<StockAlarmLine>();
   @Output() delete = new EventEmitter<StockAlarmLine>();
+  @Input() isEditable = false;
 
   public changeWarning(): void {
     this.update.emit(this.data);
