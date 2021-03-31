@@ -33,4 +33,5 @@ export class EndPoints {
   static ADMIN = environment.REST_USER + '/users-admin';
   static ISSUES = environment.REST_CORE + '/issues';
   static PROVIDER_INVOICES = environment.REST_CORE + '/provider-invoices';
+  static SLACK = environment.REST_CORE + '/slack-messages';
 }
