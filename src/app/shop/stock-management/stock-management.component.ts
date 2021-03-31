@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ArticleSearch} from './article-search';
 import {of} from 'rxjs';
 import {StockService} from './stock-service';
 import * as moment from 'moment';
