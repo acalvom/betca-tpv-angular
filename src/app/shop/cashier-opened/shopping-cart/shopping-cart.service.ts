@@ -157,13 +157,20 @@ export class ShoppingCartService {
         })
       );
   }
-  printBudget(budgetId: string): Observable<void> {
-    return this.httpService.pdf().get(EndPoints.BUDGETS + '/' + budgetId + ShoppingCartService.RECEIPT);
+  printBudget(BudgetId: string): Observable<void> {
+    return this.httpService.pdf().get(EndPoints.BUDGETS + '/' + BudgetId + ShoppingCartService.RECEIPT);
   }
 
-  readBudget(budget: string): Observable<Shopping> {
+  readBudget(id: string): Observable<Shopping> {
     return this.budgetService
-      .read(budget);
+      .read(id)
+      .pipe(
+        map(budgets => {
+            const shopping = new Shopping(budgets.barcode, budgets.description, budgets.retailPrice);
+            return shopping;
+          }
+        )
+      );
   }
 
   addDiscount(mobile: string, purchase: number): Observable<number> {
