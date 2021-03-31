@@ -9,10 +9,10 @@ import {BudgetService} from './budget.service';
 })
 
 export class SearchByBudgetComponent {
-  budgets: Observable<number[]> = of([]);
+  references: Observable<string[]> = of([]);
+  @Input() reference: string;
   @Output() add = new EventEmitter<string>();
-  @Input() budget: string;
-  constructor(private budgetervice: BudgetService) {
+  constructor(private budgetService: BudgetService) {
   }
 
   public onSelect(value): void {
@@ -20,6 +20,6 @@ export class SearchByBudgetComponent {
   }
 
   searchByBudget(): void {
-    this.budgets = this.budgetervice.searchBudget(this.budget);
+    this.references = this.budgetService.searchBudget(this.reference);
   }
 }

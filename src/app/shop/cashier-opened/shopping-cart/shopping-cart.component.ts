@@ -20,7 +20,6 @@ export class ShoppingCartComponent implements OnInit {
 
   barcode: string;
   barcodes: Observable<number[]> = of([]);
-
   displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'actions'];
   shoppingCart: Shopping[] = [];
   indexShoppingCart = 0;
@@ -59,7 +58,6 @@ export class ShoppingCartComponent implements OnInit {
       });
     this.elementRef.nativeElement.focus();
   }
-
   incrementAmount(shopping: Shopping): void {
     shopping.amount++;
     if (shopping.amount === 0) {
@@ -165,17 +163,15 @@ export class ShoppingCartComponent implements OnInit {
       , () => this.dialog.closeAll()
     );
   }
-
-  addBudget(budget): void {
+  addBudget(id): void {
     this.shoppingCartService
-      .readBudget(budget)
-      .subscribe(newbudget => {
-        this.shoppingCart.push(newbudget);
+      .readBudget(id)
+      .subscribe(newShopping => {
+        this.shoppingCart.push(newShopping);
         this.synchronizeShoppingCart();
       });
     this.elementRef.nativeElement.focus();
   }
-
   addDiscount(mobile): void {
     this.shoppingCartService
       .addDiscount(mobile, this.totalShoppingCart)
