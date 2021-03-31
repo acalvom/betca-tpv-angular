@@ -19,16 +19,16 @@
   </mat-form-field>
   <app-search-by-barcode (add)="addAlarmLine($event)"></app-search-by-barcode>
   <div *ngFor="let current of stockAlarm.stockAlarmLines">
-    <app-stock-alarm-chip [data]="current" (update)="updateAlarmLine($event)" (delete)="removeAlarmLine($event)"></app-stock-alarm-chip>
+    <app-stock-alarm-chip [data]="current" [isEditable]="true" (update)="updateAlarmLine($event)"
+                          (delete)="removeAlarmLine($event)"></app-stock-alarm-chip>
   </div>
 
 </mat-dialog-content>
 
 <mat-dialog-actions>
-
-    <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
-    <button (click)="create()" *ngIf="isCreate()"  color="primary" mat-raised-button>Create
-    </button>
-    <button (click)="update()" *ngIf="!isCreate()" color="primary" mat-raised-button>Update
-    </button>
+  <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
+  <button (click)="create()" *ngIf="isCreate()" color="primary" mat-raised-button>Create
+  </button>
+  <button (click)="update()" *ngIf="!isCreate()" color="primary" mat-raised-button>Update
+  </button>
 </mat-dialog-actions>
