@@ -1,11 +1,11 @@
 <mat-card>
   <mat-card-content>
-    <mat-label><strong>Calculate Total Tax: </strong></mat-label>
+    <mat-label><strong>Calculate Total Tax (current year): </strong></mat-label>
     <mat-form-field>
-      <mat-label>Trimester</mat-label>
-      <mat-select [(ngModel)]="selectedTrimester">
-        <mat-option *ngFor="let trimester of trimesters" [value]="trimester">
-          {{trimester}}
+      <mat-label>Quarter</mat-label>
+      <mat-select [(ngModel)]="selectedQuarter">
+        <mat-option *ngFor="let quarter of quarters" [value]="quarter">
+          {{quarter}}
         </mat-option>
       </mat-select>
     </mat-form-field>

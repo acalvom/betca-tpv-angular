@@ -17,12 +17,10 @@ import { ProductComponent } from './ticket-tracking/product/product.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import {ShoppingBasketComponent} from './shopping-basket/shopping-basket.component';
 import { Top5Component } from './top5/top5.component';
-import { StockManagementComponent } from './stock-management/stock-management.component';
 import { NewsComponent } from './adviser/news/news.component';
 import { PopularComponent } from './adviser/popular/popular.component';
 import {ComplaintUpdateDialogComponent} from './complaints/complaint-update-dialog.component';
 import { OnlineOrderComponent } from './online-order/online-order.component';
-import { TableStockComponent } from './stock-management/table-stock/table-stock.component';
 import {SaleComponent} from './adviser/sale/sale.component';
 import {PayDialogComponent} from './shopping-basket/pay-dialog.component';
 import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
@@ -43,10 +41,8 @@ import { ForgottenPasswordComponent } from './forgotten-password/forgotten-passw
     ProductComponent,
     ShoppingBasketComponent,
     Top5Component,
-    StockManagementComponent,
     NewsComponent,
     PopularComponent,
-    TableStockComponent,
     SaleComponent,
     PayDialogComponent,
     ForgottenPasswordComponent,

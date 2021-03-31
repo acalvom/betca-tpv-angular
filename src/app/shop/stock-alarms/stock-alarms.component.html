@@ -23,20 +23,31 @@
       <app-crud (create)="create()" (update)="update($event)" (delete)="delete($event)" [readAction]="false"
                 [data]="data" [title]="title"></app-crud>
     </div>
-    <div class="flex-column" style="width: 25%;">
-      <mat-card style="background-color: orange">Warning</mat-card>
-      <ng-container *ngFor="let current of stockAlarms.warningAlarms">
-        <app-stock-alarm-chip [data]="current"></app-stock-alarm-chip>
-      </ng-container>
-    </div>
-    <div class="flex-column" style="width: 25%;">
-      <mat-card style="background-color: red">Critical</mat-card>
-      <ng-container *ngFor="let current of stockAlarms.criticalAlarms">
-        <app-stock-alarm-chip [data]="current"></app-stock-alarm-chip>
-      </ng-container>
+
+    <div class="flex-column" style="width: 50%;">
+      <mat-card>Alarms
+        <button (click)="findAlarms()" class="close" mat-icon-button matSuffix matTooltip="Renew" matTooltipShowDelay="2000">
+          <mat-icon>autorenew</mat-icon>
+        </button>
+      </mat-card>
+      <div class="flex-body">
+
+        <div class="flex-column" style="width: 50%;">
+          <mat-card style="background-color: orange">Warning</mat-card>
+          <ng-container *ngFor="let current of stockAlarms.warningAlarms">
+            <app-stock-alarm-chip [data]="current"></app-stock-alarm-chip>
+          </ng-container>
+        </div>
+        <div class="flex-column" style="width: 50%;">
+          <mat-card style="background-color: red">Critical</mat-card>
+          <ng-container *ngFor="let current of stockAlarms.criticalAlarms">
+            <app-stock-alarm-chip [data]="current"></app-stock-alarm-chip>
+          </ng-container>
+        </div>
+      </div>
     </div>
   </div>
 
 </div>
-
+z
 

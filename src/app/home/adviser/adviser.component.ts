@@ -7,7 +7,7 @@ import {Article} from '../shared/article.model';
   styleUrls: ['adviser.component.css'],
 })
 export class AdviserComponent implements OnInit{
-  @Input() articles: Article[];
+  @Input() articles: Article[] = [];
   @Output() add = new EventEmitter<Article>();
 
   ngOnInit(): void {

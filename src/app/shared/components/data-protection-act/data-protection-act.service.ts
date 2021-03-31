@@ -13,11 +13,6 @@ export class DataProtectionActService {
 
   private SEPARATOR = '/';
 
-  searchRgpdUser: SearchRgpdUser = {
-    mobile: 123456789,
-    rgpdType: RgpdType.ADVANCED
-  };
-
   constructor(private httpService: HttpService) {
   }
 
@@ -32,7 +27,8 @@ export class DataProtectionActService {
   }
 
   update(rgpdUser: RgpdUser): Observable<RgpdUser> {
-    return of(rgpdUser);
+    return this.httpService
+      .put(EndPoints.DATA_PROTECTION_ACT + this.SEPARATOR + rgpdUser.mobile, rgpdUser);
   }
 
   printUnsignedAgreement(searchRgpdUser: SearchRgpdUser): Observable<void> {

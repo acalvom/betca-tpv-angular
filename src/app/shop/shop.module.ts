@@ -78,6 +78,8 @@ import { TagCreationUpdatingDialogComponent } from './tags/tag-creation-updating
 import { TagArticleCreationUpdatingDialogComponent } from './tags/tag-article-creation-updating-dialog.component';
 import {BudgetDialogComponent} from './budgets/budget-dialog.component';
 import { VoucherConsumingComponent } from './vouchers/voucher-consuming/voucher-consuming-component';
+import { TableStockComponent } from '../shop/stock-management/table-stock/table-stock.component';
+import { StockManagementComponent } from '../shop/stock-management/stock-management.component';
 
 @NgModule({
   declarations: [
@@ -146,6 +148,8 @@ import { VoucherConsumingComponent } from './vouchers/voucher-consuming/voucher-
     VouchersComponent,
     VoucherCreationDialogComponent,
     VoucherConsumingComponent,
+    StockManagementComponent,
+    TableStockComponent,
 
   ],
   entryComponents: [
