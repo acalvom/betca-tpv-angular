@@ -33,7 +33,9 @@ export class StockManagementComponent implements OnInit {
 
   constructor(private stockService: StockService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // This is intentional
+  }
 
   searchByStock(): void {
     if (this.stockProduct != null) {
