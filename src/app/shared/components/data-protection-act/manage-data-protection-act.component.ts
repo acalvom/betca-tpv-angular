@@ -32,12 +32,7 @@ export class ManageDataProtectionActComponent {
 
   handleFileInput(event: Event): void {
     this.rgpdUser.rgpdType = this.selectedRgpdType;
-    const file = (event.target as HTMLInputElement).files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.rgpdUser.agreement = reader.result.toString();
-    };
-    reader.readAsDataURL(file);
+    this.rgpdUser.agreement = (event.target as HTMLInputElement).files[0];
   }
 
   printUnsignedAgreement(): void {
