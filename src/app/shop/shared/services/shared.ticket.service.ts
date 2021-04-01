@@ -3,6 +3,7 @@ import {HttpService} from '@core/http.service';
 import {Observable, of} from 'rxjs';
 import {EndPoints} from '@shared/end-points';
 import {map} from 'rxjs/operators';
+import {Ticket} from './models/ticket.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,10 @@ export class SharedTicketService {
   tickets: string[] = [ 'Tck_Ref_3', 'Tck_Ref_4'];
 
   searchTicketsWithoutInvoice(): Observable<string[]> {
-    return of(this.tickets);
+    return this.httpService
+      .get(EndPoints.TICKETS + '/search' + '/noInvoice')
+      .pipe(
+        map(response => response.references)
+      );;
   }
 }

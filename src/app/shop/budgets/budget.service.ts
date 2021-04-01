@@ -1,8 +1,11 @@
 import {HttpService} from '@core/http.service';
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {BudgetCreation} from './budget-creation.model';
+import {EndPoints} from '@shared/end-points';
+import {map} from 'rxjs/operators';
 import {Shopping} from '../shared/services/models/shopping.model';
+
+
 
 
 
@@ -11,35 +14,21 @@ import {Shopping} from '../shared/services/models/shopping.model';
   providedIn: 'root',
 })
 export class BudgetService {
-  private static BUDGET = '/budget';
-  private budgets: number[] = [111111111, 222222222, 3333333333];
-  budget: Shopping = {
-    barcode: '111',
-    description: 'budget',
-    retailPrice: 10,
-    amount: 10,
-    discount: 1,
-    total: 10,
-    state: 0,
-    updateTotal: null,
-    updateDiscount: null
-  };
+  static ID = '/id';
   constructor(private httpService: HttpService) {
   }
-  read(budget: string): Observable<Shopping> {
-    return of(this.budget);
-  }
-  createBudget(budgetCreation: BudgetCreation): Observable<void> {
-    return of(console.log('Success'));
-  }
-  searchBudget(budget: string): Observable<number[]> {
-    return of (this.budgets);
-    /*return of(console.log('Success'));
+
+  read(id: string): Observable<Shopping> {
     return this.httpService
-      .param('budgets', budgets)
-      .get(EndPoints.BUDGETS + BudgetService.BUDGET)
+      .get(EndPoints.BUDGETS  + '/' + id);
+  }
+
+  searchBudget(reference: string): Observable<string[]> {
+    return this.httpService
+      .param('reference', reference)
+      .get(EndPoints.BUDGETS  + BudgetService.ID )
       .pipe(
-        map(response => response.budgets)
-      );*/
+        map(response => response.references)
+      );
   }
 }
