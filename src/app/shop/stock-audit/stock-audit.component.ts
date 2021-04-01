@@ -84,7 +84,7 @@ export class StockAuditComponent implements OnInit {
       }
       this.stockAudit.barcodesWithoutAudit = barcodesWithoutAudit;
       this.stockAudit.losses = losses;
-      this.stockAuditService.saveAudit(this.stockAudit)
+      this.stockAuditService.saveAudit(this.stockAudit.id, this.stockAudit)
         .subscribe(() => {
             this.snackBar.open('Success saving', '', {
               duration: 3500
