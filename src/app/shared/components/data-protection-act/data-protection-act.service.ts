@@ -12,6 +12,7 @@ import {EndPoints} from '@shared/end-points';
 export class DataProtectionActService {
 
   private SEPARATOR = '/';
+  private AGREEMENT = '/agreement';
 
   constructor(private httpService: HttpService) {
   }
@@ -36,7 +37,8 @@ export class DataProtectionActService {
   }
 
   printSignedAgreement(mobile: number): Observable<void> {
-    return of();
+    return this.httpService
+      .get(EndPoints.DATA_PROTECTION_ACT + this.AGREEMENT + this.SEPARATOR + mobile);
   }
 
 }

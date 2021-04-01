@@ -45,7 +45,8 @@ export class ManageDataProtectionActComponent {
   }
 
   printSignedAgreement(): void {
-    this.dataProtectionActService.printSignedAgreement(this.rgpdUser.mobile);
+    this.dataProtectionActService.printSignedAgreement(this.rgpdUser.mobile)
+      .subscribe();
   }
 
 }
