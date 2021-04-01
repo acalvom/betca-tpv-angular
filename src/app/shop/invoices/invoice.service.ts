@@ -90,31 +90,7 @@ export class InvoiceService {
   }
 
   create(invoiceModel: InvoiceUpdate): Observable<InvoiceItem> {
-    // {id: 'Ticket_1', mobile: this.phones[1], reference: 'Tck_Ref_1', user: this.users[1]}
-    // {mobile: this.phones[1], dni: 'DNI_U2', name: 'User_2', familyName: 'FamU_2'}
-    const lastPhone = this.phones.length;
-    this.phones.push(invoiceModel.userPhone);
-
-    const lastUser = this.users.length;
-    const user: User = {
-      mobile: this.phones[lastPhone], name: invoiceModel.userName,
-      familyName: invoiceModel.familyNameUser, dni: invoiceModel.userDni
-    };
-    this.users.push(user);
-
-    const sizeTickets = this.tickets.length;
-    const ticket = {id: 'Ticket_' + sizeTickets, mobile: user.mobile, user: this.users[lastUser], reference: invoiceModel.ticketReference};
-    this.tickets.push(ticket);
-
-    // {number: 111200300, creationDate: new Date(), baseTax: 1, taxValue: 1, ticket: this.tickets[0]}
-    const invoice: Invoice = {
-      number: this.incSequence(), ticket: this.tickets[sizeTickets],
-      taxValue: 1, baseTax: 1, creationDate: new Date()
-    };
-    this.invoices.push(invoice);
-
-    const invoiceItem: InvoiceItem = this.invoiceToItems(invoice);
-
-    return of(invoiceItem);
+    const ticketRef = {reference: invoiceModel.ticketReference};
+    return this.httpService.pdf().post(EndPoints.INVOICES + '/ticketRef', ticketRef);
   }
 }
