@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {StaffTimeSearch} from './model/staff-time-search.model';
 import {StaffTimeService} from './staff-time.service';
-import {response} from 'express';
-import {formatDate} from '@angular/common';
-import {StaffTime} from './model/staff-time.model';
+import {DatePipe} from '@angular/common';
 import {of} from 'rxjs';
 
 @Component({
@@ -18,15 +16,16 @@ export class StaffComponent implements OnInit {
   endDate: Date;
   data = of([]);
 
-  constructor(private staffTimeService: StaffTimeService) { }
+  constructor(private staffTimeService: StaffTimeService,
+              private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.staffTime = new StaffTimeSearch();
   }
 
   search(): void {
-    this.staffTime.startDate = this.startDate.toLocaleDateString();
-    this.staffTime.endDate = this.endDate.toLocaleDateString();
+    this.staffTime.startDate = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
+    this.staffTime.endDate = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
     this.data = this.staffTimeService.find(this.staffTime);
   }
 
