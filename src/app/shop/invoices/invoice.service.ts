@@ -44,9 +44,9 @@ export class InvoiceService {
     }
   }
 
-  incSequence(): number {
+  incSequence(): string {
     this.sequence = this.sequence + 1;
-    return this.sequence;
+    return String(this.sequence);
   }
 
   search(invoiceSearch: InvoiceSearch): Observable<InvoiceItem[]> {
@@ -55,11 +55,14 @@ export class InvoiceService {
       .get(EndPoints.INVOICES + '/search');
   }
 
-  printPdf(numberInvoice: number): Observable<void> {
-    return of(console.log('Implementado impresion de factura'));
+  printPdf(numberInvoice: string): Observable<void> {
+    const ticket = {number: numberInvoice}; // invoice provisional
+    return this.httpService.pdf()
+      .paramsFrom(ticket)
+      .get(EndPoints.INVOICES + '/print');
   }
 
-  read(numberInvoice: number): Observable<Invoice> {
+  read(numberInvoice: string): Observable<Invoice> {
     const invoice: Invoice = this.invoices.find(invo => invo.number === numberInvoice);
     return of(invoice);
   }
@@ -77,7 +80,6 @@ export class InvoiceService {
   }
 
   searchTicketByRef(ticketRef: string): Observable<Ticket> {
-    const ticket: Ticket = this.tickets.find(tk => tk.reference === ticketRef);
     return this.httpService
       .get(EndPoints.TICKETS + '/' + ticketRef + '/reference/selected');
   }
