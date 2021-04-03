@@ -11,7 +11,10 @@ export class TagArticleService {
 
   constructor() {
   }
-
+  refresh(): Observable<Article[]> {
+    this.articles = of([]);
+    return this.articles;
+  }
   create(article: Article): Observable<Article> {
     return this.articles.pipe(map(articles => {
         articles.push(article);
@@ -49,5 +52,9 @@ export class TagArticleService {
       }
       )
     );
+  }
+
+  init(articleList: Article[]): void {
+    this.articles = of(articleList);
   }
 }
