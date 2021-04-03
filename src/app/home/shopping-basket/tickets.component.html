@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Please Check Your Order: </strong></mat-label>
+    <ul>
+      <li>
+        Index|Desc|Quan|Price|Amount
+      </li>
+      <li *ngFor="let item of shoppingList;let key=index;">
+        {{key+1}} | {{item.description}} |{{item.quantity}} | {{item.retailPrice}} | {{item.amount}}
+      </li>
+
+    </ul>
+    <mat-label>
+      Total : {{pay}}
+    </mat-label>
+  </mat-card-content>
+
+  <mat-dialog-actions>
+    <button id="reference" color="accent" (click)="confirm()" routerLink="/home/online-order" mat-raised-button>
+      Confirm
+    </button>
+    <button [mat-dialog-close]="false" cdkFocusInitial mat-raised-button>Cancel</button>
+  </mat-dialog-actions>
+
+</mat-card>
+
