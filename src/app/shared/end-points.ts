@@ -12,9 +12,10 @@ export class EndPoints {
   static INVOICES = environment.REST_CORE + '/invoices';
   static GIFTTICKETS = environment.REST_CORE + '/giftTickets';
   static COMPLAINTS = environment.REST_CUSTOMER_SUPPORT + '/complaints';
-  static COMPLAINTS_SHOP = environment.REST_CORE + '/complaints';
   static USERS = environment.REST_USER + '/users';
   static USERS_PROFILE = EndPoints.USERS + '/profile';
+  static SEND_EMAIL = EndPoints.USERS + '/send_email';
+  static RECOVER_PASSWORD = EndPoints.USERS + '/recover_password';
   static STOCK_MANAGER = environment.REST_CORE + '/stock-manager';
   static STOCKS_ALARMS = environment.REST_CORE + '/stock-alarms';
   static BUDGETS = environment.REST_CORE + '/budgets';
@@ -33,4 +34,6 @@ export class EndPoints {
   static VOUCHERS = environment.REST_CORE + '/vouchers';
   static ADMIN = environment.REST_USER + '/users-admin';
   static ISSUES = environment.REST_CORE + '/issues';
+  static PROVIDER_INVOICES = environment.REST_CORE + '/provider-invoices';
+  static SLACK = environment.REST_CORE + '/slack-messages';
 }

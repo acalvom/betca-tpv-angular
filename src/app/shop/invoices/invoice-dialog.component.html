@@ -7,12 +7,6 @@
         <input [(ngModel)]="invoiceModel.number" [disabled]=true matInput required type="text"/>
       </label>
     </mat-form-field>
-    <mat-form-field class="full-width">
-      <mat-label>Creation Date</mat-label>
-      <label>
-        <input [(ngModel)]="invoiceModel.creationDate" [disabled]=!isCreate() matInput required type="date">
-      </label>
-    </mat-form-field>
     <mat-form-field *ngIf="!isCreate()"  class="full-width">
       <mat-label>Ticket Reference</mat-label>
       <label>
@@ -20,6 +14,12 @@
       </label>
     </mat-form-field>
     <app-search-by-ticket-ref *ngIf="isCreate()" (add)="addTicket($event)"></app-search-by-ticket-ref>
+    <mat-form-field *ngIf="isCreate()" class="full-width">
+      <mat-label>Creation Date</mat-label>
+      <label>
+        <input [(ngModel)]="invoiceModel.creationDate" [disabled]=true matInput required type="text"  >
+      </label>
+    </mat-form-field>
   </div>
   <br/>
   <div>
@@ -27,25 +27,25 @@
     <mat-form-field class="full-width">
       <mat-label>DNI</mat-label>
       <label>
-        <input [(ngModel)]="invoiceModel.userDni" matInput required type="text"/>
+        <input [(ngModel)]="invoiceModel.userDni" [disabled]=isCreate() matInput required type="text"/>
       </label>
     </mat-form-field>
     <mat-form-field class="full-width">
       <mat-label>Phone</mat-label>
       <label>
-        <input [(ngModel)]="invoiceModel.userPhone" matInput required type="number"/>
+        <input [(ngModel)]="invoiceModel.userPhone" [disabled]=isCreate() matInput required type="number"/>
       </label>
     </mat-form-field>
     <mat-form-field class="full-width">
       <mat-label>Name</mat-label>
       <label>
-        <input [(ngModel)]="invoiceModel.userName" matInput required type="text"/>
+        <input [(ngModel)]="invoiceModel.userName" [disabled]=isCreate() matInput required type="text"/>
       </label>
     </mat-form-field>
     <mat-form-field class="full-width">
       <mat-label>Family Name</mat-label>
       <label>
-        <input [(ngModel)]="invoiceModel.familyNameUser" matInput required type="text"/>
+        <input [(ngModel)]="invoiceModel.familyNameUser" [disabled]=isCreate() matInput required type="text"/>
       </label>
     </mat-form-field>
   </div>

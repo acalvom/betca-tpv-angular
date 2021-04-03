@@ -5,7 +5,6 @@ import {ProviderInvoice} from './provider-invoice.model';
 import {ProviderInvoiceService} from './provider-invoice.service';
 import {ProviderInvoiceCreationUpdatingDialogComponent} from './provider-invoice-creation-updating-dialog.component';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
-import {TotalTax} from './total-tax.model';
 
 @Component({
   selector: 'app-provider-invoices',
@@ -14,9 +13,9 @@ import {TotalTax} from './total-tax.model';
 export class ProviderInvoicesComponent {
   title = 'Provider Invoices Management';
   providerInvoices = of([]);
-  trimesters = [1, 2, 3, 4];
-  selectedTrimester: number;
-  totalTax: TotalTax = {totalBaseTax: 0, totalTaxValue: 0};
+  quarters = [1, 2, 3, 4];
+  selectedQuarter: number;
+  totalTax = of({totalBaseTax: 0, totalTaxValue: 0});
 
   constructor(private dialog: MatDialog, private providerInvoiceService: ProviderInvoiceService) {
     this.search();
@@ -47,7 +46,9 @@ export class ProviderInvoicesComponent {
       .subscribe((fullProviderInvoice: ProviderInvoice) =>
         this.dialog.open(ProviderInvoiceCreationUpdatingDialogComponent,
           {data: fullProviderInvoice})
-          .afterClosed().subscribe(() => this.search()));
+          .afterClosed()
+          .subscribe(() => this.search())
+      );
   }
 
   delete(providerInvoice: ProviderInvoice): void {
@@ -57,9 +58,8 @@ export class ProviderInvoicesComponent {
   }
 
   calculateTotalTax(): void {
-    this.providerInvoiceService
-      .calculateTotalTax(this.selectedTrimester)
-      .subscribe((totalTax: TotalTax) => this.totalTax = totalTax);
+    this.totalTax = this.providerInvoiceService
+      .calculateTotalTax(this.selectedQuarter);
   }
 
 }

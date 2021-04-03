@@ -11,12 +11,12 @@ import {AddCreditLineDialogComponent} from './shared/dialogs/add-credit-line-dia
 import {CreditLinePayDialogComponent} from './cashier-opened/credit-line-pay-dialog.component';
 import {DataProtectionActDialogComponent} from './data-protection-act/data-protection-act-dialog.component';
 import {CashMovementDialogComponent} from './cashier-opened/cash-movements/cash-movement-dialog/cash-movement-dialog.component';
-import { SlackPublisherComponent } from './slack-publisher/slack-publisher.component';
+import {SlackPublisherComponent} from './slack-publisher/slack-publisher.component';
 import {ArticlesSizeFamilyCreationDialogComponent} from './articles-size-family-creation/articles-size-family-creation-dialog.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SharedMessengerService } from './shared/services/shared-messenger.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {SharedMessengerService} from './shared/services/shared-messenger.service';
 import {StaffTimeService} from './staff/staff-time.service';
-import { Message } from './shared/services/models/message.model';
+import {Message} from './shared/services/models/message.model';
 
 @Component({
   templateUrl: 'shop.component.html',
@@ -62,7 +62,7 @@ export class ShopComponent implements OnInit {
   }
 
   logout(): void {
-    this.logoutService.logout();
+    this.logoutService.logout().subscribe();
     this.tokensService.logout();
   }
 
@@ -119,10 +119,10 @@ export class ShopComponent implements OnInit {
         let snackBarRef = this.snackBar.open(message, action, {
           duration: 8000,
         });
-  
+
         var audio = new Audio('../../assets/pristine.mp3');
         audio.play();
-  
+
         snackBarRef.onAction().subscribe(() => {
           this.router.navigate(['shop', 'messenger']).then();
         });
@@ -132,6 +132,6 @@ export class ShopComponent implements OnInit {
     });
 
   }
-  
+
 }
 

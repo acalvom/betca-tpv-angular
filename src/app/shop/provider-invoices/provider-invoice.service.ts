@@ -1,75 +1,46 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {ProviderInvoice} from './provider-invoice.model';
 import {TotalTax} from './total-tax.model';
-// import {HttpService} from '@core/http.service';
-// import {EndPoints} from '@shared/end-points';
+import {HttpService} from '@core/http.service';
+import {EndPoints} from '@shared/end-points';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProviderInvoiceService {
-  providerInvoices: ProviderInvoice[] = [
-    {number: 1, creationDate: new Date('2021-03-01'), baseTax: 1000, taxValue: 10, provider: 'pro1', orderId: '1'},
-    {number: 2, creationDate: new Date('2021-03-02'), baseTax: 2000, taxValue: 20, provider: 'pro2', orderId: '2'},
-  ];
+  static TOTAL_TAX_QUARTERS = '/total-tax/quarters';
 
-  constructor(/* private httpService: HttpService */) {
+  constructor(private httpService: HttpService) {
   }
 
   findAll(): Observable<ProviderInvoice[]> {
-    return of(this.providerInvoices);
+    return this.httpService.get(EndPoints.PROVIDER_INVOICES);
   }
 
   create(providerInvoice: ProviderInvoice): Observable<ProviderInvoice> {
-    this.providerInvoices.push(providerInvoice);
-    return of(providerInvoice);
-    /*
     return this.httpService
       .post(EndPoints.PROVIDER_INVOICES, providerInvoice);
-    */
   }
 
   read(providerInvoiceNumber: number): Observable<ProviderInvoice> {
-    const providerInvoice = this.providerInvoices.find(pi => pi.number === providerInvoiceNumber);
-    return of({...providerInvoice});
-    /*
     return this.httpService
       .get(EndPoints.PROVIDER_INVOICES + '/' + providerInvoiceNumber);
-    */
   }
 
   update(oldProviderInvoiceNumber: number, providerInvoice: ProviderInvoice): Observable<ProviderInvoice> {
-    const index = this.providerInvoices.findIndex(pi => pi.number === oldProviderInvoiceNumber);
-    this.providerInvoices[index] = providerInvoice;
-    return of(providerInvoice);
-    /*
-     return this.httpService
-      .put(EndPoints.PROVIDER_INVOICES + '/' + providerInvoice.number, providerInvoice);
-     */
+    return this.httpService
+      .put(EndPoints.PROVIDER_INVOICES + '/' + oldProviderInvoiceNumber, providerInvoice);
   }
 
   delete(providerInvoiceNumber: number): Observable<void> {
-    const index = this.providerInvoices.findIndex(pi => pi.number === providerInvoiceNumber);
-    this.providerInvoices.splice(index, 1);
-    return of(null);
-    /*
     return this.httpService
       .delete(EndPoints.PROVIDER_INVOICES + '/' + providerInvoiceNumber);
-     */
   }
 
-  calculateTotalTax(trimester: number): Observable<TotalTax> {
-    const total: TotalTax = {totalBaseTax: 0, totalTaxValue: 0};
-    if (trimester === 1) {
-      total.totalBaseTax = this.providerInvoices[0].baseTax + this.providerInvoices[1].baseTax;
-      total.totalTaxValue = this.providerInvoices[0].taxValue + this.providerInvoices[1].taxValue;
-    }
-    return of(total);
-    /*
+  calculateTotalTax(quarterNumber: number): Observable<TotalTax> {
     return this.httpService
-      .get(EndPoints.PROVIDER_INVOICES + '/' + 'trimesters/' + trimester);
-     */
+      .get(EndPoints.PROVIDER_INVOICES + ProviderInvoiceService.TOTAL_TAX_QUARTERS + '/' + quarterNumber);
   }
 
 }

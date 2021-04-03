@@ -12,7 +12,7 @@ import {Article} from '../shared/services/models/article.model';
 export class StockAuditService {
   private stockAudits: StockAudit[] = ([
     {
-      idAudit: '1',
+      id: '1',
       creationDate: new Date(),
       closeDate: new Date(),
       barcodesWithoutAudit: ['100000', '200000'],
@@ -20,7 +20,7 @@ export class StockAuditService {
       losses: [{barcode: '300000', amount: 3}]
     },
     {
-      idAudit: '2',
+      id: '2',
       creationDate: new Date(),
       closeDate: new Date(),
       barcodesWithoutAudit: ['500000'],
@@ -38,22 +38,18 @@ export class StockAuditService {
   }
 
   readSingleOpenedAudit(): Observable<StockAudit> {
-    /*return this.httpService
-      .get(EndPoints.AUDITS + '/opened');*/
-    /*
     return this.httpService
-      .param('closeDate', null)
-      .get(EndPoints.AUDITS);
-     */
-    return of(this.stockAudits.find(stockAudit => stockAudit.closeDate == null));
+      .get(EndPoints.AUDITS + '/opened');
+
+    // return of(this.stockAudits.find(stockAudit => stockAudit.closeDate == null));
   }
 
-  createAudit(stockAudit: StockAudit): Observable<StockAudit> {
-    /*return this.httpService
-      .post(EndPoints.AUDITS, stockAudit);*/
-    const stockAuditCreated: StockAudit = (
+  createAudit(barcodesWithoutAudit: string[]): Observable<StockAudit> {
+    return this.httpService
+      .post(EndPoints.AUDITS, barcodesWithoutAudit);
+    /* const stockAuditCreated: StockAudit = (
       {
-        idAudit: '3',
+        id: '3',
         creationDate: new Date(),
         closeDate: null,
         barcodesWithoutAudit: ['1', '8400000000017', '8400000000024', '8400000000031', '8400000000048', '8400000000055', '8400000000062', '8400000000079', '8400000000086', '8400000000093', '8400000000100'],
@@ -61,15 +57,15 @@ export class StockAuditService {
         losses: []
       });
     this.stockAudits.push(stockAuditCreated);
-    return of(stockAuditCreated);
+    return of(stockAuditCreated); */
   }
 
-  saveAudit(stockAudit: StockAudit): Observable<StockAudit> {
-    /*return this.httpService
-      .patch(EndPoints.AUDITS + '/' + idAudit, stockAudit);*/
-    this.stockAudits.pop();
+  saveAudit(id: string, stockAudit: StockAudit): Observable<StockAudit> {
+    return this.httpService
+      .put(EndPoints.AUDITS + '/' + id, stockAudit);
+    /*this.stockAudits.pop();
     this.stockAudits.push({
-      idAudit: '3',
+      id: '3',
       creationDate: new Date(),
       closeDate: null,
       barcodesWithoutAudit: stockAudit.barcodesWithoutAudit,
@@ -77,13 +73,13 @@ export class StockAuditService {
       losses: stockAudit.losses
     });
     return of({
-      idAudit: '3',
+      id: '3',
       creationDate: new Date(),
       closeDate: null,
       barcodesWithoutAudit: stockAudit.barcodesWithoutAudit,
       lossValue: null,
       losses: stockAudit.losses
-    });
+    });*/
   }
 
   closeAudit(stockAudit: StockAudit): Observable<StockAudit> {
@@ -91,7 +87,7 @@ export class StockAuditService {
       .patch(EndPoints.AUDITS + '/close/' + idAudit, stockAudit);*/
     this.stockAudits.pop();
     return of({
-      idAudit: '3',
+      id: '3',
       creationDate: new Date(),
       closeDate: new Date(),
       barcodesWithoutAudit: stockAudit.barcodesWithoutAudit,

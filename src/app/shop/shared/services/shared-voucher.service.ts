@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {EMPTY, Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Voucher} from './models/voucher.model';
 import {HttpService} from '@core/http.service';
 import {VoucherCreation} from '../../vouchers/voucher.creation';
@@ -12,13 +12,15 @@ import {EndPoints} from '@shared/end-points';
 })
 export class SharedVoucherService {
 
-  constructor(private httpService: HttpService) {}
+  constructor(private httpService: HttpService) {
+
+  }
 
   create(voucher: VoucherCreation): Observable<Voucher> {
     const createdVoucher: Voucher = {
       reference: undefined,
       value: voucher.value,
-      creationDate: new Date(),
+      creationDate: undefined,
       dateOfUse: undefined
     };
 
@@ -28,15 +30,14 @@ export class SharedVoucherService {
   printVoucher(value: number): Observable<any> {
     const voucherCreation: VoucherCreation = { value };
     return this.create(voucherCreation)
-      .pipe(map(voucher => this.httpService.pdf().get(`${EndPoints.VOUCHERS}/${voucher.reference}`)));
+      .pipe(map(voucher => this.httpService.pdf().get(`${EndPoints.VOUCHERS}/${voucher.reference}/pdf`)));
   }
 
-  consumeVoucher(vouchers: Voucher[]): Observable<any> {
-    return this.httpService.put(`${EndPoints.VOUCHERS}`, vouchers);
+  consumeVoucher(voucher: Voucher): Observable<any> {
+    return this.httpService.put(`${EndPoints.VOUCHERS}/${voucher.reference}`);
   }
 
   findAll(): Observable<Voucher[]> {
-    // return this.httpService.get(EndPoints.VOUCHERS);
-    return of([{reference: 'a', value: 12, creationDate: new Date(), dateOfUse: undefined}]);
+    return this.httpService.get(EndPoints.VOUCHERS);
   }
 }

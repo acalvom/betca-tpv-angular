@@ -12,11 +12,11 @@ import {Top5Component} from './top5/top5.component';
 import {OffersComponent} from './offers/offers.component';
 import {ShoppingBasketComponent} from './shopping-basket/shopping-basket.component';
 import {ProfileSettingsComponent} from '@shared/components/profile-settings/profile-settings.component';
-import {StockManagementComponent} from './stock-management/stock-management.component';
 import {NewsComponent} from './adviser/news/news.component';
 import {PopularComponent} from './adviser/popular/popular.component';
-import {OnlineOrderComponent} from "./online-order/online-order.component";
+import {OnlineOrderComponent} from './online-order/online-order.component';
 import {SaleComponent} from './adviser/sale/sale.component';
+import {ForgottenPasswordComponent} from './forgotten-password/forgotten-password.component';
 
 const routes: Routes = [
   {
@@ -36,7 +36,7 @@ const routes: Routes = [
       {path: 'shopping-basket', component: ShoppingBasketComponent},
       {path: 'settings', component: ProfileSettingsComponent},
       {path: 'online-order', component: OnlineOrderComponent},
-      {path: 'stock-management', component: StockManagementComponent}
+      {path: 'forgotten-password', component: ForgottenPasswordComponent}
     ]
   }
 ];

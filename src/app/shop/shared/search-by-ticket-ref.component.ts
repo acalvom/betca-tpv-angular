@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {SharedArticleService} from './services/shared.article.service';
 import {Observable, of} from 'rxjs';
 import {SharedTicketService} from './services/shared.ticket.service';
+import {Ticket} from './services/models/ticket.model';
 
 @Component({
   selector: 'app-search-by-ticket-ref',

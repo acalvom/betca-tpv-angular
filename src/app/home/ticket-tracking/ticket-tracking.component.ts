@@ -19,8 +19,13 @@ export class TicketTrackingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => this.id = params.id );
-    this.ticketTrackingService.read().subscribe( products => this.products = products );
+    this.route.params.subscribe(params => {
+      this.id = params.id;
+      this.ticketTrackingService.read(this.id).subscribe( products => {
+        // @ts-ignore
+        this.products = products.shoppingList;
+      });
+    } );
   }
 
 }

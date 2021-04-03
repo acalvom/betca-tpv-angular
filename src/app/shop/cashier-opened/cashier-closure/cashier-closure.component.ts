@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {CashierClosureService} from './cashier-closure.service';
-import {of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {CashierClosure} from './cashier-closure.model';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
 import {Cashier} from '../../shared/services/models/cashier.model';
@@ -22,8 +22,9 @@ export class CashierClosureComponent implements OnInit {
   title2 = 'Total Sales';
   beginDate;
   endDate;
-  totals = of([]);
+  totals: Observable<Cashier>;
   cashiers = of([]);
+  displayedColumnsTotals = ['initialCash', 'cashSales', 'cardSales', 'usedVouchers', 'deposit', 'withdrawal', 'lostCard', 'lostCash', 'finalCash'];
 
   constructor(private dialog: MatDialog, private cashierClosureService: CashierClosureService, public datepipe: DatePipe) {
     this.resetSearch();
@@ -35,7 +36,6 @@ export class CashierClosureComponent implements OnInit {
   resetSearch(): void {
     this.beginDate = null;
     this.endDate = null;
-    this.cashierClosure = {};
     this.cashierClosureSearch = {};
   }
 
@@ -58,6 +58,6 @@ export class CashierClosureComponent implements OnInit {
       this.cashierClosureSearch.dateEndString = this.datepipe.transform(new Date(this.endDate), 'yyyy-MM-dd 23:59');
     }
     this.cashiers = this.cashierClosureService.search(this.cashierClosureSearch);
-    this.totals = this.cashierClosureService.totals(this.cashierClosure);
+    this.totals = this.cashierClosureService.totals(this.cashierClosureSearch);
   }
 }

@@ -40,16 +40,9 @@ export class CashierClosureService {
       .get(EndPoints.CASHIERS + CashierClosureService.SEARCH);
   }
 
-  totals(cashierClosure: CashierClosure): Observable<CashierTotals[]> {
-    /*return this.httpService
-      .paramsFrom(cashierClosure)
-      .get(EndPoints.CASHIERS + CashierClosureService.TOTALS);*/
-
-    const cashiertotals: CashierTotals[] = ([
-      {
-        cashTotalSales: 100,
-        cardTotalSales: 50
-      }
-      ]);
-    return of(cashiertotals);  }
+  totals(cashierClosureSearch: CashierClosureSearch): Observable<Cashier> {
+    return this.httpService
+      .paramsFrom(cashierClosureSearch)
+      .get(EndPoints.CASHIERS + CashierClosureService.SEARCH + CashierClosureService.TOTALS);
+  }
 }

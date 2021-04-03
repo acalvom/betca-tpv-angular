@@ -20,6 +20,7 @@ import {SharedCreditSaleService} from '../../shared/services/shared.credit-sale.
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {User} from '@core/user.model';
 import {Offer} from '../../shared/services/models/offer.model';
+import {SharedVoucherService} from '../../shared/services/shared-voucher.service';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +36,8 @@ export class ShoppingCartService {
   constructor(private dialog: MatDialog, private articleService: SharedArticleService,
               private offerService: SharedOfferService, private httpService: HttpService,
               private budgetService: BudgetService, private sharedCreditLineService: SharedCreditLineService,
-              private sharedCreditSaleService: SharedCreditSaleService, private snackBar: MatSnackBar) {
+              private sharedCreditSaleService: SharedCreditSaleService, private snackBar: MatSnackBar,
+              private sharedVoucherService: SharedVoucherService) {
   }
 
   read(newBarcode: string): Observable<Shopping> {
@@ -92,7 +94,7 @@ export class ShoppingCartService {
   }
 
   createVoucherAndPrint(voucher: number): Observable<void> {
-    return EMPTY; // TODO change EMPTY
+    return this.sharedVoucherService.printVoucher(voucher);
   }
 
   createInvoiceAndPrint(ticketId: string): Observable<void> {
@@ -102,9 +104,15 @@ export class ShoppingCartService {
   }
 
   createGiftTicketAndPrint(ticketId: string): Observable<void> {
-    const giftTicket = {id: 'Ma35Mhdgd2454656', message: 'Gift ticket message', ticketId}; // ticket provisional
+    const giftTicket = {message: 'Gift ticket from MIW', ticketId}; // ticket provisional
     return this.httpService
-      .post(EndPoints.GIFTTICKETS, giftTicket);
+      .post(EndPoints.GIFTTICKETS, giftTicket)
+      .pipe(
+        concatMap( ticket => {
+          const receipts = this.httpService.pdf().get(EndPoints.GIFTTICKETS + '/' + ticket.id + ShoppingCartService.RECEIPT);
+          return receipts;
+        })
+      );
   }
 
   createDataProtectionActAndPrint(ticket): Observable<void> {
@@ -140,12 +148,29 @@ export class ShoppingCartService {
   }
 
   createBudget(budgetCreation: BudgetCreation): Observable<void> {
-    return of(console.log('Success'));
+    return this.httpService
+      .post(EndPoints.BUDGETS, budgetCreation)
+      .pipe(
+        concatMap(budget => {
+          const receipt = this.printBudget(budget.id);
+          return receipt;
+        })
+      );
+  }
+  printBudget(BudgetId: string): Observable<void> {
+    return this.httpService.pdf().get(EndPoints.BUDGETS + '/' + BudgetId + ShoppingCartService.RECEIPT);
   }
 
-  readBudget(budget: string): Observable<Shopping> {
+  readBudget(id: string): Observable<Shopping> {
     return this.budgetService
-      .read(budget);
+      .read(id)
+      .pipe(
+        map(budgets => {
+            const shopping = new Shopping(budgets.barcode, budgets.description, budgets.retailPrice);
+            return shopping;
+          }
+        )
+      );
   }
 
   addDiscount(mobile: string, purchase: number): Observable<number> {

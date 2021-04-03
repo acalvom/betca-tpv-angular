@@ -1,7 +1,7 @@
 import {ArticleLoss} from './article-loss.model';
 
 export interface StockAudit {
-  idAudit?: string;
+  id?: string;
   creationDate: Date;
   closeDate?: Date;
   barcodesWithoutAudit: string[];

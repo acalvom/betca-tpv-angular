@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {of} from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {StockAuditService} from './stock-audit.service';
@@ -38,26 +38,21 @@ export class StockAuditComponent implements OnInit {
 
     this.auditArticles.subscribe((articles) => {
       this.resetRealStockArray(articles);
-    });
 
-    this.stockAuditService.readSingleOpenedAudit()
-      .subscribe((stockAuditFound) => {
-        if (stockAuditFound == null){
-          this.stockAuditService.createAudit({
-            creationDate: new Date(),
-            closeDate: null,
-            barcodesWithoutAudit: this.barcodesWithoutAudit,
-            lossValue: null,
-            losses: []
-          }).subscribe((auditCreated) => {
-            this.stockAudit = auditCreated;
-            this.assignSavedRealStockValues(auditCreated);
-          });
-        } else {
-          this.stockAudit = stockAuditFound;
-          this.assignSavedRealStockValues(stockAuditFound);
-        }
-      });
+      this.stockAuditService.readSingleOpenedAudit()
+        .subscribe((stockAuditFound) => {
+          if (stockAuditFound == null){
+            this.stockAuditService.createAudit(this.barcodesWithoutAudit)
+              .subscribe((auditCreated) => {
+                this.stockAudit = auditCreated;
+                this.assignSavedRealStockValues(auditCreated);
+              });
+          } else {
+            this.stockAudit = stockAuditFound;
+            this.assignSavedRealStockValues(stockAuditFound);
+          }
+        });
+    });
   }
 
   resetRealStockArray(arr: Article[]): void {
@@ -89,7 +84,7 @@ export class StockAuditComponent implements OnInit {
       }
       this.stockAudit.barcodesWithoutAudit = barcodesWithoutAudit;
       this.stockAudit.losses = losses;
-      this.stockAuditService.saveAudit(this.stockAudit)
+      this.stockAuditService.saveAudit(this.stockAudit.id, this.stockAudit)
         .subscribe(() => {
             this.snackBar.open('Success saving', '', {
               duration: 3500

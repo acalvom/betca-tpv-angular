@@ -17,9 +17,9 @@ export class StaffReportService {
   constructor(private httpService: HttpService) { }
 
   find(month: string): Observable<StaffReport[]> {
-    return of(this.staffReport);
-    // return this.httpService
-    //   .param('month', month)
-    //   .get(EndPoints.STAFF + '/reports');
+    //return of(this.staffReport);
+    return this.httpService
+      .param('month', month)
+      .get(EndPoints.STAFF + '/reports');
   }
 }

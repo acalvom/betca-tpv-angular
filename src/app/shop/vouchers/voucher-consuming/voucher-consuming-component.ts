@@ -24,14 +24,9 @@ export class VoucherConsumingComponent {
 
   consume(): void {
     const totalSumOfSelectedVouchers = this.getTotalSumOfSelectedVouchers();
-    console.log(totalSumOfSelectedVouchers);
+    this.selectedVouchers.forEach(voucher => this.voucherService.consumeVoucher(voucher).subscribe());
     this.dialogRef.close(totalSumOfSelectedVouchers);
-
-    /*this.voucherService
-      .consumeVoucher(this.selectedVouchers)
-      .subscribe(() => this.dialog.closeAll());*/
   }
-
 
   invalid(): boolean {
     return this.selectedVouchers.length === 0;
