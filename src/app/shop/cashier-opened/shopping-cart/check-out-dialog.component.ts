@@ -14,6 +14,7 @@ import {UserUpdateCreateDialogComponent} from '../../users/dialog/user-update-cr
 import {SharedCreditLineService} from '../../shared/services/shared.credit-line.service';
 import {SharedVoucherService} from '../../shared/services/shared-voucher.service';
 import {VoucherConsumingComponent} from '../../vouchers/voucher-consuming/voucher-consuming-component';
+import {User} from "@shared/models/userRegister.model";
 
 @Component({
   templateUrl: 'check-out-dialog.component.html',
@@ -28,6 +29,7 @@ export class CheckOutDialogComponent {
   credit = false;
   checkedCreditLine = false;
   userSearch: UserSearch;
+  user: User;
 
   constructor(@Inject(MAT_DIALOG_DATA) data, private dialog: MatDialog, private dialogRef: MatDialogRef<CheckOutDialogComponent>,
               private shoppingCartService: ShoppingCartService, private userService: UserCompleteService, private authService: AuthService,
@@ -52,9 +54,8 @@ export class CheckOutDialogComponent {
   searchUser(mobile: string): void {
 
     if (mobile) {
-      if (!this.authService.isAuthenticated() || !this.checkMobileExist(Number(mobile))){
-         this.dialog.open(UserUpdateCreateDialogComponent);
-      }
+
+      this.checkMobileExist(Number(mobile));
       this.ticketCreation.user = {mobile: Number(mobile)};
       this.sharedCreditLineService.findByUserReference(this.ticketCreation.user.mobile.toString()).subscribe(
         value => {
@@ -66,15 +67,13 @@ export class CheckOutDialogComponent {
     }
   }
 
-  checkMobileExist(mobile: number ): boolean{
-    let exist = true;
-    this.userService.searchCompleteUser(Number(mobile)).subscribe( user => {
-      if (user == undefined || user.mobile == null || user.mobile == undefined){
-          exist = false;
-      }
-    });
+  checkMobileExist(mobile: number ): void{
 
-    return exist;
+    this.userService.searchCompleteUser(Number(mobile)).subscribe( () => console.log('succes'),
+      () => {
+      console.log('error');
+      this.dialog.open(UserUpdateCreateDialogComponent);
+      });
   }
 
   managedMobile(): boolean {
