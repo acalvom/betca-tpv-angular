@@ -33,7 +33,7 @@
   <p>
     <mat-form-field class="full-width">
       <mat-label>Role</mat-label>
-      <mat-select [(ngModel)]="user.role">
+      <mat-select [disabled]="!canUpdatedRoles()" [(ngModel)]="user.role">
         <mat-option *ngFor="let role of roleValues" [value]="role">
           {{role}}
         </mat-option>
@@ -41,7 +41,7 @@
     </mat-form-field>
   </p>
   <p>
-    <mat-checkbox [(ngModel)]="user.active" [disabled]="!editable">Active Account</mat-checkbox>
+    <mat-checkbox [(ngModel)]="user.active" [disabled]="!canActivateAccounts()">Active Account</mat-checkbox>
   </p>
 </mat-dialog-content>
 <mat-dialog-actions>

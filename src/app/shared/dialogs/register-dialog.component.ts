@@ -8,7 +8,6 @@ import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {RgpdUser} from '@shared/models/rgpd-user.model';
-import {concatMap} from 'rxjs/operators';
 import {DataProtectionActService} from '@shared/components/data-protection-act/data-protection-act.service';
 
 @Component({

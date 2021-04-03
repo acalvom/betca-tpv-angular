@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy{
 
 
   ngOnInit(): void {
-    this.onLoginSubscription = this.authService.onLogin().subscribe(user => this.loginTimeRegister.login(user));
+    this.onLoginSubscription = this.authService.onLogin().subscribe(user => this.loginTimeRegister.login().subscribe());
   }
 
   ngOnDestroy(): void {

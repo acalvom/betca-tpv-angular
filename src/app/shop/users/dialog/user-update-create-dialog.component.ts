@@ -18,7 +18,7 @@ export class UserUpdateCreateDialogComponent implements OnInit {
   roleValues = Object.keys(Role).filter(key => isNaN(Number(key)));
   user: User;
   title: string;
-  editable;
+  editable: boolean;
   oldUser: number;
 
 
@@ -40,16 +40,9 @@ export class UserUpdateCreateDialogComponent implements OnInit {
     };
 
     this.oldUser = data ? data.mobile : undefined;
-    this.editable = false;
   }
 
   ngOnInit(): void {
-
-    if (this.authService.getRole() == Role.ADMIN) {
-      this.editable = true;
-    } else if ((this.authService.getRole() == Role.MANAGER) && (this.user.role == (Role.OPERATOR || Role.MANAGER || Role.CUSTOMER))) {
-      this.editable = true;
-    }
   }
 
   updateCompleteUser(): void {
@@ -81,5 +74,14 @@ export class UserUpdateCreateDialogComponent implements OnInit {
   invalid(): boolean {
     return (this.user.mobile === undefined || null) ||
       (this.user.firstName === undefined || null || this.user.firstName === '' );
+  }
+
+  canUpdatedRoles(): boolean {
+    return !(this.authService.getRole() === Role.OPERATOR || this.authService.getRole() === Role.CUSTOMER);
+  }
+
+
+  canActivateAccounts(): boolean {
+    return this.authService.getRole() !== Role.CUSTOMER;
   }
 }

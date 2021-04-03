@@ -12,7 +12,11 @@ export class TableStockComponent implements OnInit {
   @Input() productSold;
   @Input() stock;
 
-  constructor() {}
+  constructor() {
+    // This is intentional
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // This is intentional
+  }
 }

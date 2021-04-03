@@ -1,9 +1,7 @@
 
 export class InvoiceUpdate {
-  number: number;
+  number: string;
   creationDate: Date;
-  baseTax: number;
-  taxValue: number;
   ticketReference: string;
   userPhone: number;
   userDni: string;

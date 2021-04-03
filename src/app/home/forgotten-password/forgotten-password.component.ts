@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {ForgottenPasswordService} from './forgotten-password.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-forgotten-password',
@@ -12,13 +13,14 @@ export class ForgottenPasswordComponent {
   newPassword: string;
   confirmPassword: string;
   email = false;
-  constructor(private forgottenPassword: ForgottenPasswordService) {
+  constructor(private forgottenPassword: ForgottenPasswordService, private router: Router) {
     this.email = this.hasEmail();
   }
 
   resetPassword(): void {
     if (this.samePasswords()) {
       this.forgottenPassword.resetPassword(localStorage.getItem('recoverEmail'), this.newPassword);
+      this.router.navigate(['home']).then().finally();
     }
   }
 

@@ -63,7 +63,6 @@ export class CustomerDiscountDialogComponent {
   }
 
   searchUser(mobile: string): void {
-    // TODO search if the user with the mobile exists
     if (mobile) {
       this.customerDiscount.user = mobile;
     }

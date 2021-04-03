@@ -1,7 +1,7 @@
 import {Ticket} from './ticket.model';
 
 export class Invoice {
-  number: number;
+  number: string;
   creationDate: Date;
   baseTax: number;
   taxValue: number;

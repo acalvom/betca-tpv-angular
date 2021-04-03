@@ -21,6 +21,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {User} from '@core/user.model';
 import {Offer} from '../../shared/services/models/offer.model';
 import {SharedVoucherService} from '../../shared/services/shared-voucher.service';
+import {CustomerDiscount} from '../../shared/services/models/customer-discount.model';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,7 @@ export class ShoppingCartService {
   static RECEIPT = '/receipt';
   static VARIOUS_BARCODE = '1';
   static VARIOUS_LENGTH = 5;
+  private static SEARCH = '/search';
 
   creditSale: CreditSale;
   user: User;
@@ -173,14 +175,9 @@ export class ShoppingCartService {
       );
   }
 
-  addDiscount(mobile: string, purchase: number): Observable<number> {
-    // TODO Search user mobile to get discount and check minimum purchase
-    const minimumPurchase = 60;
-    const discount = 50;
-    if (purchase < minimumPurchase) {
-      return of(0);
-    } else {
-      return of(discount);
-    }
+  addDiscount(mobile: string): Observable<CustomerDiscount[]> {
+    return this.httpService
+      .paramsFrom({user: mobile})
+      .get(EndPoints.CUSTOMERS_DISCOUNTS + ShoppingCartService.SEARCH);
   }
 }

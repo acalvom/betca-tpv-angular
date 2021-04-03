@@ -12,8 +12,6 @@ import {AuthService} from '@core/auth.service';
 })
 export class UserCompleteService {
 
-  private users: User[];
-
   constructor(private httpService: HttpService, private authService: AuthService) {
   }
 
@@ -27,10 +25,6 @@ export class UserCompleteService {
       .get(EndPoints.ADMIN);
   }
 
-  getBasicUsersInfo(): Observable<any[]> {
-    return of(this.users.map(user => new UserInfoModel(user.mobile, user.firstName, user.role)));
-  }
-
   setCompleteUser(oldMobile: number, newUser: User): Observable<User>{
     return this.httpService
       .successful()
@@ -40,10 +34,6 @@ export class UserCompleteService {
   createCompleteUser(user: User): Observable<User>{
     return this.httpService
       .post(EndPoints.ADMIN + '/' + this.authService.getRole(), user);
-  }
-
-  checkUser(mobile: number): boolean {
-    return (this.users.find( user => user.mobile == mobile)) ? true : false;
   }
 
   deleteCompleteUser(mobile: number): Observable<User[]>{

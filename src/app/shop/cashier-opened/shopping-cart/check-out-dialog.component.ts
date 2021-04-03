@@ -52,9 +52,8 @@ export class CheckOutDialogComponent {
   searchUser(mobile: string): void {
 
     if (mobile) {
-      if (!this.authService.isAuthenticated() || !this.userService.checkUser(Number(mobile))){
-        this.dialog.open(UserUpdateCreateDialogComponent);
-      }
+
+      this.checkMobileExist(Number(mobile));
       this.ticketCreation.user = {mobile: Number(mobile)};
       this.sharedCreditLineService.findByUserReference(this.ticketCreation.user.mobile.toString()).subscribe(
         value => {
@@ -64,6 +63,15 @@ export class CheckOutDialogComponent {
         }
       );
     }
+  }
+
+  checkMobileExist(mobile: number ): void{
+
+    this.userService.searchCompleteUser(Number(mobile)).subscribe( () => console.log('succes'),
+      () => {
+      console.log('error');
+      this.dialog.open(UserUpdateCreateDialogComponent);
+      });
   }
 
   managedMobile(): boolean {
