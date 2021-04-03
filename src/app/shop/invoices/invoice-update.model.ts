@@ -1,6 +1,6 @@
 
 export class InvoiceUpdate {
-  number: number;
+  number: string;
   creationDate: Date;
   ticketReference: string;
   userPhone: number;
