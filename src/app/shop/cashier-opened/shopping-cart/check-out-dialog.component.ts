@@ -14,7 +14,6 @@ import {UserUpdateCreateDialogComponent} from '../../users/dialog/user-update-cr
 import {SharedCreditLineService} from '../../shared/services/shared.credit-line.service';
 import {SharedVoucherService} from '../../shared/services/shared-voucher.service';
 import {VoucherConsumingComponent} from '../../vouchers/voucher-consuming/voucher-consuming-component';
-import {User} from "@shared/models/userRegister.model";
 
 @Component({
   templateUrl: 'check-out-dialog.component.html',
@@ -29,7 +28,6 @@ export class CheckOutDialogComponent {
   credit = false;
   checkedCreditLine = false;
   userSearch: UserSearch;
-  user: User;
 
   constructor(@Inject(MAT_DIALOG_DATA) data, private dialog: MatDialog, private dialogRef: MatDialogRef<CheckOutDialogComponent>,
               private shoppingCartService: ShoppingCartService, private userService: UserCompleteService, private authService: AuthService,
