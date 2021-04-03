@@ -12,11 +12,7 @@ import {EndPoints} from '@shared/end-points';
 export class DataProtectionActService {
 
   private SEPARATOR = '/';
-
-  searchRgpdUser: SearchRgpdUser = {
-    mobile: 123456789,
-    rgpdType: RgpdType.ADVANCED
-  };
+  private AGREEMENT = '/agreement';
 
   constructor(private httpService: HttpService) {
   }
@@ -32,7 +28,8 @@ export class DataProtectionActService {
   }
 
   update(rgpdUser: RgpdUser): Observable<RgpdUser> {
-    return of(rgpdUser);
+    return this.httpService
+      .put(EndPoints.DATA_PROTECTION_ACT + this.SEPARATOR + rgpdUser.mobile, rgpdUser);
   }
 
   printUnsignedAgreement(searchRgpdUser: SearchRgpdUser): Observable<void> {
@@ -40,7 +37,8 @@ export class DataProtectionActService {
   }
 
   printSignedAgreement(mobile: number): Observable<void> {
-    return of();
+    return this.httpService
+      .get(EndPoints.DATA_PROTECTION_ACT + this.AGREEMENT + this.SEPARATOR + mobile);
   }
 
 }

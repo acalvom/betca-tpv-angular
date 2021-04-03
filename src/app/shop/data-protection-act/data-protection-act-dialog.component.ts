@@ -33,9 +33,9 @@ export class DataProtectionActDialogComponent {
             this.rgpdUser.mobile = searchRgpdUser.mobile;
             this.rgpdUser.rgpdType = (RgpdType as any)[searchRgpdUser.rgpdType];
           }
+          this.isNew = searchRgpdUser === null;
         }
       );
-    this.isNew = this.rgpdUser.rgpdType === undefined;
   }
 
   isReady(): boolean {
@@ -46,6 +46,9 @@ export class DataProtectionActDialogComponent {
   submit(): void {
     if (this.isNew) {
       this.dataProtectionActService.create(this.rgpdUser)
+        .subscribe(() => this.dialog.closeAll());
+    } else {
+      this.dataProtectionActService.update(this.rgpdUser)
         .subscribe(() => this.dialog.closeAll());
     }
   }

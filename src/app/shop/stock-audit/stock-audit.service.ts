@@ -60,10 +60,10 @@ export class StockAuditService {
     return of(stockAuditCreated); */
   }
 
-  saveAudit(stockAudit: StockAudit): Observable<StockAudit> {
-    /*return this.httpService
-      .patch(EndPoints.AUDITS + '/' + idAudit, stockAudit);*/
-    this.stockAudits.pop();
+  saveAudit(id: string, stockAudit: StockAudit): Observable<StockAudit> {
+    return this.httpService
+      .put(EndPoints.AUDITS + '/' + id, stockAudit);
+    /*this.stockAudits.pop();
     this.stockAudits.push({
       id: '3',
       creationDate: new Date(),
@@ -79,7 +79,7 @@ export class StockAuditService {
       barcodesWithoutAudit: stockAudit.barcodesWithoutAudit,
       lossValue: null,
       losses: stockAudit.losses
-    });
+    });*/
   }
 
   closeAudit(stockAudit: StockAudit): Observable<StockAudit> {

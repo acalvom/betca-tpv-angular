@@ -14,7 +14,7 @@ export class BudgetDialogComponent {
   budgetCreation: BudgetCreation;
   constructor( @Inject(MAT_DIALOG_DATA) data, private dialogRef: MatDialogRef<BudgetDialogComponent>,
                private shoppingCartService: ShoppingCartService) {
-    this.budgetCreation = {id: undefined, creationDate : undefined  , shoppingList: data};
+    this.budgetCreation = {id: undefined, creationDate : undefined , shoppingList: data};
   }
 
   createBudget(): void{
