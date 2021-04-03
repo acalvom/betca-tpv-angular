@@ -22,8 +22,8 @@ import { PopularComponent } from './adviser/popular/popular.component';
 import {ComplaintUpdateDialogComponent} from './complaints/complaint-update-dialog.component';
 import { OnlineOrderComponent } from './online-order/online-order.component';
 import {SaleComponent} from './adviser/sale/sale.component';
-import {PayDialogComponent} from './shopping-basket/pay-dialog.component';
 import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
+import {TicketsComponent} from './shopping-basket/tickets.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +44,8 @@ import { ForgottenPasswordComponent } from './forgotten-password/forgotten-passw
     NewsComponent,
     PopularComponent,
     SaleComponent,
-    PayDialogComponent,
     ForgottenPasswordComponent,
+    TicketsComponent,
   ],
   entryComponents: [
     ComplaintCreationDialogComponent,
