@@ -44,6 +44,7 @@ export class DataProtectionActService {
 
   printSignedAgreement(mobile: number): Observable<void> {
     return this.httpService
+      .pdf()
       .get(EndPoints.DATA_PROTECTION_ACT + this.AGREEMENT + this.SEPARATOR + mobile);
   }
 
