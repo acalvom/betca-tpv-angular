@@ -26,10 +26,12 @@ export class TagCreationUpdatingDialogComponent {
     this.title = data ? 'Update Tag' : 'Create Tag';
     this.tittleArticle = data ? 'Update Article' : 'Add Article';
     this.tag = data ? data : {
-      name: undefined, group: undefined, description: undefined, articles: []
+      name: undefined, group: undefined, description: undefined, articleList: []
     };
     this.oldName = data ? data.name : undefined;
-    this.articles = of(this.tag.articles);
+    this.articles = of(this.tag.articleList);
+    this.tagArticleService.init(this.tag.articleList);
+    console.log(data);
   }
 
   isCreate(): boolean {
@@ -59,7 +61,7 @@ export class TagCreationUpdatingDialogComponent {
 
   searchArticle(): void {
     this.articles = this.tagArticleService.search().pipe(map(articles => {
-        this.tag.articles = articles;
+        this.tag.articleList = articles;
         return articles;
       }
     ));

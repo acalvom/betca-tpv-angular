@@ -4,5 +4,5 @@ export interface Tag {
   name: string;
   group: string;
   description: string;
-  articles?: Article[];
+  articleList?: Article[];
 }
