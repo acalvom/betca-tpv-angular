@@ -22,12 +22,11 @@ export class UsersManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.users = this.userCompleteService.getCompleteUsers();
-    // this.data = this.userCompleteService.getBasicUsersInfo();
     this.getBasicInfo();
   }
 
   getBasicInfo(): void{
-    this.userCompleteService.getCompleteUsers().subscribe( users => {
+    this.userCompleteService.getCompleteUsers().subscribe(users => {
       this.data = of(users.map(user => new UserInfoModel(user.mobile, user.firstName, user.role)));
     });
   }
@@ -43,11 +42,6 @@ export class UsersManagementComponent implements OnInit {
   }
 
   readUser(user: User): void {
-    this.userCompleteService.searchCompleteUser(user.mobile).subscribe( data => {
-      console.log('read user');
-      console.log(data);
-    });
-
 
     this.dialog.open(ReadDetailDialogComponent, {
       data: {
@@ -69,5 +63,9 @@ export class UsersManagementComponent implements OnInit {
         .deleteCompleteUser(user.mobile)
         .subscribe(() =>  this.getBasicInfo());
     }
+  }
+
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
   }
 }
