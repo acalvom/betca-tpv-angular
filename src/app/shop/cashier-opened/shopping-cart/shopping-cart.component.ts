@@ -174,16 +174,16 @@ export class ShoppingCartComponent implements OnInit {
   }
   addDiscount(mobile): void {
     this.shoppingCartService
-      .addDiscount(mobile, this.totalShoppingCart)
-      .subscribe(discount => {
-        if (discount !== 0) {
-          this.shoppingCart.forEach(item => {
-            item.discount = discount;
-            item.updateTotal();
-          });
-        }
-      });
-    this.synchronizeShoppingCart();
+      .addDiscount(mobile)
+      .subscribe(customer => {
+        if (customer !== null) {
+          if (customer[0].minimumPurchase <= this.totalShoppingCart) {
+            this.shoppingCart.forEach(item => {
+              item.discount = customer[0].discount;
+              item.updateTotal();
+            });
+            this.synchronizeShoppingCart();
+          }}});
   }
 
   addOffer(offer): void {
