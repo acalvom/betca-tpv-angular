@@ -58,6 +58,9 @@ export class ProviderInvoicesComponent {
   }
 
   calculateTotalTax(): void {
+    if (!this.selectedQuarter) {
+      return;
+    }
     this.totalTax = this.providerInvoiceService
       .calculateTotalTax(this.selectedQuarter);
   }
