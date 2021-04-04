@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 
 import {HttpService} from '@core/http.service';
 import {Tag} from '../shared/services/models/tag.model';
 import {TagSearch} from './tag-search.model';
-import {map} from 'rxjs/operators';
 import {EndPoints} from '@shared/end-points';
 
 @Injectable({
@@ -28,13 +27,13 @@ export class TagService {
 
   update(oldName: string, tag: Tag): Observable<Tag> {
     return this.httpService
-          .successful()
-          .put(EndPoints.TAGS + '/' + oldName, tag);
+      .successful()
+      .put(EndPoints.TAGS + '/' + oldName, tag);
   }
 
   search(tagSearch: TagSearch): Observable<Tag[]> {
     return this.httpService
-          .paramsFrom(tagSearch)
-          .get(EndPoints.TAGS + TagService.SEARCH);
+      .paramsFrom(tagSearch)
+      .get(EndPoints.TAGS + TagService.SEARCH);
   }
 }
