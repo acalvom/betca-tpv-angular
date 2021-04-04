@@ -63,8 +63,10 @@ export class InvoiceService {
   }
 
   read(numberInvoice: string): Observable<Invoice> {
-    const invoice: Invoice = this.invoices.find(invo => invo.number === numberInvoice);
-    return of(invoice);
+    const invoice = {number: numberInvoice};
+    return this.httpService
+      .paramsFrom(invoice)
+      .get(EndPoints.INVOICES);
   }
 
   update(invoice: InvoiceUpdate): Observable<InvoiceItem> {

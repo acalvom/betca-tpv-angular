@@ -13,7 +13,6 @@ export class SaleService {
   }
 
   searchSaleArticles(): Observable<Article[]> {
-    // return of(this.popularArticles);
     return this.tagService.read('sale').pipe(map(tag => tag.articleList));
   }
 }

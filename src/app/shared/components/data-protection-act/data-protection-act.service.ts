@@ -4,6 +4,7 @@ import {HttpService} from '@core/http.service';
 import {Observable, of} from 'rxjs';
 import {SearchRgpdUser} from '@shared/components/data-protection-act/search-rgpd-user.model';
 import {EndPoints} from '@shared/end-points';
+import {RgpdType} from '@shared/models/RgpdType';
 
 @Injectable({
   providedIn: 'root'
@@ -38,8 +39,12 @@ export class DataProtectionActService {
       .put(EndPoints.DATA_PROTECTION_ACT + this.SEPARATOR + rgpdUser.mobile, this.getBody(rgpdUser));
   }
 
-  printUnsignedAgreement(searchRgpdUser: SearchRgpdUser): Observable<void> {
-    return of();
+  printUnsignedAgreement(mobile: string, rgpdType: RgpdType): Observable<void> {
+    return this.httpService
+      .pdf()
+      .param('mobile', mobile)
+      .param('rgpdType', rgpdType.toString())
+      .get(EndPoints.DATA_PROTECTION_ACT + this.AGREEMENT);
   }
 
   printSignedAgreement(mobile: number): Observable<void> {

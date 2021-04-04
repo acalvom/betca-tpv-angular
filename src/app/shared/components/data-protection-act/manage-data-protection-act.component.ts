@@ -36,7 +36,9 @@ export class ManageDataProtectionActComponent {
   }
 
   printUnsignedAgreement(): void {
-    this.dataProtectionActService.printUnsignedAgreement(this.rgpdUser);
+    this.dataProtectionActService.printUnsignedAgreement(
+      this.rgpdUser.mobile === undefined ? '' : this.rgpdUser.mobile.toString(), this.selectedRgpdType)
+      .subscribe();
   }
 
   printSignedAgreement(): void {
