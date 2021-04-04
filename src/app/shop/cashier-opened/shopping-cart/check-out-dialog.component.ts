@@ -6,8 +6,6 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {ShoppingState} from '../../shared/services/models/shopping-state.model';
 import {UserSearch} from '../../users/models/user-search-model';
 import {UserCompleteService} from '@shared/services/userComplete.service';
-import {SearchRgpdUser} from '@shared/components/data-protection-act/search-rgpd-user.model';
-import {RgpdType} from '@shared/models/RgpdType';
 import {DataProtectionActService} from '@shared/components/data-protection-act/data-protection-act.service';
 import {AuthService} from '@core/auth.service';
 import {UserUpdateCreateDialogComponent} from '../../users/dialog/user-update-create-dialog.component';
@@ -52,18 +50,26 @@ export class CheckOutDialogComponent {
   searchUser(mobile: string): void {
 
     if (mobile) {
-      if (!this.authService.isAuthenticated() || !this.userService.checkUser(Number(mobile))){
-        this.dialog.open(UserUpdateCreateDialogComponent);
-      }
+
+      this.checkMobileExist(Number(mobile));
       this.ticketCreation.user = {mobile: Number(mobile)};
       this.sharedCreditLineService.findByUserReference(this.ticketCreation.user.mobile.toString()).subscribe(
         value => {
-          if (value != null){
+          if (value != null) {
             this.credit = true;
           }
         }
       );
     }
+  }
+
+  checkMobileExist(mobile: number): void {
+
+    this.userService.searchCompleteUser(Number(mobile)).subscribe(() => console.log('succes'),
+      () => {
+        console.log('error');
+        this.dialog.open(UserUpdateCreateDialogComponent);
+      });
   }
 
   managedMobile(): boolean {
@@ -141,8 +147,8 @@ export class CheckOutDialogComponent {
   consumeVoucher(): void {
     this.voucherService.findAll().subscribe(
       (v) => {
-        const unConsumedVouchers = v.filter(vs => vs.dateOfUse === undefined)
-        this.dialog.open(VoucherConsumingComponent, { data: unConsumedVouchers })
+        const unConsumedVouchers = v.filter(vs => vs.dateOfUse === undefined);
+        this.dialog.open(VoucherConsumingComponent, {data: unConsumedVouchers})
           .afterClosed()
           .subscribe((totalValue) => {
             this.ticketCreation.voucher += totalValue;
@@ -191,9 +197,6 @@ export class CheckOutDialogComponent {
     if (returned > 0) {
       this.ticketCreation.note += ' Return: ' + this.round(returned) + '.';
     }
-    if (this.requestedDataProtectionAct) {
-      this.printUnsignedDataProtectionAgreement();
-    }
     // tslint:disable-next-line:max-line-length
     this.shoppingCartService.createTicketAndPrintReceipts(this.ticketCreation, voucher, this.requestedInvoice, this.requestedGiftTicket, this.requestedDataProtectionAct, this.checkedCreditLine)
       .subscribe(() => this.dialogRef.close(true));
@@ -215,14 +218,6 @@ export class CheckOutDialogComponent {
         value.state = ShoppingState.COMMITTED;
       });
     }
-  }
-
-  printUnsignedDataProtectionAgreement(): void {
-    const searchRgpdUser: SearchRgpdUser = {
-      mobile: this.userSearch.mobile,
-      rgpdType: RgpdType.BASIC
-    };
-    this.dataProtectionActService.printUnsignedAgreement(searchRgpdUser);
   }
 
 }

@@ -4,12 +4,12 @@
     Online Orders
   </mat-card-title>
 
-  <mat-grid-list>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <mat-grid-list clos="5">
+    <table mat-table [dataSource]="onlineOrders" class="mat-elevation-z8">
 
       <ng-container matColumnDef="reference">
         <th mat-header-cell *matHeaderCellDef> Reference </th>
-        <td mat-cell *matCellDef="let onlineOrder"> {{ onlineOrder.reference }} </td>
+        <td mat-cell *matCellDef="let onlineOrder"> {{onlineOrder.reference}} </td>
       </ng-container>
 
       <ng-container matColumnDef="deliveryDate">
@@ -17,9 +17,9 @@
         <td mat-cell *matCellDef="let onlineOrder"> {{onlineOrder.deliveryDate}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="totalPayed">
-        <th mat-header-cell *matHeaderCellDef> Total Payed </th>
-        <td mat-cell *matCellDef="let onlineOrder"> {{onlineOrder.totalPayed}}</td>
+      <ng-container matColumnDef="ticket">
+        <th mat-header-cell *matHeaderCellDef> Ticket </th>
+        <td mat-cell *matCellDef="let onlineOrder"> {{onlineOrder.ticket}}</td>
       </ng-container>
 
       <ng-container matColumnDef="state">

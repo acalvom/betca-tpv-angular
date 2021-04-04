@@ -4,7 +4,7 @@ import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from '@core/auth.service';
 import {ShoppingBasketArticle} from '../shared/shopping-basket-article.model';
-import {PayDialogComponent} from './pay-dialog.component';
+import {TicketsComponent} from './tickets.component';
 
 @Component({
   selector: 'app-shopping-basket',
@@ -15,17 +15,16 @@ export class ShoppingBasketComponent implements OnInit {
 
   displayedColumns = ['photo', 'description', 'quantity', 'retailPrice', 'amount', 'actions'];
   article1: ShoppingBasketArticle = {photo: 'https://static.zara.net/photos///2021/V/0/1/p/2753/025/712/2/w/375/2753025712_6_1_1.jpg?ts=1614009934404',
-    description: 'White', quantity: 2, retailPrice: 23.67, amount: 0};
+    description: 'White', quantity: 1, retailPrice: 23.67, amount: 0};
   article2: ShoppingBasketArticle = {photo: 'https://static.zara.net/photos///2021/V/0/1/p/2409/711/406/2/w/375/2409711406_6_1_1.jpg?ts=1614100929895',
-    description: 'Light blue', quantity: 1, retailPrice: 10.89, amount: 0};
+    description: 'Light blue', quantity: 4, retailPrice: 10.89, amount: 0};
   article3: ShoppingBasketArticle = {photo: 'https://static.zara.net/photos///2021/V/0/1/p/2409/711/704/2/w/375/2409711704_6_1_1.jpg?ts=1614091492493',
-    description: 'Brown', quantity: 5, retailPrice: 34.78, amount: 0};
+    description: 'Brown', quantity: 3, retailPrice: 34.78, amount: 0};
   article4: ShoppingBasketArticle = {photo: 'https://static.zara.net/photos///2021/V/0/1/p/8073/150/412/2/w/375/8073150412_6_1_1.jpg?ts=1614784382100',
     description: 'Purple', quantity: 4, retailPrice: 23.09, amount: 0};
   article5: ShoppingBasketArticle = {photo: 'https://static.zara.net/photos///2021/V/0/1/p/2761/053/403/2/w/375/2761053403_6_1_1.jpg?ts=1610963172458',
-    description: 'Blue', quantity: 7, retailPrice: 5.20, amount: 0};
+    description: 'Blue', quantity: 4, retailPrice: 5.20, amount: 0};
   shoppingBasket = [this.article1, this.article2, this.article3, this.article4, this.article5];
-  dataSource = this.shoppingBasket;
   username = undefined;
   totalShoppingBasket = 0 ;
 
@@ -81,8 +80,8 @@ export class ShoppingBasketComponent implements OnInit {
     return this.authService.isAuthenticated();
   }
 
-  pay() {
-    this.dialog.open(PayDialogComponent, {data: this.shoppingBasket}).afterClosed().subscribe(
+  pay(): void {
+    this.dialog.open(TicketsComponent, {data: this.shoppingBasket}).afterClosed().subscribe(
       result => {
         if (result) {
           this.ngOnInit();

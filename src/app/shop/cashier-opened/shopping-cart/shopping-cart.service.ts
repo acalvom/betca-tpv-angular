@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {EMPTY, iif, merge, Observable, of} from 'rxjs';
+import {EMPTY, iif, merge, Observable} from 'rxjs';
 import {catchError, concatMap, map} from 'rxjs/operators';
 
 import {HttpService} from '@core/http.service';
@@ -21,6 +21,10 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {User} from '@core/user.model';
 import {Offer} from '../../shared/services/models/offer.model';
 import {SharedVoucherService} from '../../shared/services/shared-voucher.service';
+import {CustomerDiscount} from '../../shared/services/models/customer-discount.model';
+import {DataProtectionActService} from '@shared/components/data-protection-act/data-protection-act.service';
+import {RgpdType} from '@shared/models/RgpdType';
+import {tick} from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +33,7 @@ export class ShoppingCartService {
   static RECEIPT = '/receipt';
   static VARIOUS_BARCODE = '1';
   static VARIOUS_LENGTH = 5;
+  private static SEARCH = '/search';
 
   creditSale: CreditSale;
   user: User;
@@ -37,7 +42,7 @@ export class ShoppingCartService {
               private offerService: SharedOfferService, private httpService: HttpService,
               private budgetService: BudgetService, private sharedCreditLineService: SharedCreditLineService,
               private sharedCreditSaleService: SharedCreditSaleService, private snackBar: MatSnackBar,
-              private sharedVoucherService: SharedVoucherService) {
+              private sharedVoucherService: SharedVoucherService, private dataProtectionActService: DataProtectionActService) {
   }
 
   read(newBarcode: string): Observable<Shopping> {
@@ -81,7 +86,7 @@ export class ShoppingCartService {
           receipts = iif(() => voucher > 0, merge(receipts, this.createVoucherAndPrint(voucher)), receipts);
           receipts = iif(() => requestedInvoice, merge(receipts, this.createInvoiceAndPrint(ticket.reference)), receipts);
           receipts = iif(() => requestedGiftTicket, merge(receipts, this.createGiftTicketAndPrint(ticket.id)), receipts);
-          receipts = iif(() => requestDataProtectionAct, merge(receipts, this.createDataProtectionActAndPrint(ticket)), receipts);
+          receipts = iif(() => requestDataProtectionAct, merge(receipts, this.createDataProtectionActAndPrint()), receipts);
           receipts = iif(() => checkedCreditLine, merge(receipts, this.createCreditSaleAndPrint(ticket.reference,
             ticketCreation.user)), receipts);
           return receipts;
@@ -108,15 +113,15 @@ export class ShoppingCartService {
     return this.httpService
       .post(EndPoints.GIFTTICKETS, giftTicket)
       .pipe(
-        concatMap( ticket => {
+        concatMap(ticket => {
           const receipts = this.httpService.pdf().get(EndPoints.GIFTTICKETS + '/' + ticket.id + ShoppingCartService.RECEIPT);
           return receipts;
         })
       );
   }
 
-  createDataProtectionActAndPrint(ticket): Observable<void> {
-    return EMPTY; // TODO change EMPTY
+  createDataProtectionActAndPrint(): Observable<void> {
+    return this.dataProtectionActService.printUnsignedAgreement('', RgpdType.BASIC);
   }
 
   createCreditSaleAndPrint(ticketReference, userReference): Observable<any> {
@@ -157,6 +162,7 @@ export class ShoppingCartService {
         })
       );
   }
+
   printBudget(BudgetId: string): Observable<void> {
     return this.httpService.pdf().get(EndPoints.BUDGETS + '/' + BudgetId + ShoppingCartService.RECEIPT);
   }
@@ -173,14 +179,9 @@ export class ShoppingCartService {
       );
   }
 
-  addDiscount(mobile: string, purchase: number): Observable<number> {
-    // TODO Search user mobile to get discount and check minimum purchase
-    const minimumPurchase = 60;
-    const discount = 50;
-    if (purchase < minimumPurchase) {
-      return of(0);
-    } else {
-      return of(discount);
-    }
+  addDiscount(mobile: string): Observable<CustomerDiscount[]> {
+    return this.httpService
+      .paramsFrom({user: mobile})
+      .get(EndPoints.CUSTOMERS_DISCOUNTS + ShoppingCartService.SEARCH);
   }
 }

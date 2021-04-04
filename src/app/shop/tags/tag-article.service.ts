@@ -9,9 +9,6 @@ import {map} from 'rxjs/operators';
 export class TagArticleService {
   articles = of([]);
 
-  constructor() {
-  }
-
   create(article: Article): Observable<Article> {
     return this.articles.pipe(map(articles => {
         articles.push(article);
@@ -49,5 +46,9 @@ export class TagArticleService {
       }
       )
     );
+  }
+
+  init(articleList: Article[]): void {
+    this.articles = of(articleList);
   }
 }
