@@ -5,8 +5,8 @@
     Shopping Basket ------Total:{{ totalShoppingBasket| currency:'EUR':'symbol'}}
   </mat-card-title>
 
-  <mat-grid-list>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <mat-grid-list cols="6">
+    <table mat-table [dataSource]="shoppingBasket" class="mat-elevation-z8">
 
       <ng-container matColumnDef="photo">
         <th mat-header-cell *matHeaderCellDef> Product Photo </th>
