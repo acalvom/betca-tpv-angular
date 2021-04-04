@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {DataProtectionActService} from '@shared/components/data-protection-act/data-protection-act.service';
 import {RgpdType} from '@shared/models/RgpdType';
 import {MatDialog} from '@angular/material/dialog';
+import {UserCompleteService} from '@shared/services/userComplete.service';
 
 @Component({
   selector: 'app-data-protection-act-dialog',
@@ -17,12 +18,20 @@ export class DataProtectionActDialogComponent {
   rgpdUser: RgpdUser;
   isNew = true;
 
-  constructor(private dataProtectionActService: DataProtectionActService, private dialog: MatDialog) {
+  constructor(private dataProtectionActService: DataProtectionActService,
+              private userCompleteService: UserCompleteService, private dialog: MatDialog) {
     this.reset();
   }
 
   findMobiles(): void {
-    this.mobiles = of([11111111, 22222222, 333333333]);
+    this.userCompleteService.getCompleteUsers()
+      .subscribe(value => {
+        const mobiles: number[] = [value.length];
+        for (let i = 0; i < value.length; i++) {
+          mobiles[i] = Number(value[i].mobile);
+        }
+        this.mobiles = of(mobiles);
+      });
   }
 
   findByMobile(): void {
