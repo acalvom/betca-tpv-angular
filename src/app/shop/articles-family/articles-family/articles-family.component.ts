@@ -50,8 +50,7 @@ export class ArticlesFamilyComponent implements OnInit {
   }
 
   createFamilyArticle(node: ArticleFamilyModel): any {
-    this.dialog.open(NewArticleFamilyDialogComponent, {data: node})
-      .afterClosed().subscribe(
+    this.dialog.open(NewArticleFamilyDialogComponent, {data: node}).afterClosed().subscribe(
       result => {
         if (result) {
           this.read();
@@ -61,9 +60,7 @@ export class ArticlesFamilyComponent implements OnInit {
   }
 
   editFamilyArticle(node: ArticleFamilyModel): any {
-    this.dialog.open(EditArticleFamilyDialogComponent, {
-      data: node
-    }).afterClosed().subscribe(
+    this.dialog.open(EditArticleFamilyDialogComponent, {data: node}).afterClosed().subscribe(
       result => {
       if (result) {
         this.read();
