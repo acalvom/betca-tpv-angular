@@ -25,17 +25,19 @@
   <div>
     <h2>User Data</h2>
     <mat-form-field class="full-width">
+      <mat-label>Phone</mat-label>
+      <label>
+        <input [(ngModel)]="invoiceModel.userPhone" [disabled]=true matInput required type="number"/>
+      </label>
+    </mat-form-field>
+    <mat-form-field class="full-width">
       <mat-label>DNI</mat-label>
       <label>
         <input [(ngModel)]="invoiceModel.userDni" [disabled]=isCreate() matInput required type="text"/>
       </label>
     </mat-form-field>
-    <mat-form-field class="full-width">
-      <mat-label>Phone</mat-label>
-      <label>
-        <input [(ngModel)]="invoiceModel.userPhone" [disabled]=isCreate() matInput required type="number"/>
-      </label>
-    </mat-form-field>
+  </div>
+  <div>
     <mat-form-field class="full-width">
       <mat-label>Name</mat-label>
       <label>
@@ -48,8 +50,15 @@
         <input [(ngModel)]="invoiceModel.familyNameUser" [disabled]=isCreate() matInput required type="text"/>
       </label>
     </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Email</mat-label>
+      <label>
+        <input [(ngModel)]="invoiceModel.userEmail" [disabled]=isCreate() matInput required type="text"/>
+      </label>
+    </mat-form-field>
   </div>
 </mat-dialog-content>
+
 <mat-dialog-actions>
   <button cdkFocusInitial mat-dialog-close mat-raised-button>Close</button>
   <button (click)="create()" *ngIf="isCreate()" color="primary" mat-raised-button>Create

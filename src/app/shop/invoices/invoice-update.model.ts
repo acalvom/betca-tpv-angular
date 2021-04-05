@@ -7,4 +7,5 @@ export class InvoiceUpdate {
   userDni: string;
   userName: string;
   familyNameUser: string;
+  userEmail: string;
 }
