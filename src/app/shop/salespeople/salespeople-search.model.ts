@@ -1,4 +1,6 @@
 export class SalesPeopleSearch {
   salesperson?: string;
-  date?: string;
+  startDate?: any;
+  endDate?: any;
+  secondDate?: any;
 }

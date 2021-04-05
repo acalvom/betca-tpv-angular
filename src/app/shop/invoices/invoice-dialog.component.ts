@@ -24,7 +24,8 @@ export class InvoiceDialogComponent {
       ticketReference: data.ticket.reference,
       userDni: data.ticket.user.dni,
       userName: data.ticket.user.name,
-      familyNameUser: data.ticket.user.familyName
+      familyNameUser: data.ticket.user.familyName,
+      userEmail: data.ticket.user.email
     } : {
       number: undefined,
       creationDate: undefined,
@@ -32,7 +33,8 @@ export class InvoiceDialogComponent {
       ticketReference: undefined,
       userDni: undefined,
       userName: undefined,
-      familyNameUser: undefined
+      familyNameUser: undefined,
+      userEmail: undefined
     };
   }
 
@@ -47,13 +49,13 @@ export class InvoiceDialogComponent {
   }
 
   setTicketInModel(ticket: Ticket): void{
-    console.log(ticket);
     this.invoiceModel.ticketReference = ticket.reference;
     this.invoiceModel.creationDate = ticket.creationDate;
     this.invoiceModel.userDni = ticket.user.dni;
     this.invoiceModel.userName = ticket.user.name;
     this.invoiceModel.familyNameUser = ticket.user.familyName;
     this.invoiceModel.userPhone = ticket.user.mobile;
+    this.invoiceModel.userEmail = ticket.user.email;
   }
 
   addTicket(ticketRef: string): void {

@@ -19,7 +19,6 @@ export class InvoicesComponent{
   }
 
   search(): void {
-    console.log(this.invoiceSearch);
     this.invoices = this.invoiceService.search(this.invoiceSearch);
   }
 

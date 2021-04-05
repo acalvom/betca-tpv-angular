@@ -63,20 +63,16 @@ export class InvoiceService {
   }
 
   read(numberInvoice: string): Observable<Invoice> {
-    const invoice: Invoice = this.invoices.find(invo => invo.number === numberInvoice);
-    return of(invoice);
+    const invoice = {number: numberInvoice};
+    return this.httpService
+      .paramsFrom(invoice)
+      .get(EndPoints.INVOICES);
   }
 
   update(invoice: InvoiceUpdate): Observable<InvoiceItem> {
-    const invoiceUpdated: InvoiceItem = this.invoicesItems.find(invo => invo.number === invoice.number);
-    const invoiceFullUpdated: Invoice = this.invoices.find(invo => invo.number === invoice.number);
-
-    invoiceFullUpdated.ticket.user.dni = invoice.userDni;
-    invoiceFullUpdated.ticket.user.name = invoice.userName;
-    invoiceFullUpdated.ticket.user.familyName = invoice.familyNameUser;
-    invoiceFullUpdated.ticket.user.mobile = invoice.userPhone;
-    invoiceUpdated.userPhone = invoice.userPhone;
-    return of(invoiceUpdated);
+    const user = {mobile: invoice.userPhone, firstName: invoice.userName, familyName: invoice.familyNameUser,
+    dni: invoice.userDni, email: invoice.userEmail};
+    return this.httpService.pdf().put(EndPoints.USERS + '/' + invoice.userPhone, user);
   }
 
   searchTicketByRef(ticketRef: string): Observable<Ticket> {
@@ -93,6 +89,7 @@ export class InvoiceService {
 
   create(invoiceModel: InvoiceUpdate): Observable<InvoiceItem> {
     const ticketRef = {reference: invoiceModel.ticketReference};
-    return this.httpService.pdf().post(EndPoints.INVOICES + '/ticketRef', ticketRef);
+    return this.httpService.pdf()
+      .post(EndPoints.INVOICES + '/ticketRef', ticketRef);
   }
 }

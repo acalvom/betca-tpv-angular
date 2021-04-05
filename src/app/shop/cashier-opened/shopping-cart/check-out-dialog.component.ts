@@ -26,7 +26,7 @@ export class CheckOutDialogComponent {
   credit = false;
   checkedCreditLine = false;
   userSearch: UserSearch;
-
+  salespeople: string;
   constructor(@Inject(MAT_DIALOG_DATA) data, private dialog: MatDialog, private dialogRef: MatDialogRef<CheckOutDialogComponent>,
               private shoppingCartService: ShoppingCartService, private userService: UserCompleteService, private authService: AuthService,
               private dataProtectionActService: DataProtectionActService, private sharedCreditLineService: SharedCreditLineService,
@@ -194,6 +194,8 @@ export class CheckOutDialogComponent {
     if (!this.ticketCreation.note) {
       this.ticketCreation.note += ' No Pay.';
     }
+
+    this.ticketCreation.note += ' Salespeople is ' + this.salespeople;
     if (returned > 0) {
       this.ticketCreation.note += ' Return: ' + this.round(returned) + '.';
     }

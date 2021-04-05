@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 
 import {HttpService} from '@core/http.service';
 import {Tag} from './tag.model';
-import {map} from 'rxjs/operators';
-import {Article} from './article.model';
 import {EndPoints} from '@shared/end-points';
 
 @Injectable({
@@ -20,7 +18,6 @@ export class TagService {
     return this.httpService
       .get(EndPoints.TAGS + '/' + name);
   }
-
 
 
 }
