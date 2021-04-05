@@ -8,9 +8,8 @@
                          (close)="resetFinalAmount()" class="medium-width"></app-search-by-company>
   <mat-form-field *ngIf="!isCreate()" appearance="fill">
     <mat-label>Opening</mat-label>
-    <input matInput [disabled]="!isCreate()" [matDatepicker]="openingDate" [value]="order.openingDate">
-    <mat-datepicker-toggle matSuffix [for]="openingDate"></mat-datepicker-toggle>
-    <mat-datepicker #openingDate></mat-datepicker>
+    <input [(ngModel)]="order.openingDate" [value]="setFormatDate(order.openingDate)" matInput required type="text"
+           [disabled]="!isCreate()"/>
   </mat-form-field>
 
   <app-search-by-barcode (add)="addBarcode($event)" class="medium-width"></app-search-by-barcode>

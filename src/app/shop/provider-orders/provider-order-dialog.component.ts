@@ -7,6 +7,8 @@ import {SharedArticleService} from "../shared/services/shared.article.service";
 import {of} from "rxjs";
 import {SharedProviderService} from "../shared/services/shared.provider.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import * as moment from "moment";
+
 
 @Component({
   templateUrl: 'provider-order-dialog.component.html',
@@ -30,17 +32,22 @@ export class ProviderOrderDialogComponent {
   ) {
     this.title = data ? 'Update Order' : 'Create Order';
     this.order = data ? data : {
-      reference: Math.random().toString(36).substring(7), description: undefined, providerCompany: undefined,
+      description: undefined, providerCompany: undefined,
       openingDate: undefined, closingDate: undefined,
       orderLines: []
     };
     this.currentReference = data ? data.reference : undefined;
-    this.search();
+    data.orderLines
+    if (this.currentReference != undefined) {
+      //this.search();
+      this.providerOrderLines = of(data.orderLines);
+    }
 
   }
 
   search(): void {
     this.providerOrderService.read(this.currentReference).subscribe(order => {
+
       this.providerOrderLines = of(order.orderLines);
     });
   }
@@ -161,6 +168,10 @@ export class ProviderOrderDialogComponent {
     this._snackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  setFormatDate(dateInput) {
+    return moment(dateInput).format('MM/DD/YYYY');
   }
 
 }
