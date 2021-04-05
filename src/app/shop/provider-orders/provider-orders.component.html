@@ -6,17 +6,18 @@
         <mat-label>Description</mat-label>
         <input [(ngModel)]="orderSearch.description" matInput>
       </mat-form-field>
-      <app-search-by-company [(company)]="orderSearch.providerCompany"></app-search-by-company>
       <mat-form-field>
         <mat-label>Opening</mat-label>
         <label>
-          <mat-date-range-input [rangePicker]="firstPicker">
-            <input matStartDate placeholder="Start date">
-            <input matEndDate placeholder="End date">
+          <mat-date-range-input [formGroup]="range" [rangePicker]="firstPicker">
+            <input matStartDate formControlName="start" [(ngModel)]="orderSearch.fromDate" placeholder="Start date">
+            <input matEndDate formControlName="end" [(ngModel)]="orderSearch.toDate" placeholder="End date">
           </mat-date-range-input>
         </label>
         <mat-datepicker-toggle matSuffix [for]="firstPicker"></mat-datepicker-toggle>
         <mat-date-range-picker #firstPicker></mat-date-range-picker>
+        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
       </mat-form-field>
       <button (click)="search()" mat-icon-button>
         <mat-icon>search</mat-icon>

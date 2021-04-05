@@ -38,4 +38,6 @@ export class EndPoints {
   static PROVIDER_INVOICES = environment.REST_CORE + '/provider-invoices';
   static SLACK = environment.REST_CORE + '/slack-messages';
   static SALE_PEOPLE = environment.REST_CORE + '/salespeople';
+  static ORDERS = environment.REST_CORE + '/orders';
+  static ORDER_LINES = environment.REST_CORE + '/orderLines';
 }
