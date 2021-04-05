@@ -36,4 +36,6 @@ export class EndPoints {
   static ISSUES = environment.REST_CORE + '/issues';
   static PROVIDER_INVOICES = environment.REST_CORE + '/provider-invoices';
   static SLACK = environment.REST_CORE + '/slack-messages';
+  static ORDERS = environment.REST_CORE + '/orders';
+  static ORDER_LINES = environment.REST_CORE + '/orderLines';
 }
