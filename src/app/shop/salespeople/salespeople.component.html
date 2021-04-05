@@ -11,8 +11,8 @@
       <mat-label>Date</mat-label>
       <label>
           <mat-date-range-input [rangePicker]="firstPicker">
-            <input matStartDate placeholder="Start date">
-            <input matEndDate placeholder="End date">
+            <input [(ngModel)]="salesPeopleSearch.startDate" matStartDate placeholder="Start date">
+            <input [(ngModel)]="salesPeopleSearch.endDate" matEndDate placeholder="End date">
           </mat-date-range-input>
         </label>
         <mat-datepicker-toggle matSuffix [for]="firstPicker"></mat-datepicker-toggle>
@@ -28,7 +28,7 @@
     <mat-form-field>
       <mat-label>Date</mat-label>
       <label>
-        <input type="month" matInput>
+        <input [(ngModel)]="salesPeopleSearch.secondDate" type="month" matInput>
       </label>
     </mat-form-field>
         <button (click)="secondSearch()" mat-icon-button>

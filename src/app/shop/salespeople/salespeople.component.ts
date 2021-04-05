@@ -5,6 +5,7 @@ import {SalesPeopleSearch} from './salespeople-search.model';
 import {SalesPeopleService} from './salespeople.service';
 import {SalesPeople} from '../shared/services/models/salespeople.model';
 import {ReadDetailDialogComponent} from '@shared/dialogs/read-detail.dialog.component';
+import * as moment from 'moment';
 
 @Component({
   templateUrl: './salespeople.component.html',
@@ -21,11 +22,26 @@ export class SalesPeopleComponent {
   }
 
   search(): void {
-    this.salesPeoples = this.SalesPeopleService.search(this.salesPeopleSearch);
+    // tslint:disable-next-line:prefer-const
+    let { salesperson, startDate, endDate } = this.salesPeopleSearch;
+    if ( !startDate || !endDate){
+      return;
+    }
+    startDate = this.changeDateFormat(startDate);
+    endDate = this.changeDateFormat(endDate);
+    if (salesperson){
+      this.salesPeoples = this.SalesPeopleService.search(salesperson, startDate, endDate);
+    }
   }
 
   secondSearch(): void {
-    this.salesPeoples = this.SalesPeopleService.secondSearch(this.salesPeopleSearch);
+    let dateBeginString;
+    let dateEndString;
+    let  { secondDate } = this.salesPeopleSearch;
+    // secondDate = secondDate.substring(secondDate.length-2)
+    dateBeginString = secondDate + '-01';
+    dateEndString = secondDate + '-31';
+    this.salesPeoples = this.SalesPeopleService.secondSearch(dateBeginString, dateEndString);
   }
 
   resetSearch(): void {
@@ -45,5 +61,9 @@ export class SalesPeopleComponent {
        object: this.SalesPeopleService.read(salesPeople)
       }
     });
+  }
+
+  changeDateFormat(datePicker: Date): string {
+    return moment(datePicker).format('YYYY-MM-DD');
   }
 }

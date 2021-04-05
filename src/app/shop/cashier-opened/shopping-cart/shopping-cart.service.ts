@@ -34,6 +34,7 @@ export class ShoppingCartService {
   static VARIOUS_BARCODE = '1';
   static VARIOUS_LENGTH = 5;
   private static SEARCH = '/search';
+  static ticket: any = {};
 
   creditSale: CreditSale;
   user: User;
@@ -82,6 +83,12 @@ export class ShoppingCartService {
       .post(EndPoints.TICKETS, ticketCreation)
       .pipe(
         concatMap(ticket => {
+          ShoppingCartService.ticket = ticket;
+          this.httpService
+            .post(EndPoints.TICKETS + '/', ticketCreation)
+            .pipe(
+
+            );
           let receipts = this.printTicket(ticket.id);
           receipts = iif(() => voucher > 0, merge(receipts, this.createVoucherAndPrint(voucher)), receipts);
           receipts = iif(() => requestedInvoice, merge(receipts, this.createInvoiceAndPrint(ticket.reference)), receipts);
@@ -95,7 +102,32 @@ export class ShoppingCartService {
   }
 
   printTicket(ticketId: string): Observable<void> {
-    return this.httpService.pdf().get(EndPoints.TICKETS + '/' + ticketId + ShoppingCartService.RECEIPT);
+    return this.httpService.pdf().get(EndPoints.TICKETS + '/' + ticketId + ShoppingCartService.RECEIPT)
+      .pipe(
+        concatMap(ticket => {
+          const receipts = this.ForSalespeople();
+          return receipts;
+        })
+      );
+  }
+
+  ForSalespeople(): Observable<void> {
+    console.log(ShoppingCartService.ticket);
+    const obj: any = {};
+    const ticket = ShoppingCartService.ticket;
+    obj.salesperson = ticket.note.substring(ticket.note.lastIndexOf(' ') + 1, ticket.note.length);
+    obj.salesDate = this.SalesGetDate();
+    obj.ticketBarcode = ticket.id;
+    obj.articleBarcode = [];
+    obj.amount = 0;
+    obj.total = 0;
+    ticket.shoppingList.map((item) => {
+      obj.total += item.retailPrice;
+      obj.amount += item.amount;
+      obj.articleBarcode.push(item.barcode);
+    });
+    console.log(obj);
+    return this.httpService.post(EndPoints.SALE_PEOPLE, obj);
   }
 
   createVoucherAndPrint(voucher: number): Observable<void> {
@@ -183,5 +215,23 @@ export class ShoppingCartService {
     return this.httpService
       .paramsFrom({user: mobile})
       .get(EndPoints.CUSTOMERS_DISCOUNTS + ShoppingCartService.SEARCH);
+  }
+
+  SalesGetDate(): string {
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = change(d.getMonth() + 1);
+    const day = change(d.getDate());
+
+    function change(t: any): any {
+      if (t < 10) {
+        return '0' + t;
+      } else {
+        return t;
+      }
+    }
+
+    const time = year + '-' + month + '-' + day;
+    return time;
   }
 }
