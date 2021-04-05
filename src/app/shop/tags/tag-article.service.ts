@@ -9,12 +9,6 @@ import {map} from 'rxjs/operators';
 export class TagArticleService {
   articles = of([]);
 
-  constructor() {
-  }
-  refresh(): Observable<Article[]> {
-    this.articles = of([]);
-    return this.articles;
-  }
   create(article: Article): Observable<Article> {
     return this.articles.pipe(map(articles => {
         articles.push(article);

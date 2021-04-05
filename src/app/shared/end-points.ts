@@ -4,6 +4,7 @@ export class EndPoints {
   static OFFERS = environment.REST_CORE + '/offers';
   static PROVIDERS = environment.REST_CORE + '/providers';
   static ARTICLES = environment.REST_CORE + '/articles';
+  static ARTICLES_SIZE_FAMILY = environment.REST_CORE + '/article-size';
   static CASHIERS = environment.REST_CORE + '/cashiers';
   static CASHIERS_LAST = EndPoints.CASHIERS + '/last';
   static CASH_MOVEMENT_IN = EndPoints.CASHIERS + '/last/movement-in';

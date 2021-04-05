@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {StockAuditService} from './stock-audit.service';
 import {StockAudit} from '../shared/services/models/stock-audit.model';
 import {Article} from '../shared/services/models/article.model';
+import {ArticleLoss} from '../shared/services/models/article-loss.model';
 
 @Component({
   selector: 'app-stock-audit',
@@ -58,7 +59,7 @@ export class StockAuditComponent implements OnInit {
   resetRealStockArray(arr: Article[]): void {
     this.arrRealStock = [];
     this.barcodesWithoutAudit = [];
-    // tslint:disable-next-line:forin
+
     for (let i in arr) {
       this.arrRealStock.push(null);
       this.barcodesWithoutAudit.push(arr[i].barcode);
@@ -80,6 +81,21 @@ export class StockAuditComponent implements OnInit {
             let left = currentArticle.stock - currentRealStock;
             losses.push({barcode: currentArticle.barcode, amount: left});
           }
+          else if (currentRealStock > currentArticle.stock) {
+            this.snackBar.open('Article with barcode: ' + currentArticle.barcode
+              + ' has wrong real stock assigment. Please check it before saving.',
+              'Error', {duration: 5000});
+            return;
+          }
+          else {}
+
+          // Tuve que separarlo porque dentro del else if no funcionaba con la condición or (||)
+          if (currentRealStock < 0) {
+            this.snackBar.open('Article with barcode: ' + currentArticle.barcode
+              + ' has wrong real stock assigment. Please check it before saving.',
+              'Error', {duration: 5000});
+            return;
+          }
         }
       }
       this.stockAudit.barcodesWithoutAudit = barcodesWithoutAudit;
@@ -98,7 +114,6 @@ export class StockAuditComponent implements OnInit {
     this.auditArticles.subscribe((articles) => {
       let barcodesWithoutAudit = [];
       let losses = [];
-      let lossValue = 0;
       for (let i in articles) {
         let currentArticle = articles[i];
         let currentRealStock = this.arrRealStock[i];
@@ -108,21 +123,31 @@ export class StockAuditComponent implements OnInit {
         } else {
           if (currentRealStock < currentArticle.stock) {
             let left = currentArticle.stock - currentRealStock;
-            // DONT HAVE PROPERTY RETAIL PRICE READING ARTICLES. SO CALCULATE IT IN BACKEND. IN OTHER CASE HAVE TO READ EACH ARTICLE DETAILS
-            //lossValue = lossValue + (left * currentArticle.retailPrice);
             losses.push({barcode: currentArticle.barcode, amount: left});
+          }
+          else if ((currentRealStock > currentArticle.stock) || (currentRealStock < 0)) {
+            this.snackBar.open('Article with barcode: ' + currentArticle.barcode
+              + ' has wrong real stock assigment. Please check it before closing.',
+              'Error', {duration: 5000});
+            return;
+          } else {}
+
+          // Tuve que separarlo porque dentro del else if no funcionaba con la condición or (||)
+          if (currentRealStock < 0) {
+            this.snackBar.open('Article with barcode: ' + currentArticle.barcode
+              + ' has wrong real stock assigment. Please check it before saving.',
+              'Error', {duration: 5000});
+            return;
           }
         }
       }
       this.stockAudit.barcodesWithoutAudit = barcodesWithoutAudit;
       this.stockAudit.losses = losses;
-      this.stockAudit.closeDate = new Date();
-      //this.stockAudit.lossValue = lossValue;
-      this.stockAuditService.closeAudit(this.stockAudit)
+      this.stockAuditService.closeAudit(this.stockAudit.id, this.stockAudit)
         .subscribe((stockAuditClosed) => {
             this.notAuditedArticles = stockAuditClosed.barcodesWithoutAudit;
             this.articlesLoss = stockAuditClosed.losses;
-            this.lossValue = stockAuditClosed.lossValue;
+            this.calculateLossValue(stockAuditClosed.losses);
             this.closedAudit = true;
             this.snackBar.open('Success audit closure', '', {
               duration: 3500
@@ -132,6 +157,17 @@ export class StockAuditComponent implements OnInit {
     });
   }
 
+  calculateLossValue(losses: ArticleLoss[]): void {
+    this.lossValue = 0;
+    for (let i in losses){
+      this.stockAuditService.readByBarcode(losses[i].barcode)
+        .subscribe((article) => {
+          this.lossValue = this.lossValue + (losses[i].amount * article.retailPrice);
+        }
+      );
+    }
+  }
+
   assignSavedRealStockValues(stockAudit: StockAudit): void {
     this.auditArticles.subscribe((articles) => {
       for (let i in articles) {
@@ -139,10 +175,12 @@ export class StockAuditComponent implements OnInit {
         let barcodesWithoutAudit = stockAudit.barcodesWithoutAudit;
         let losses = stockAudit.losses;
         let foundW = barcodesWithoutAudit.find(barcodeWithoutAudit => barcodeWithoutAudit === currentArticle.barcode);
+
         if (foundW != null) {
             this.arrRealStock[i] = null;
         } else {
           let foundL = losses.find(articleLoss => articleLoss.barcode === currentArticle.barcode);
+
           if (foundL != null) {
             this.arrRealStock[i] = currentArticle.stock - foundL.amount;
           } else {
